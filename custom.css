@@ -1,0 +1,549 @@
+/* Get rid of <del>women</del><ins>Jeff Atwood</ins>-friendly shapes */
+#menu .chat-list li a .user-icon,
+#menu .chat-list li a img,
+#menu .notification-list li .user-icon,
+#menu .notification-list li img,
+.account .cover .avatar-wrapper,
+.avatar.avatar-rounded,
+.categories>li .card .user-icon,
+.categories>li .card img,
+.categories>li .content .user-icon,
+.categories>li .content img,
+.category>ul>li .card .user-icon,
+.category>ul>li .card img,
+.category>ul>li .content .user-icon,
+.category>ul>li .content img,
+.chat-modal .chat-content li.chat-message .chat-user-image,
+.chats-list li .user-img,
+.expanded-chat .chat-content li.chat-message .chat-user-image,
+.header #user_dropdown .user-icon,
+.header #user_dropdown img,
+.header .chat-list li a .user-icon,
+.header .chat-list li a img,
+.header .notification-list li .user-icon,
+.header .notification-list li img,
+.posts-list .posts-list-item .user-img,
+.search .user-img,
+.taskbar .navbar-nav li.taskbar-chat a,
+.taskbar .navbar-nav li.taskbar-chat a:active,
+.taskbar .navbar-nav li.taskbar-chat a:focus,
+.taskbar .navbar-nav li.taskbar-chat a:hover,
+.topic .posts .icon .user-icon,
+.topic .posts .icon img, 
+.users-container .users-box .user-icon,
+.users-container .users-box img {
+	border-radius: 0 !important;
+}
+
+/* resize the forum logo to fit better */
+.header .forum-logo {
+	margin: 10px;
+	height: 30px;
+	width: 30px;
+}
+
+/* this is applied by default on some browser widths but not others */
+.navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
+	margin-left: -15px;
+}
+
+/* <kbd> */
+kbd, kbd kbd {
+	background-color: #fff;
+	border: 1px solid #e9e9e9;
+	border-radius: 3px;
+	box-shadow: 0 1px 0 rgba(0,0,0,0.8);
+	color: #222;
+	display: inline-block;
+	font-size: 0.857em;
+	line-height: 1.4;
+	margin: 0 .1em;
+	padding: .1em .6em;
+}
+
+/* post content */
+.topic .posts .content, .composer .preview {
+	/* Stick a border around images */
+	.img-responsive {
+		padding: 1px;
+		border: 1px solid #D8E5FB;
+		@media (min-width: 1000px) {
+		    max-width: 600px;
+        }
+		max-height: 600px;
+		display: inline;
+	}
+
+	/* Differentiate strike/del */
+	del {
+		background-color: #FDD;
+		border-color: #F1C0C0;
+	}
+	ins {
+		background-color: #DBFFDB;
+		border-color: #C1E9C1;
+	}
+	ins > del {
+		background-color: #00CCFF;
+		text-decoration: overline;
+	}
+	del > ins {
+		background-color: #FFFF66;
+		text-decoration: overline;
+	}
+
+	/* Show abbr and a title contents on mobile */
+	@media screen and (max-width: 991px) {
+		abbr[title]:after{
+			content: " [" attr(title) "]";
+		}
+	}
+
+	/* Stop big+big...+big abuse http://what.thedailywtf.com/t/abusing-big-tags/5566 */
+	big big big big big big { font-size: 1em; }
+		
+	/* And small-small */
+	small small small small small small { font-size: 1em; }
+
+	/* underline links in posts */
+	a[href] {
+		text-decoration: underline;
+	}
+	a.plugin-mentions-a, a[href^="#"], a[href=""] {
+		text-decoration: none;
+	}
+
+    blockquote > blockquote, blockquote > p {
+        margin-bottom: 11px;
+    }
+
+	blockquote > blockquote:last-child, blockquote > p:last-child {
+		margin-bottom: 0;
+	}
+
+	.iframely-link .iframely-container h4 {
+		margin-top: 0;
+	}
+
+	.iframely-link .iframely-container .thumb {
+		max-width: 21px !important;
+	}
+
+	.iframely-link .iframely-container .media .media {
+		display: inline-block;
+		max-width: 200px;
+		margin-top: 0;
+		vertical-align: top;
+	}
+	
+	.iframely-link .iframely-container .panel-iframely .iframely-embed .one-line {
+        /* wrap iframely titles instead of cutting off with an elipse */
+        white-space: normal !important;
+	}
+
+	.iframely-link .iframely-container p.description {
+        /* wrap iframely on small screen 
+        https://what.thedailywtf.com/topic/19499/one-box-picture-overflow-on-mobile/10
+        */
+		display: inline-block;
+		max-width: 350px;
+		width: auto;
+	}
+
+	.iframely-link .iframely-container img, .iframely-link .iframely-container iframe {
+		max-height: none !important;
+	}
+
+    .lazyYT-container iframe {
+        max-width: none !important;
+    }
+
+	.img-responsive.emoji, .img-responsive.plugin-mentions-emoji {
+	    height: 20px;
+		border: 0;
+	}
+
+    table {
+        border-collapse: separate;
+	    border-spacing: 2px;
+    }
+}
+
+.slideout-open #panel {
+	height: 100%;
+}
+
+/* make it blue */
+a[component="post/reply"], a[component="post/quote"] {
+	background-color: #337ab7;
+	color: white;
+	padding: 10px;
+	margin-right: 3px;
+}
+
+a[component="post/upvote"], a[component="post/downvote"]{
+	background-color: #ccc;
+	padding: 10px;
+	padding-right: 8px;
+	margin-right: 2px;
+}
+
+.topic a[component="post/upvote"].upvoted, .topic a[component="post/downvote"].downvoted {
+	color: #ccc;
+}
+
+a[component="post/upvote"].upvoted {
+	background-color: #0b0;
+}
+
+a[component="post/downvote"].downvoted {
+	background-color: #c00;
+}
+
+span[component="post/vote-count"] {
+	padding: 10px 13px;
+}
+
+/* hide email addresses for admin views of profiles */
+.profile-meta strong {
+	position: relative;
+}
+
+.profile-meta strong i.fa.fa-eye-slash::after {
+	background-color: #000;
+	content: '';
+	position: absolute;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	left: 10px;
+}
+
+.profile-meta strong:hover i.fa.fa-eye-slash::after {
+	display: none;
+}
+
+/* hide the global notice on profile pages where it goes behind the cover image */
+.page-user [widget-area="header"] {
+	display: none;
+}
+
+/* make reply-to visible on cell phone size */
+@media (max-width: 767px) {
+	[component="post/parent"].hidden-xs {
+		display: inline-block !important;
+	}
+}
+
+#main-nav span.menu-item-label {
+	display: none;
+}
+
+.menu-selection-list span.menu-item-label {
+	display: inline;
+}
+
+.topic .post-signature {
+	max-height: 100px;
+	overflow-y: hidden;
+	padding-right: 1em;
+}
+
+.chat-modal {
+	/* z-index: 100 !important; */ /* not 10000 because that goes in front of menus */
+}
+
+.composer {
+    z-index: 1000 !important; /* otherwise it covers the cancel dialog on alternative skins */
+}
+
+/* See if we can change the background colour of categories - PJH */
+html {
+    height: 100%;
+}
+body {
+    min-height: 100%;
+}
+[data-category-id="4"] body { /* staff */
+	box-shadow: 0 0 25vw #283890 inset;
+	background-image: url('/uploads/files/1458603522948-trans_15_turnleft.png');
+	background-size: cover;
+	background-attachment: fixed;
+}
+[data-category-id="17"] body { /* turn left */
+	box-shadow: 0 0 25vw #3AB54A inset;
+	background-image: url('/uploads/files/1458603522948-trans_15_turnleft.png');
+	background-size: cover;
+	background-attachment: fixed;
+}
+[data-category-id="16"] body { /* lounge */
+	box-shadow: 0 0 25vw #F7941D inset;
+	background-image: url('/uploads/files/1458603503953-trans_15_qantas-first-class-lounge-sydney.png');
+	background-size: cover;
+	background-attachment: fixed;
+}
+[data-category-id="33"] body, [data-category-id="34"] body, [data-category-id="35"] body, [data-category-id="38"] body { /* mafia factions */
+	box-shadow: 0 0 25vw #A16946 inset;
+}
+[data-category-id="31"] body { /* mafia current game */
+    box-shadow: 0 0 5vw #AB4642 inset;
+}
+[data-category-id="32"] body { /* mafia club ded */
+    box-shadow: 0 0 5vw #000 inset;
+}
+
+/* fix mobile */
+@media (max-width: 1199px) {
+	main#panel {
+		background: inherit;
+		box-shadow: inherit;
+	}
+}
+
+/* hide post buttons in active mafia games */
+[data-category-id="31"], [data-category-id="33"], [data-category-id="34"], [data-category-id="35"], [data-category-id="38"] {
+	.votes, .topic .moderator-tools a {
+		display: none;
+	}
+}
+
+/* mafia GM highlights */
+
+/* Mafia I - Release! Mafia */
+[data-tid="2078"], [data-tid="17813"], [data-tid="17815"], [data-tid="17816"] {
+	& > [data-uid="175"] {
+		background-color: rgba(255, 255, 0, 0.25);
+	}
+}
+
+/* Mafia II - Mafia in Spaaaaaaaaace! */
+[data-tid="18068"], [data-tid="18315"], [data-tid="18316"], [data-tid="18317"], [data-tid="18318"], [data-tid="18319"] {
+	& > [data-uid="39"] {
+		background-color: rgba(255, 255, 0, 0.25);
+	}
+}
+
+/* Mafia III - Bushido Mafia */
+[data-tid="18440"], [data-tid="18593"], [data-tid="18595"], [data-tid="18596"], [data-tid="18597"], [data-tid="18598"] {
+	& > [data-uid="731"] {
+		background-color: rgba(255, 255, 0, 0.25);
+	}
+}
+
+/* Mafia IV - Reverse Mafia */
+[data-tid="18779"], [data-tid="18901"], [data-tid="18902"], [data-tid="18899"] {
+	& > [data-uid="595"], & > [data-uid="650"], & > [data-uid="970"] {
+		background-color: rgba(255, 255, 0, 0.25);
+	}
+}
+
+/* Mafia V - Corporate Mafia */
+[data-tid="19354"], [data-tid="19459"], [data-tid="19460"], [data-tid="19461"], [data-tid="19462"] {
+	& > [data-uid="256"] {
+		background-color: rgba(255, 255, 0, 0.25);
+	}
+}
+
+/* Mafia VI - Swypos Anonymouse */
+[data-tid="19711"], [data-tid="19712"], [data-tid="19713"], [data-tid="19835"] {
+    & > [data-uid="650"] {
+        background-color: rgba(255, 127, 255, 0.25);
+    }
+
+    .page-topic & {
+        a[href="https://what.thedailywtf.com/uid/289"]:after, a[href="/user/raceprouk"]:after {
+            content: ' "Maria"';
+            font-weight: bold;
+        }
+        a[href="https://what.thedailywtf.com/uid/731"]:after, a[href="/user/yamikuronue"]:after {
+            content: ' "Violet"';
+            font-weight: bold;
+        }
+        a[href="https://what.thedailywtf.com/uid/1727"]:after, a[href="/user/cloak15"]:after {
+            content: ' "Oscar"';
+            font-weight: bold;
+        }
+        .icon > a[href]:after, a[href]:empty:after {
+            content: '';
+        }
+    }
+}
+
+/* Mafia VII - Bushido Mafia II */
+/*[data-tid=""] {
+    & > [data-uid="731"] {
+        background-color: rgba(255, 255, 0, 0.25);
+    }
+}*/
+
+/* Mafia VIII - [theme pending] */
+/*[data-tid=""] {
+    & > [data-uid="39"] {
+        background-color: rgba(255, 255, 0, 0.25);
+    }
+}*/
+
+/* Mafia IX - don't push the button */
+/*[data-tid=""] {
+    & > [data-uid="175"] {
+        background-color: rgba(255, 255, 0, 0.25);
+    }
+}*/
+
+/* Mafia X - Dwarf Fortress */
+/*[data-tid=""] {
+    & > [data-uid="1"] {
+        background-color: rgba(255, 255, 0, 0.25);
+    }
+}*/
+
+#new-topics-alert {
+	position: absolute;
+	margin-top: -60px;
+}
+
+.persona-usercard .usercard-name {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 270px;
+	display: inline-block;
+	overflow: hidden;
+}
+
+div#taskbar.taskbar.navbar-fixed-bottom {
+	left: auto;
+}
+
+.topic .posts>li { transition: box-shadow 30s; box-shadow: 0 0 0 #5bc0de; }
+.topic .posts>li.highlight { transition: box-shadow 0s; box-shadow: 0 0 5em #5bc0de; }
+
+.header [component="navbar/title"] {
+	display: block !important;
+	clear: both;
+	max-width: 0;
+	white-space: nowrap;
+
+	span {
+		font-size: 16px;
+		padding-left: 30px;
+		padding-bottom: 10px;
+		display: block !important;
+
+		&:empty {
+			display: none !important;
+		}
+	}
+}
+
+@media (max-width: 1199px) {
+	.nav>li>a {
+		padding-left: 5px;
+		padding-right: 5px;
+	}
+	#search-form {
+		padding: 0;
+		margin-right:0;
+	}
+	#search-form #search-button {
+		padding-left:4px;
+		padding-right:4px;
+	}
+}
+
+#search-form #search-button.hidden {
+	border:0;
+}
+
+/* details shim for Firefox - https://github.com/tyleruebele/details-shim/blob/master/details-shim.css */
+details, summary {display: block;}
+details.details_shim_closed > * {display: none;}
+details.details_shim_closed > summary {display: block;}
+details.details_shim_open   > summary {display: block;}
+details.details_shim_closed > summary:before {display: inline-block; content: "\25b6"; padding: 0 0.1em; margin-right: 0.4em; font-size: 0.9em;}
+details.details_shim_open   > summary:before {display: inline-block; content: "\25bc"; padding: 0; margin-right: 0.35em;}
+
+/* tags in the composer */
+.tags-container.inline-block {
+	display: block;
+}
+.bootstrap-tagsinput {
+	display: flex;
+}
+.bootstrap-tagsinput input {
+	flex-grow: 1;
+}
+.bootstrap-tagsinput .label {
+	height: 1.5em;
+	margin-top: .3em;
+}
+
+.lazyYT-container {
+	background-color: transparent;
+}
+
+/* force navbar to never hide on non-mobile view */
+@media (min-width: 992px) {
+	.navbar-fixed-top {
+		top: 0 !important;
+	}
+}
+
+.nprogress-busy .form-actions:after {
+	content: '';
+	display: inline-block;
+	width: 18px;
+	height: 18px;
+	vertical-align: middle;
+	box-sizing: border-box;
+	border: solid 2px transparent;
+	border-top-color: #29d;
+	border-left-color: #29d;
+	border-radius: 50%;
+	animation: nprogress-spinner 400ms linear infinite;
+	margin-left: 10px;
+}
+
+.composer .imagedrop {
+    box-shadow: 0 0 5em #5bc0de inset;
+}
+
+.formatting-bar {
+    /* hide image link button and duplicate upload button */
+    [data-format="picture-o"], [data-format="picture"] {
+        display: none;
+    }
+}
+
+/* attempt to cut down on the jellypotato */
+.js-lazyYT {
+	width: 640px;
+	padding-bottom: 360px;
+}
+/* hide status stuff */
+i[component="user/status"] {
+    display: none;
+}
+a.user-status{ /* mobile menu, that's different */
+    display: none;
+}
+.dropdown-menu li a.user-status {
+    display: none;
+}
+.dropdown-menu li:first-child + li.divider {
+    display: none;
+}
+
+/* fix composer height */
+.composer .write-preview-container {
+    min-height: 0;
+}
+
+blockquote small {
+    display: inline;
+    color: inherit;
+    font-size: 85%;
+    
+    &:before {
+        content: '';
+    }
+}
