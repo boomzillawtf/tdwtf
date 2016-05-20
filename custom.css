@@ -416,6 +416,7 @@ div#taskbar.taskbar.navbar-fixed-bottom {
 
 .topic .posts>li { transition: box-shadow 30s; box-shadow: 0 0 0 #5bc0de; }
 .topic .posts>li.highlight { transition: box-shadow 0s; box-shadow: 0 0 5em #5bc0de; }
+.posts > li > div > hr { border-top: 1px solid #777; } /* https://what.thedailywtf.com/post/894514 */
 
 .header [component="navbar/title"] {
 	display: block !important;
