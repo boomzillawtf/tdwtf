@@ -8,7 +8,7 @@ jasmine.getFixtures().fixturesPath = '/base/test/fixtures';
 			it( 'prevents font from becoming too big', function() {
 				var count = 0;
 				$( '#tagabuse-big .subject' ).each( function( i, subject ) {
-					expect( $( subject ).css( 'font-size' ) ).toBe( '50px' );
+					expect( $( subject ).css( 'font-size' ) ).toBe( '35px' );
 					++count;
 				} );
 				expect( count ).toBe( 3 );
@@ -16,7 +16,7 @@ jasmine.getFixtures().fixturesPath = '/base/test/fixtures';
 			it( 'prevents font from becoming too small', function() {
 				var count = 0;
 				$( '#tagabuse-small .subject' ).each( function( i, subject ) {
-					expect( $( subject ).css( 'font-size' ) ).toBe( '8px' );
+					expect( $( subject ).css( 'font-size' ) ).toBe( '6px' );
 					++count;
 				} );
 				expect( count ).toBe( 3 );
