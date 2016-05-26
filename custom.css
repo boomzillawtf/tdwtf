@@ -548,3 +548,8 @@ blockquote small {
         content: '';
     }
 }
+
+/* https://what.thedailywtf.com/post/899058 */
+.js-lazyYT {
+    margin-bottom: 10px;
+}
