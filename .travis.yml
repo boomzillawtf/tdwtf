@@ -3,7 +3,7 @@ node_js:
   - "6.0.0"
 
 before_install:
-  - npm install -g karma-cli
+  - npm install -g gulp-cli
 
 install:
   - npm install
