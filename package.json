@@ -10,5 +10,8 @@
     "karma-spec-reporter": "0.0.26",
     "node-sass": "^3.7.0",
     "phantomjs-prebuilt": "^2.1.7"
+  },
+  "scripts": {
+    "test": "karma start test/karma.conf.js"
   }
 }
