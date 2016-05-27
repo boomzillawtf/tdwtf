@@ -20,10 +20,10 @@ module.exports = function( config ) {
 		colors: true,
 		logLevel: config.LOG_INFO,
 		autoWatch: false,
-		browsers: [ 'PhantomJS' ],
+		browsers: [ 'PhantomJS', 'Firefox' ],
 		singleRun: true,
 		concurrency: Infinity,
-		plugins: [ 'karma-spec-reporter', 'karma-phantomjs-launcher', 'karma-jasmine-jquery', 'karma-jasmine', 'karma-scss-preprocessor', 'karma-less-preprocessor' ],
+		plugins: [ 'karma-*' ],
 		specReporter: {
 			maxLogLines: 20,
 			suppressErrorSummary: false,
@@ -33,4 +33,5 @@ module.exports = function( config ) {
 			showSpecTiming: true
 		}
 	} )
+	} );
 };
