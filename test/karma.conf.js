@@ -24,6 +24,10 @@ module.exports = function( config ) {
 		browsers: [ 'PhantomJS', 'Firefox' ],
 		singleRun: true,
 		concurrency: 1,
+		captureTimeout: 60000,
+		browserDisconnectTimeout : 60000,
+		browserDisconnectTolerance : 1,
+		browserNoActivityTimeout : 60000,
 		plugins: [ 'karma-*' ],
 		specReporter: {
 			maxLogLines: 20,
