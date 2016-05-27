@@ -1,0 +1,63 @@
+[submodule "NodeBB"]
+	path = NodeBB
+	url = https://github.com/NodeBB/NodeBB
+[submodule "nodebb-plugin-deny-moderator-access"]
+	path = nodebb-plugin-deny-moderator-access
+	url = https://github.com/BenLubar/nodebb-plugin-deny-moderator-access
+[submodule "nodebb-plugin-emailer-amazon"]
+	path = nodebb-plugin-emailer-amazon
+	url = https://github.com/barisusakli/nodebb-plugin-emailer-amazon
+[submodule "nodebb-plugin-emoji-static"]
+	path = nodebb-plugin-emoji-static
+	url = https://github.com/NodeBB-Community/nodebb-plugin-emoji-static
+[submodule "nodebb-plugin-google-analytics"]
+	path = nodebb-plugin-google-analytics
+	url = https://github.com/julianlam/nodebb-plugin-google-analytics
+[submodule "nodebb-plugin-gravatar"]
+	path = nodebb-plugin-gravatar
+	url = https://github.com/julianlam/nodebb-plugin-gravatar
+[submodule "nodebb-plugin-htmlcleaner"]
+	path = nodebb-plugin-htmlcleaner
+	url = https://github.com/BenLubar/nodebb-plugin-htmlcleaner
+[submodule "nodebb-plugin-iframely"]
+	path = nodebb-plugin-iframely
+	url = https://github.com/NodeBB/nodebb-plugin-iframely
+[submodule "nodebb-plugin-imagemagick"]
+	path = nodebb-plugin-imagemagick
+	url = https://github.com/NodeBB/nodebb-plugin-imagemagick
+[submodule "nodebb-plugin-import-discourse"]
+	path = nodebb-plugin-import-discourse
+	url = https://github.com/BenLubar/nodebb-plugin-import-discourse
+[submodule "nodebb-plugin-mentions-emoji"]
+	path = nodebb-plugin-mentions-emoji
+	url = https://github.com/BenLubar/nodebb-plugin-mentions-emoji
+[submodule "nodebb-plugin-ns-login"]
+	path = nodebb-plugin-ns-login
+	url = https://github.com/NicolasSiver/nodebb-plugin-ns-login
+[submodule "nodebb-plugin-shortcuts"]
+	path = nodebb-plugin-shortcuts
+	url = https://github.com/NodeBB-Community/nodebb-plugin-shortcuts
+[submodule "nodebb-plugin-sso-facebook"]
+	path = nodebb-plugin-sso-facebook
+	url = https://github.com/julianlam/nodebb-plugin-sso-facebook
+[submodule "nodebb-plugin-sso-github"]
+	path = nodebb-plugin-sso-github
+	url = https://github.com/julianlam/nodebb-plugin-sso-github
+[submodule "nodebb-plugin-sso-google"]
+	path = nodebb-plugin-sso-google
+	url = https://github.com/julianlam/nodebb-plugin-sso-google
+[submodule "nodebb-plugin-sso-twitter"]
+	path = nodebb-plugin-sso-twitter
+	url = https://github.com/julianlam/nodebb-plugin-sso-twitter
+[submodule "nodebb-plugin-tdwtf-buttons"]
+	path = nodebb-plugin-tdwtf-buttons
+	url = https://github.com/NedFodder/nodebb-plugin-tdwtf-buttons
+[submodule "nodebb-plugin-unresponsive"]
+	path = nodebb-plugin-unresponsive
+	url = https://github.com/boomzillawtf/nodebb-plugin-unresponsive
+[submodule "nodebb-plugin-upvote-notifications"]
+	path = nodebb-plugin-upvote-notifications
+	url = https://github.com/boomzillawtf/nodebb-plugin-upvote-notifications
+[submodule "nodebb-plugin-youtube-lite"]
+	path = nodebb-plugin-youtube-lite
+	url = https://github.com/a5mith/nodebb-plugin-youtube-lite
