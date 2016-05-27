@@ -23,7 +23,7 @@ module.exports = function( config ) {
 		autoWatch: false,
 		browsers: [ 'PhantomJS', 'Firefox' ],
 		singleRun: true,
-		concurrency: Infinity,
+		concurrency: 1,
 		plugins: [ 'karma-*' ],
 		specReporter: {
 			maxLogLines: 20,
