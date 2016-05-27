@@ -4,16 +4,17 @@ module.exports = function( config ) {
 		frameworks: [ 'jasmine-jquery', 'jasmine' ],
 		files: [
 			'test/**/*.spec.js',
-			'*.scss',
-			'*.css',
-			'*.less',
-			'*.html',
+			'custom.less',
+			'header.html',
 			'test/fixtures/**/*'
 		],
 		exclude: [],
 		preprocessors: {
 			'**/*.scss': [ 'scss' ],
 			'**/*.less': [ 'less' ]
+		},
+		proxies: {
+			'/wtdwtf/': 'https://what.thedailywtf.com/'
 		},
 		reporters: [ 'spec' ],
 		port: 9876,
@@ -31,7 +32,11 @@ module.exports = function( config ) {
 			suppressPassed: false,
 			suppressSkipped: false,
 			showSpecTiming: true
+		},
+		lessPreprocessor: {
+			options: {
+				paths: [ '.', 'test/fixtures' ]
+			}
 		}
-	} )
 	} );
 };
