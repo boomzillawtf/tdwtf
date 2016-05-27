@@ -11,7 +11,7 @@
 		describe( 'custom.css', function() {
 			beforeEach( function() {
 				fixtures.load( 'base/test/fixtures/css-test.html' );
-				styleFixtures.appendLoad( 'wtdwtf/stylesheet.css', 'base/custom.css' );
+				styleFixtures.appendLoad( 'base/custom.css' );
 			} );
 			it( 'prevents font from becoming too big', function() {
 				var count = 0,

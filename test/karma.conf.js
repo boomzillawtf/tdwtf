@@ -13,9 +13,7 @@ module.exports = function( config ) {
 			'**/*.scss': [ 'scss' ],
 			'**/*.less': [ 'less' ]
 		},
-		proxies: {
-			'/wtdwtf/': 'https://what.thedailywtf.com/'
-		},
+		proxies: {},
 		reporters: [ 'spec' ],
 		port: 9876,
 		colors: true,
