@@ -1,8 +1,10 @@
 {
   "devDependencies": {
     "gulp": "^3.9.1",
+    "gulp-jshint": "^2.0.1",
     "jasmine-core": "^2.4.1",
     "jasmine-jquery": "^2.1.1",
+    "jshint": "^2.9.2",
     "karma": "^0.13.22",
     "karma-jasmine": "^1.0.2",
     "karma-jasmine-jquery": "^0.1.1",
@@ -14,6 +16,7 @@
     "phantomjs-prebuilt": "^2.1.7"
   },
   "scripts": {
+    "lint": "gulp lint",
     "test": "gulp test"
   }
 }
