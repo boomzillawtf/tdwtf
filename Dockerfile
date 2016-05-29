@@ -14,6 +14,8 @@ COPY NodeBB /usr/src/app
 COPY plugins /usr/src/app/plugins
 RUN npm install ./plugins/*/ `cat ./plugins/other.txt`
 
+RUN echo public/uploads/*/ > .make-uploads-folders
+
 # the default port for NodeBB is exposed outside the container
 EXPOSE 4567
 
@@ -25,7 +27,7 @@ RUN ln -s /usr/src/app/docker/config.json /usr/src/app/config.json
 
 # make sure the uploads subdirectories exist, run any database migrations,
 # and set the container's process as the NodeBB daemon so ./nodebb works
-CMD git checkout -- public/uploads \
+CMD cat .make-uploads-folders | xargs mkdir -p \
 && ./nodebb upgrade \
 && echo 1 > pidfile \
 && exec node loader.js
