@@ -1,9 +1,3 @@
-<meta name="google-site-verification" content="CHVbCxly52Dog4tN9fsbqoQkNTASojg2LzYSeJzqRgw" />
-
-<!-- change background colours 
-https://community.nodebb.org/topic/8322/custom-background-using-custom-class-custom-css/2
--->
-<script>
 /* jshint browser: true */
 /* globals $, ajaxify, app */ 
 $(window).on('action:ajaxify.contentLoaded', function() {
@@ -31,4 +25,3 @@ c=-1!=c.indexOf("open")&&-1==c.indexOf('open=""')?"open":"closed";a.setAttribute
 document.createElement("span"),d=a.childNodes[b];a.insertBefore(c,d);a.removeChild(d);c.appendChild(d)}}details_shim.toggle=function(a,b){b="undefined"===typeof b?"open"==a.getAttribute("data-open")?"closed":"open":b?"open":"closed";a.setAttribute("data-open",b);a.className=a.className.replace(/\bdetails_shim_open\b|\bdetails_shim_closed\b/g," ")+" details_shim_"+b};details_shim.init=function(){for(var a=document.getElementsByTagName("summary"),b=0;b<a.length;b++)details_shim(a[b])};
 window.addEventListener?window.addEventListener("load",details_shim.init,!1):window.attachEvent&&window.attachEvent("onload",details_shim.init);
 /* jshint ignore:end */
-</script>
