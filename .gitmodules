@@ -56,3 +56,6 @@
 	path = plugins/nodebb-plugin-import-tdwtf
 	url = https://github.com/BenLubar/nodebb-plugin-import-discourse.git
 	branch = tdwtf
+[submodule "emoji/emojione"]
+	path = emoji/emojione
+	url = https://github.com/Ranks/emojione.git

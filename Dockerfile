@@ -14,6 +14,13 @@ COPY NodeBB /usr/src/app
 COPY plugins /usr/src/app/plugins
 RUN npm install ./plugins/*/ `cat ./plugins/other.txt`
 
+COPY emoji/emojione/assets/svg /usr/src/app/node_modules/nodebb-plugin-emoji-one/public/static/images
+COPY emoji/emojione/LICENSE.md /usr/src/app/node_modules/nodebb-plugin-emoji-one/public/static/images/
+RUN node -e 'require("nodebb-plugin-emoji-one/lib/set/update/index").build("/usr/src/app/node_modules/nodebb-plugin-emoji-one/public/static/images")'
+
+COPY emoji/tdwtf /usr/src/app/tdwtf-emoji
+RUN mkdir -p /usr/src/app/node_modules/nodebb-plugin-emoji-static/public/static/images && ln -s /usr/src/app/tdwtf-emoji /usr/src/app/node_modules/nodebb-plugin-emoji-static/public/static/images/tdwtf
+
 RUN echo public/uploads/*/ > .make-uploads-folders
 
 # the default port for NodeBB is exposed outside the container
