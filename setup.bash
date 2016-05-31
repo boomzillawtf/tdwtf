@@ -1,10 +1,13 @@
 #!/bin/bash -e
 
+# add the nginx config file
+sudo cp nodebb-upstream.conf /etc/nginx/
+
 # make sure we have Docker
 which docker &> /dev/null || curl -sSL https://get.docker.com/ | sh
 
-# build the NodeBB container
-docker build -t boomzillawtf/tdwtf .
+# pull the NodeBB image
+docker pull boomzillawtf/tdwtf
 
 # create a Docker network
 docker network create --subnet 172.21.1.0/24 wtdwtf

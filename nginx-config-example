@@ -1,13 +1,4 @@
-upstream nodebb {
-	ip_hash;
-
-	server 172.21.1.253:4567;
-	server 172.21.1.253:4568;
-	server 172.21.1.254:4567;
-	server 172.21.1.254:4568;
-
-	keepalive 16;
-}
+include /etc/nginx/nodebb-upstream.conf;
 
 server {
 	server_name nodebb.local;
