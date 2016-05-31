@@ -16,6 +16,8 @@
 			it( 'prevents font from becoming too big', function() {
 				var count = 0,
 					expected = $( '#tagabuse-big .reference' ).css( 'font-size' );
+
+				expect( expected ).toMatch( /^[-+]?[0-9]+(?:\.[0-9+])?px$/ );
 				$( '#tagabuse-big .subject' ).each( function( i, subject ) {
 					expect( $( subject ).css( 'font-size' ) ).toBe( expected );
 					++count;
@@ -25,6 +27,8 @@
 			it( 'prevents font from becoming too small', function() {
 				var count = 0,
 					expected = $( '#tagabuse-small .reference' ).css( 'font-size' );
+
+				expect( expected ).toMatch( /^[-+]?[0-9]+(?:\.[0-9+])?px$/ );
 				$( '#tagabuse-small .subject' ).each( function( i, subject ) {
 					expect( $( subject ).css( 'font-size' ) ).toBe( expected );
 					++count;
