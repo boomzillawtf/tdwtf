@@ -5,7 +5,11 @@ const gulp = require( 'gulp' ),
 gulp.task( 'default', [ 'lint', 'test' ] );
 
 gulp.task( 'lint:jshint', () =>
-	gulp.src( [ '*.html', '*.js', 'test/**/*.js', '!gulpfile.js' ] )
+	gulp.src( [
+		'plugins/nodebb-plugin-tdwtf-customizations/**/*.js',
+		'plugins/nodebb-plugin-tdwtf-customizations/**/*.html',
+		'test/**/*.js'
+	] )
 	.pipe( jshint.extract( 'auto' ) )
 	.pipe( jshint() )
 	.pipe( jshint.reporter( 'default', { verbose: true } ) )
