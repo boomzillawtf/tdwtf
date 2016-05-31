@@ -4,6 +4,8 @@
 https://community.nodebb.org/topic/8322/custom-background-using-custom-class-custom-css/2
 -->
 <script>
+/* jshint browser: true */
+/* globals $, ajaxify, app */ 
 $(window).on('action:ajaxify.contentLoaded', function() {
     if (ajaxify.data && ajaxify.data.cid) {
         $('html').attr('data-category-id', ajaxify.data.cid);

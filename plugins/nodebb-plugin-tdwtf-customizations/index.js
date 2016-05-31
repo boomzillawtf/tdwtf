@@ -1,4 +1,4 @@
-/*global exports:true */
+/* jshint node: true */
 module.exports = {
 	"meta": function(tags, callback) {
 		callback(null, tags.concat([{

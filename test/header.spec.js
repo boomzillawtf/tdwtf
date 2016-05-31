@@ -1,3 +1,5 @@
+/* jshint jasmine: true */
+/* globals jQuery */
 ( function( $ ) {
 	var fixtures = jasmine.getFixtures(),
 		styleFixtures = jasmine.getStyleFixtures(),
