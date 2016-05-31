@@ -1,7 +1,12 @@
 ( function( $ ) {
-	var fixtures = jasmine.getFixtures();
-	var styleFixtures = jasmine.getStyleFixtures();
-	var jsonFixtures = jasmine.getJSONFixtures();
+	var fixtures = jasmine.getFixtures(),
+		styleFixtures = jasmine.getStyleFixtures(),
+		jsonFixtures = jasmine.getJSONFixtures(),
+		basePath = 'base',
+		testPath = basePath + '/test',
+		fixturesPath = testPath + '/fixtures',
+		customizationsPath = basePath + '/plugins/nodebb-plugin-tdwtf-customizations';
+
 	fixtures.fixturesPath =
 	styleFixtures.fixturesPath =
 	jsonFixtures.fixturesPath =
@@ -10,8 +15,8 @@
 	describe( 'header', function() {
 		describe( 'custom.css', function() {
 			beforeEach( function() {
-				fixtures.load( 'base/test/fixtures/css-test.html' );
-				styleFixtures.appendLoad( 'base/custom.css' );
+				fixtures.load( fixturesPath + '/css-test.html' );
+				styleFixtures.appendLoad( customizationsPath + '/custom.css' );
 			} );
 			it( 'prevents font from becoming too big', function() {
 				var count = 0,

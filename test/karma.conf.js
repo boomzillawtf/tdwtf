@@ -4,9 +4,8 @@ module.exports = function( config ) {
 		frameworks: [ 'jasmine-jquery', 'jasmine' ],
 		files: [
 			'test/**/*.spec.js',
-			'custom.less',
-			'header.html',
-			'test/fixtures/**/*'
+			{ pattern: 'test/fixtures/**/*', served: true, included: false },
+			{ pattern: 'plugins/nodebb-plugin-tdwtf-customizations/**/*', served: true, included: false }
 		],
 		exclude: [],
 		preprocessors: {
