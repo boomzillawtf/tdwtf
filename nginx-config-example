@@ -1,0 +1,36 @@
+upstream nodebb {
+	ip_hash;
+
+	server 172.21.1.253:4567;
+	server 172.21.1.253:4568;
+	server 172.21.1.254:4567;
+	server 172.21.1.254:4568;
+
+	keepalive 16;
+}
+
+server {
+	server_name nodebb.local;
+
+	location @what {
+		return 301 https://what.thedailywtf.com$request_uri;
+	}
+
+	location @nodebb {
+		proxy_pass http://nodebb$request_uri;
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		proxy_set_header Host $http_host;
+		proxy_set_header Upgrade $http_upgrade;
+		proxy_set_header Connection "upgrade";
+		proxy_http_version 1.1;
+	}
+
+	location /uploads {
+		alias /usr/share/nginx/wtdwtf-nodebb.uploads;
+		try_files $uri @what;
+	}
+
+	location / {
+		try_files /nonexistent @nodebb;
+	}
+}

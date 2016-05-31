@@ -1,0 +1,14 @@
+{
+	"id": "nodebb-plugin-tdwtf-customizations",
+	"url": "https://github.com/boomzillawtf/tdwtf",
+	"library": "index.js",
+	"hooks": [
+		{"hook": "filter:meta.getMetaTags", "method": "meta"}
+	],
+	"less": [
+		"./custom.less"
+	],
+	"scripts": [
+		"./custom.js"
+	]
+}
