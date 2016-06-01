@@ -1,3 +1,4 @@
+/* jshint node: true, esversion: 6 */
 const gulp = require( 'gulp' ),
 	jshint = require( 'gulp-jshint' ),
 	karma = require( 'karma' );
@@ -8,6 +9,7 @@ gulp.task( 'lint:jshint', () =>
 	gulp.src( [
 		'plugins/nodebb-plugin-tdwtf-customizations/**/*.js',
 		'plugins/nodebb-plugin-tdwtf-customizations/**/*.html',
+		'gulpfile.js',
 		'test/**/*.js'
 	] )
 	.pipe( jshint.extract( 'auto' ) )
