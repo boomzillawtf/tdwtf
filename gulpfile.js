@@ -1,6 +1,7 @@
 /* jshint node: true, esversion: 6 */
 const gulp = require( 'gulp' ),
 	jshint = require( 'gulp-jshint' ),
+	lesshint = require( 'gulp-lesshint' ),
 	karma = require( 'karma' );
 
 gulp.task( 'default', [ 'lint', 'test' ] );
@@ -18,7 +19,15 @@ gulp.task( 'lint:jshint', () =>
 	.pipe( jshint.reporter( 'fail' ) )
 );
 
-gulp.task( 'lint', [ 'lint:jshint' ] );
+gulp.task( 'lint:lesshint', () =>
+	gulp.src( [
+		'plugins/nodebb-plugin-tdwtf-customizations/**/*.less'
+	] )
+	.pipe( lesshint() )
+	.pipe( lesshint.reporter() )
+);
+
+gulp.task( 'lint', [ 'lint:jshint', 'lint:lesshint' ] );
 
 gulp.task( 'test:karma', done => {
 	const configFile = `${__dirname}/test/karma.conf.js`;
