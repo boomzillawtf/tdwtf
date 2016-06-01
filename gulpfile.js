@@ -2,6 +2,7 @@
 const gulp = require( 'gulp' ),
 	jshint = require( 'gulp-jshint' ),
 	lesshint = require( 'gulp-lesshint' ),
+	jsonlint = require( 'gulp-jsonlint' ),
 	karma = require( 'karma' );
 
 gulp.task( 'default', [ 'lint', 'test' ] );
@@ -29,7 +30,19 @@ gulp.task( 'lint:lesshint', () =>
 	.pipe( lesshint.reporter() )
 );
 
-gulp.task( 'lint', [ 'lint:jshint', 'lint:lesshint' ] );
+gulp.task( 'lint:jsonlint', () =>
+	gulp.src( [
+		'*.json',
+		'.jshintrc',
+		'.lesshintrc',
+		'plugins/nodebb-plugin-tdwtf-customizations/**/*.json',
+		'test/**/*.json'
+	] )
+	.pipe( jsonlint() )
+	.pipe( jsonlint.reporter() )
+);
+
+gulp.task( 'lint', [ 'lint:jshint', 'lint:lesshint', 'lint:jsonlint' ] );
 
 gulp.task( 'test:karma', done => {
 	const configFile = `${__dirname}/test/karma.conf.js`;
