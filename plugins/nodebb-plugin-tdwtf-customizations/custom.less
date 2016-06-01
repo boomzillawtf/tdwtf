@@ -29,7 +29,7 @@
 .taskbar .navbar-nav li.taskbar-chat a:focus,
 .taskbar .navbar-nav li.taskbar-chat a:hover,
 .topic .posts .icon .user-icon,
-.topic .posts .icon img, 
+.topic .posts .icon img,
 .users-container .users-box .user-icon,
 .users-container .users-box img {
 	border-radius: 0 !important;
@@ -68,8 +68,8 @@ kbd, kbd kbd {
 		padding: 1px;
 		border: 1px solid #D8E5FB;
 		@media (min-width: 1000px) {
-		    max-width: 600px;
-        }
+			max-width: 600px;
+		}
 		max-height: 600px;
 		display: inline;
 	}
@@ -101,7 +101,7 @@ kbd, kbd kbd {
 
 	/* Stop big+big...+big abuse http://what.thedailywtf.com/t/abusing-big-tags/5566 */
 	big big big big big big { font-size: 1em; }
-		
+
 	/* And small-small */
 	small small small small small small { font-size: 1em; }
 
@@ -113,9 +113,9 @@ kbd, kbd kbd {
 		text-decoration: none;
 	}
 
-    blockquote > blockquote, blockquote > p {
-        margin-bottom: 11px;
-    }
+	blockquote > blockquote, blockquote > p {
+		margin-bottom: 11px;
+	}
 
 	blockquote > blockquote:last-child, blockquote > p:last-child {
 		margin-bottom: 0;
@@ -135,16 +135,16 @@ kbd, kbd kbd {
 		margin-top: 0;
 		vertical-align: top;
 	}
-	
+
 	.iframely-link .iframely-container .panel-iframely .iframely-embed .one-line {
-        /* wrap iframely titles instead of cutting off with an elipse */
-        white-space: normal !important;
+		/* wrap iframely titles instead of cutting off with an elipse */
+		white-space: normal !important;
 	}
 
 	.iframely-link .iframely-container p.description {
-        /* wrap iframely on small screen 
-        https://what.thedailywtf.com/topic/19499/one-box-picture-overflow-on-mobile/10
-        */
+		/* wrap iframely on small screen
+		https://what.thedailywtf.com/topic/19499/one-box-picture-overflow-on-mobile/10
+		*/
 		display: inline-block;
 		max-width: 350px;
 		width: auto;
@@ -154,19 +154,19 @@ kbd, kbd kbd {
 		max-height: none !important;
 	}
 
-    .lazyYT-container iframe {
-        max-width: none !important;
-    }
+	.lazyYT-container iframe {
+		max-width: none !important;
+	}
 
 	.img-responsive.emoji, .img-responsive.plugin-mentions-emoji {
-	    height: 20px;
+		height: 20px;
 		border: 0;
 	}
 
-    table {
-        border-collapse: separate;
-	    border-spacing: 2px;
-    }
+	table {
+		border-collapse: separate;
+		border-spacing: 2px;
+	}
 }
 
 .slideout-open #panel {
@@ -254,15 +254,15 @@ span[component="post/vote-count"] {
 }
 
 .composer {
-    z-index: 1000 !important; /* otherwise it covers the cancel dialog on alternative skins */
+	z-index: 1000 !important; /* otherwise it covers the cancel dialog on alternative skins */
 }
 
 /* See if we can change the background colour of categories - PJH */
 html {
-    height: 100%;
+	height: 100%;
 }
 body {
-    min-height: 100%;
+	min-height: 100%;
 }
 [data-category-id="4"] body { /* staff */
 	box-shadow: 0 0 25vw #283890 inset;
@@ -286,10 +286,10 @@ body {
 	box-shadow: 0 0 25vw #A16946 inset;
 }
 [data-category-id="31"] body { /* mafia current game */
-    box-shadow: 0 0 5vw #AB4642 inset;
+	box-shadow: 0 0 5vw #AB4642 inset;
 }
 [data-category-id="32"] body { /* mafia club ded */
-    box-shadow: 0 0 5vw #000 inset;
+	box-shadow: 0 0 5vw #000 inset;
 }
 
 /* fix mobile */
@@ -344,57 +344,64 @@ body {
 	}
 }
 
-/* Mafia VI - Swypos Anonymouse */
+/* Mafia VI - Spellars Town Council */
 [data-tid="19711"], [data-tid="19712"], [data-tid="19713"], [data-tid="19835"] {
-    & > [data-uid="650"] {
-        background-color: rgba(255, 127, 255, 0.25);
-    }
+	& > [data-uid="650"] {
+		background-color: rgba(255, 127, 255, 0.25);
+	}
 
-    .page-topic & {
-        a[href="https://what.thedailywtf.com/uid/289"]:after, a[href="/user/raceprouk"]:after {
-            content: ' "Maria"';
-            font-weight: bold;
-        }
-        a[href="https://what.thedailywtf.com/uid/731"]:after, a[href="/user/yamikuronue"]:after {
-            content: ' "Violet"';
-            font-weight: bold;
-        }
-        a[href="https://what.thedailywtf.com/uid/1727"]:after, a[href="/user/cloak15"]:after {
-            content: ' "Oscar"';
-            font-weight: bold;
-        }
-        .icon > a[href]:after, a[href]:empty:after {
-            content: '';
-        }
-    }
+	.page-topic & {
+		a[href="https://what.thedailywtf.com/uid/289"]:after, a[href="/user/raceprouk"]:after {
+			content: ' "Maria"';
+			font-weight: bold;
+		}
+		a[href="https://what.thedailywtf.com/uid/731"]:after, a[href="/user/yamikuronue"]:after {
+			content: ' "Violet"';
+			font-weight: bold;
+		}
+		a[href="https://what.thedailywtf.com/uid/1727"]:after, a[href="/user/cloak15"]:after {
+			content: ' "Oscar"';
+			font-weight: bold;
+		}
+		.icon > a[href]:after, a[href]:empty:after {
+			content: '';
+		}
+	}
 }
 
 /* Mafia VII - Bushido Mafia II */
 /*[data-tid=""] {
-    & > [data-uid="731"] {
-        background-color: rgba(255, 255, 0, 0.25);
-    }
+	& > [data-uid="731"] {
+		background-color: rgba(255, 255, 0, 0.25);
+	}
 }*/
 
 /* Mafia VIII - [theme pending] */
 /*[data-tid=""] {
-    & > [data-uid="39"] {
-        background-color: rgba(255, 255, 0, 0.25);
-    }
+	& > [data-uid="39"] {
+		background-color: rgba(255, 255, 0, 0.25);
+	}
 }*/
 
 /* Mafia IX - don't push the button */
 /*[data-tid=""] {
-    & > [data-uid="175"] {
-        background-color: rgba(255, 255, 0, 0.25);
-    }
+	& > [data-uid="175"] {
+		background-color: rgba(255, 255, 0, 0.25);
+	}
 }*/
 
-/* Mafia X - Dwarf Fortress */
+/* Mafia X - Flame War Mafia */
 /*[data-tid=""] {
-    & > [data-uid="1"] {
-        background-color: rgba(255, 255, 0, 0.25);
-    }
+	& > [data-uid="140879"] {
+		background-color: rgba(255, 255, 0, 0.25);
+	}
+}*/
+
+/* Mafia XI - Normal Mafia Realy! Pinkie Swears! */
+/*[data-tid=""] {
+	& > [data-uid="650"] {
+		background-color: rgba(255, 127, 255, 0.25);
+	}
 }*/
 
 #new-topics-alert {
@@ -505,14 +512,14 @@ details.details_shim_open   > summary:before {display: inline-block; content: "\
 }
 
 .composer .imagedrop {
-    box-shadow: 0 0 5em #5bc0de inset;
+	box-shadow: 0 0 5em #5bc0de inset;
 }
 
 .formatting-bar {
-    /* hide image link button and duplicate upload button */
-    [data-format="picture-o"], [data-format="picture"] {
-        display: none;
-    }
+	/* hide image link button and duplicate upload button */
+	[data-format="picture-o"], [data-format="picture"] {
+		display: none;
+	}
 }
 
 /* attempt to cut down on the jellypotato */
@@ -522,34 +529,34 @@ details.details_shim_open   > summary:before {display: inline-block; content: "\
 }
 /* hide status stuff */
 i[component="user/status"] {
-    display: none;
+	display: none;
 }
 a.user-status{ /* mobile menu, that's different */
-    display: none;
+	display: none;
 }
 .dropdown-menu li a.user-status {
-    display: none;
+	display: none;
 }
 .dropdown-menu li:first-child + li.divider {
-    display: none;
+	display: none;
 }
 
 /* fix composer height */
 .composer .write-preview-container {
-    min-height: 0;
+	min-height: 0;
 }
 
 blockquote small {
-    display: inline;
-    color: inherit;
-    font-size: 85%;
-    
-    &:before {
-        content: '';
-    }
+	display: inline;
+	color: inherit;
+	font-size: 85%;
+
+	&:before {
+		content: '';
+	}
 }
 
 /* https://what.thedailywtf.com/post/899058 */
 .js-lazyYT {
-    margin-bottom: 10px;
+	margin-bottom: 10px;
 }
