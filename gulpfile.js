@@ -11,7 +11,8 @@ gulp.task( 'lint:jshint', () =>
 		'plugins/nodebb-plugin-tdwtf-customizations/**/*.js',
 		'plugins/nodebb-plugin-tdwtf-customizations/**/*.html',
 		'gulpfile.js',
-		'test/**/*.js'
+		'test/**/*.js',
+		'test/**/*.html'
 	] )
 	.pipe( jshint.extract( 'auto' ) )
 	.pipe( jshint() )
