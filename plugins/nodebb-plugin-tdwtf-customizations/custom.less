@@ -52,13 +52,13 @@ kbd, kbd kbd {
 	background-color: #fff;
 	border: 1px solid #e9e9e9;
 	border-radius: 3px;
-	box-shadow: 0 1px 0 rgba(0,0,0,0.8);
+	box-shadow: 0 1px 0 rgba(0, 0, 0, 0.8);
 	color: #222;
 	display: inline-block;
 	font-size: 0.857em;
 	line-height: 1.4;
-	margin: 0 .1em;
-	padding: .1em .6em;
+	margin: 0 0.1em;
+	padding: 0.1em 0.6em;
 }
 
 /* post content */
@@ -66,7 +66,7 @@ kbd, kbd kbd {
 	/* Stick a border around images */
 	.img-responsive {
 		padding: 1px;
-		border: 1px solid #D8E5FB;
+		border: 1px solid #d8e5fb;
 		@media (min-width: 1000px) {
 			max-width: 600px;
 		}
@@ -76,25 +76,25 @@ kbd, kbd kbd {
 
 	/* Differentiate strike/del */
 	del {
-		background-color: #FDD;
-		border-color: #F1C0C0;
+		background-color: #fdd;
+		border-color: #f1c0c0;
 	}
 	ins {
-		background-color: #DBFFDB;
-		border-color: #C1E9C1;
+		background-color: #dbffdb;
+		border-color: #c1e9c1;
 	}
 	ins > del {
-		background-color: #00CCFF;
+		background-color: #0cf;
 		text-decoration: overline;
 	}
 	del > ins {
-		background-color: #FFFF66;
+		background-color: #ff6;
 		text-decoration: overline;
 	}
 
 	/* Show abbr and a title contents on mobile */
 	@media screen and (max-width: 991px) {
-		abbr[title]:after{
+		abbr[title]:after {
 			content: " [" attr(title) "]";
 		}
 	}
@@ -160,7 +160,7 @@ kbd, kbd kbd {
 
 	.img-responsive.emoji, .img-responsive.plugin-mentions-emoji {
 		height: 20px;
-		border: 0;
+		border: none;
 	}
 
 	table {
@@ -181,7 +181,7 @@ a[component="post/reply"], a[component="post/quote"] {
 	margin-right: 3px;
 }
 
-a[component="post/upvote"], a[component="post/downvote"]{
+a[component="post/upvote"], a[component="post/downvote"] {
 	background-color: #ccc;
 	padding: 10px;
 	padding-right: 8px;
@@ -211,7 +211,7 @@ span[component="post/vote-count"] {
 
 .profile-meta strong i.fa.fa-eye-slash::after {
 	background-color: #000;
-	content: '';
+	content: "";
 	position: absolute;
 	right: 0;
 	top: 0;
@@ -266,27 +266,27 @@ body {
 }
 [data-category-id="4"] body { /* staff */
 	box-shadow: 0 0 25vw #283890 inset;
-	background-image: url('/uploads/files/1458603522948-trans_15_turnleft.png');
+	background-image: url("/uploads/files/1458603522948-trans_15_turnleft.png");
 	background-size: cover;
 	background-attachment: fixed;
 }
 [data-category-id="17"] body { /* turn left */
-	box-shadow: 0 0 25vw #3AB54A inset;
-	background-image: url('/uploads/files/1458603522948-trans_15_turnleft.png');
+	box-shadow: 0 0 25vw #3ab54a inset;
+	background-image: url("/uploads/files/1458603522948-trans_15_turnleft.png");
 	background-size: cover;
 	background-attachment: fixed;
 }
 [data-category-id="16"] body { /* lounge */
-	box-shadow: 0 0 25vw #F7941D inset;
-	background-image: url('/uploads/files/1458603503953-trans_15_qantas-first-class-lounge-sydney.png');
+	box-shadow: 0 0 25vw #f7941d inset;
+	background-image: url("/uploads/files/1458603503953-trans_15_qantas-first-class-lounge-sydney.png");
 	background-size: cover;
 	background-attachment: fixed;
 }
 [data-category-id="33"] body, [data-category-id="34"] body, [data-category-id="35"] body, [data-category-id="38"] body { /* mafia factions */
-	box-shadow: 0 0 25vw #A16946 inset;
+	box-shadow: 0 0 25vw #a16946 inset;
 }
 [data-category-id="31"] body { /* mafia current game */
-	box-shadow: 0 0 5vw #AB4642 inset;
+	box-shadow: 0 0 5vw #ab4642 inset;
 }
 [data-category-id="32"] body { /* mafia club ded */
 	box-shadow: 0 0 5vw #000 inset;
@@ -364,7 +364,7 @@ body {
 			font-weight: bold;
 		}
 		.icon > a[href]:after, a[href]:empty:after {
-			content: '';
+			content: "";
 		}
 	}
 }
@@ -450,16 +450,16 @@ div#taskbar.taskbar.navbar-fixed-bottom {
 	}
 	#search-form {
 		padding: 0;
-		margin-right:0;
+		margin-right: 0;
 	}
 	#search-form #search-button {
-		padding-left:4px;
-		padding-right:4px;
+		padding-left: 4px;
+		padding-right: 4px;
 	}
 }
 
 #search-form #search-button.hidden {
-	border:0;
+	border: none;
 }
 
 /* details shim for Firefox - https://github.com/tyleruebele/details-shim/blob/master/details-shim.css */
@@ -482,7 +482,7 @@ details.details_shim_open   > summary:before {display: inline-block; content: "\
 }
 .bootstrap-tagsinput .label {
 	height: 1.5em;
-	margin-top: .3em;
+	margin-top: 0.3em;
 }
 
 .lazyYT-container {
@@ -497,7 +497,7 @@ details.details_shim_open   > summary:before {display: inline-block; content: "\
 }
 
 .nprogress-busy .form-actions:after {
-	content: '';
+	content: "";
 	display: inline-block;
 	width: 18px;
 	height: 18px;
@@ -531,7 +531,7 @@ details.details_shim_open   > summary:before {display: inline-block; content: "\
 i[component="user/status"] {
 	display: none;
 }
-a.user-status{ /* mobile menu, that's different */
+a.user-status { /* mobile menu, that's different */
 	display: none;
 }
 .dropdown-menu li a.user-status {
@@ -552,7 +552,7 @@ blockquote small {
 	font-size: 85%;
 
 	&:before {
-		content: '';
+		content: "";
 	}
 }
 
