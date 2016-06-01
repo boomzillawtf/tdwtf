@@ -51,7 +51,7 @@
 	url = https://github.com/boomzillawtf/nodebb-plugin-upvote-notifications
 [submodule "nodebb-plugin-youtube-lite"]
 	path = plugins/nodebb-plugin-youtube-lite
-	url = https://github.com/boomzillawtf/nodebb-plugin-youtube-lite
+	url = https://github.com/a5mith/nodebb-plugin-youtube-lite
 [submodule "plugins/nodebb-plugin-import-tdwtf"]
 	path = plugins/nodebb-plugin-import-tdwtf
 	url = https://github.com/BenLubar/nodebb-plugin-import-discourse.git
