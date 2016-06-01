@@ -19,6 +19,8 @@ COPY emoji/emojione/LICENSE.md /usr/src/app/node_modules/nodebb-plugin-emoji-one
 RUN node -e 'require("nodebb-plugin-emoji-one/lib/set/update/index").build("/usr/src/app/node_modules/nodebb-plugin-emoji-one/public/static/images")'
 
 COPY emoji/tdwtf /usr/src/app/tdwtf-emoji
+COPY emoji/fontawesome/black/png/64 /usr/src/app/tdwtf-emoji/fontawesome
+RUN cd /usr/src/app/tdwtf-emoji/fontawesome && rename 's/^/fa-/' -- *.png && rename 's/-/_/g' -- *.png && mv -- *.png /usr/src/app/tdwtf-emoji/ && cd .. && rmdir fontawesome
 RUN mkdir -p /usr/src/app/node_modules/nodebb-plugin-emoji-static/public/static/images && ln -s /usr/src/app/tdwtf-emoji /usr/src/app/node_modules/nodebb-plugin-emoji-static/public/static/images/tdwtf
 
 RUN echo public/uploads/*/ > .make-uploads-folders
