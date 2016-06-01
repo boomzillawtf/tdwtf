@@ -21,7 +21,8 @@ gulp.task( 'lint:jshint', () =>
 
 gulp.task( 'lint:lesshint', () =>
 	gulp.src( [
-		'plugins/nodebb-plugin-tdwtf-customizations/**/*.less'
+		'plugins/nodebb-plugin-tdwtf-customizations/**/*.less',
+		'test/**/*.less'
 	] )
 	.pipe( lesshint() )
 	.pipe( lesshint.reporter() )
