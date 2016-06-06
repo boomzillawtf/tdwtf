@@ -560,3 +560,15 @@ blockquote small {
 .js-lazyYT {
 	margin-bottom: 10px;
 }
+
+/* If people are going to title topics things that are 2 pixels wide in an 18 point font, let 'em. Except for the 2 pixels part. */
+a[itemprop="url"][href] {
+	position: relative;
+
+	&:after {
+		position: absolute;
+		content: '';
+		left: 0;
+		width: 8em;
+	}
+}
