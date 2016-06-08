@@ -6,9 +6,9 @@ docker stop wtdwtf-mongo
 docker stop wtdwtf-redis
 
 echo "Deleting containers"
-docker rm wtdwtf-nodebb
-docker rm wtdwtf-mongo
-docker rm wtdwtf-redis
+docker rm -v wtdwtf-nodebb
+docker rm -v wtdwtf-mongo
+docker rm -v wtdwtf-redis
 
 echo "Deleting network"
 docker network rm wtdwtf
