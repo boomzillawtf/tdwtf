@@ -1,7 +1,12 @@
 #!/bin/bash -e
 
-# pull the new image
-docker pull boomzillawtf/tdwtf
+if [[ "`basename "$0"`" == "update_local.bash" ]]; then
+	# build the local image
+	docker build -t boomzillawtf/tdwtf .
+else
+	# pull the new image
+	docker pull boomzillawtf/tdwtf
+fi
 
 # rename the old image
 docker rename wtdwtf-nodebb wtdwtf-nodebb-temp
