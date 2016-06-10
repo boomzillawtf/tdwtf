@@ -19,7 +19,7 @@ server {
 
 	location /uploads {
 		alias /usr/share/nginx/wtdwtf-nodebb.uploads;
-		add_header Content-Security-Policy "default-src 'none'";
+		add_header Content-Security-Policy "default-src 'none'; style-src 'unsafe-inline'; img-src *; media-src *; object-src 'self'";
 		try_files $uri @what;
 	}
 
