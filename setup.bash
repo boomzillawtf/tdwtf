@@ -36,8 +36,10 @@ else
 nodebb-upstream.conf for a webserver running on the host."
 fi
 
+
 # pull the NodeBB image
-docker pull boomzillawtf/tdwtf
+#docker pull boomzillawtf/tdwtf
+docker build -t boomzillawtf/tdwtf -f Dockerfile .
 
 # create a Docker network
 docker network create --subnet 172.21.1.0/24 wtdwtf

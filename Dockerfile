@@ -39,4 +39,4 @@ RUN ln -s /usr/src/app/docker/config.json /usr/src/app/config.json
 CMD cat .make-uploads-folders | xargs mkdir -p \
 && ./nodebb upgrade \
 && echo 1 > pidfile \
-&& exec node loader.js
+&& exec node --perf-basic-prof-only-functions loader.js
