@@ -252,6 +252,12 @@ span[component="post/vote-count"] {
 	max-height: 100px;
 	overflow-y: hidden;
 	padding-right: 1em;
+	max-width: 800px;
+	word-wrap: break-word;
+
+	@media (max-width: 991px) {
+		max-width: 100%;
+	}
 }
 
 .chat-modal {
