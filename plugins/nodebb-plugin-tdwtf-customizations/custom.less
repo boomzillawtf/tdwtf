@@ -126,39 +126,42 @@ kbd, kbd kbd {
 		margin-bottom: 0;
 	}
 
-	.iframely-link .iframely-container h4 {
-		margin-top: 0;
-	}
+	.iframely-link .iframely-container {
+		h4 {
+			margin-top: 0;
+		}
 
-	.iframely-link .iframely-container .thumb {
-		max-width: 21px;
-		max-height: 21px;
-		float: none !important;
-	}
+		.thumb {
+			max-width: 21px;
+			float: none !important;
+		}
 
-	.iframely-link .iframely-container .media .media {
-		display: inline-block;
-		max-width: 200px;
-		margin-top: 0;
-		vertical-align: top;
-	}
+		.media .media {
+			display: inline-block;
+			max-width: 200px;
+			margin-top: 0;
+			vertical-align: top;
+		}
 
-	.iframely-link .iframely-container .panel-iframely .iframely-embed .one-line {
-		/* wrap iframely titles instead of cutting off with an elipse */
-		white-space: normal !important;
-	}
+		.panel-iframely .iframely-embed .one-line {
+			/* wrap iframely titles instead of cutting off with an elipse */
+			white-space: normal !important;
+		}
 
-	.iframely-link .iframely-container p.description {
-		/* wrap iframely on small screen
-		https://what.thedailywtf.com/topic/19499/one-box-picture-overflow-on-mobile/10
-		*/
-		display: inline-block;
-		max-width: 350px;
-		width: auto;
-	}
+		p.description {
+			/* wrap iframely on small screen https://what.thedailywtf.com/post/868774 */
+			display: inline-block;
+			max-width: 350px;
+			width: auto;
+		}
 
-	.iframely-link .iframely-container img, .iframely-link .iframely-container iframe {
-		max-height: 1000px !important;
+		/* https://what.thedailywtf.com/post/919173 */
+		max-height: 800px;
+		overflow-y: auto;
+
+		img, iframe {
+			max-height: none !important;
+		}
 	}
 
 	.lazyYT-container iframe {
