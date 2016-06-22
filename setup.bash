@@ -38,8 +38,7 @@ fi
 
 
 # pull the NodeBB image
-#docker pull boomzillawtf/tdwtf
-docker build -t boomzillawtf/tdwtf -f Dockerfile .
+docker pull boomzillawtf/tdwtf
 
 # create a Docker network
 docker network create --subnet 172.21.1.0/24 wtdwtf
