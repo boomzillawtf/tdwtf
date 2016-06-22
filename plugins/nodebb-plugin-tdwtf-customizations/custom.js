@@ -1,21 +1,28 @@
 /* jshint browser: true */
 /* globals $, ajaxify, app */ 
 $(window).on('action:ajaxify.contentLoaded', function() {
-    if (ajaxify.data && ajaxify.data.cid) {
-        $('html').attr('data-category-id', ajaxify.data.cid);
-    } else {
-        $('html').removeAttr('data-category-id');
-    }
-    if (app.user && app.user.uid) {
-        $('html').attr('data-user-id', app.user.uid);
-    } else {
-        $('html').removeAttr('data-user-id');
-    }
+	if (ajaxify.data && ajaxify.data.cid) {
+		$('html').attr('data-category-id', ajaxify.data.cid);
+	} else {
+		$('html').removeAttr('data-category-id');
+	}
+
+	if (app.user && app.user.uid) {
+		$('html').attr('data-user-id', app.user.uid);
+	} else {
+		$('html').removeAttr('data-user-id');
+	}
+
+	if (app.user && app.user.isMafiaPlayer) {
+		$('html').attr('data-mafia-player', '');
+	} else {
+		$('html').removeAttr('data-mafia-player');
+	}
 });
 
 // fix title thingy
 $(window).on('action:ajaxify.end', function() {
-    $('[component="navbar/title"] span:hidden').addClass('hidden').removeAttr('style');
+	$('[component="navbar/title"] span:hidden').addClass('hidden').removeAttr('style');
 });
 
 /* jshint ignore:start */

@@ -323,6 +323,12 @@ body {
 	.votes, .topic .moderator-tools a {
 		display: none;
 	}
+
+	&:not([data-mafia-player]) {
+		div.btn-group.action-bar, span.post-tools {
+			display: none;
+		}
+	}
 }
 
 /* mafia GM highlights */

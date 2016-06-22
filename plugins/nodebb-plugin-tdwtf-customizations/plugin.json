@@ -3,7 +3,8 @@
 	"url": "https://github.com/boomzillawtf/tdwtf",
 	"library": "index.js",
 	"hooks": [
-		{"hook": "filter:meta.getMetaTags", "method": "meta"}
+		{"hook": "filter:meta.getMetaTags", "method": "meta"},
+		{"hook": "filter:middleware.renderHeader", "method": "header"}
 	],
 	"less": [
 		"./custom.less"
