@@ -1,6 +1,8 @@
 /* jshint node: true */
 
 var Groups = module.parent.require('./groups');
+var Posts = module.parent.require('./posts');
+var events = module.parent.require('./events');
 
 module.exports = {
 	"meta": function(tags, callback) {
@@ -21,5 +23,27 @@ module.exports = {
 			data.templateValues.userJSON = JSON.stringify(data.templateValues.user);
 			callback(null, data);
 		});
+	},
+	"postEdit": function(data, callback) {
+		if (data.uid === 140870) {
+			return Posts.getPostField(data.post.pid, 'content', function(err, content) {
+				if (err) {
+					return callback(err, data);
+				}
+
+				events.log({
+					type: 'fbmac',
+					uid: data.uid,
+					ip: data.req.ip,
+					pid: data.post.pid,
+					oldContent: content,
+					newContent: data.post.content
+				});
+
+				callback(null, data);
+			});
+		}
+
+		callback(null, data);
 	}
 };

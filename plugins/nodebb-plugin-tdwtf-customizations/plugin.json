@@ -4,7 +4,8 @@
 	"library": "index.js",
 	"hooks": [
 		{"hook": "filter:meta.getMetaTags", "method": "meta"},
-		{"hook": "filter:middleware.renderHeader", "method": "header"}
+		{"hook": "filter:middleware.renderHeader", "method": "header"},
+		{"hook": "filter:post.edit", "method": "postEdit"}
 	],
 	"less": [
 		"./custom.less"
