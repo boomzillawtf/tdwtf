@@ -62,7 +62,7 @@ kbd, kbd kbd {
 }
 
 /* post content */
-.topic .posts .content, .composer .preview {
+.topic .posts .content, .composer .preview, [component="chat/message/body"] {
 	/* Stick a border around images */
 	.img-responsive {
 		padding: 1px;
@@ -300,7 +300,7 @@ body {
 	background-size: cover;
 	background-attachment: fixed;
 }
-[data-category-id="33"] body, [data-category-id="34"] body, [data-category-id="35"] body, [data-category-id="38"] body { /* mafia factions */
+[data-category-id="33"] body, [data-category-id="34"] body, [data-category-id="35"] body, [data-category-id="38"] body, [data-category-id="40"] body, [data-category-id="41"] body { /* mafia factions */
 	box-shadow: 0 0 25vw #a16946 inset;
 }
 [data-category-id="31"] body { /* mafia current game */
@@ -319,7 +319,7 @@ body {
 }
 
 /* hide post buttons in active mafia games */
-[data-category-id="31"], [data-category-id="33"], [data-category-id="34"], [data-category-id="35"], [data-category-id="38"] {
+[data-category-id="31"], [data-category-id="33"], [data-category-id="34"], [data-category-id="35"], [data-category-id="38"], [data-category-id="40"], [data-category-id="41"] {
 	.votes, .topic .moderator-tools a {
 		display: none;
 	}
@@ -400,12 +400,12 @@ body {
 	}
 }
 
-/* Mafia VIII - [theme pending] */
-/*[data-tid=""] {
+/* Mafia VIII - The Maffening */
+[data-tid="20366"], [data-tid="20374"], [data-tid="20381"], [data-tid="20375"], [data-tid="20376"], [data-tid="20377"], [data-tid="20378"], [data-tid="20379"], [data-tid="20380"] {
 	& > [data-uid="39"] {
 		background-color: rgba(255, 255, 0, 0.25);
 	}
-}*/
+}
 
 /* Mafia IX - don't push the button */
 /*[data-tid=""] {
@@ -562,16 +562,11 @@ details.details_shim_open   > summary:before {display: inline-block; content: "\
 	padding-bottom: 360px;
 }
 /* hide status stuff */
-i[component="user/status"] {
-	display: none;
-}
-a.user-status { /* mobile menu, that's different */
-	display: none;
-}
-.dropdown-menu li a.user-status {
-	display: none;
-}
-.dropdown-menu li:first-child + li.divider {
+i[component="user/status"],
+a.user-status /* mobile menu, that's different */,
+.dropdown-menu li a.user-status,
+.dropdown-menu li:first-child + li.divider,
+.chat-list .status {
 	display: none;
 }
 
