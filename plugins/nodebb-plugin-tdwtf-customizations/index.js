@@ -25,7 +25,7 @@ module.exports = {
 		});
 	},
 	"postEdit": function(data, callback) {
-		if (data.uid === 140870) {
+		if (data.uid === 140870 || data.uid === 140914 || data.uid === 140925 || data.uid === 141278) {
 			return Posts.getPostField(data.post.pid, 'content', function(err, content) {
 				if (err) {
 					return callback(err, data);
