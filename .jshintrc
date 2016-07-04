@@ -9,7 +9,7 @@
 	"globals": [],
 	"iterator": false,
 	"latedef": true,
-	"maxcomplexity": 4,
+	"maxcomplexity": 15,
 	"maxdepth": 4,
 	"maxerr": 50,
 	"maxparams": 4,
