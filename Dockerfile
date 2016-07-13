@@ -44,3 +44,4 @@ CMD cat .make-uploads-folders | xargs mkdir -p \
 && ./nodebb upgrade \
 && echo 1 > pidfile \
 && exec node --perf-basic-prof-only-functions loader.js
+
