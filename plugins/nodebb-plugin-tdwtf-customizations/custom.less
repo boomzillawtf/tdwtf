@@ -186,7 +186,7 @@ kbd, kbd kbd {
 }
 
 /* make it blue */
-a[component="post/reply"], a[component="post/quote"] {
+a[component="post/reply"], a[component="post/quote"], a[component="post/quote-club-ded"] {
 	background-color: #337ab7;
 	color: white;
 	padding: 10px;
@@ -321,7 +321,7 @@ body {
 	}
 
 	&:not([data-mafia-player]) {
-		div.btn-group.action-bar, span.post-tools {
+		div.btn-group.action-bar, span.post-tools [component="post/reply"], span.post-tools [component="post/quote"] {
 			display: none;
 		}
 	}

@@ -1,5 +1,5 @@
 /* jshint browser: true */
-/* globals $, ajaxify, app */ 
+/* globals $, ajaxify, app, socket */
 $(window).on('action:ajaxify.contentLoaded', function() {
 	if (ajaxify.data && ajaxify.data.cid) {
 		$('html').attr('data-category-id', ajaxify.data.cid);
@@ -18,7 +18,46 @@ $(window).on('action:ajaxify.contentLoaded', function() {
 	} else {
 		$('html').removeAttr('data-mafia-player');
 	}
+
+	if (app.user && app.user.isMafiaClubDed) {
+		$('html').attr('data-mafia-club-ded', app.user.isMafiaClubDed);
+	} else {
+		$('html').removeAttr('data-mafia-club-ded');
+	}
 });
+
+function addClubDedQuoteButton() {
+	if ($('html').is('[data-mafia-club-ded]') &&
+			$('.breadcrumb a[href="/category/31/current-game"]').length &&
+			!$('.breadcrumb a[href="/category/32/club-ded"]').length) {
+		$('[component="topic"]').off('click', '[component="post/quote-club-ded"]').on('click', '[component="post/quote-club-ded"]', function() {
+			var tid = $('html').attr('data-mafia-club-ded');
+			var p = $(this).parents('[component="post"]');
+			var pid = p.attr('data-pid');
+			var username = '@' + p.attr('data-username').replace(/\s/g, '-');
+			socket.emit('posts.getRawPost', pid, function(err, post) {
+				if (err) {
+					return app.alertError(err.message);
+				}
+
+				$(window).trigger('action:composer.addQuote', {
+					tid: tid,
+					slug: ajaxify.data.slug,
+					pid: pid,
+					index: p.attr('data-index'),
+					username: username,
+					topicName: ajaxify.data.titleRaw,
+					text: post
+				});
+
+				ajaxify.go('/topic/' + tid);
+			});
+		});
+		$('.post-tools:not(:contains([component="post/quote-club-ded"]))').append('<a component="post/quote-club-ded" href="#" class="no-select">Popcorn</a>');
+	}
+}
+$(window).on('action:ajaxify.contentLoaded', addClubDedQuoteButton);
+$(window).on('action:posts.loaded', addClubDedQuoteButton);
 
 // fix title thingy
 $(window).on('action:ajaxify.end', function() {
