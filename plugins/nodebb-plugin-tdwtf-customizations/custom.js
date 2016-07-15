@@ -53,7 +53,7 @@ function addClubDedQuoteButton() {
 				ajaxify.go('/topic/' + tid);
 			});
 		});
-		$('.post-tools:not(:contains([component="post/quote-club-ded"]))').append('<a component="post/quote-club-ded" href="#" class="no-select">Popcorn</a>');
+		$('.post-tools:not(:has([component="post/quote-club-ded"]))').append('<a component="post/quote-club-ded" href="#" class="no-select">Popcorn</a>');
 	}
 }
 $(window).on('action:ajaxify.contentLoaded', addClubDedQuoteButton);
