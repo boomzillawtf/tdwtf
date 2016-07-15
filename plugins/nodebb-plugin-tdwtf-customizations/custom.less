@@ -494,6 +494,20 @@ div#taskbar.taskbar.navbar-fixed-bottom {
 	overflow: hidden;
 }
 
+.header .pagination-block {
+	transition: opacity 250ms ease-in, max-width 250ms ease-in;
+	max-width: 0;
+	white-space: nowrap;
+
+	&.ready {
+		max-width: unset;
+	}
+}
+
+.navbar-form {
+	padding-left: 0;
+}
+
 #search-form #search-button.hidden {
 	border: none;
 }
