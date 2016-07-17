@@ -3,6 +3,7 @@
 	"url": "https://github.com/boomzillawtf/tdwtf",
 	"library": "index.js",
 	"hooks": [
+		{"hook": "static:app.load", "method": "init"},
 		{"hook": "filter:meta.getMetaTags", "method": "meta"},
 		{"hook": "filter:middleware.renderHeader", "method": "header"},
 		{"hook": "filter:post.edit", "method": "postEdit"}

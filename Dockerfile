@@ -3,6 +3,12 @@ FROM node:4
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
+RUN apt-get update \
+&& apt-get install -y gdb \
+&& rm -rf /var/lib/apt/lists/*
+
+COPY watchdog.bash /usr/src/app/
+
 ENV NODE_ENV=production \
     daemon=false \
     silent=false
@@ -44,4 +50,3 @@ CMD cat .make-uploads-folders | xargs mkdir -p \
 && ./nodebb upgrade \
 && echo 1 > pidfile \
 && exec node --perf-basic-prof-only-functions loader.js
-

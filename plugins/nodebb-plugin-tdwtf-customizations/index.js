@@ -1,5 +1,7 @@
 /* jshint node: true */
 
+var spawn = require('child_process').spawn;
+var nconf = module.parent.require('nconf');
 var async = module.parent.require('async');
 var Groups = module.parent.require('./groups');
 var Posts = module.parent.require('./posts');
@@ -7,6 +9,12 @@ var Categories = module.parent.require('./categories');
 var events = module.parent.require('./events');
 
 module.exports = {
+	"init": function(data, callback) {
+		spawn('./watchdog.bash', [nconf.get('port')], {
+			stdio: 'inherit'
+		}).unref();
+		callback();
+	},
 	"meta": function(tags, callback) {
 		tags = tags.concat([{
 			name: 'google-site-verification',
