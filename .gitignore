@@ -1,6 +1,1 @@
-.*
-!.gitignore
-!.travis.yml
-!.jshintrc
-!.lesshintrc
 node_modules
