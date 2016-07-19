@@ -495,12 +495,10 @@ div#taskbar.taskbar.navbar-fixed-bottom {
 }
 
 .header .pagination-block {
-	transition: opacity 250ms ease-in, max-width 250ms ease-in;
-	max-width: 0;
-	white-space: nowrap;
+	display: none !important;
 
 	&.ready {
-		max-width: initial;
+		display: block !important;
 	}
 }
 

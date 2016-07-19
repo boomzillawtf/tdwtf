@@ -1,4 +1,4 @@
-FROM boomzillawtf/tdwtf:node-gdbjit
+FROM node:4
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
@@ -49,4 +49,4 @@ RUN ln -s /usr/src/app/docker/config.json /usr/src/app/config.json
 CMD cat .make-uploads-folders | xargs mkdir -p \
 && ./nodebb upgrade \
 && echo 1 > pidfile \
-&& exec node --gdbjit_full --gdbjit_dump loader.js
+&& exec node loader.js
