@@ -640,3 +640,38 @@ a[itemprop="url"][href] {
 .skin-lumen .modal-header .close {
 	color: #333;
 }
+
+.emoji {
+	display: inline-block;
+
+	&[data-set-id="emoji-one"] {
+		height: 20px;
+		width: 20px;
+		margin: -1px 0;
+	}
+
+	&[data-set-id="tdwtf"] {
+		vertical-align: middle;
+		height: 20px;
+		width: auto;
+
+		&[data-emoji-id="eek"] {
+			height: 30px;
+		}
+		&[data-emoji-id="rofl"] {
+			height: 15px;
+		}
+		&[data-emoji-id="spittake"] {
+			height: 25px;
+		}
+		&[data-emoji-id="hide"] {
+			height: 25px;
+		}
+		&[data-emoji-id="popcorn"] {
+			height: 35px;
+		}
+		&[data-emoji-id="vomit"] {
+			height: 16px;
+		}
+	}
+}
