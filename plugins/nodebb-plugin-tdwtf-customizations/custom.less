@@ -488,18 +488,53 @@ div#taskbar.taskbar.navbar-fixed-bottom {
 	}
 }
 
-#main-nav {
-	float: none;
+
+#nav-dropdown {
+	/* top bar */
 	display: flex;
-	overflow: hidden;
+	flex-direction: row;
+}
+
+#logged-in-menu {
+	/* avatar menu */
+	order: 100;
+	flex-shrink: 0;
+}
+
+#logged-in-menu + #logged-in-menu {
+	/* notifications/chat */
+	order: 99;
+	flex-shrink: 0;
+}
+
+#logged-in-menu + #logged-in-menu + ul {
+	/* search box */
+	order: 98;
+	flex-shrink: 1;
+}
+
+#logged-in-menu + #logged-in-menu + ul + ul {
+	/* "forum is down" spinner */
+	order: 97;
+	flex-shrink: 0;
 }
 
 .header .pagination-block {
+	/* topic progress bar */
+	order: 96;
+	flex-shrink: 0;
 	display: none !important;
 
 	&.ready {
 		display: block !important;
 	}
+}
+
+#main-nav {
+	/* navigation menu button bar */
+	flex-grow: 1;
+	flex-shrink: 2;
+	display: flex;
 }
 
 .navbar-form {
