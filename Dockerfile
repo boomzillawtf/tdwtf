@@ -26,9 +26,36 @@ RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION.tar.xz
   && tar -xJf "node-v$NODE_VERSION.tar.xz" -C /usr/src/node --strip-components=1 \
   && rm "node-v$NODE_VERSION.tar.xz" SHASUMS256.txt.asc SHASUMS256.txt \
   && cd /usr/src/node \
-  && (echo '--- deps/v8/src/gdb-jit.cc	2016-06-28 16:08:23.000000000 -0500'; \
-      echo '+++ deps/v8/src/gdb-jit.cc	2016-07-21 10:51:08.572984926 -0500'; \
-      echo '@@ -2128,7 +2128,7 @@'; \
+  && (echo '--- gdb-jit.cc	2016-07-21 16:04:50.634792268 -0500'; \
+      echo '+++ gdb-jit.cc	2016-07-21 16:04:21.754706810 -0500'; \
+      echo '@@ -17,6 +17,8 @@'; \
+      echo ' #include "src/snapshot/natives.h"'; \
+      echo ' #include "src/splay-tree-inl.h"'; \
+      echo ' '; \
+      echo '+#include <unistd.h>'; \
+      echo '+'; \
+      echo ' namespace v8 {'; \
+      echo ' namespace internal {'; \
+      echo ' namespace GDBJITInterface {'; \
+      echo '@@ -2109,14 +2111,14 @@'; \
+      echo ' static void AddJITCodeEntry(CodeMap* map, const AddressRange& range,'; \
+      echo '                             JITCodeEntry* entry, bool dump_if_enabled,'; \
+      echo '                             const char* name_hint) {'; \
+      echo '-#if defined(DEBUG) && !V8_OS_WIN'; \
+      echo '+#if !V8_OS_WIN'; \
+      echo '   static int file_num = 0;'; \
+      echo '   if (FLAG_gdbjit_dump && dump_if_enabled) {'; \
+      echo '     static const int kMaxFileNameSize = 64;'; \
+      echo '     char file_name[64];'; \
+      echo ' '; \
+      echo '-    SNPrintF(Vector<char>(file_name, kMaxFileNameSize), "/tmp/elfdump%s%d.o",'; \
+      echo '-             (name_hint != NULL) ? name_hint : "", file_num++);'; \
+      echo '+    SNPrintF(Vector<char>(file_name, kMaxFileNameSize), "/tmp/elfdump%d-%s%d.o",'; \
+      echo '+             ::getpid(), (name_hint != NULL) ? name_hint : "", file_num++);'; \
+      echo '     WriteBytes(file_name, entry->symfile_addr_,'; \
+      echo '                static_cast<int>(entry->symfile_size_));'; \
+      echo '   }'; \
+      echo '@@ -2178,7 +2180,7 @@'; \
       echo '       LineInfo* lineinfo = GetLineInfo(addr);'; \
       echo '       EmbeddedVector<char, 256> buffer;'; \
       echo '       StringBuilder builder(buffer.start(), buffer.length());'; \
