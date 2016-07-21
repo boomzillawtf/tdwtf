@@ -50,8 +50,8 @@ RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION.tar.xz
       echo ' '; \
       echo '-    SNPrintF(Vector<char>(file_name, kMaxFileNameSize), "/tmp/elfdump%s%d.o",'; \
       echo '-             (name_hint != NULL) ? name_hint : "", file_num++);'; \
-      echo '+    SNPrintF(Vector<char>(file_name, kMaxFileNameSize), "/tmp/elfdump%d-%s%d.o",'; \
-      echo '+             ::getpid(), (name_hint != NULL) ? name_hint : "", file_num++);'; \
+      echo '+    SNPrintF(Vector<char>(file_name, kMaxFileNameSize), "/tmp/elfdump%d-%d.o",'; \
+      echo '+             ::getpid(), file_num++);'; \
       echo '     WriteBytes(file_name, entry->symfile_addr_,'; \
       echo '                static_cast<int>(entry->symfile_size_));'; \
       echo '   }'; \
