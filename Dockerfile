@@ -26,6 +26,18 @@ RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION.tar.xz
   && tar -xJf "node-v$NODE_VERSION.tar.xz" -C /usr/src/node --strip-components=1 \
   && rm "node-v$NODE_VERSION.tar.xz" SHASUMS256.txt.asc SHASUMS256.txt \
   && cd /usr/src/node \
+  && (echo '--- deps/v8/src/gdb-jit.cc	2016-06-28 16:08:23.000000000 -0500'; \
+      echo '+++ deps/v8/src/gdb-jit.cc	2016-07-21 10:51:08.572984926 -0500'; \
+      echo '@@ -2128,7 +2128,7 @@'; \
+      echo '       LineInfo* lineinfo = GetLineInfo(addr);'; \
+      echo '       EmbeddedVector<char, 256> buffer;'; \
+      echo '       StringBuilder builder(buffer.start(), buffer.length());'; \
+      echo '-      builder.AddSubstring(event->name.str, static_cast<int>(event->name.len));'; \
+      echo '+      builder.AddSubstring(event->name.str, std::min(static_cast<int>(event->name.len), buffer.length()));'; \
+      echo '       // It'"'"'s called UnboundScript in the API but it'"'"'s a SharedFunctionInfo.'; \
+      echo '       SharedFunctionInfo* shared ='; \
+      echo '           event->script.IsEmpty() ? NULL : *Utils::OpenHandle(*event->script);') \
+     | patch -u deps/v8/src/gdb-jit.cc \
   && ./configure --gdb \
   && make -j $(nproc) \
   && make install
