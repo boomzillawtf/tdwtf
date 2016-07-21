@@ -3,10 +3,6 @@ FROM boomzillawtf/tdwtf:node-gdbjit
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
-RUN apt-get update \
-&& apt-get install -y gdb \
-&& rm -rf /var/lib/apt/lists/*
-
 COPY watchdog.bash /usr/src/app/
 
 ENV NODE_ENV=production \
@@ -46,7 +42,8 @@ RUN ln -s /usr/src/app/docker/config.json /usr/src/app/config.json
 
 # make sure the uploads subdirectories exist, run any database migrations,
 # and set the container's process as the NodeBB daemon so ./nodebb works
-CMD cat .make-uploads-folders | xargs mkdir -p \
+CMD rm -f /var/tmp/elfdump*-*.o \
+&& cat .make-uploads-folders | xargs mkdir -p \
 && ./nodebb upgrade \
 && echo 1 > pidfile \
-&& exec node --gdbjit_full --gdbjit_dump loader.js
+&& exec node --gdbjit --gdbjit_dump loader.js
