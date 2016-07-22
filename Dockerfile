@@ -69,4 +69,25 @@ RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION.tar.xz
   && make -j $(nproc) \
   && make install
 
+# debian stable has GDB 7.7.1, but the bugfix we need is in 7.11.1, which just
+# happens to be the latest version.
+ENV GDB_VERSION 7.11.1
+
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends texinfo \
+  && rm -rf /var/lib/apt/lists/* \
+  && curl -SLO "https://ftp.gnu.org/gnu/gnu-keyring.gpg" \
+  && curl -SLO "https://ftp.gnu.org/gnu/gdb/gdb-$GDB_VERSION.tar.xz" \
+  && curl -SLO "https://ftp.gnu.org/gnu/gdb/gdb-$GDB_VERSION.tar.xz.sig" \
+  && gpg --verify --keyring ./gnu-keyring.gpg "gdb-$GDB_VERSION.tar.xz.sig" \
+  && mkdir -p /usr/src/gdb \
+  && tar -xJf "gdb-$GDB_VERSION.tar.xz" -C /usr/src/gdb --strip-components=1 \
+  && rm -f gnu-keyring.gpg "gdb-$GDB_VERSION.tar.xz" "gdb-$GDB_VERSION.tar.xz.sig" \
+  && cd /usr/src/gdb \
+  && ./configure \
+  && make -j $(nproc) \
+  && make install \
+  && cd .. \
+  && rm -rf /usr/src/gdb
+
 CMD [ "node" ]
