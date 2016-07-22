@@ -10,7 +10,7 @@ while true; do
 		echo "$PPID/$1 timed out"
 		date -uIns
 		gdb -p "$PPID" -ex 'thread apply all bt' -ex 'kill' --batch
-		rm -f /var/tmp/elfdump"$PPID"-*.o
+		find /var/tmp -maxdepth 1 -name "elfdump${PPID}-*.o" -delete
 		exit
 	fi
 	sleep 5
