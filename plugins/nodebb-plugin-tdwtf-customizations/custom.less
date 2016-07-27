@@ -403,16 +403,25 @@ body {
 	}
 }
 
-/* Mafia IX - don't push the button */
+/* Mafia IX - Flame War Mafia */
+[data-tid="20576"], [data-tid="20577"], [data-tid="20578"], [data-tid="20579"] {
+	& > [data-uid="140879"] {
+		background-color: rgba(255, 157, 0, 0.25);
+	}
+	.post-header > .pull-left > strong > a {
+		text-shadow: 0 0 2px rgb(254,252,201),
+			1px -1px 3px rgb(254,236,133),
+			-2px -2px 4px rgb(255,174,52),
+			2px -4px 5px rgb(236,118,12),
+			-2px -6px 6px rgb(205,70,6),
+			0 -8px 7px rgb(151,55,22),
+			1px -9px 8px rgb(69,27,14);
+	}
+}
+
+/* Mafia X - don't push the button */
 /*[data-tid=""] {
 	& > [data-uid="175"] {
-		background-color: rgba(255, 255, 0, 0.25);
-	}
-}*/
-
-/* Mafia X - Flame War Mafia */
-/*[data-tid=""] {
-	& > [data-uid="140879"] {
 		background-color: rgba(255, 255, 0, 0.25);
 	}
 }*/
