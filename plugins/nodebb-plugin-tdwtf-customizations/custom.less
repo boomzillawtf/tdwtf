@@ -604,21 +604,15 @@ div#taskbar.taskbar.navbar-fixed-bottom {
 	flex-shrink: 0;
 }
 
-#logged-in-menu + #logged-in-menu {
-	/* notifications/chat */
-	order: 99;
-	flex-shrink: 0;
-}
-
-#logged-in-menu + #logged-in-menu + ul, #logged-out-menu + ul {
+#logged-in-menu + ul, #logged-out-menu + ul {
 	/* search box */
-	order: 98;
+	order: 99;
 	flex-shrink: 1;
 }
 
-#logged-in-menu + #logged-in-menu + ul + ul, #logged-out-menu + ul + ul {
+#logged-in-menu + ul + ul, #logged-out-menu + ul + ul {
 	/* "forum is down" spinner */
-	order: 97;
+	order: 98;
 	flex-shrink: 0;
 }
 
