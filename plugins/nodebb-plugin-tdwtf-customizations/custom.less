@@ -466,6 +466,30 @@ body {
 	& > [data-uid="650"] {
 		background-color: rgba(255, 127, 255, 0.25);
 	}
+
+	.page-topic & {
+		/* goddamnit why did nobody tell me there was going to be a rule 5 */
+		a[href="https://what.thedailywtf.com/uid/1"]:before, a[href="/user/ben_lubar"]:before {
+			content: 'Ben "';
+			font-weight: bold;
+		}
+		a[href="https://what.thedailywtf.com/uid/1"]:after, a[href="/user/ben_lubar"]:after {
+			content: '" Lubar';
+			font-weight: bold;
+		}
+		a[href="https://what.thedailywtf.com/uid/802"]:after, a[href="/user/createdtodislikethis"]:after {
+			content: ' "Created"';
+			font-weight: bold;
+		}
+
+		/* hardcore roleplay mode */
+		a[href="https://what.thedailywtf.com/uid/802"], a[href="/user/createdtodislikethis"],
+		a[href="https://what.thedailywtf.com/uid/140879"], a[href="/user/fox"],
+		a[href="https://what.thedailywtf.com/uid/731"], a[href="/user/yamikuronue"],
+		a[href="https://what.thedailywtf.com/uid/141372"], a[href="/user/pydsigner"] {
+			text-shadow: 0 0 5px rgba(255, 127, 255, 0.25);
+		}
+	}
 }
 
 /* Mafia XI - don't push the button */
