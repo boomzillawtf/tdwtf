@@ -14,7 +14,8 @@ RUN npm install
 COPY NodeBB /usr/src/app
 
 RUN sed -e "s/Meta\\.config\\['cache-buster'\\] = utils\\.generateUUID();/Meta.config['cache-buster'] = os.hostname();/" -i /usr/src/app/src/meta.js \
-&& sed -e "s/config\\['cache-buster'\\] = utils\\.generateUUID();/config['cache-buster'] = require('os').hostname();/" -i /usr/src/app/src/meta/configs.js
+&& sed -e "s/config\\['cache-buster'\\] = utils\\.generateUUID();/config['cache-buster'] = require('os').hostname();/" -i /usr/src/app/src/meta/configs.js \
+&& sed -e "s/waitSeconds: 3,/waitSeconds: 0,/" -i /usr/src/app/src/views/partials/requirejs-config.tpl
 
 COPY plugins /usr/src/app/plugins
 RUN npm install ./plugins/*/ `cat ./plugins/other.txt`
