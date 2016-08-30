@@ -19,42 +19,65 @@ $(window).on('action:ajaxify.contentLoaded', function() {
 		$('html').removeAttr('data-mafia-player');
 	}
 
+	if (app.user && app.user.isMafiaPlayerSS) {
+		$('html').attr('data-mafia-player-ss', '');
+	} else {
+		$('html').removeAttr('data-mafia-player-ss');
+	}
+
 	if (app.user && app.user.isMafiaClubDed) {
 		$('html').attr('data-mafia-club-ded', app.user.isMafiaClubDed);
 	} else {
 		$('html').removeAttr('data-mafia-club-ded');
 	}
+
+	if (app.user && app.user.isMafiaClubDedSS) {
+		$('html').attr('data-mafia-club-ded-ss', app.user.isMafiaClubDedSS);
+	} else {
+		$('html').removeAttr('data-mafia-club-ded-ss');
+	}
 });
 
 function addClubDedQuoteButton() {
-	if ($('html').is('[data-mafia-club-ded]') &&
-			$('.breadcrumb a[href="/category/31/current-game"]').length &&
-			!$('.breadcrumb a[href="/category/32/club-ded"]').length) {
-		$('[component="topic"]').off('click', '[component="post/quote-club-ded"]').on('click', '[component="post/quote-club-ded"]', function() {
-			var tid = $('html').attr('data-mafia-club-ded');
-			var p = $(this).parents('[component="post"]');
-			var pid = p.attr('data-pid');
-			var username = '@' + p.attr('data-username').replace(/\s/g, '-');
-			socket.emit('posts.getRawPost', pid, function(err, post) {
-				if (err) {
-					return app.alertError(err.message);
-				}
+	[{
+		data: 'data-mafia-club-ded',
+		current: '31/current-game',
+		ded: '32/club-ded'
 
-				$(window).trigger('action:composer.addQuote', {
-					tid: tid,
-					slug: ajaxify.data.slug,
-					pid: pid,
-					index: p.attr('data-index'),
-					username: username,
-					topicName: ajaxify.data.titleRaw,
-					text: post
+	}, {
+		data: 'data-mafia-club-ded-ss',
+		current: '45/self-serve-mafia',
+		ded: '47/self-serve-club-ded'
+	}].forEach(function(mafia) {
+		if ($('html').is('[' + mafia.data + ']') &&
+				$('.breadcrumb a[href="/category/' + mafia.current + '"]').length &&
+				!$('.breadcrumb a[href="/category/' + mafia.ded + '"]').length) {
+			$('[component="topic"]').off('click', '[component="post/quote-club-ded"]').on('click', '[component="post/quote-club-ded"]', function() {
+				var tid = $('html').attr(mafia.data);
+				var p = $(this).parents('[component="post"]');
+				var pid = p.attr('data-pid');
+				var username = '@' + p.attr('data-username').replace(/\s/g, '-');
+				socket.emit('posts.getRawPost', pid, function(err, post) {
+					if (err) {
+						return app.alertError(err.message);
+					}
+
+					$(window).trigger('action:composer.addQuote', {
+						tid: tid,
+						slug: ajaxify.data.slug,
+						pid: pid,
+						index: p.attr('data-index'),
+						username: username,
+						topicName: ajaxify.data.titleRaw,
+						text: post
+					});
+
+					ajaxify.go('/topic/' + tid);
 				});
-
-				ajaxify.go('/topic/' + tid);
 			});
-		});
-		$('.post-tools:not(:has([component="post/quote-club-ded"]))').append('<a component="post/quote-club-ded" href="#" class="no-select">Popcorn</a>');
-	}
+			$('.post-tools:not(:has([component="post/quote-club-ded"]))').append('<a component="post/quote-club-ded" href="#" class="no-select">Popcorn</a>');
+		}
+	});
 }
 $(window).on('action:ajaxify.contentLoaded', addClubDedQuoteButton);
 $(window).on('action:posts.loaded', addClubDedQuoteButton);

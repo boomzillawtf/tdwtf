@@ -25,8 +25,9 @@ module.exports = {
 	},
 	"header": function(data, callback) {
 		async.parallel({
-			groups: async.apply(Groups.isMemberOfGroups, data.templateValues.user.uid, ['Mafia - Players', 'Mafia - Club Ded']),
-			clubDed: async.apply(Categories.getTopicIds, 'cid:32:tids', false, 0, 0)
+			groups: async.apply(Groups.isMemberOfGroups, data.templateValues.user.uid, ['Mafia - Players', 'Mafia - Club Ded', 'Self-Serve Mafia - Players', 'Self-Serve Mafia - Club Ded']),
+			clubDed: async.apply(Categories.getTopicIds, 'cid:32:tids', false, 0, 0),
+			clubDedSS: async.apply(Categories.getTopicIds, 'cid:47:tids', false, 0, 0)
 		}, function(err, results) {
 			if (err) {
 				return callback(err, data);
@@ -34,6 +35,8 @@ module.exports = {
 
 			data.templateValues.user.isMafiaPlayer = results.groups[0];
 			data.templateValues.user.isMafiaClubDed = results.groups[1] && results.clubDed[0];
+			data.templateValues.user.isMafiaPlayerSS = results.groups[2];
+			data.templateValues.user.isMafiaClubDedSS = results.groups[3] && results.clubDedSS[0];
 			data.templateValues.userJSON = JSON.stringify(data.templateValues.user);
 			callback(null, data);
 		});

@@ -338,13 +338,13 @@ body {
 	background-size: cover;
 	background-attachment: fixed;
 }
-[data-category-id="33"] body, [data-category-id="34"] body, [data-category-id="35"] body, [data-category-id="38"] body, [data-category-id="40"] body, [data-category-id="41"] body { /* mafia factions */
+[data-category-id="33"] body, [data-category-id="34"] body, [data-category-id="35"] body, [data-category-id="38"] body, [data-category-id="40"] body, [data-category-id="41"] body, [data-category-id="46"] body { /* mafia factions */
 	box-shadow: 0 0 25vw #a16946 inset;
 }
-[data-category-id="31"] body { /* mafia current game */
+[data-category-id="31"] body, [data-category-id="45"] body { /* mafia current game */
 	box-shadow: 0 0 5vw #ab4642 inset;
 }
-[data-category-id="32"] body { /* mafia club ded */
+[data-category-id="32"] body, [data-category-id="47"] body { /* mafia club ded */
 	box-shadow: 0 0 5vw #000 inset;
 }
 
@@ -369,7 +369,26 @@ body {
 	}
 }
 
+[data-category-id="45"], [data-category-id="46"] {
+	.votes, .topic .moderator-tools a {
+		display: none;
+	}
+
+	&:not([data-mafia-player-ss]) {
+		div.btn-group.action-bar, span.post-tools [component="post/reply"], span.post-tools [component="post/quote"] {
+			display: none;
+		}
+	}
+}
+
 /* mafia GM highlights */
+
+/* self-serve */
+[data-category-id="45"], [data-category-id="46"], [data-category-id="47"] {
+	[data-tid] > [data-uid="140639"] {
+		background-color: rgba(255, 0, 127, 0.25);
+	}
+}
 
 /* Mafia I - Release! Mafia */
 [data-tid="2078"], [data-tid="17813"], [data-tid="17815"], [data-tid="17816"] {
@@ -533,6 +552,104 @@ body {
 		background-color: rgba(255, 255, 0, 0.25);
 	}
 }*/
+
+/* other games */
+
+/* The Impossible Mission */
+[data-tid="20849"], [data-tid="20850"], [data-tid="20852"], [data-tid="20854"], [data-tid="20855"], [data-tid="20856"], [data-tid="20858"] {
+	/* GMs */
+	& > [data-uid="731"], & > [data-uid="1496"], & > [data-uid="140639"] {
+		background-color: rgba(192, 0, 255, 0.25);
+	}
+	/* players */
+	.page-topic & {
+		a[href="https://what.thedailywtf.com/uid/650"], a[href="/user/accalia"] {
+			&:hover:after, &:active:after {
+				content: ' [druid]';
+				font-weight: bold;
+			}
+		}
+		a[href="https://what.thedailywtf.com/uid/1166"], a[href="/user/gąska"], a[href="https://what.thedailywtf.com/groups/gaska"] {
+		}
+		a[href="https://what.thedailywtf.com/uid/23"], a[href="/user/error"] {
+			&:hover:after, &:active:after {
+				content: ' [chaotic neutral rogue]';
+				font-weight: bold;
+			}
+		}
+		a[href="https://what.thedailywtf.com/uid/140732"], a[href="/user/rednaxela"] {
+			&:hover:after, &:active:after {
+				content: ' [neutral good two-weapon fighter]';
+				font-weight: bold;
+			}
+		}
+		a[href="https://what.thedailywtf.com/uid/544"], a[href="/user/xaade"] {
+			&:before {
+				content: 'Zabrock "';
+				font-weight: bold;
+			}
+			&:after {
+				content: '" Lightcrest';
+				font-weight: bold;
+			}
+			&:hover:after, &:active:after {
+				content: '" Lightcrest [half-orc paladin]';
+			}
+		}
+		a[href="https://what.thedailywtf.com/uid/582"], a[href="/user/chaostheeternal"] {
+			&:hover:after, &:active:after {
+				content: ' [healer]';
+				font-weight: bold;
+			}
+		}
+		a[href="https://what.thedailywtf.com/uid/1345"], a[href="/user/vault_dweller"] {
+		}
+		a[href="https://what.thedailywtf.com/uid/141406"], a[href="/user/masonwheeler"] {
+			&:hover:after, &:active:after {
+				content: ' [catfolk bard]';
+				font-weight: bold;
+			}
+		}
+		a[href="https://what.thedailywtf.com/uid/1727"], a[href="/user/cloak15"] {
+			&:hover:after, &:active:after {
+				content: ' [cleric]';
+				font-weight: bold;
+			}
+		}
+		a[href="https://what.thedailywtf.com/uid/141401"], a[href="/user/lathun"] {
+			&:hover:after, &:active:after {
+				content: ' [knife rogue/scout]';
+				font-weight: bold;
+			}
+		}
+		a[href="https://what.thedailywtf.com/uid/970"], a[href="/user/izzion"] {
+			&:hover:after, &:active:after {
+				content: ' [neutral good male half-elf sorcerer]';
+				font-weight: bold;
+			}
+		}
+		a[href="https://what.thedailywtf.com/uid/897"], a[href="/user/tsaukpaetra"] {
+		}
+	}
+}
+
+/* The Impossible Mission - hide post buttons in game threads for non-players */
+html:not([data-user-id="731"]):not([data-user-id="1496"]):not([data-user-id="140639"]) {
+	&:not([data-user-id="544"]):not([data-user-id="140732"]):not([data-user-id="1727"]):not([data-user-id="141401"]):not([data-user-id="970"]):not([data-user-id="897"]) {
+		[data-tid="20850"], [data-tid="20854"] {
+			div.btn-group.action-bar, span.post-tools [component="post/reply"], span.post-tools [component="post/quote"] {
+				display: none;
+			}
+		}
+	}
+	&:not([data-user-id="23"]):not([data-user-id="650"]):not([data-user-id="582"]):not([data-user-id="1345"]):not([data-user-id="1166"]):not([data-user-id="141406"]) {
+		[data-tid="20852"], [data-tid="20855"] {
+			div.btn-group.action-bar, span.post-tools [component="post/reply"], span.post-tools [component="post/quote"] {
+				display: none;
+			}
+		}
+	}
+}
 
 #new-topics-alert {
 	position: absolute;
