@@ -612,9 +612,16 @@ body {
 		a[href="https://what.thedailywtf.com/uid/1345"], a[href="/user/vault_dweller"] {
 		}
 		a[href="https://what.thedailywtf.com/uid/141406"], a[href="/user/masonwheeler"] {
-			&:hover:after, &:active:after {
-				content: ' [catfolk bard]';
+			&:before {
+				content: 'Roland "';
 				font-weight: bold;
+			}
+			&:after {
+				content: '" Caesamar';
+				font-weight: bold;
+			}
+			&:hover:after, &:active:after {
+				content: '" Caesamar [true neutral catfolk bard]';
 			}
 		}
 		a[href="https://what.thedailywtf.com/uid/1727"], a[href="/user/cloak15"] {
