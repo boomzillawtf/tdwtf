@@ -597,9 +597,16 @@ body {
 			}
 		}
 		a[href="https://what.thedailywtf.com/uid/582"], a[href="/user/chaostheeternal"] {
-			&:hover:after, &:active:after {
-				content: ' [healer]';
+			&:before {
+				content: 'Kilral "';
 				font-weight: bold;
+			}
+			&:after {
+				content: '" Nalfik';
+				font-weight: bold;
+			}
+			&:hover:after, &:active:after {
+				content: '" Nalfik [neutral good dwarf cleric]';
 			}
 		}
 		a[href="https://what.thedailywtf.com/uid/1345"], a[href="/user/vault_dweller"] {
@@ -629,7 +636,6 @@ body {
 			}
 			&:hover:after, &:active:after {
 				content: ' Cyssaliht [neutral good half-elf sorcerer]';
-				font-weight: bold;
 			}
 		}
 		a[href="https://what.thedailywtf.com/uid/897"], a[href="/user/tsaukpaetra"] {
