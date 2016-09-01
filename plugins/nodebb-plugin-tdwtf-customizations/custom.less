@@ -578,9 +578,16 @@ body {
 			}
 		}
 		a[href="https://what.thedailywtf.com/uid/140732"], a[href="/user/rednaxela"] {
-			&:hover:after, &:active:after {
-				content: ' [neutral good two-weapon fighter]';
+			&:before {
+				content: 'Alanus "';
 				font-weight: bold;
+			}
+			&:after {
+				content: '" Dove';
+				font-weight: bold;
+			}
+			&:hover:after, &:active:after {
+				content: '" Dove [neutral good halfling fighter]';
 			}
 		}
 		a[href="https://what.thedailywtf.com/uid/544"], a[href="/user/xaade"] {
