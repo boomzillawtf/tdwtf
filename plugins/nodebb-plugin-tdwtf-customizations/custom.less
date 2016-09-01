@@ -617,6 +617,17 @@ body {
 			}
 		}
 		a[href="https://what.thedailywtf.com/uid/1345"], a[href="/user/vault_dweller"] {
+			&:before {
+				content: 'Tiet "';
+				font-weight: bold;
+			}
+			&:after {
+				content: '" Kropnatlum';
+				font-weight: bold;
+			}
+			&:hover:after, &:active:after {
+				content: '" Kropnatlum [neutral good gnome sorcerer]';
+			}
 		}
 		a[href="https://what.thedailywtf.com/uid/141406"], a[href="/user/masonwheeler"] {
 			&:before {
