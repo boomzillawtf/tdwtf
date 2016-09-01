@@ -431,7 +431,7 @@ body {
 		background-color: rgba(255, 127, 255, 0.25);
 	}
 
-	.page-topic & .post-header strong, .page-topic & [component="post/content"] {
+	.page-topic & {
 		a[href="https://what.thedailywtf.com/uid/289"]:after, a[href="/user/raceprouk"]:after {
 			content: ' "Maria"';
 			font-weight: bold;
@@ -486,7 +486,7 @@ body {
 		background-color: rgba(255, 127, 255, 0.25);
 	}
 
-	.page-topic & .post-header strong, .page-topic & [component="post/content"] {
+	.page-topic & {
 		/* goddamnit why did nobody tell me there was going to be a rule 5 */
 		a[href="https://what.thedailywtf.com/uid/1"]:before, a[href="/user/ben_lubar"]:before {
 			content: 'Ben "';
@@ -507,6 +507,10 @@ body {
 		a[href="https://what.thedailywtf.com/uid/731"], a[href="/user/yamikuronue"],
 		a[href="https://what.thedailywtf.com/uid/141372"], a[href="/user/pydsigner"] {
 			text-shadow: 0 0 5px rgba(255, 127, 255, 0.25);
+		}
+
+		.icon > a[href]:before, a[href]:empty:before, .icon > a[href]:after, a[href]:empty:after {
+			content: "";
 		}
 	}
 }
@@ -562,11 +566,18 @@ body {
 		background-color: rgba(192, 0, 255, 0.25);
 	}
 	/* players */
-	.page-topic & .post-header strong, .page-topic & [component="post/content"] {
+	.page-topic & {
 		a[href="https://what.thedailywtf.com/uid/650"], a[href="/user/accalia"] {
-			&:hover:after, &:active:after {
-				content: ' [druid]';
+			&:before {
+				content: 'Solras "';
 				font-weight: bold;
+			}
+			&:after {
+				content: '"';
+				font-weight: bold;
+			}
+			&:hover:after, &:active:after {
+				content: '", Daughter of Umdor, Son of Gimrigg, Son of Rangrom who slew the dreaded Balrog of Tydren\'s Keep [lawful neutral dwarf druid]';
 			}
 		}
 		a[href="https://what.thedailywtf.com/uid/1166"], a[href="/user/gąska"], a[href="https://what.thedailywtf.com/groups/gaska"] {
@@ -600,7 +611,7 @@ body {
 				font-weight: bold;
 			}
 			&:hover:after, &:active:after {
-				content: '" Lightcrest [half-orc paladin]';
+				content: '" Lightcrest [lawful good half-orc paladin]';
 			}
 		}
 		a[href="https://what.thedailywtf.com/uid/582"], a[href="/user/chaostheeternal"] {
@@ -662,15 +673,25 @@ body {
 			}
 		}
 		a[href="https://what.thedailywtf.com/uid/970"], a[href="/user/izzion"] {
+			&:before {
+				content: 'Cyssaliht "';
+				font-weight: bold;
+			}
 			&:after {
-				content: ' Cyssaliht';
+				content: '"';
 				font-weight: bold;
 			}
 			&:hover:after, &:active:after {
-				content: ' Cyssaliht [neutral good half-elf sorcerer]';
+				content: '" [neutral good half-elf sorcerer]';
 			}
 		}
 		a[href="https://what.thedailywtf.com/uid/897"], a[href="/user/tsaukpaetra"] {
+		}
+
+		.icon > a[href], a[href]:empty {
+			&:before, &:after, &:hover:after {
+				content: "";
+			}
 		}
 	}
 }
