@@ -694,6 +694,17 @@ body {
 			}
 		}
 		a[href="https://what.thedailywtf.com/uid/897"], a[href="/user/tsaukpaetra"] {
+			&:before {
+				content: 'Biggen "';
+				font-weight: bold;
+			}
+			&:after {
+				content: '" Gurble';
+				font-weight: bold;
+			}
+			&:hover:after, &:active:after {
+				content: '" Gurble [chaotic good halfling ranger]';
+			}
 		}
 
 		.icon > a[href], a[href]:empty {
