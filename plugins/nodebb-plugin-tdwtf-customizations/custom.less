@@ -591,9 +591,16 @@ body {
 		a[href="https://what.thedailywtf.com/uid/1166"], a[href="/user/gąska"], a[href="https://what.thedailywtf.com/groups/gaska"] {
 		}
 		a[href="https://what.thedailywtf.com/uid/23"], a[href="/user/error"] {
-			&:hover:after, &:active:after {
-				content: ' [chaotic neutral rogue]';
+			&:before {
+				content: 'Shade "';
 				font-weight: bold;
+			}
+			&:after {
+				content: '"';
+				font-weight: bold;
+			}
+			&:hover:after, &:active:after {
+				content: '" [chaotic neutral elf rogue]';
 			}
 		}
 		a[href="https://what.thedailywtf.com/uid/140732"], a[href="/user/rednaxela"] {
