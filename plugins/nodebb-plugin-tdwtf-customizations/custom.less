@@ -444,9 +444,6 @@ body {
 			content: ' "Oscar"';
 			font-weight: bold;
 		}
-		.icon > a[href]:after, a[href]:empty:after {
-			content: "";
-		}
 	}
 }
 
@@ -519,10 +516,6 @@ body {
 		a[href="https://what.thedailywtf.com/uid/731"], a[href="/user/yamikuronue"],
 		a[href="https://what.thedailywtf.com/uid/141372"], a[href="/user/pydsigner"] {
 			text-shadow: 0 0 5px rgba(255, 127, 255, 0.25);
-		}
-
-		.icon > a[href]:before, a[href]:empty:before, .icon > a[href]:after, a[href]:empty:after {
-			content: "";
 		}
 	}
 }
@@ -715,12 +708,6 @@ body {
 			}
 			&:hover:after, &:active:after {
 				content: '" Gurble [chaotic good halfling ranger]';
-			}
-		}
-
-		.icon > a[href], a[href]:empty {
-			&:before, &:after, &:hover:after {
-				content: "";
 			}
 		}
 	}
@@ -990,6 +977,15 @@ a[itemprop="url"][href] {
 /* https://what.thedailywtf.com/post/937723 */
 .skin-lumen .modal-header .close {
 	color: #333;
+}
+
+/* stop RP names from showing up where they shouldn't */
+.page-topic [data-tid] {
+	.icon > a[href], a[href]:empty, a[href].plugin-mentions-emoji-a {
+		&:before, &:after, &:hover:after, &:active:after {
+			content: "";
+		}
+	}
 }
 
 .emoji {
