@@ -670,9 +670,16 @@ body {
 			}
 		}
 		a[href="https://what.thedailywtf.com/uid/1727"], a[href="/user/cloak15"] {
-			&:hover:after, &:active:after {
-				content: ' [cleric]';
+			&:before {
+				content: 'Edwin "';
 				font-weight: bold;
+			}
+			&:after {
+				content: '" Gales';
+				font-weight: bold;
+			}
+			&:hover:after, &:active:after {
+				content: '" Gales [cleric]';
 			}
 		}
 		a[href="https://what.thedailywtf.com/uid/141401"], a[href="/user/lathun"] {
