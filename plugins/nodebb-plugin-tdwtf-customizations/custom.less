@@ -590,6 +590,17 @@ body {
 			}
 		}
 		a[href="https://what.thedailywtf.com/uid/1166"], a[href="/user/gąska"], a[href="https://what.thedailywtf.com/groups/gaska"] {
+			&:before {
+				content: 'Alrod "';
+				font-weight: bold;
+			}
+			&:after {
+				content: '" the Short-Tempered';
+				font-weight: bold;
+			}
+			&:hover:after, &:active:after {
+				content: '" the Short-Tempered [neutral evil dwarf fighter]';
+			}
 		}
 		a[href="https://what.thedailywtf.com/uid/23"], a[href="/user/error"] {
 			&:before {
