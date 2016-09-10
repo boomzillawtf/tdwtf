@@ -1008,6 +1008,10 @@ a[itemprop="url"][href] {
 			content: initial;
 		}
 	}
+	/* allow long names to wrap 🦊 */
+	a[href]:before, a[href]:after {
+		white-space: normal;
+	}
 }
 
 .emoji {
