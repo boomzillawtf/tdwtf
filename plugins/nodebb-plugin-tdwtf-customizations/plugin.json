@@ -4,6 +4,7 @@
 	"library": "index.js",
 	"hooks": [
 		{"hook": "static:app.load", "method": "init"},
+		{"hook": "filter:router.page", "method": "protectChats"},
 		{"hook": "filter:meta.getMetaTags", "method": "meta"},
 		{"hook": "filter:middleware.renderHeader", "method": "header"},
 		{"hook": "filter:post.edit", "method": "postEdit"}

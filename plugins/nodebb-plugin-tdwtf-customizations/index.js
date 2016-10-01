@@ -3,10 +3,12 @@
 var spawn = require('child_process').spawn;
 var nconf = module.parent.require('nconf');
 var async = module.parent.require('async');
+var Categories = module.parent.require('./categories');
 var Groups = module.parent.require('./groups');
 var Posts = module.parent.require('./posts');
-var Categories = module.parent.require('./categories');
+var User = module.parent.require('./user');
 var events = module.parent.require('./events');
+var controllerHelpers = module.parent.require('./controllers/helpers');
 
 module.exports = {
 	"init": function(data, callback) {
@@ -14,6 +16,23 @@ module.exports = {
 			stdio: 'inherit'
 		}).unref();
 		callback();
+	},
+	"protectChats": function(req, res, next) {
+		if (req.route.path === '/user/:userslug/chats/:roomid?' || req.route.path === '/api/user/:userslug/chats/:roomid?') {
+			return User.getUidByUserslug(req.params.userslug, function(err, uid) {
+				if (err) {
+					return next(err);
+				}
+
+				if (req.uid === uid) {
+					return next();
+				}
+
+				controllerHelpers.notAllowed(req, res);
+			});
+		}
+
+		next();
 	},
 	"meta": function(tags, callback) {
 		tags = tags.concat([{
