@@ -25,23 +25,6 @@ module.exports = {
 		}).unref();
 		callback();
 	},
-	"protectChats": function(req, res, next) {
-		if (req.route.path === '/user/:userslug/chats/:roomid?' || req.route.path === '/api/user/:userslug/chats/:roomid?') {
-			return User.getUidByUserslug(req.params.userslug, function(err, uid) {
-				if (err) {
-					return next(err);
-				}
-
-				if (req.uid === uid) {
-					return next();
-				}
-
-				controllerHelpers.notAllowed(req, res);
-			});
-		}
-
-		next();
-	},
 	"meta": function(tags, callback) {
 		tags = tags.concat([{
 			name: 'google-site-verification',
