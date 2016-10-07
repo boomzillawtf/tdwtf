@@ -10,6 +10,16 @@ var User = module.parent.require('./user');
 var events = module.parent.require('./events');
 var controllerHelpers = module.parent.require('./controllers/helpers');
 
+var realDismissFlag = Posts.dismissFlag;
+var dismissedFlags = {};
+Posts.dismissFlag = function(pid, next) {
+	if (pid in dismissedFlags) {
+		delete dismissedFlags[pid];
+		return next(null);
+	}
+	next(new Error("[[not-allowed]]"));
+};
+
 module.exports = {
 	"init": function(data, callback) {
 		spawn('./watchdog.bash', [nconf.get('port')], {
@@ -81,5 +91,11 @@ module.exports = {
 		}
 
 		callback(null, data);
+	},
+	"postPurge": function(data, callback) {
+		dismissedFlags[data.pid] = true;
+		realDismissFlag(data.pid, function(err) {
+			callback(err, data);
+		});
 	}
 };
