@@ -1,0 +1,35 @@
+/* Styles for details/summary shim */
+.details {
+	display: block;
+	font-weight: inherit;
+
+	& > .summary {
+		cursor: pointer;
+		display: inline-block;
+		font-weight: inherit;
+	}
+
+	& > input:first-child {
+		display: none;
+
+		& + :before {
+			content: "▶";
+			display: block;
+			margin-top: 1pt;
+			font-size: 70%;
+			width: 1.3em;
+			float: left;
+			cursor: pointer;
+		}
+
+		&:checked + :before {
+			content: "▼";
+			margin-left: -2px;
+			margin-right: 2px;
+		}
+
+		&:not(:checked) ~ :not(.summary) {
+			display: none;
+		}
+	}
+}

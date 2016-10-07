@@ -6,9 +6,7 @@ var async = module.parent.require('async');
 var Categories = module.parent.require('./categories');
 var Groups = module.parent.require('./groups');
 var Posts = module.parent.require('./posts');
-var User = module.parent.require('./user');
 var events = module.parent.require('./events');
-var controllerHelpers = module.parent.require('./controllers/helpers');
 
 var realDismissFlag = Posts.dismissFlag;
 var dismissedFlags = {};

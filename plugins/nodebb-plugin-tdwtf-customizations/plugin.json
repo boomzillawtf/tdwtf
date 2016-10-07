@@ -11,9 +11,11 @@
 		{"hook": "filter:post.purge", "method": "postPurge"}
 	],
 	"less": [
-		"./custom.less"
+		"./custom.less",
+		"./details-shim.less"
 	],
 	"scripts": [
-		"./custom.js"
+		"./custom.js",
+		"./details-shim.js"
 	]
 }
