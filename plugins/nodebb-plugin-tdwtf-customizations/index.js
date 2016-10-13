@@ -78,5 +78,12 @@ module.exports = {
 		realDismissFlag(data.pid, function(err) {
 			callback(err, data);
 		});
+	},
+	"disableFuzzy": function(parser) {
+		parser.linkify.set({
+			"fuzzyLink": false,
+			"fuzzyIP": false,
+			"fuzzyEmail": false
+		});
 	}
 };
