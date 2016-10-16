@@ -1,41 +1,49 @@
 /* jshint browser: true */
 /* globals $, ajaxify, app, socket */
 $(window).on('action:ajaxify.contentLoaded', function() {
+	var $html = $('html');
+
 	if (ajaxify.data && ajaxify.data.cid) {
-		$('html').attr('data-category-id', ajaxify.data.cid);
+		$html.attr('data-category-id', ajaxify.data.cid);
 	} else {
-		$('html').removeAttr('data-category-id');
+		$html.removeAttr('data-category-id');
 	}
 
 	if (app.user && app.user.uid) {
-		$('html').attr('data-user-id', app.user.uid);
+		$html.attr('data-user-id', app.user.uid);
 	} else {
-		$('html').removeAttr('data-user-id');
+		$html.removeAttr('data-user-id');
 	}
 
 	if (app.user && app.user.isMafiaPlayer) {
-		$('html').attr('data-mafia-player', '');
+		$html.attr('data-mafia-player', '');
 	} else {
-		$('html').removeAttr('data-mafia-player');
+		$html.removeAttr('data-mafia-player');
 	}
 
 	if (app.user && app.user.isMafiaPlayerSS) {
-		$('html').attr('data-mafia-player-ss', '');
+		$html.attr('data-mafia-player-ss', '');
 	} else {
-		$('html').removeAttr('data-mafia-player-ss');
+		$html.removeAttr('data-mafia-player-ss');
 	}
 
 	if (app.user && app.user.isMafiaClubDed) {
-		$('html').attr('data-mafia-club-ded', app.user.isMafiaClubDed);
+		$html.attr('data-mafia-club-ded', app.user.isMafiaClubDed);
 	} else {
-		$('html').removeAttr('data-mafia-club-ded');
+		$html.removeAttr('data-mafia-club-ded');
 	}
 
 	if (app.user && app.user.isMafiaClubDedSS) {
-		$('html').attr('data-mafia-club-ded-ss', app.user.isMafiaClubDedSS);
+		$html.attr('data-mafia-club-ded-ss', app.user.isMafiaClubDedSS);
 	} else {
-		$('html').removeAttr('data-mafia-club-ded-ss');
+		$html.removeAttr('data-mafia-club-ded-ss');
 	}
+
+	var now = new Date();
+	$html.attr('data-current-year', now.getFullYear());
+	$html.attr('data-current-month', now.getMonth() + 1);
+	$html.attr('data-current-day-of-week', now.getDay());
+	$html.attr('data-current-day-of-month', now.getDate());
 });
 
 function addClubDedQuoteButton() {
@@ -85,4 +93,24 @@ $(window).on('action:posts.loaded', addClubDedQuoteButton);
 // fix title thingy
 $(window).on('action:ajaxify.end', function() {
 	$('[component="navbar/title"] span:hidden').addClass('hidden').removeAttr('style');
+	var $fa = $('[component="navbar/title"] i.fa');
+	if (ajaxify.data.category) {
+		if ($fa.length === 0) {
+			$fa = $('<i>').prependTo($('[component="navbar/title"]'));
+		}
+		$fa.attr('title', ajaxify.data.category.name);
+		$fa.attr('class', 'fa ' + ajaxify.data.category.icon);
+		$fa.css({
+			color: ajaxify.data.category.color,
+			backgroundColor: ajaxify.data.category.bgColor
+		});
+		if (ajaxify.data.category.image) {
+			$fa.css({
+				backgroundImage: 'url(' + ajaxify.data.category.image + ')',
+				backgroundSize: ajaxify.data.category.imageClass
+			});
+		}
+	} else {
+		$fa.remove();
+	}
 });

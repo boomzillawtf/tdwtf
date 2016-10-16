@@ -807,8 +807,19 @@ div#taskbar.taskbar.navbar-fixed-bottom {
 		padding-bottom: 10px;
 		display: block !important;
 
-		&:empty {
+		&:empty, &.hidden + i, &:empty + i {
 			display: none !important;
+		}
+
+		& + i {
+			position: absolute;
+			font-size: 16px;
+			padding: 3px;
+			border-radius: 16px;
+			width: 24px;
+			height: 24px;
+			text-align: center;
+			margin-top: -32px;
 		}
 	}
 }
@@ -1065,4 +1076,34 @@ a[itemprop="url"][href] {
 /* prevent accidental dismiss flag button presses */
 .page-posts-flags #dismissAll, .page-posts-flags button.dismiss {
 	display: none;
+}
+
+/* holidays! */
+html[data-current-month="10"][data-current-day-of-month="31"] #panel:before {
+	display: block;
+	content: " ";
+	background-image: url("/uploads/default/8337/260c79c86c26d749.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: top right;
+	opacity: 0.1;
+	position: fixed;
+	top: 50px;
+	right: 0;
+	width: 50vw;
+	height: 60vh;
+	pointer-events: none;
+}
+
+html[data-current-month="4"][data-current-day-of-month="1"] {
+	.categories>li, .category>ul>li, .topic .posts>li {
+		transform: rotate(-1deg);
+	}
+}
+
+/* dark theme fixes */
+body.skin-cyborg, body.skin-darkly, body.skin-slate, body.skin-superhero {
+	html[data-current-month="10"][data-current-day-of-month="31"] & #panel:before {
+		background-image: url("/uploads/default/8503/d2f7d9520f48de69.png");
+	}
 }
