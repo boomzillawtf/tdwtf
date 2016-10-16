@@ -96,7 +96,7 @@ $(window).on('action:ajaxify.end', function() {
 	var $fa = $('[component="navbar/title"] i.fa');
 	if (ajaxify.data.category) {
 		if ($fa.length === 0) {
-			$fa = $('<i>').prependTo($('[component="navbar/title"]'));
+			$fa = $('<i>').appendTo($('[component="navbar/title"]'));
 		}
 		$fa.attr('title', ajaxify.data.category.name);
 		$fa.attr('class', 'fa ' + ajaxify.data.category.icon);
