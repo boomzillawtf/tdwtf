@@ -96,9 +96,10 @@ $(window).on('action:ajaxify.end', function() {
 	var $fa = $('[component="navbar/title"] i.fa');
 	if (ajaxify.data.category) {
 		if ($fa.length === 0) {
-			$fa = $('<i>').appendTo($('[component="navbar/title"]'));
+			$fa = $('<a>').appendTo($('[component="navbar/title"]'));
 		}
 		$fa.attr('title', ajaxify.data.category.name);
+		$fa.attr('href', '/category/' + ajaxify.data.category.slug);
 		$fa.attr('class', 'fa ' + ajaxify.data.category.icon);
 		$fa.css({
 			color: ajaxify.data.category.color,
