@@ -109,6 +109,8 @@ $(window).on('action:ajaxify.end', function() {
 				backgroundImage: 'url(' + ajaxify.data.category.image + ')',
 				backgroundSize: ajaxify.data.category.imageClass
 			});
+		} else {
+			$fa.css('background-image', 'none');
 		}
 	} else {
 		$fa.remove();
