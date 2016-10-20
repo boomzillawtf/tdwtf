@@ -93,7 +93,7 @@ $(window).on('action:posts.loaded', addClubDedQuoteButton);
 // fix title thingy
 $(window).on('action:ajaxify.end', function() {
 	$('[component="navbar/title"] span:hidden').addClass('hidden').removeAttr('style');
-	var $fa = $('[component="navbar/title"] i.fa');
+	var $fa = $('[component="navbar/title"] a.fa');
 	if (ajaxify.data.category) {
 		if ($fa.length === 0) {
 			$fa = $('<a>').appendTo($('[component="navbar/title"]'));
