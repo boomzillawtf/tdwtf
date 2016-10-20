@@ -11,13 +11,19 @@ start_time=$(( $(date -u +%s) - $start_time ))
 
 echo "$PPID/$1 up after $start_time seconds"
 
+failures=0
+
 while true; do
-	if ! curl -fsm 15 http://127.0.0.1:"$1"/recent.rss > /dev/null; then
-		echo "$PPID/$1 timed out"
+	if ! curl -fsm 30 http://127.0.0.1:"$1"/recent.rss > /dev/null; then
+		failures=$(( $failures + 1 ))
+		echo "$PPID/$1 timed out ($failures/3)"
 		date -uIns
-		#gdb -p "$PPID" -ex 'thread apply all bt' -ex 'kill' --batch
-		kill -9 "$PPID"
-		exit
+		if [[ $failures -eq 3 ]]; then
+			kill -9 "$PPID"
+			exit
+		fi
+	else
+		failures=0
+		sleep 5
 	fi
-	sleep 5
 done
