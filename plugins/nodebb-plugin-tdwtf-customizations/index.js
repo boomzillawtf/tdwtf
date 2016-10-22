@@ -34,6 +34,12 @@ module.exports = {
 		callback(null, tags);
 	},
 	"header": function(data, callback) {
+		// https://github.com/NodeBB/NodeBB/issues/5145
+		if (!data.res.locals.config) {
+			var winston = module.parent.require('winston');
+			winston.log('warn', '[#5145] res.locals.config is undefined (uid %d) %s %s %s', data.req.uid, data.req.ip, data.req.method, data.req.originalUrl);
+		}
+
 		async.parallel({
 			groups: async.apply(Groups.isMemberOfGroups, data.templateValues.user.uid, ['Mafia - Players', 'Mafia - Club Ded', 'Self-Serve Mafia - Players', 'Self-Serve Mafia - Club Ded']),
 			clubDed: async.apply(Categories.getTopicIds, 'cid:32:tids', false, 0, 0),
