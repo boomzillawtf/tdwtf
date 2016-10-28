@@ -20,11 +20,14 @@ if [[ "`docker inspect -f '{{ .NetworkSettings.Networks.wtdwtf.IPAddress }}' wtd
 fi
 
 # start the new NodeBB container
-docker run -d --name wtdwtf-nodebb --security-opt apparmor:unconfined --security-opt seccomp:unconfined --cap-add SYS_PTRACE --net wtdwtf --ip $ip --restart unless-stopped --volumes-from wtdwtf-nodebb-temp boomzillawtf/tdwtf
+docker run -d --name wtdwtf-nodebb --net wtdwtf --ip $ip --restart unless-stopped --volumes-from wtdwtf-nodebb-temp boomzillawtf/tdwtf
 
 # wait until it's listening on both ports
 until nc -z $ip 4567; do echo Waiting for NodeBB; sleep 1; done
 until nc -z $ip 4568; do echo Waiting for NodeBB; sleep 1; done
+
+# make sure the emailer plugin is disabled
+docker exec wtdwtf-nodebb ./nodebb reset -p nodebb-plugin-emailer-amazon
 
 # switch nginx upstream
 sudo sed -i /etc/nginx/nodebb-upstream.conf -e "s/\\(server $ip:[0-9]\\+\\) down;/\\1;/" -e "s/\\(server $other_ip:[0-9]\\+\\);/\\1 down;/"
