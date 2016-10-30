@@ -3,6 +3,7 @@
 var spawn = require('child_process').spawn;
 var nconf = module.parent.require('nconf');
 var async = module.parent.require('async');
+var request = module.parent.require('request');
 var Categories = module.parent.require('./categories');
 var Groups = module.parent.require('./groups');
 var Posts = module.parent.require('./posts');
@@ -34,12 +35,6 @@ module.exports = {
 		callback(null, tags);
 	},
 	"header": function(data, callback) {
-		// https://github.com/NodeBB/NodeBB/issues/5145
-		if (!data.res.locals.config) {
-			var winston = module.parent.require('winston');
-			winston.log('warn', '[#5145] res.locals.config is undefined (uid %d) %s %s %s', data.req.uid, data.req.ip, data.req.method, data.req.originalUrl);
-		}
-
 		async.parallel({
 			groups: async.apply(Groups.isMemberOfGroups, data.templateValues.user.uid, ['Mafia - Players', 'Mafia - Club Ded', 'Self-Serve Mafia - Players', 'Self-Serve Mafia - Club Ded']),
 			clubDed: async.apply(Categories.getTopicIds, 'cid:32:tids', false, 0, 0),
@@ -83,6 +78,41 @@ module.exports = {
 		dismissedFlags[data.pid] = true;
 		realDismissFlag(data.pid, function(err) {
 			callback(err, data);
+		});
+	},
+	"registerCheck": function(data, callback) {
+		if (data.queue) {
+			return callback(null, data);
+		}
+
+		var ip = data.req.ip.replace('::ffff:', '');
+
+		request({
+			method: 'get',
+			url: 'https://api.stopforumspam.org/api' +
+				'?ip=' + encodeURIComponent(ip) +
+				'&email=' + encodeURIComponent(data.userData.email) +
+				'&username=' + encodeURIComponent(data.userData.username) +
+				'&f=json',
+			json: true
+		}, function (err, response, body) {
+			if (err) {
+				data.queue = true;
+				return callback(null, data);
+			}
+			if (response.statusCode === 200 && body) {
+				var usernameSpam = body.username ? body.username.frequency > 0 || body.username.appears > 0 : true;
+				var emailSpam = body.email ? body.email.frequency > 0 || body.email.appears > 0 : true;
+				var ipSpam = body.ip ? body.ip.frequency > 0 || body.ip.appears > 0 : true;
+
+				if (usernameSpam || emailSpam || ipSpam) {
+					data.queue = true;
+				}
+			} else {
+				data.queue = true;
+			}
+
+			callback(null, data);
 		});
 	},
 	"disableFuzzy": function(parser) {

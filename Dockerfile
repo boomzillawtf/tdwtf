@@ -30,6 +30,13 @@ RUN mkdir -p /usr/src/app/node_modules/nodebb-plugin-emoji-static/public/static/
 
 RUN echo public/uploads/*/ > .make-uploads-folders
 
+# PULL REQUESTS
+# delete these steps as the pull requests get merged into the upstream repo
+RUN curl -sSL https://patch-diff.githubusercontent.com/raw/NodeBB/NodeBB/pull/5050.diff | patch -p1
+RUN cd node_modules/nodebb-theme-persona && curl -sSL https://patch-diff.githubusercontent.com/raw/NodeBB/nodebb-theme-persona/pull/329.diff | patch -p1
+RUN curl -sSL https://patch-diff.githubusercontent.com/raw/NodeBB/NodeBB/pull/5169.diff | patch -p1
+RUN cd node_modules/nodebb-plugin-imagemagick && curl -sSL https://patch-diff.githubusercontent.com/raw/NodeBB/nodebb-plugin-imagemagick/pull/6.diff | patch -p1
+
 # the default port for NodeBB is exposed outside the container
 EXPOSE 4567
 
