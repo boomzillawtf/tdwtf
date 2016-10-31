@@ -8,7 +8,6 @@ var db = module.parent.require('./database');
 var Categories = module.parent.require('./categories');
 var Groups = module.parent.require('./groups');
 var Posts = module.parent.require('./posts');
-var Topics = module.parent.require('./topics');
 var events = module.parent.require('./events');
 var privileges = module.parent.require('./privileges');
 
