@@ -4,10 +4,13 @@ var spawn = require('child_process').spawn;
 var nconf = module.parent.require('nconf');
 var async = module.parent.require('async');
 var request = module.parent.require('request');
+var db = module.parent.require('./database');
 var Categories = module.parent.require('./categories');
 var Groups = module.parent.require('./groups');
 var Posts = module.parent.require('./posts');
+var Topics = module.parent.require('./topics');
 var events = module.parent.require('./events');
+var privileges = module.parent.require('./privileges');
 
 var realDismissFlag = Posts.dismissFlag;
 var dismissedFlags = {};
@@ -73,6 +76,42 @@ module.exports = {
 		}
 
 		callback(null, data);
+	},
+	"postReplyCount": function(data, callback) {
+		var pids = data.posts.filter(function(post) {
+			return parseInt(post.replyCount, 10) !== 0;
+		}).map(function(post) {
+			post.replyCount = 0;
+			return post.pid;
+		});
+
+		var replyIndices = {};
+
+		async.waterfall([
+			function(next) {
+				db.getSortedSetsMembers(pids.map(function(pid) {
+					return 'pid:' + pid + ':replies';
+				}), next);
+			},
+			function(_replyPids, next) {
+				var replyPids = [].concat.apply([], _replyPids);
+				_replyPids.forEach(function(replies, index) {
+					replies.forEach(function(reply) {
+						replyIndices[reply] = data.posts.findIndex(function(post) {
+							return post.pid === pids[index];
+						});
+					});
+				});
+
+				privileges.posts.filter('read', replyPids, data.uid, next);
+			},
+			function(allowedPids, next) {
+				allowedPids.forEach(function(pid) {
+					data.posts[replyIndices[pid]].replyCount++;
+				});
+				next(null, data);
+			}
+		], callback);
 	},
 	"postPurge": function(data, callback) {
 		dismissedFlags[data.pid] = true;

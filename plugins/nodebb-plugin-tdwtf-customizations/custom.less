@@ -236,26 +236,26 @@ a[component="post/reply"], a[component="post/quote"], a[component="post/quote-cl
 }
 
 a[component="post/upvote"], a[component="post/downvote"] {
-	background-color: #ccc;
-	padding: 10px;
-	padding-right: 8px;
-	margin-right: 2px;
+	.fa {
+		background-color: #ccc;
+		padding: 12px 10px 11px;
+	}
 }
 
 .topic a[component="post/upvote"].upvoted, .topic a[component="post/downvote"].downvoted {
 	color: #ccc;
 }
 
-a[component="post/upvote"].upvoted {
+a[component="post/upvote"].upvoted .fa {
 	background-color: #0b0;
 }
 
-a[component="post/downvote"].downvoted {
+a[component="post/downvote"].downvoted .fa {
 	background-color: #c00;
 }
 
 span[component="post/vote-count"] {
-	padding: 10px 13px;
+	padding: 10px;
 }
 
 .post-footer > .pull-right {
@@ -1110,6 +1110,10 @@ html[data-current-month="10"][data-current-day-of-month="31"] #panel:before {
 html[data-current-month="4"][data-current-day-of-month="1"] {
 	.categories>li, .category>ul>li, .topic .posts>li {
 		transform: rotate(-1deg);
+	}
+	.votes {
+		transform: rotate(180deg);
+		display: inline-block;
 	}
 }
 
