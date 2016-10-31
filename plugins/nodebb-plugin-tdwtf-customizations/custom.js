@@ -46,6 +46,32 @@ $(window).on('action:ajaxify.contentLoaded', function() {
 	$html.attr('data-current-day-of-month', now.getDate());
 });
 
+function addPopcornButton(tid) {
+	$('[component="topic"]').off('click', '[component="post/quote-club-ded"]').on('click', '[component="post/quote-club-ded"]', function() {
+		var p = $(this).parents('[component="post"]');
+		var pid = p.attr('data-pid');
+		var username = '@' + p.attr('data-username').replace(/\s/g, '-');
+		socket.emit('posts.getRawPost', pid, function(err, post) {
+			if (err) {
+				return app.alertError(err.message);
+			}
+
+			$(window).trigger('action:composer.addQuote', {
+				tid: tid,
+				slug: ajaxify.data.slug,
+				pid: pid,
+				index: p.attr('data-index'),
+				username: username,
+				topicName: ajaxify.data.titleRaw,
+				text: post
+			});
+
+			ajaxify.go('/topic/' + tid);
+		});
+	});
+	$('.post-tools:not(:has([component="post/quote-club-ded"]))').append('<a component="post/quote-club-ded" href="#" class="no-select">Popcorn</a>');
+}
+
 function addClubDedQuoteButton() {
 	[{
 		data: 'data-mafia-club-ded',
@@ -60,32 +86,14 @@ function addClubDedQuoteButton() {
 		if ($('html').is('[' + mafia.data + ']') &&
 				$('.breadcrumb a[href="/category/' + mafia.current + '"]').length &&
 				!$('.breadcrumb a[href="/category/' + mafia.ded + '"]').length) {
-			$('[component="topic"]').off('click', '[component="post/quote-club-ded"]').on('click', '[component="post/quote-club-ded"]', function() {
-				var tid = $('html').attr(mafia.data);
-				var p = $(this).parents('[component="post"]');
-				var pid = p.attr('data-pid');
-				var username = '@' + p.attr('data-username').replace(/\s/g, '-');
-				socket.emit('posts.getRawPost', pid, function(err, post) {
-					if (err) {
-						return app.alertError(err.message);
-					}
-
-					$(window).trigger('action:composer.addQuote', {
-						tid: tid,
-						slug: ajaxify.data.slug,
-						pid: pid,
-						index: p.attr('data-index'),
-						username: username,
-						topicName: ajaxify.data.titleRaw,
-						text: post
-					});
-
-					ajaxify.go('/topic/' + tid);
-				});
-			});
-			$('.post-tools:not(:has([component="post/quote-club-ded"]))').append('<a component="post/quote-club-ded" href="#" class="no-select">Popcorn</a>');
+			addPopcornButton($('html').attr(mafia.data));
 		}
 	});
+
+	// NodeBB Updates
+	if ($('html').is('[data-user-id]') && $('body').is('.page-topic-19454')) {
+		addPopcornButton(19758);
+	}
 }
 $(window).on('action:ajaxify.contentLoaded', addClubDedQuoteButton);
 $(window).on('action:posts.loaded', addClubDedQuoteButton);
