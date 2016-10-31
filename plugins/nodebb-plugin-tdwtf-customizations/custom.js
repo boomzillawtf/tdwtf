@@ -66,7 +66,13 @@ function addPopcornButton(tid) {
 				text: post
 			});
 
-			ajaxify.go('/topic/' + tid);
+			socket.emit('plugins.tdwtf.getPopcornBookmark', tid, function(err, index) {
+				if (err || !index) {
+					return ajaxify.go('/topic/' + tid + '/popcorn');
+				}
+
+				ajaxify.go('/topic/' + tid + '/popcorn/' + index);
+			});
 		});
 	});
 	$('.post-tools:not(:has([component="post/quote-club-ded"]))').append('<a component="post/quote-club-ded" href="#" class="no-select">Popcorn</a>');

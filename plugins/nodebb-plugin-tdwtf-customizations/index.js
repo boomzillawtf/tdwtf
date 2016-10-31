@@ -8,6 +8,8 @@ var db = module.parent.require('./database');
 var Categories = module.parent.require('./categories');
 var Groups = module.parent.require('./groups');
 var Posts = module.parent.require('./posts');
+var SocketPlugins = module.parent.require('./socket.io/plugins');
+var Topics = module.parent.require('./topics');
 var events = module.parent.require('./events');
 var privileges = module.parent.require('./privileges');
 
@@ -19,6 +21,42 @@ Posts.dismissFlag = function(pid, next) {
 		return next(null);
 	}
 	next(new Error("[[not-allowed]]"));
+};
+
+SocketPlugins.tdwtf = {};
+SocketPlugins.tdwtf.getPopcornBookmark = function(socket, data, callback) {
+	var tid = parseInt(data, 10);
+
+	function done(err, isMember) {
+		if (err || !isMember) {
+			// hide real error
+			return callback(new Error("[[invalid-data]]"));
+		}
+
+		Topics.getUserBookmark(tid, socket.uid, callback);
+	}
+
+	// Discussion of NodeBB Updates is always allowed for popcorning.
+	if (tid === 19758) {
+		return done(null, true);
+	}
+
+	Topics.getTopicField(tid, 'cid', function(err, cid) {
+		if (err) {
+			return done(err);
+		}
+
+		// Club Ded
+		if (cid === 32) {
+			return Groups.isMember(socket.uid, 'Mafia - Club Ded', done);
+		}
+		// Club Ded (Self-Serve)
+		if (cid === 47) {
+			return Groups.isMember(socket.uid, 'Self-Serve Mafia - Club Ded', done);
+		}
+
+		done(null, false);
+	});
 };
 
 module.exports = {
