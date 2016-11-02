@@ -267,7 +267,21 @@ span[component="post/vote-count"] {
 }
 
 .topic [component="post/reply-count"] {
-	display: block;
+	display: table;
+	padding: 10px;
+	padding-left: 7px;
+	color: inherit;
+	background: rgba(127, 127, 127, 0.25);
+}
+
+.topic [component="post/replies"] {
+	margin-top: 0;
+	padding-top: 20px;
+	background: rgba(127, 127, 127, 0.25);
+
+	@media (max-width: 991px) {
+		margin-left: 0;
+	}
 }
 
 /* hide email addresses for admin views of profiles */
