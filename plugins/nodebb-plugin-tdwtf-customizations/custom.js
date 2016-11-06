@@ -44,6 +44,10 @@ $(window).on('action:ajaxify.contentLoaded', function() {
 	$html.attr('data-current-month', now.getMonth() + 1);
 	$html.attr('data-current-day-of-week', now.getDay());
 	$html.attr('data-current-day-of-month', now.getDate());
+
+	if ($('#new_topic').length && $('#new-topics-alert').length) {
+		$('#new-topics-alert').css('margin-left', $('#new_topic').outerWidth() + 10 + 'px');
+	}
 });
 
 function addPopcornButton(tid) {
