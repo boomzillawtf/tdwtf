@@ -65,3 +65,6 @@
 [submodule "plugins/nodebb-plugin-google-search"]
 	path = plugins/nodebb-plugin-google-search
 	url = https://github.com/BenLubar/nodebb-plugin-google-search
+[submodule "plugins/nodebb-plugin-image-size"]
+	path = plugins/nodebb-plugin-image-size
+	url = https://github.com/BenLubar/nodebb-plugin-image-size
