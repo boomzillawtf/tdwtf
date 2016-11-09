@@ -116,9 +116,9 @@ module.exports = {
 	},
 	"postReplyCount": function(data, callback) {
 		var pids = data.posts.filter(function(post) {
-			return parseInt(post.replyCount, 10) !== 0;
+			return parseInt(post.replies, 10) !== 0;
 		}).map(function(post) {
-			post.replyCount = 0;
+			post.replies = 0;
 			return post.pid;
 		});
 
@@ -144,7 +144,7 @@ module.exports = {
 			},
 			function(allowedPids, next) {
 				allowedPids.forEach(function(pid) {
-					data.posts[replyIndices[pid]].replyCount++;
+					data.posts[replyIndices[pid]].replies++;
 				});
 				next(null, data);
 			}
