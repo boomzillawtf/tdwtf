@@ -7,9 +7,9 @@
 		{"hook": "filter:meta.getMetaTags", "method": "meta"},
 		{"hook": "filter:middleware.renderHeader", "method": "header"},
 		{"hook": "filter:post.edit", "method": "postEdit"},
-		{"hook": "filter:post.getPosts", "method": "postReplyCount"},
 		{"hook": "filter:post.purge", "method": "postPurge"},
 		{"hook": "filter:register.check", "method": "registerCheck"},
+		{"hook": "filter:topics.addPostData", "method": "postReplyCount"},
 		{"hook": "action:markdown.updateParserRules", "method": "disableFuzzy"}
 	],
 	"less": [

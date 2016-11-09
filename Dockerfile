@@ -35,6 +35,7 @@ RUN echo public/uploads/*/ > .make-uploads-folders
 RUN cd node_modules/nodebb-plugin-imagemagick && curl -sSL https://patch-diff.githubusercontent.com/raw/NodeBB/nodebb-plugin-imagemagick/pull/6.diff | patch -p1
 RUN curl -sSL https://patch-diff.githubusercontent.com/raw/NodeBB/NodeBB/pull/5185.diff | patch -p1
 RUN cd node_modules/nodebb-theme-persona && sed -i templates/partials/topic/post-menu-list.tpl -e 's/\r//' && curl -sSL https://patch-diff.githubusercontent.com/raw/NodeBB/nodebb-theme-persona/pull/333.diff | patch -p1
+RUN curl -sSL https://patch-diff.githubusercontent.com/raw/NodeBB/NodeBB/pull/5192.diff | patch -p1
 
 # the default port for NodeBB is exposed outside the container
 EXPOSE 4567
