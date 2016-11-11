@@ -122,7 +122,9 @@ module.exports = {
 			return post.pid;
 		});
 
+		var replyPids;
 		var replyIndices = {};
+		var cidReplyIndices = {};
 
 		async.waterfall([
 			function(next) {
@@ -131,7 +133,7 @@ module.exports = {
 				}), next);
 			},
 			function(_replyPids, next) {
-				var replyPids = [].concat.apply([], _replyPids);
+				replyPids = [].concat.apply([], _replyPids);
 				_replyPids.forEach(function(replies, index) {
 					replies.forEach(function(reply) {
 						replyIndices[reply] = data.posts.findIndex(function(post) {
@@ -140,11 +142,27 @@ module.exports = {
 					});
 				});
 
-				privileges.posts.filter('read', replyPids, data.uid, next);
+				Posts.getCidsByPids(replyPids, next);
 			},
-			function(allowedPids, next) {
-				allowedPids.forEach(function(pid) {
-					data.posts[replyIndices[pid]].replies++;
+			function(replyCids, next) {
+				replyCids.forEach(function(cid, index) {
+					if (!cidReplyIndices[cid]) {
+						cidReplyIndices[cid] = [];
+					}
+					cidReplyIndices[cid].push(replyIndices[replyPids[index]]);
+				});
+
+				var filteredCids = replyCids.filter(function(cid, index, array) {
+					return array.indexOf(cid) === index;
+				});
+
+				privileges.categories.filterCids('read', filteredCids, data.uid, next);
+			},
+			function(allowedCids, next) {
+				allowedCids.forEach(function(cid) {
+					cidReplyIndices[cid].forEach(function(index) {
+						data.posts[index].replies++;
+					});
 				});
 				next(null, data);
 			}
