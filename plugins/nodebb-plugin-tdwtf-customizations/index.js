@@ -1,7 +1,5 @@
 /* jshint node: true */
 
-var spawn = require('child_process').spawn;
-var nconf = module.parent.require('nconf');
 var async = module.parent.require('async');
 var request = module.parent.require('request');
 var db = module.parent.require('./database');
@@ -21,6 +19,18 @@ Posts.dismissFlag = function(pid, next) {
 		return next(null);
 	}
 	next(new Error("[[not-allowed]]"));
+};
+
+var uploadsController = module.parent.require('./controllers/uploads');
+var realUpload = uploadsController.upload;
+uploadsController.upload = function(req, res, filesIterator) {
+	// Ensure a category is set. We use General Discussion because it
+	// allows all users to upload files.
+	if (parseInt(req.body.cid, 10) === 0) {
+		req.body.cid = 8;
+	}
+
+	realUpload(req, res, filesIterator);
 };
 
 SocketPlugins.tdwtf = {};
@@ -60,12 +70,6 @@ SocketPlugins.tdwtf.getPopcornBookmark = function(socket, data, callback) {
 };
 
 module.exports = {
-	"init": function(data, callback) {
-		spawn('./watchdog.bash', [nconf.get('port')], {
-			stdio: 'inherit'
-		}).unref();
-		callback();
-	},
 	"meta": function(tags, callback) {
 		tags = tags.concat([{
 			name: 'google-site-verification',
