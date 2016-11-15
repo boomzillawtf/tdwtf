@@ -1,7 +1,9 @@
 /* jshint node: true */
 
 var async = module.parent.require('async');
+var nconf = module.parent.require('nconf');
 var request = module.parent.require('request');
+var winston = module.parent.require('winston');
 var db = module.parent.require('./database');
 var Categories = module.parent.require('./categories');
 var Groups = module.parent.require('./groups');
@@ -10,6 +12,16 @@ var SocketPlugins = module.parent.require('./socket.io/plugins');
 var Topics = module.parent.require('./topics');
 var events = module.parent.require('./events');
 var privileges = module.parent.require('./privileges');
+
+var realLoggerAdd = winston.Logger.prototype.add;
+winston.Logger.prototype.add = function() {
+	this.filters.push(function(level, msg) {
+		// add port/pid to log output
+		return '[' + nconf.get('port') + '/' + global.process.pid + '] ' + msg;
+	});
+	winston.Logger.prototype.add = realLoggerAdd;
+};
+winston.add();
 
 var realDismissFlag = Posts.dismissFlag;
 var dismissedFlags = {};
