@@ -187,10 +187,16 @@ function renderAdminPage(req, res, next) {
 	});
 }
 
+function renderIPPage(req, res) {
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	res.json({client_ip: req.ip, upstream_ip: upstreamIP, upstream_port: nconf.get('port')});
+}
+
 module.exports = {
 	"init": function(params, callback) {
 		params.router.get('/admin/plugins/tdwtf', params.middleware.admin.buildHeader, renderAdminPage);
 		params.router.get('/api/admin/plugins/tdwtf', renderAdminPage);
+		params.router.get('/api/tdwtf-ip', renderIPPage);
 
 		callback();
 	},
