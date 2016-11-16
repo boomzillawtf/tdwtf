@@ -10,6 +10,7 @@ var Groups = module.parent.require('./groups');
 var Posts = module.parent.require('./posts');
 var SocketPlugins = module.parent.require('./socket.io/plugins');
 var Topics = module.parent.require('./topics');
+var User = module.parent.require('./user');
 var events = module.parent.require('./events');
 var privileges = module.parent.require('./privileges');
 
@@ -81,7 +82,118 @@ SocketPlugins.tdwtf.getPopcornBookmark = function(socket, data, callback) {
 	});
 };
 
+var upstreamIP = require('os').networkInterfaces().eth0.find(function(addr) {
+	return addr.family === 'IPv4';
+}).address;
+
+db.sortedSetAdd('tdwtf-upstreams:started', Date.now(), upstreamIP + ':' + nconf.get('port'));
+
+var upstreamPorts = module.parent.require('../config.json').port;
+
+var upstreamIPs = upstreamPorts.map(function(port) {
+	return upstreamIP.replace(/\.254$/, '.253') + ':' + port;
+}).concat(upstreamPorts.map(function(port) {
+	return upstreamIP.replace(/\.253$/, '.254') + ':' + port;
+}));
+
+function findUpstreams(clientIP) {
+	var octetString = clientIP.split(/\./g);
+	var octets = [parseInt(octetString[0], 10), parseInt(octetString[1], 10), parseInt(octetString[2], 10)];
+
+	var hits = [];
+
+	var hash = 89;
+	for (var tries = 0; tries < 20; tries++) {
+		for (var i = 0; i < octets.length; i++) {
+			hash = (hash * 113 + octets[i]) % 6271;
+		}
+
+		var hit = upstreamIPs[hash % upstreamIPs.length];
+		if (hit.split(/:/)[0] === upstreamIP && hits.indexOf(hit) === -1) {
+			hits.push(hit);
+		}
+	}
+	return hits;
+}
+
+function renderAdminPage(req, res, next) {
+	var now = Date.now();
+
+	var data = {title: 'The Daily WTF', entries: []};
+
+	db.getSortedSetRevRangeWithScores('tdwtf-upstreams:started', 0, upstreamPorts.length - 1, function(err, upstreamsStarted) {
+		if (err) {
+			return next(err);
+		}
+
+		var recentRestarts = upstreamsStarted.filter(function(upstream) {
+			return upstream.score > upstreamsStarted[0].score - 60 * 1000;
+		}).map(function(upstream) {
+			return upstream.value;
+		});
+
+		data.recent = recentRestarts;
+
+		db.getSortedSetRevRangeByScore('ip:recent', 0, -1, now, now - 60 * 60 * 1000, function(err, recentIPs) {
+			if (err) {
+				return next(err);
+			}
+
+			async.eachLimit(recentIPs, 10, function(ip, next) {
+				var upstreams = findUpstreams(ip);
+
+				if (recentRestarts.indexOf(upstreams[0]) === -1) {
+					return next();
+				}
+
+				async.waterfall([
+					function(next) {
+						db.getSortedSetRevRangeByScore('ip:' + ip + ':uid', 0, -1, now, now - 60 * 60 * 1000, next);
+					},
+					function(uids, next) {
+						User.getUsers(uids, req.uid, next);
+					},
+					function(users, next) {
+						var count = upstreams.findIndex(function(upstream) {
+							return recentRestarts.indexOf(upstream) === -1;
+						});
+						if (count === -1) {
+							count = upstreams.length;
+						}
+
+						if (users.length === 0) {
+							data.entries.push({count: count, guest: ip});
+						} else {
+							users.forEach(function(user) {
+								data.entries.push({count: count, user: user});
+							});
+						}
+
+						next();
+					}
+				], next);
+			}, function(err) {
+				if (err) {
+					return next(err);
+				}
+
+				data.entries = data.entries.sort(function(a, b) {
+					return b.count - a.count;
+				});
+
+				res.render('admin/plugins/tdwtf', data);
+			});
+		});
+	});
+}
+
 module.exports = {
+	"init": function(params, callback) {
+		params.router.get('/admin/plugins/tdwtf', params.middleware.admin.buildHeader, renderAdminPage);
+		params.router.get('/api/admin/plugins/tdwtf', renderAdminPage);
+
+		callback();
+	},
 	"meta": function(tags, callback) {
 		tags = tags.concat([{
 			name: 'google-site-verification',
@@ -89,6 +201,14 @@ module.exports = {
 		}]);
 
 		callback(null, tags);
+	},
+	"adminHeader": function(header, callback) {
+		header.plugins.push({
+			route: '/plugins/tdwtf',
+			name: 'TDWTF'
+		});
+
+		callback(null, header);
 	},
 	"header": function(data, callback) {
 		async.parallel({
