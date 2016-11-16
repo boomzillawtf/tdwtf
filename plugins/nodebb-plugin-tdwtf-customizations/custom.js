@@ -104,6 +104,11 @@ function addClubDedQuoteButton() {
 	if ($('html').is('[data-user-id]') && $('body').is('.page-topic-19454')) {
 		addPopcornButton(19758);
 	}
+
+	// The Impossible Mission
+	if ($('html').is('[data-user-id]') && $('body').is('.page-topic-20849, .page-topic-20850, .page-topic-20852, .page-topic-20854, .page-topic-20855, .page-topic-20858, .page-topic-20864, .page-topic-20865')) {
+		addPopcornButton(20856);
+	}
 }
 $(window).on('action:ajaxify.contentLoaded', addClubDedQuoteButton);
 $(window).on('action:posts.loaded', addClubDedQuoteButton);

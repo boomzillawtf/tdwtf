@@ -64,6 +64,11 @@ SocketPlugins.tdwtf.getPopcornBookmark = function(socket, data, callback) {
 		return done(null, true);
 	}
 
+	// The Impossible Mission is always allowed for popcorning.
+	if (tid === 20856) {
+		return done(null, true);
+	}
+
 	Topics.getTopicField(tid, 'cid', function(err, cid) {
 		if (err) {
 			return done(err);
