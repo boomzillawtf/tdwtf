@@ -227,7 +227,7 @@ setTimeout(function() {
 			prepareAdminPage(uid, next);
 		},
 		function(data, next) {
-			var content = ['# Instance restart\n\n## Affected instances\n\n'];
+			var content = ['# Instance restart\n\n<details>\n\n## Affected instances\n\n'];
 			data.recent.forEach(function(recent) {
 				content.push('- ', recent, '\n');
 			});
@@ -235,13 +235,13 @@ setTimeout(function() {
 			data.entries.forEach(function(entry) {
 				content.push('- ', entry.count, ' ');
 				if (entry.user) {
-					content.push('@', entry.userslug);
+					content.push('@', entry.user.userslug);
 				} else {
 					content.push('guest: ', entry.guest);
 				}
 				content.push('\n');
 			});
-			content.push('\n*This was an automated post by nodebb-plugin-tdwtf-customizations*');
+			content.push('\n*This was an automated post by nodebb-plugin-tdwtf-customizations*\n\n</details>');
 			next(null, content.join(''));
 		},
 		function(content, next) {
