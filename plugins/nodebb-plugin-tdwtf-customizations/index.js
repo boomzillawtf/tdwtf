@@ -121,7 +121,7 @@ function findUpstreams(clientIP) {
 	return hits;
 }
 
-function renderAdminPage(req, res, next) {
+function prepareAdminPage(uid, next) {
 	var now = Date.now();
 
 	var data = {title: 'The Daily WTF', entries: []};
@@ -156,7 +156,7 @@ function renderAdminPage(req, res, next) {
 						db.getSortedSetRevRangeByScore('ip:' + ip + ':uid', 0, -1, now, now - 60 * 60 * 1000, next);
 					},
 					function(uids, next) {
-						User.getUsers(uids, req.uid, next);
+						User.getUsers(uids, uid, next);
 					},
 					function(users, next) {
 						var count = upstreams.findIndex(function(upstream) {
@@ -186,11 +186,79 @@ function renderAdminPage(req, res, next) {
 					return b.count - a.count;
 				});
 
-				res.render('admin/plugins/tdwtf', data);
+				next(null, data);
 			});
 		});
 	});
 }
+
+function renderAdminPage(req, res, next) {
+	prepareAdminPage(req.uid, function(err, data) {
+		if (err) {
+			return next(err);
+		}
+
+		res.render('admin/plugins/tdwtf', data);
+	});
+}
+
+setTimeout(function() {
+	var uid = 1567;
+	var tid = 21402;
+
+	async.waterfall([
+		function(next) {
+			db.getSortedSetRevRangeWithScores('tdwtf-upstreams:started', 0, upstreamPorts.length - 1, next);
+		},
+		function(recentlyStarted, next) {
+			if (recentlyStarted[0].value !== upstreamIP + ':' + nconf.get('port')) {
+				// not last started instance
+				return;
+			}
+			if (recentlyStarted.every(function(instance) {
+				return instance.score >= recentlyStarted[0].score - 60 * 1000;
+			})) {
+				// all instances restarted, not useful
+				return;
+			}
+			next();
+		},
+		function(next) {
+			prepareAdminPage(uid, next);
+		},
+		function(data, next) {
+			var content = ['# Instance restart\n\n## Affected instances\n\n'];
+			data.recent.forEach(function(recent) {
+				content.push('- ', recent, '\n');
+			});
+			content.push('\n## Users connected to affected instances in the past hour\n\n');
+			data.entries.forEach(function(entry) {
+				content.push('- ', entry.count, ' ');
+				if (entry.user) {
+					content.push('@', entry.userslug);
+				} else {
+					content.push('guest: ', entry.guest);
+				}
+				content.push('\n');
+			});
+			content.push('\n*This was an automated post by nodebb-plugin-tdwtf-customizations*');
+			next(null, content.join(''));
+		},
+		function(content, next) {
+			Topics.reply({
+				uid: uid,
+				tid: tid,
+				content: content,
+				timestamp: Date.now(),
+				ip: null
+			}, next);
+		}
+	], function(err) {
+		if (err) {
+			winston.warn('posting restart notice: ' + err.stack);
+		}
+	});
+}, 2 * 60 * 1000);
 
 function renderIPPage(req, res) {
 	res.setHeader('Access-Control-Allow-Origin', '*');
