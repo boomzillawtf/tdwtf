@@ -4,20 +4,18 @@ history_count=20
 threshold="`printf "%05.1f" "90.0" | sed -e 's/\.//'`"
 
 for (( i=0; $i <= $history_count; i++ )); do
-	declare -A history$i
+	eval declare -A history$i="([1]=0)"
 done
 
 while true; do
 	unset history$history_count
-	declare -A history$history_count
-
-	ps -C 'node' -o 'pid=,pcpu=' | awk '{ if ($1 != "1") print $1 "," $2; }' | while read line; do
+	eval "declare -A history$history_count=([1]=0 $(ps -C 'node' -o 'pid=,pcpu=' | awk '{ if ($1 != "1") print $1 "," $2; }' | while read line; do
 		pid="`cut -d, -f1 <<< "$line"`"
 		pcpu="`cut -d, -f2 <<< "$line"`"
 		pcpu="`printf "%05.1f" "$pcpu" | sed -e 's/\.//'`"
 
-		eval "history$history_count[\"\$pid\"]=\"\$pcpu\""
-	done
+		echo "[$pid]=$pcpu"
+	done))"
 
 	for pid in "${!history0[@]}"; do
 		fail=""
@@ -44,11 +42,7 @@ while true; do
 	for (( i=0; $i < $history_count; i++ )); do
 		next=$(( $i + 1 ))
 		unset history$i
-		declare -A history$i
-		eval keys=("\${!history$next[@]}")
-		for key in "${keys[@]}"; do
-			history$i["$key"]="${history$next["$key"]}"
-		done
+		eval $(declare -p history$next | sed -e "s/history$next=/history$i=/")
 	done
 
 	sleep 5
