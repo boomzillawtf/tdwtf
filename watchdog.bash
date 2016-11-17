@@ -8,9 +8,12 @@ for (( i=0; $i <= $history_count; i++ )); do
 done
 
 while true; do
+	unset history$history_count
+	declare -A history$history_count
+
 	ps -C 'node' -o 'pid=,pcpu=' | awk '{ if ($1 != "1") print $1 "," $2; }' | while read line; do
-		pid=`cut -d, -f1 <<< "$line"`
-		pcpu=`cut -d, -f2 <<< "$line"`
+		pid="`cut -d, -f1 <<< "$line"`"
+		pcpu="`cut -d, -f2 <<< "$line"`"
 		pcpu="`printf "%05.1f" "$pcpu" | sed -e 's/\.//'`"
 
 		eval "history$history_count[\"\$pid\"]=\"\$pcpu\""
