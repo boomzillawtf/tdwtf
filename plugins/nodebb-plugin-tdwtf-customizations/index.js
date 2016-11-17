@@ -183,7 +183,23 @@ function prepareAdminPage(uid, next) {
 				}
 
 				data.entries = data.entries.sort(function(a, b) {
-					return b.count - a.count;
+					if (b.count !== a.count) {
+						return b.count - a.count;
+					}
+					if (a.user && b.user) {
+						return a.user.uid - b.user.uid;
+					}
+					if (a.user || b.user) {
+						return a.user ? -1 : 1;
+					}
+					var aip = a.guest.split(/\./g);
+					var bip = b.guest.split(/\./g);
+					for (var i = 0; i < 4; i++) {
+						if (aip[i] !== bip[i]) {
+							return aip[i] - bip[i];
+						}
+					}
+					return 0;
 				});
 
 				next(null, data);
