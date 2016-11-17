@@ -1,7 +1,7 @@
 #!/bin/bash
 
 history_count=20
-threshold=$(( 90 * ( $history_count - 1 ) * 5 / $(getconf CLK_TCK) ))
+threshold=$(( ( $history_count - 1 ) * 5 * $(getconf CLK_TCK) * 90 / 100 ))
 
 for (( i=0; $i <= $history_count; i++ )); do
 	eval declare -A history$i="([1]=0)"
