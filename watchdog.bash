@@ -1,38 +1,52 @@
 #!/bin/bash
 
-start_time=$(date -u +%s)
+history_count=20
+threshold="`printf "%05.1f" "90.0" | sed -e 's/\.//'`"
 
-failures=0
-
-until curl -fsm 5 http://127.0.0.1:"$1"/recent.rss > /dev/null; do
-	kill -0 $PPID &> /dev/null || (echo "$PPID/$1 died unexpectedly"; exit)
-	failures=$(( $failures + 1 ))
-	echo "Waiting for $PPID/$1 ($failures/100)"
-	if [[ $failures -eq 100 ]]; then
-		kill -9 "$PPID"
-		exit
-	fi
-	sleep 5
+for (( i=0; $i <= $history_count; i++ )); do
+	declare -A history$i
 done
 
-start_time=$(( $(date -u +%s) - $start_time ))
-
-echo "$PPID/$1 up after $start_time seconds"
-
-failures=0
-
 while true; do
-	kill -0 $PPID &> /dev/null || (echo "$PPID/$1 died unexpectedly"; exit)
-	if ! curl -fsm 15 http://127.0.0.1:"$1"/recent.rss > /dev/null; then
-		failures=$(( $failures + 1 ))
-		echo "$PPID/$1 timed out ($failures/2)"
-		date -uIns
-		if [[ $failures -eq 2 ]]; then
-			kill -9 "$PPID"
-			exit
+	ps -C 'node' -o 'pid=,pcpu=' | awk '{ if ($1 != "1") print $1 "," $2; }' | while read line; do
+		pid=`cut -d, -f1 <<< "$line"`
+		pcpu=`cut -d, -f2 <<< "$line"`
+		pcpu="`printf "%05.1f" "$pcpu" | sed -e 's/\.//'`"
+
+		eval "history$history_count[\"\$pid\"]=\"\$pcpu\""
+	done
+
+	for pid in "${!history0[@]}"; do
+		fail=""
+		for (( i=0; $i <= $history_count; i++ )); do
+			pcpu="history$i[$pid]"
+			pcpu="${!pcpu}"
+			if [[ -z "$pcpu" ]]; then
+				fail=yes
+				break
+			fi
+
+			if (( 10#$pcpu < 10#$threshold )); then
+				fail=yes
+				break
+			fi
+		done
+
+		if [[ -z "$fail" ]]; then
+			echo '{"level":"error","message":"[watchdog.bash] killing '"$pid"'","timestamp":"'"`date -u --iso-8601=ns | sed -e 's/......+00:00/Z/g' -e 's/,/./g'`"'"}'
+			kill -9 "$pid"
 		fi
-	else
-		failures=0
-		sleep 5
-	fi
+	done
+
+	for (( i=0; $i < $history_count; i++ )); do
+		next=$(( $i + 1 ))
+		unset history$i
+		declare -A history$i
+		eval keys=("\${!history$next[@]}")
+		for key in "${keys[@]}"; do
+			history$i["$key"]="${history$next["$key"]}"
+		done
+	done
+
+	sleep 5
 done

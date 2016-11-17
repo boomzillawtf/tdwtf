@@ -50,4 +50,5 @@ RUN ln -s /usr/src/app/docker/config.json /usr/src/app/config.json
 CMD cat .make-uploads-folders | xargs mkdir -p \
 && ./nodebb upgrade \
 && echo 1 > pidfile \
+&& bash -c './watchdog.bash &' \
 && exec node loader.js
