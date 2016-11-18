@@ -79,7 +79,7 @@ function addPopcornButton(tid) {
 			});
 		});
 	});
-	$('.post-tools:not(:has([component="post/quote-club-ded"]))').append('<a component="post/quote-club-ded" href="#" class="no-select">Popcorn</a>');
+	$('.post-tools:not(:has([component="post/quote-club-ded"]))').prepend('<a component="post/quote-club-ded" href="#" class="no-select">Popcorn</a>');
 }
 
 function addClubDedQuoteButton() {
