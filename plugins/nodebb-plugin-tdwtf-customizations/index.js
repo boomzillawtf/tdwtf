@@ -153,7 +153,7 @@ function prepareAdminPage(uid, next) {
 
 				async.waterfall([
 					function(next) {
-						db.getSortedSetRevRangeByScore('ip:' + ip + ':uid', 0, -1, now, now - 60 * 60 * 1000, next);
+						db.getSortedSetRange('ip:' + ip + ':uid', 0, -1, next);
 					},
 					function(uids, next) {
 						User.getUsers(uids, uid, next);
