@@ -17,7 +17,7 @@ function processPosts() {
 				// console.error(err);
 				raw.parentElement.removeChild(raw);
 			} else {
-				raw.innerText = rawContent;
+				$(raw).text(rawContent);
 				if (vis) {
 					raw.classList.remove('hidden');
 					post.classList.add('hidden');
@@ -40,7 +40,7 @@ function processPosts() {
 								o.disconnect();
 								// console.error(err);
 							} else {
-								raw.innerText = rawContent;
+								$(raw).text(rawContent);
 							}
 						});
 					}
@@ -90,7 +90,7 @@ function processPosts() {
 	// this relies on the addRaw function from above, and it quotes the entire post, regardless of any selected text
 	// by default, the new topic will be titled "Re: (original title)" and in the same category as the original
 	function replyAsTopic(event) {
-		var e = event.target.closest('li[component="post"]');
+		var e = $(event.target).closest('li[component="post"]').get(0);
 		var pid = e.getAttribute('data-pid');
 
 		// start a new topic composer, with the same category as the quoted post's topic selected by default
@@ -117,7 +117,7 @@ function processPosts() {
 							// grab the raw post out of the element that addRaw created
 							var r = e.querySelector('.raw-content'), h = r.classList.contains('hidden');
 							r.classList.remove('hidden');
-							var raw = r.innerText;
+							var raw = $(r).text();
 							r.classList.toggle('hidden', h);
 
 							// add the quote to the composer
@@ -151,7 +151,8 @@ function processPosts() {
 		}
 	}
 	
-	document.querySelectorAll('.post-tools').forEach(function(e) {
+	$('.post-tools').each(function() {
+		var e = this;
 		// add the "view raw" button
 		if (!e.querySelector(".view-raw")) {
 			var viewRawButton = document.createElement("a");
@@ -163,12 +164,12 @@ function processPosts() {
 		}
 
 		// add the "reply as topic" item and a separator to the hamburger menu
-		e = e.closest('.post-footer');
+		e = $(e).closest('.post-footer').get(0);
 		if (e.querySelector('.dropdown.open') && !e.querySelector('.reply-as-topic')) {
 			// if there's a "Bookmark" option, this adds it right before that; otherwise, at the very top
 			var favOption = e.querySelector('[component="post/bookmark"]') || e.querySelector('.dropdown-menu li');
 			if (favOption) {
-				favOption = favOption.closest('li');
+				favOption = $(favOption).closest('li').get(0);
 				var option = favOption.parentElement.insertBefore(document.createElement('li'), favOption);
 				option.setAttribute('role', 'presentation');
 				var a = option.appendChild(document.createElement('a'));
