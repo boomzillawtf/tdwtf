@@ -113,7 +113,7 @@ function addClubDedQuoteButton() {
 	var necroThreshold = (new Date().getMonth() + 1 === 4 && new Date().getDate() === 1 ? 5 : 7 * 24 * 60 * 60) * 1000;
 	$('[component="post"]').each(function() {
 		var post = $(this);
-		if (post.is(':contains(.necro-post)')) {
+		if (post.is(':has(.necro-post)')) {
 			return;
 		}
 		var prev = post.prev('[component="post"]');

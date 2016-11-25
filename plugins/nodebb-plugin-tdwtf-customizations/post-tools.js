@@ -155,7 +155,7 @@ function processPosts() {
 		// add the "view raw" button
 		if (!e.querySelector(".view-raw")) {
 			var viewRawButton = document.createElement("a");
-			viewRawButton.appendChild(document.createTextNode("View Raw"));
+			viewRawButton.appendChild(document.createTextNode("Raw"));
 			viewRawButton.setAttribute("class", "view-raw no-select");
 			viewRawButton.setAttribute("href", "#");
 			e.insertBefore(viewRawButton, e.firstChild);

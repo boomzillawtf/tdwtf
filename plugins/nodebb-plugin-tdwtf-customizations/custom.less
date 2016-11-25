@@ -1086,6 +1086,10 @@ a[itemprop="url"][href] {
 	}
 }
 
+[component="post/reply-count"] {
+	white-space: nowrap;
+}
+
 .emoji {
 	display: inline-block;
 
@@ -1151,6 +1155,11 @@ html[data-current-month="10"][data-current-day-of-month="31"] #panel:before {
 	pointer-events: none;
 }
 
+@font-face {
+	font-family: sponge;
+	src: url('/uploads/default/original/3X/8/e/8e076a5d6aa6f28e8a485f969fb06e63082f7a5e.ttf');
+}
+
 html[data-current-month="4"][data-current-day-of-month="1"] {
 	.categories>li, .category>ul>li, .topic .posts>li {
 		transform: rotate(-1deg);
@@ -1158,6 +1167,15 @@ html[data-current-month="4"][data-current-day-of-month="1"] {
 	.votes {
 		transform: rotate(180deg);
 		display: inline-block;
+	}
+	.necro-post {
+		display: block;
+		font-family: sponge;
+		font-size: 72px;
+		background-image: url('/uploads/default/original/3X/d/d/dd5fb009afd1f83bc662d69ba3ee43a0278d8663.png');
+		color: #fff;
+		text-align: center;
+		padding-top: 20px;
 	}
 }
 
