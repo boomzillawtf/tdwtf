@@ -19,7 +19,8 @@
 	],
 	"scripts": [
 		"./custom.js",
-		"./details-shim.js"
+		"./details-shim.js",
+		"./post-tools.js"
 	],
 	"templates": "templates"
 }

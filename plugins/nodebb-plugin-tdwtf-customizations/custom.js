@@ -109,6 +109,25 @@ function addClubDedQuoteButton() {
 	if ($('html').is('[data-user-id]') && $('body').is('.page-topic-20849, .page-topic-20850, .page-topic-20852, .page-topic-20854, .page-topic-20855, .page-topic-20858, .page-topic-20864, .page-topic-20865')) {
 		addPopcornButton(20856);
 	}
+
+	var necroThreshold = (new Date().getMonth() + 1 === 4 && new Date().getDate() === 1 ? 5 : 7 * 24 * 60 * 60) * 1000;
+	$('[component="post"]').each(function() {
+		var post = $(this);
+		if (post.is(':contains(.necro-post)')) {
+			return;
+		}
+		var prev = post.prev('[component="post"]');
+		if (!prev.length) {
+			return;
+		}
+		var diff = post.attr('data-timestamp') - prev.attr('data-timestamp');
+		if (diff >= necroThreshold) {
+			var ago = $.timeago.settings.strings.suffixAgo;
+			$.timeago.settings.strings.suffixAgo = ' later';
+			$('<aside>').addClass('necro-post').text($.timeago.inWords(-diff)).append($('<hr>')).prependTo(post);
+			$.timeago.settings.strings.suffixAgo = ago;
+		}
+	});
 }
 $(window).on('action:ajaxify.contentLoaded', addClubDedQuoteButton);
 $(window).on('action:posts.loaded', addClubDedQuoteButton);

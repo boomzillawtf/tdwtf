@@ -230,11 +230,22 @@ kbd, kbd kbd {
 }
 
 /* make it blue */
-a[component="post/reply"], a[component="post/quote"], a[component="post/quote-club-ded"] {
+a[component="post/reply"], a[component="post/quote"], a[component="post/quote-club-ded"], .post-tools .view-raw {
 	background-color: #337ab7;
 	color: white;
 	padding: 10px;
 	margin-right: 3px;
+}
+
+li.deleted .view-raw {
+	display: none;
+}
+
+.raw-content {
+	font-family: monospace;
+	font-size: 10pt;
+	white-space: pre-wrap;
+	margin-bottom: 15px;
 }
 
 a[component="post/upvote"], a[component="post/downvote"] {
@@ -1110,6 +1121,14 @@ a[itemprop="url"][href] {
 	}
 }
 
+.necro-post {
+	margin-bottom: 20px;
+	text-align: center;
+	font-size: 1.5em;
+	text-transform: uppercase;
+	color: rgba(127, 127, 127, 0.5);
+}
+
 /* prevent accidental dismiss flag button presses */
 .page-posts-flags #dismissAll, .page-posts-flags button.dismiss {
 	display: none;
@@ -1148,3 +1167,6 @@ body.skin-cyborg, body.skin-darkly, body.skin-slate, body.skin-superhero {
 		background-image: url("/uploads/default/8503/d2f7d9520f48de69.png");
 	}
 }
+
+/* bootstrap is still violating the HTML5 spec as of version 4: https://html.spec.whatwg.org/multipage/rendering.html#the-details-and-summary-elements */
+summary { display: list-item; }

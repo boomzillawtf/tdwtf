@@ -49,6 +49,7 @@ RUN ln -s /usr/src/app/docker/config.json /usr/src/app/config.json
 # and set the container's process as the NodeBB daemon so ./nodebb works
 CMD cat .make-uploads-folders | xargs mkdir -p \
 && ./nodebb upgrade \
+&& ./nodebb build \
 && echo 1 > pidfile \
 && bash -c './watchdog.bash &' \
 && exec node loader.js
