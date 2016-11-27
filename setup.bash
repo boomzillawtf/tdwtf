@@ -52,7 +52,7 @@ docker cp redis.conf wtdwtf-redis:/data/redis.conf
 docker start wtdwtf-redis
 
 # create the MongoDB container. we use mmapv1 on WTDWTF.
-docker run -d --name wtdwtf-mongo --net wtdwtf --restart unless-stopped mongo --storageEngine mmapv1
+docker run -d --name wtdwtf-mongo --net wtdwtf --restart unless-stopped mongo
 
 # give MongoDB time to start up
 until nc -z "`docker inspect -f '{{ .NetworkSettings.Networks.wtdwtf.IPAddress }}' wtdwtf-mongo`" 27017; do echo "Waiting for MongoDB"; sleep 1; done
