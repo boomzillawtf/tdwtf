@@ -35,10 +35,10 @@ until nc -z $ip 4568; do sleep 1; done
 
 # stop outputting logs
 kill $log_pid
-wait $log_pid 2> /dev/null
+wait $log_pid 2> /dev/null || true
 
 # make sure the emailer plugin is disabled
-docker exec wtdwtf-nodebb ./nodebb reset -p nodebb-plugin-emailer-amazon
+docker exec wtdwtf-nodebb ./nodebb reset -p nodebb-plugin-emailer-amazon || true
 
 # switch nginx upstream
 sudo sed -i /etc/nginx/nodebb-upstream.conf -e "s/\\(server $ip:[0-9]\\+\\) down;/\\1;/" -e "s/\\(server $other_ip:[0-9]\\+\\);/\\1 down;/"

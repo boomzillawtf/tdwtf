@@ -7,6 +7,7 @@
 		{"hook": "filter:admin.header.build", "method": "adminHeader"},
 		{"hook": "filter:meta.getMetaTags", "method": "meta"},
 		{"hook": "filter:middleware.renderHeader", "method": "header"},
+		{"hook": "filter:notification.push", "method": "notificationPush"},
 		{"hook": "filter:post.edit", "method": "postEdit"},
 		{"hook": "filter:post.purge", "method": "postPurge"},
 		{"hook": "filter:register.check", "method": "registerCheck"},

@@ -66,14 +66,16 @@ function processPosts() {
 				if (post.classList.contains("hidden")) {
 					raw.classList.add("hidden");
 					post.classList.remove("hidden");
+					$(event.target).text('Show raw');
 				} else {
 					post.classList.add("hidden");
 					raw.classList.remove("hidden");
+					$(event.target).text('Hide raw');
 				}
 			}
-
 		} else {
 			addRaw(pid, post, true);
+			$(event.target).text('Hide raw');
 		}
 		
 		// this scrolls the page only if necessary to keep the "view raw" button within the viewport
@@ -151,41 +153,34 @@ function processPosts() {
 		}
 	}
 	
-	$('.post-tools').each(function() {
-		var e = this;
+	$('.post-footer .dropdown.open').each(function() {
+		var e = $(this);
+		// if there's a "Bookmark" option, this adds it right before that; otherwise, at the very top
+		var favOption = e.find('[component="post/bookmark"]').closest('li');
+		if (!favOption.length) {
+			favOption = e.find('.dropdown-menu > li:first-of-type');
+		}
 		// add the "view raw" button
-		if (!e.querySelector(".view-raw")) {
-			var viewRawButton = document.createElement("a");
-			viewRawButton.appendChild(document.createTextNode("Raw"));
-			viewRawButton.setAttribute("class", "view-raw no-select");
-			viewRawButton.setAttribute("href", "#");
-			e.insertBefore(viewRawButton, e.firstChild);
-			viewRawButton.addEventListener("click", showRaw);
+		if (!e.is(":has(.view-raw)")) {
+			$('<li>').attr('role', 'presentation').append($('<a>').text('View raw').attr({
+				role: 'menuitem',
+				href: '#',
+				'class': 'view-raw'
+			}).on('click', showRaw)).insertBefore(favOption);
 		}
 
 		// add the "reply as topic" item and a separator to the hamburger menu
-		e = $(e).closest('.post-footer').get(0);
-		if (e.querySelector('.dropdown.open') && !e.querySelector('.reply-as-topic')) {
-			// if there's a "Bookmark" option, this adds it right before that; otherwise, at the very top
-			var favOption = e.querySelector('[component="post/bookmark"]') || e.querySelector('.dropdown-menu li');
-			if (favOption) {
-				favOption = $(favOption).closest('li').get(0);
-				var option = favOption.parentElement.insertBefore(document.createElement('li'), favOption);
-				option.setAttribute('role', 'presentation');
-				var a = option.appendChild(document.createElement('a'));
-				a.appendChild(document.createTextNode('Reply as topic'));
-				a.setAttribute('role', 'menuitem');
-				a.setAttribute('href', '#');
-				a.classList.add('reply-as-topic');
-				a.addEventListener('click', replyAsTopic);
+		if (!e.is(":has(.reply-as-topic)")) {
+			$('<li>').attr('role', 'presentation').append($('<a>').text('Reply as topic').attr({
+				role: 'menuitem',
+				href: '#',
+				'class': 'reply-as-topic'
+			}).on('click', replyAsTopic)).insertBefore(favOption);
 
-				var divider = option.parentElement.insertBefore(document.createElement('li'), favOption);
-				divider.setAttribute('role', 'presentation');
-				divider.classList.add('divider');
-			} else {
-				// console.error("Unable to add \"Reply as topic\" item to post menu");
-				// console.log(e);
-			}
+			$('<li>').attr({
+				role: 'presentation',
+				'class': 'divider',
+			}).insertBefore(favOption);
 		}
 	});
 }

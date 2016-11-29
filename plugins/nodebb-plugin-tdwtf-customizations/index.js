@@ -323,6 +323,21 @@ module.exports = {
 			callback(null, data);
 		});
 	},
+	"notificationPush": function(data, callback) {
+		if (!data.notification.tid) {
+			return callback(null, data);
+		}
+
+		Topics.getTopicField(data.notification.tid, 'cid', function(err, cid) {
+			if (err) {
+				return callback(err, data);
+			}
+
+			data.notification.cid = cid;
+
+			callback(null, data);
+		});
+	},
 	"postEdit": function(data, callback) {
 		if (data.uid === 140870 || data.uid === 140914 || data.uid === 140925 || data.uid === 141278) {
 			return Posts.getPostField(data.post.pid, 'content', function(err, content) {
