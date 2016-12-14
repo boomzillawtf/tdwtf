@@ -1191,3 +1191,13 @@ body.skin-cyborg, body.skin-darkly, body.skin-slate, body.skin-superhero {
 
 /* bootstrap is still violating the HTML5 spec as of version 4: https://html.spec.whatwg.org/multipage/rendering.html#the-details-and-summary-elements */
 summary { display: list-item; }
+
+/* nodebb-plugin-composer-default 4.3.0+ thinks having a 1-character-wide text entry area is good enough */
+.composer .preview-container {
+	max-width: calc(50% ~"-" 30px);
+}
+
+/* nodebb-plugin-composer-default 4.3.0+ thinks the preview should have a font size about ten times what is in the actual posts */
+.composer.composer .preview, .composer.composer .write {
+	font-size: inherit;
+}
