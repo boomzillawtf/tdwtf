@@ -11,16 +11,10 @@ ENV NODE_ENV=production \
 
 COPY NodeBB/package.json /usr/src/app/
 
-# Until composer is fixed:
-# https://what.thedailywtf.com/post/1046960
-# https://what.thedailywtf.com/post/1047038
-RUN sed -e "s/\"nodebb-plugin-composer-default\": \"4\\.3\\.0\",/\"nodebb-plugin-composer-default\": \"4.2.13\",/" -i /usr/src/app/package.json
-
 RUN npm install
 COPY NodeBB /usr/src/app
 
-# duplicate of above line for composer fix as we just overwrote package.json:
-RUN sed -e "s/\"nodebb-plugin-composer-default\": \"4\\.3\\.0\",/\"nodebb-plugin-composer-default\": \"4.2.13\",/" -i /usr/src/app/package.json
+RUN sed -e "s/var mediumMin = \\([0-9]\\+\\);/var mediumMin = !window.localStorage['unresponsive-settings'] || JSON.parse(window.localStorage['unresponsive-settings']).responsive ? \\1 : 0;/" -i /usr/src/app/node_modules/nodebb-plugin-composer-default/static/lib/composer/resize.js
 
 RUN sed -e "s/Meta\\.config\\['cache-buster'\\] = utils\\.generateUUID();/Meta.config['cache-buster'] = os.hostname();/" -i /usr/src/app/src/meta.js \
 && sed -e "s/config\\['cache-buster'\\] = utils\\.generateUUID();/config['cache-buster'] = require('os').hostname();/" -i /usr/src/app/src/meta/configs.js
