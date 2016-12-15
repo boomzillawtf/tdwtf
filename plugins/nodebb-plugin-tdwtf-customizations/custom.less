@@ -804,6 +804,19 @@ body {
 				content: '" Gurble [chaotic good halfling ranger]';
 			}
 		}
+		a[href="https://what.thedailywtf.com/uid/141628"], a[href="/user/hitoshirenu-shourai"] {
+			&:before {
+				content: 'Seris "';
+				font-weight: bold;
+			}
+			&:after {
+				content: '" Clover';
+				font-weight: bold;
+			}
+			&:hover:after, &:active:after {
+				content: '" Clover [true neutral tiefling sorceror]';
+			}
+		}
 	}
 }
 
@@ -816,7 +829,7 @@ html:not([data-user-id="731"]):not([data-user-id="1496"]):not([data-user-id="140
 			}
 		}
 	}
-	&:not([data-user-id="23"]):not([data-user-id="650"]):not([data-user-id="582"]):not([data-user-id="1345"]):not([data-user-id="1166"]):not([data-user-id="141406"]) {
+	&:not([data-user-id="23"]):not([data-user-id="650"]):not([data-user-id="582"]):not([data-user-id="1345"]):not([data-user-id="1166"]):not([data-user-id="141406"]):not([data-user-id="141628"]) {
 		[data-tid="20852"], [data-tid="20855"], [data-tid="20865"] {
 			div.btn-group.action-bar, & + .post-bar div.btn-group.action-bar, span.post-tools [component="post/reply"], span.post-tools [component="post/quote"] {
 				display: none;
