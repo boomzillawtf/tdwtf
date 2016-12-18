@@ -1,5 +1,5 @@
 /* jshint browser: true */
-/* globals $, ajaxify, app, socket */
+/* globals $, ajaxify, app, socket, require */
 $(window).on('action:ajaxify.contentLoaded', function() {
 	var $html = $('html');
 
@@ -48,6 +48,20 @@ $(window).on('action:ajaxify.contentLoaded', function() {
 	if ($('#new_topic').length && $('#new-topics-alert').length) {
 		$('#new-topics-alert').css('margin-left', $('#new_topic').outerWidth() + 10 + 'px');
 	}
+});
+
+require(['notifications'], function(notifications) {
+	function removeDoubleClick() {
+		$('[component="notifications"] > a').off('dblclick');
+	}
+
+	var realPrepareDOM = notifications.prepareDOM;
+	notifications.prepareDOM = function() {
+		realPrepareDOM();
+		removeDoubleClick();
+	};
+
+	removeDoubleClick();
 });
 
 function addPopcornButton(tid) {
@@ -103,6 +117,11 @@ function addClubDedQuoteButton() {
 	// NodeBB Updates
 	if ($('html').is('[data-user-id]') && $('body').is('.page-topic-19454')) {
 		addPopcornButton(19758);
+	}
+
+	// automated instance restart tracking thread
+	if ($('html').is('[data-user-id]') && $('body').is('.page-topic-21402')) {
+		addPopcornButton(21555);
 	}
 
 	// The Impossible Mission

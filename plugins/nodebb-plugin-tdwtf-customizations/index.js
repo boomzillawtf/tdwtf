@@ -82,6 +82,10 @@ SocketPlugins.tdwtf.getPopcornBookmark = function(socket, data, callback) {
 		if (cid === 47) {
 			return Groups.isMember(socket.uid, 'Self-Serve Mafia - Club Ded', done);
 		}
+		// Staff
+		if (cid === 4) {
+			return User.isAdminOrGlobalMod(socket.uid, done);
+		}
 
 		done(null, false);
 	});
@@ -274,7 +278,7 @@ setTimeout(function() {
 			winston.warn('posting restart notice: ' + err.stack);
 		}
 	});
-}, 2 * 60 * 1000);
+}, 60 * 1000);
 
 function renderIPPage(req, res) {
 	res.setHeader('Access-Control-Allow-Origin', '*');
