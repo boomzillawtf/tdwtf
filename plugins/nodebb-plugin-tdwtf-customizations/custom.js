@@ -119,6 +119,11 @@ function addClubDedQuoteButton() {
 		addPopcornButton(19758);
 	}
 
+	// Song of the day
+	if ($('html').is('[data-user-id]') && $('body').is('.page-topic-13289')) {
+		addPopcornButton(13309);
+	}
+
 	// automated instance restart tracking thread
 	if ($('html').is('[data-user-id]') && $('body').is('.page-topic-21402')) {
 		addPopcornButton(21555);
