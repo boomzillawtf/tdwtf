@@ -1,5 +1,5 @@
 /* jshint browser: true */
-/* globals $, ajaxify, app, socket, require */
+/* globals $, ajaxify, app, socket */
 $(window).on('action:ajaxify.contentLoaded', function() {
 	var $html = $('html');
 
@@ -48,20 +48,6 @@ $(window).on('action:ajaxify.contentLoaded', function() {
 	if ($('#new_topic').length && $('#new-topics-alert').length) {
 		$('#new-topics-alert').css('margin-left', $('#new_topic').outerWidth() + 10 + 'px');
 	}
-});
-
-require(['notifications'], function(notifications) {
-	function removeDoubleClick() {
-		$('[component="notifications"] > a').off('dblclick');
-	}
-
-	var realPrepareDOM = notifications.prepareDOM;
-	notifications.prepareDOM = function() {
-		realPrepareDOM();
-		removeDoubleClick();
-	};
-
-	removeDoubleClick();
 });
 
 function addPopcornButton(tid) {
