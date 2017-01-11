@@ -134,7 +134,7 @@ function addClubDedQuoteButton() {
 		if (diff >= necroThreshold) {
 			var ago = $.timeago.settings.strings.suffixAgo;
 			$.timeago.settings.strings.suffixAgo = ' later';
-			$('<aside>').addClass('necro-post').text($.timeago.inWords(-diff)).append($('<hr>')).prependTo(post);
+			$('<aside>').addClass('necro-post').text($.timeago.inWords(diff)).append($('<hr>')).prependTo(post);
 			$.timeago.settings.strings.suffixAgo = ago;
 		}
 	});
