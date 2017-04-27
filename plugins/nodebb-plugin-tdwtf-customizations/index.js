@@ -347,6 +347,48 @@ module.exports = {
 			callback(null, data);
 		});
 	},
+	"addNotificationCategory": function(data, callback) {
+		var pids = [];
+		var tids = [];
+		data.notifications.forEach(function(n) {
+			if (n.cid) {
+				return;
+			}
+			if (n.tid) {
+				tids.push(n.tid);
+				return;
+			}
+			if (n.pid) {
+				pids.push(n.pid);
+				return;
+			}
+		});
+
+		async.parallel({
+			pcid: async.apply(Posts.getCidsByPids, pids),
+			tcid: async.apply(Topics.getTopicsFields, tids, ['cid'])
+		}, function(err, mapping) {
+			if (err) {
+				return callback(err);
+			}
+
+			data.notifications.forEach(function(n) {
+				if (n.cid) {
+					n.bodyShort += '<i class="notification-cid" data-ncid="' + n.cid + '"></i>';
+					return;
+				}
+				if (n.tid) {
+					n.bodyShort += '<i class="notification-cid" data-ncid="' + (mapping.tcid[tids.indexOf(n.tid)] || {}).cid + '"></i>';
+					return;
+				}
+				if (n.pid) {
+					n.bodyShort += '<i class="notification-cid" data-ncid="' + mapping.pcid[pids.indexOf(n.pid)] + '"></i>';
+					return;
+				}
+			});
+			callback(null, data);
+		});
+	},
 	"postEdit": function(data, callback) {
 		if (data.uid === 140870 || data.uid === 140914 || data.uid === 140925 || data.uid === 141278) {
 			return Posts.getPostField(data.post.pid, 'content', function(err, content) {

@@ -1204,20 +1204,29 @@ html[data-current-month="10"][data-current-day-of-month="31"] #panel:before {
 	pointer-events: none;
 }
 
-@font-face {
+/*@font-face {
 	font-family: sponge;
 	src: url('/uploads/default/original/3X/8/e/8e076a5d6aa6f28e8a485f969fb06e63082f7a5e.ttf');
+}*/
+
+@keyframes voteflip {
+	0% {
+		transform: rotate(0deg);
+	}
+	50% {
+		transform: rotate(180deg);
+	}
 }
 
-html[data-current-month="4"][data-current-day-of-month="1"] {
-	.categories>li, .category>ul>li, .topic .posts>li {
+html[data-current-month="4"][data-current-day-of-month="1"]:not([data-user-id="650"]) {
+	/*.categories>li, .category>ul>li, .topic .posts>li {
 		transform: rotate(-1deg);
-	}
+	}*/
 	.votes {
-		transform: rotate(180deg);
+		animation: voteflip 10s step-start;
 		display: inline-block;
 	}
-	.necro-post {
+	/*.necro-post {
 		display: block;
 		font-family: sponge;
 		font-size: 72px;
@@ -1225,6 +1234,95 @@ html[data-current-month="4"][data-current-day-of-month="1"] {
 		color: #fff;
 		text-align: center;
 		padding-top: 20px;
+	}*/
+
+	.forum-logo {
+		display: none;
+	}
+
+	.navbar-header > a:first-of-type:before {
+		content: '';
+		width: 30px;
+		height: 30px;
+		display: inline-block;
+		background-size: cover;
+		margin: 10px;
+		vertical-align: middle;
+		float: left;
+	}
+
+	.forum-title {
+		font-size: 0;
+
+		&:after {
+			font-size: 18px;
+		}
+	}
+
+	&[data-user-id$="0"], &[data-user-id$="2"], &[data-user-id$="4"], &[data-user-id$="8"] {
+		.navbar-header > a:first-of-type:before {
+			background-image: url(/assets/uploads/files/1493275812870-upload-426bf569-8a43-459b-b15d-01b019b7ae9a.png);
+		}
+		.forum-title:after {
+			content: 'Untitled Discourse community';
+			&:hover {
+				content: '500 OK';
+			}
+		}
+	}
+	&[data-user-id$="1"], &[data-user-id$="3"], &[data-user-id$="5"] {
+		.navbar-header > a:first-of-type:before {
+			background-image: url(/assets/uploads/default/7309/c5b85beab7048e9c.png);
+		}
+		.forum-title:after {
+			content: 'Sherikádol Ungèg';
+			&:hover {
+				content: 'The Perplexing Complexity of Failure';
+			}
+		}
+	}
+	&[data-user-id$="6"], &[data-user-id$="7"], &[data-user-id$="9"] {
+		.navbar-header > a:first-of-type:before {
+			background-image: url(/assets/uploads/files/1460387543903-morbiuswilters.jpg);
+		}
+		.forum-title:after {
+			content: '@morbiuswilters should be';
+			&:hover {
+				content: 'a @moderator again';
+			}
+		}
+	}
+
+	.pagination-text:before {
+		content: 'page ';
+	}
+
+
+	a[data-username]:not(:hover), [component="header/username"]:not(:hover), .plugin-mentions-a:not(:hover), [component="topic/header"] > .hidden-xs > a:not(:hover) {
+		font-size: 0.000000001em;
+
+		&:after {
+			content: 'boomzilla';
+			font-size: 1000000000em;
+		}
+	}
+
+	.plugin-mentions-a:not(:hover):after {
+		content: '@boomzilla';
+		font-size: 900000000em;
+	}
+
+	.topic [component="post/parent"]:not(:hover) {
+		font-size: 0;
+
+		& > i {
+			font-size: 10px;
+		}
+
+		&:after {
+			font-size: 10px;
+			content: ' @boomzilla';
+		}
 	}
 }
 
@@ -1237,6 +1335,10 @@ body.skin-cyborg, body.skin-darkly, body.skin-slate, body.skin-superhero {
 	.emoji[data-set-id="tdwtf"][data-emoji-id^="fa_"] {
 		background-color: #dfdfdf;
 		border-radius: 10px;
+	}
+
+	#menu .notification-list li.unread, .header .notification-list li.unread {
+		background-color: #847820;
 	}
 }
 

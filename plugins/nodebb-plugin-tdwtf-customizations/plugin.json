@@ -8,6 +8,7 @@
 		{"hook": "filter:meta.getMetaTags", "method": "meta"},
 		{"hook": "filter:middleware.renderHeader", "method": "header"},
 		{"hook": "filter:notification.push", "method": "notificationPush"},
+		{"hook": "filter:notifications.merge", "method": "addNotificationCategory"},
 		{"hook": "filter:post.edit", "method": "postEdit"},
 		{"hook": "filter:post.purge", "method": "postPurge"},
 		{"hook": "filter:register.check", "method": "registerCheck"},
@@ -21,7 +22,8 @@
 	"scripts": [
 		"./custom.js",
 		"./details-shim.js",
-		"./post-tools.js"
+		"./post-tools.js",
+		"./steganography.js"
 	],
 	"templates": "templates"
 }

@@ -120,7 +120,7 @@ function addClubDedQuoteButton() {
 		addPopcornButton(20856);
 	}
 
-	var necroThreshold = (new Date().getMonth() + 1 === 4 && new Date().getDate() === 1 ? 5 : 7 * 24 * 60 * 60) * 1000;
+	var necroThreshold = 7 * 24 * 60 * 60 * 1000;
 	$('[component="post"]').each(function() {
 		var post = $(this);
 		if (post.is(':has(.necro-post)')) {
