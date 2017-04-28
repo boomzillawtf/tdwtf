@@ -22,6 +22,7 @@ RUN sed -e "s/Meta\\.config\\['cache-buster'\\] = utils\\.generateUUID();/Meta.c
 COPY plugins /usr/src/app/plugins
 RUN npm install ./plugins/*/ `cat ./plugins/other.txt`
 
+RUN sed -e "s/https:\/\/raw\.githubusercontent\.com\/Ranks\/emojione\/master/https:\/\/raw.githubusercontent.com\/Ranks\/emojione\/2.2.7/" -i /usr/src/app/node_modules/nodebb-plugin-emoji-one/lib/set/update/index.js
 COPY emoji/emojione/assets/svg /usr/src/app/node_modules/nodebb-plugin-emoji-one/public/static/images
 COPY emoji/emojione/LICENSE.md /usr/src/app/node_modules/nodebb-plugin-emoji-one/public/static/images/
 RUN node -e 'require("nodebb-plugin-emoji-one/lib/set/update/index").build("/usr/src/app/node_modules/nodebb-plugin-emoji-one/public/static/images")'
