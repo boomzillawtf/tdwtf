@@ -380,13 +380,13 @@ body {
 	background-size: cover;
 	background-attachment: fixed;
 }
-[data-category-id="33"] body, [data-category-id="34"] body, [data-category-id="35"] body, [data-category-id="38"] body, [data-category-id="40"] body, [data-category-id="41"] body, [data-category-id="46"] body { /* mafia factions */
+[data-category-id="33"] body, [data-category-id="34"] body, [data-category-id="35"] body, [data-category-id="38"] body, [data-category-id="40"] body, [data-category-id="46"] body { /* mafia factions */
 	box-shadow: 0 0 25vw #a16946 inset;
 }
 [data-category-id="31"] body, [data-category-id="45"] body { /* mafia current game */
 	box-shadow: 0 0 5vw #ab4642 inset;
 }
-[data-category-id="32"] body, [data-category-id="47"] body { /* mafia club ded */
+[data-category-id="32"] body, [data-category-id="47"] body, [data-category-id="41"] body { /* mafia club ded */
 	box-shadow: 0 0 5vw #000 inset;
 }
 
@@ -399,7 +399,7 @@ body {
 }
 
 /* hide post buttons in active mafia games */
-[data-category-id="31"], [data-category-id="33"], [data-category-id="34"], [data-category-id="35"], [data-category-id="38"], [data-category-id="40"], [data-category-id="41"] {
+[data-category-id="31"], [data-category-id="33"], [data-category-id="34"], [data-category-id="35"], [data-category-id="38"], [data-category-id="40"] {
 	.votes, .topic .moderator-tools a {
 		display: none !important;
 	}
@@ -622,16 +622,20 @@ body {
 	}
 }
 
-/* Mafia XIX - Wine In Front Of Mafia */
+/* Mafia XIX - Secret Hitler Mk. II */
+[data-tid="22884"], [data-tid="22886"], [data-tid="22887"] {
+	& > [data-uid="645"] {
+		background-color: rgba(255, 255, 0, 0.25);
+
+		.table-striped > tbody > tr:nth-of-type(odd) {
+			background-color: rgba(128, 192, 255, 0.25);
+		}
+	}
+}
+
+/* Mafia XX - Wine In Front Of Mafia */
 /*[data-tid=""] {
 	& > [data-uid="140879"] {
-		background-color: rgba(255, 255, 0, 0.25);
-	}
-}*/
-
-/* Mafia XX - Reverse Mafia II */
-/*[data-tid=""] {
-	& > [data-uid="595"] {
 		background-color: rgba(255, 255, 0, 0.25);
 	}
 }*/
@@ -657,14 +661,7 @@ body {
 	}
 }*/
 
-/* Mafia XXIV - Blind Mafia */
-/*[data-tid=""] {
-	& > [data-uid="650"] {
-		background-color: rgba(255, 127, 255, 0.25);
-	}
-}*/
-
-/* Mafia XXV - Bushido IV: Bastard Harder */
+/* Mafia XXIV - Bushido IV: Bastard Harder */
 /*[data-tid=""] {
 	& > [data-uid="731"] {
 		background-color: rgba(192, 0, 255, 0.25);
