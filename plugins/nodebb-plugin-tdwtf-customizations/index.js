@@ -13,6 +13,7 @@ var Topics = module.parent.require('./topics');
 var User = module.parent.require('./user');
 var events = module.parent.require('./events');
 var privileges = module.parent.require('./privileges');
+var utils = module.parent.require('../public/src/utils');
 
 var realLoggerAdd = winston.Logger.prototype.add;
 winston.Logger.prototype.add = function() {
@@ -415,7 +416,7 @@ module.exports = {
 		var pids = data.posts.filter(function(post) {
 			return parseInt(post.replies, 10) !== 0;
 		}).map(function(post) {
-			post.replies = 0;
+			post.replies = {count: 0, users: [], hasMore: false, timestamp: 0};
 			return post.pid;
 		});
 
@@ -439,17 +440,20 @@ module.exports = {
 					});
 				});
 
-				Posts.getCidsByPids(replyPids, next);
+				async.parallel({
+					cids: async.apply(Posts.getCidsByPids, replyPids),
+					uids: async.apply(Posts.getPostsFields, replyPids, ['uid', 'timestamp'])
+				}, next);
 			},
-			function(replyCids, next) {
-				replyCids.forEach(function(cid, index) {
+			function(replyData, next) {
+				replyData.cids.forEach(function(cid, index) {
 					if (!cidReplyIndices[cid]) {
 						cidReplyIndices[cid] = [];
 					}
-					cidReplyIndices[cid].push(replyIndices[replyPids[index]]);
+					cidReplyIndices[cid].push({idx: replyIndices[replyPids[index]], uid: replyData.uids[index].uid, ts: replyData.uids[index].timestamp});
 				});
 
-				var filteredCids = replyCids.filter(function(cid, index, array) {
+				var filteredCids = replyData.cids.filter(function(cid, index, array) {
 					return array.indexOf(cid) === index;
 				});
 
@@ -457,11 +461,29 @@ module.exports = {
 			},
 			function(allowedCids, next) {
 				allowedCids.forEach(function(cid) {
-					cidReplyIndices[cid].forEach(function(index) {
-						data.posts[index].replies++;
+					cidReplyIndices[cid].forEach(function(reply) {
+						data.posts[reply.idx].replies.count++;
+						if (data.posts[reply.idx].replies.users.indexOf(reply.uid) === -1 && data.posts[reply.idx].replies.users.length < 6) {
+							data.posts[reply.idx].replies.users.push(reply.uid);
+						}
+						data.posts[reply.idx].replies.timestamp = Math.max(data.posts[reply.idx].replies.timestamp, reply.ts);
 					});
 				});
-				next(null, data);
+				async.forEach(data.posts, function(post, next) {
+					if (post.replies.users.length > 5) {
+						post.replies.users.pop();
+						post.replies.hasMore = true;
+					}
+					post.replies.timestampISO = utils.toISOString(post.replies.timestamp);
+					delete post.replies.timestamp;
+
+					User.getUsersWithFields(post.replies.users, ['uid', 'username', 'userslug', 'picture'], data.uid, function(err, users) {
+						post.replies.users = users;
+						next(err);
+					});
+				}, function(err) {
+					next(err, data);
+				});
 			}
 		], callback);
 	},

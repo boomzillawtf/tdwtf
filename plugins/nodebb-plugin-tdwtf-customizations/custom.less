@@ -31,7 +31,9 @@
 .topic .posts .icon .user-icon,
 .topic .posts .icon img,
 .users-container .users-box .user-icon,
-.users-container .users-box img {
+.users-container .users-box img,
+.topic .threaded-replies img,
+.topic .threaded-replies .user-icon {
 	border-radius: 0 !important;
 }
 
@@ -1351,4 +1353,9 @@ html summary { display: list-item; }
 /* nodebb-plugin-composer-default 4.3.0+ thinks the preview should have a font size about ten times what is in the actual posts */
 .composer.composer .preview, .composer.composer .write {
 	font-size: inherit;
+}
+
+/* RepliesLast */
+.topic .threaded-replies .replies-last {
+	margin-left: 1em;
 }
