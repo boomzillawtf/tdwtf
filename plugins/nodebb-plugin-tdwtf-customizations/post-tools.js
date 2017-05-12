@@ -114,7 +114,7 @@ function processPosts() {
 							clearInterval(i);
 							
 							// set the title of the new topic
-							t.value = "Re: " + window.ajaxify.data.title;
+							t.value = "Re: " + window.ajaxify.data.titleRaw;
 							
 							// grab the raw post out of the element that addRaw created
 							var r = e.querySelector('.raw-content'), h = r.classList.contains('hidden');
