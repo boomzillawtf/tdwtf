@@ -413,11 +413,16 @@ module.exports = {
 		callback(null, data);
 	},
 	"postReplyCount": function(data, callback) {
-		var pids = data.posts.filter(function(post) {
-			return parseInt(post.replies, 10) !== 0;
-		}).map(function(post) {
-			post.replies = {count: 0, users: [], hasMore: false, timestamp: 0};
+		var pids = data.posts.map(function(post) {
+			post.replies = {
+				count: 0,
+				users: [],
+				hasMore: false,
+				timestamp: 0
+			};
 			return post.pid;
+		}).filter(function(pid, index, array) {
+			return array.indexOf(pid) === index;
 		});
 
 		var replyPids;
@@ -450,7 +455,11 @@ module.exports = {
 					if (!cidReplyIndices[cid]) {
 						cidReplyIndices[cid] = [];
 					}
-					cidReplyIndices[cid].push({idx: replyIndices[replyPids[index]], uid: replyData.uids[index].uid, ts: replyData.uids[index].timestamp});
+					cidReplyIndices[cid].push({
+						idx: replyIndices[replyPids[index]],
+						uid: replyData.uids[index].uid,
+						ts: replyData.uids[index].timestamp
+					});
 				});
 
 				var filteredCids = replyData.cids.filter(function(cid, index, array) {

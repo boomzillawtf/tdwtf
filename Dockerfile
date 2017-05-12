@@ -41,7 +41,6 @@ RUN curl -sSL https://patch-diff.githubusercontent.com/raw/NodeBB/NodeBB/pull/51
 RUN cd node_modules/nodebb-theme-persona && sed -i templates/partials/topic/post-menu-list.tpl -e 's/\r//' && curl -sSL https://patch-diff.githubusercontent.com/raw/NodeBB/nodebb-theme-persona/pull/333.diff | patch -p1
 RUN cd node_modules/nodebb-plugin-iframely && curl -sSL https://patch-diff.githubusercontent.com/raw/NodeBB/nodebb-plugin-iframely/pull/27.diff | patch -p1
 RUN cd node_modules/nodebb-plugin-composer-default && sed -i static/lib/composer/resize.js -e 's/\r//' && curl -sSL https://patch-diff.githubusercontent.com/raw/NodeBB/nodebb-plugin-composer-default/pull/80.diff | patch -p1
-RUN curl -sSL https://patch-diff.githubusercontent.com/raw/NodeBB/NodeBB/pull/5669.diff | patch -p1
 
 # the default port for NodeBB is exposed outside the container
 EXPOSE 4567
