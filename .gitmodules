@@ -68,3 +68,6 @@
 [submodule "plugins/nodebb-plugin-image-size"]
 	path = plugins/nodebb-plugin-image-size
 	url = https://github.com/BenLubar/nodebb-plugin-image-size
+[submodule "plugins/nodebb-plugin-tdwtf-articles"]
+	path = plugins/nodebb-plugin-tdwtf-articles
+	url = https://github.com/NedFodder/nodebb-plugin-tdwtf-articles
