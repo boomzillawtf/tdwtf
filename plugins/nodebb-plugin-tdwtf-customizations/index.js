@@ -483,6 +483,7 @@ module.exports = {
 						post.replies.users.pop();
 						post.replies.hasMore = true;
 					}
+					post.replies.text = post.replies.count > 1 ? '[[topic:replies_to_this_post, ' + post.replies.count + ']]' : '[[topic:one_reply_to_this_post]]';
 					post.replies.timestampISO = utils.toISOString(post.replies.timestamp);
 					delete post.replies.timestamp;
 

@@ -1095,22 +1095,6 @@ a[itemprop="url"][href] {
 	}
 }
 
-.chat-modal, .chat-modal .modal-dialog {
-	width: initial;
-	height: initial;
-}
-
-.chat-modal .modal-dialog .modal-content {
-	@media (min-width: 768px) {
-		width: 600px;
-	}
-
-	@media (max-width: 991px) {
-		width: 100%;
-		height: 100%;
-	}
-}
-
 /* Force border-box in Firefox 1-28. You're welcome, @Lorne-Kates. */
 * {
 	-moz-box-sizing: border-box;
@@ -1361,7 +1345,11 @@ html summary { display: list-item; }
 }
 
 /* shenanigans */
-div.post-header a[href='/groups/sockdevs'] small {
-	background: linear-gradient(90deg,red,orange,yellow,green,blue,indigo,violet) !important;
-	text-shadow: 0px 0px 3px black !important;
+div.post-header a[href="/groups/sockdevs"] small {
+	background-image: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+	text-shadow: 0px 0px 3px #000;
+}
+
+[data-property="customCSS"] + .help-block:after {
+	content: " This field can be read by moderators, so don't put any Mafia stuff in here.";
 }
