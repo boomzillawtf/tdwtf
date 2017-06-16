@@ -388,8 +388,11 @@ body {
 [data-category-id="31"] body, [data-category-id="45"] body { /* mafia current game */
 	box-shadow: 0 0 5vw #ab4642 inset;
 }
-[data-category-id="32"] body, [data-category-id="47"] body, [data-category-id="41"] body { /* mafia club ded */
+[data-category-id="32"] body, [data-category-id="47"] body { /* mafia club ded */
 	box-shadow: 0 0 5vw #000 inset;
+}
+[data-category-id="41"] body { /* external mafia club ded */
+	box-shadow: 0 0 5vw #0c2042 inset;
 }
 
 /* fix mobile */
@@ -1352,4 +1355,20 @@ div.post-header a[href="/groups/sockdevs"] small {
 
 [data-property="customCSS"] + .help-block:after {
 	content: " This field can be read by moderators, so don't put any Mafia stuff in here.";
+}
+
+.iframely-container > div > div[style="left: 0px; width: 100%; height: 0px; position: relative; padding-bottom: 100%;"] {
+	left: initial !important;
+	width: initial !important;
+	height: initial !important;
+	position: initial !important;
+	padding-bottom: initial !important;
+
+	& > video[style="top: 0px; left: 0px; width: 100%; height: 100%; position: absolute;"] {
+		top: initial !important;
+		left: initial !important;
+		width: initial !important;
+		height: initial !important;
+		position: initial !important;
+	}	
 }

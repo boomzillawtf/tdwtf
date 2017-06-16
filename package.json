@@ -1,6 +1,5 @@
 {
   "devDependencies": {
-    "ghooks": "^1.2.3",
     "gulp": "^3.9.1",
     "gulp-jshint": "^2.0.1",
     "gulp-jsonlint": "^1.1.2",
@@ -22,13 +21,5 @@
   "scripts": {
     "lint": "gulp lint",
     "test": "gulp test"
-  },
-  "config": {
-    "ghooks": {
-      "pre-commit": "npm run lint",
-      "pre-push": "xvfb-run npm test",
-      "post-merge": "npm install",
-      "post-rewrite": "npm install"
-    }
   }
 }

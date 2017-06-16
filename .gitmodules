@@ -62,9 +62,6 @@
 [submodule "plugins/nodebb-plugin-youtube-embed"]
 	path = plugins/nodebb-plugin-youtube-embed
 	url = https://github.com/boomzillawtf/nodebb-plugin-youtube-embed.git
-[submodule "plugins/nodebb-plugin-google-search"]
-	path = plugins/nodebb-plugin-google-search
-	url = https://github.com/BenLubar/nodebb-plugin-google-search
 [submodule "plugins/nodebb-plugin-image-size"]
 	path = plugins/nodebb-plugin-image-size
 	url = https://github.com/BenLubar/nodebb-plugin-image-size
