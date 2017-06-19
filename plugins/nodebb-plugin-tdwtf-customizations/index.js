@@ -25,16 +25,6 @@ winston.Logger.prototype.add = function() {
 };
 winston.add();
 
-var realDismissFlag = Posts.dismissFlag;
-var dismissedFlags = {};
-Posts.dismissFlag = function(pid, next) {
-	if (pid in dismissedFlags) {
-		delete dismissedFlags[pid];
-		return next(null);
-	}
-	next(new Error("[[not-allowed]]"));
-};
-
 var uploadsController = module.parent.require('./controllers/uploads');
 var realUpload = uploadsController.upload;
 uploadsController.upload = function(req, res, filesIterator) {
@@ -496,12 +486,6 @@ module.exports = {
 				});
 			}
 		], callback);
-	},
-	"postPurge": function(data, callback) {
-		dismissedFlags[data.pid] = true;
-		realDismissFlag(data.pid, function(err) {
-			callback(err, data);
-		});
 	},
 	"registerCheck": function(data, callback) {
 		if (data.queue) {
