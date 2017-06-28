@@ -145,6 +145,7 @@ $(window).on('action:posts.loaded', addClubDedQuoteButton);
 // fix title thingy
 $(window).on('action:ajaxify.end', function() {
 	$('[component="navbar/title"] span:hidden').addClass('hidden').removeAttr('style');
+	var $span = $('[component="navbar/title"] span');
 	var $fa = $('[component="navbar/title"] a.fa');
 	if (ajaxify.data.category) {
 		if ($fa.length === 0) {
@@ -164,6 +165,8 @@ $(window).on('action:ajaxify.end', function() {
 			});
 		} else {
 			$fa.css('background-image', 'none');
+			$span.text('');
+			$span.hide();
 		}
 	} else {
 		$fa.remove();
