@@ -1,0 +1,21 @@
+diff --git a/library.js b/library.js
+index a4183a3..9c2ff64 100644
+--- a/library.js
++++ b/library.js
+@@ -78,7 +78,15 @@ YoutubeLite.fetchSnippet = function( videoId, callback ){
+                 if( err ){
+                     return callback(err);
+                 }
+-                videos = JSON.parse(videos);
++                try {
++                    var parsed = JSON.parse(videos);
++                    videos = parsed;
++                } catch (ex) {
++                    winston.error('[youtube-lite] error parsing response for video id: [' + videoId + ']: ' + JSON.stringify(videos));
++                    winston.error(ex);
++                    cache.set(videoId, null);
++                    return callback(null, null);
++                }
+                 if( !videos.items || videos.items.length == 0 ){
+                     cache.set( videoId, null );
+                     return callback(null, null);
