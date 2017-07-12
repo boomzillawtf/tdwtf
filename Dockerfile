@@ -40,6 +40,7 @@ RUN curl -sSL https://patch-diff.githubusercontent.com/raw/NodeBB/NodeBB/pull/51
 RUN cd node_modules/nodebb-theme-persona && sed -i templates/partials/topic/post-menu-list.tpl -e 's/\r//' && curl -sSL https://patch-diff.githubusercontent.com/raw/NodeBB/nodebb-theme-persona/pull/333.diff | patch -p1
 RUN cd node_modules/nodebb-plugin-iframely && curl -sSL https://patch-diff.githubusercontent.com/raw/NodeBB/nodebb-plugin-iframely/pull/27.diff | patch -p1
 RUN cd node_modules/nodebb-plugin-iframely && curl -sSL https://patch-diff.githubusercontent.com/raw/NodeBB/nodebb-plugin-iframely/pull/30.diff | patch -p1
+RUN cd node_modules/nodebb-plugin-tdwtf-buttons && curl -sSL https://patch-diff.githubusercontent.com/raw/NedFodder/nodebb-plugin-tdwtf-buttons/pull/2.diff | patch -p1
 
 COPY youtube-embed-debug.diff /usr/src/app/node_modules/nodebb-plugin-youtube-embed/youtube-embed-debug.diff
 RUN cd node_modules/nodebb-plugin-youtube-embed && cat youtube-embed-debug.diff | patch -p1
