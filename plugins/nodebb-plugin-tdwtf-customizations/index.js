@@ -290,7 +290,7 @@ module.exports = {
 		callback();
 	},
 	"meta": function(tags, callback) {
-		tags = tags.concat([{
+		tags.defaultTags = tags.defaultTags.concat([{
 			name: 'google-site-verification',
 			content: 'CHVbCxly52Dog4tN9fsbqoQkNTASojg2LzYSeJzqRgw'
 		}]);
