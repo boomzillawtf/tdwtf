@@ -289,13 +289,13 @@ module.exports = {
 
 		callback();
 	},
-	"meta": function(tags, callback) {
-		tags.defaultTags = tags.defaultTags.concat([{
+	"meta": function(data, callback) {
+		data.tags.push({
 			name: 'google-site-verification',
 			content: 'CHVbCxly52Dog4tN9fsbqoQkNTASojg2LzYSeJzqRgw'
-		}]);
+		});
 
-		callback(null, tags);
+		callback(null, data);
 	},
 	"adminHeader": function(header, callback) {
 		header.plugins.push({
@@ -379,28 +379,6 @@ module.exports = {
 			});
 			callback(null, data);
 		});
-	},
-	"postEdit": function(data, callback) {
-		if (data.uid === 140870 || data.uid === 140914 || data.uid === 140925 || data.uid === 141278) {
-			return Posts.getPostField(data.post.pid, 'content', function(err, content) {
-				if (err) {
-					return callback(err, data);
-				}
-
-				events.log({
-					type: 'fbmac',
-					uid: data.uid,
-					ip: data.req.ip,
-					pid: data.post.pid,
-					oldContent: content,
-					newContent: data.post.content
-				});
-
-				callback(null, data);
-			});
-		}
-
-		callback(null, data);
 	},
 	"postReplyCount": function(data, callback) {
 		var pids = data.posts.map(function(post) {

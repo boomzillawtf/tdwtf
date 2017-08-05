@@ -53,9 +53,6 @@
 	path = plugins/nodebb-plugin-import-tdwtf
 	url = https://github.com/BenLubar/nodebb-plugin-import-discourse.git
 	branch = tdwtf
-[submodule "emoji/emojione"]
-	path = emoji/emojione
-	url = https://github.com/Ranks/emojione.git
 [submodule "emoji/fontawesome"]
 	path = emoji/fontawesome
 	url = https://github.com/encharm/Font-Awesome-SVG-PNG
@@ -74,3 +71,6 @@
 [submodule "emoji/emojione-assets"]
 	path = emoji/emojione-assets
 	url = https://github.com/emojione/emojione-assets
+[submodule "plugins/nodebb-plugin-post-revisions"]
+	path = plugins/nodebb-plugin-post-revisions
+	url = ../../BenLubar/nodebb-plugin-post-revisions.git

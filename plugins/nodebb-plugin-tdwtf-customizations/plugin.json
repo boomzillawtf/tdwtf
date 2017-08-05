@@ -9,7 +9,6 @@
 		{"hook": "filter:middleware.renderHeader", "method": "header"},
 		{"hook": "filter:notification.push", "method": "notificationPush"},
 		{"hook": "filter:notifications.merge", "method": "addNotificationCategory"},
-		{"hook": "filter:post.edit", "method": "postEdit"},
 		{"hook": "filter:register.check", "method": "registerCheck"},
 		{"hook": "filter:topics.addPostData", "method": "postReplyCount"},
 		{"hook": "action:markdown.updateParserRules", "method": "disableFuzzy"}
