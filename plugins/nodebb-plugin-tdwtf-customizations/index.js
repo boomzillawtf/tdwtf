@@ -11,7 +11,6 @@ var Posts = module.parent.require('./posts');
 var SocketPlugins = module.parent.require('./socket.io/plugins');
 var Topics = module.parent.require('./topics');
 var User = module.parent.require('./user');
-var events = module.parent.require('./events');
 var privileges = module.parent.require('./privileges');
 var utils = module.parent.require('../public/src/utils');
 
