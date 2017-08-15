@@ -293,6 +293,10 @@ module.exports = {
 			name: 'google-site-verification',
 			content: 'CHVbCxly52Dog4tN9fsbqoQkNTASojg2LzYSeJzqRgw'
 		});
+		data.tags.push({
+			name: 'msvalidate.01',
+			content: '8B5F1BB25DCAA2F72ED1C203180B0774'
+		});
 
 		callback(null, data);
 	},
