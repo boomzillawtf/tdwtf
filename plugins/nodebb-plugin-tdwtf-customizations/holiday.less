@@ -1,0 +1,152 @@
+// lesshint depthLevel: false
+/* holidays! */
+
+html[data-current-month="10"][data-current-day-of-month="31"] #panel:before {
+	display: block;
+	content: " ";
+	background-image: url("/assets/uploads/default/8337/260c79c86c26d749.png");
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: top right;
+	opacity: 0.1;
+	position: fixed;
+	top: 50px;
+	right: 0;
+	width: 50vw;
+	height: 60vh;
+	pointer-events: none;
+}
+
+/*@font-face {
+	font-family: sponge;
+	src: url("/assets/uploads/files/1503689288950-sponge.ttf");
+}*/
+
+@keyframes voteflip {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	50% {
+		transform: rotate(180deg);
+	}
+}
+
+html[data-current-month="4"][data-current-day-of-month="1"]:not([data-user-id="650"]) {
+	/*.categories>li, .category>ul>li, .topic .posts>li {
+		transform: rotate(-1deg);
+	}*/
+	.votes {
+		animation: voteflip 10s step-start;
+		display: inline-block;
+	}
+	/*.necro-post {
+		display: block;
+		font-family: sponge;
+		font-size: 72px;
+		background-image: url("/assets/uploads/files/1503689246464-sponge.png");
+		color: #fff;
+		text-align: center;
+		padding-top: 20px;
+	}*/
+
+	.forum-logo {
+		display: none;
+	}
+
+	.navbar-header > a:first-of-type:before {
+		content: "";
+		width: 30px;
+		height: 30px;
+		display: inline-block;
+		background-size: cover;
+		margin: 10px;
+		vertical-align: middle;
+		float: left;
+	}
+
+	.forum-title {
+		font-size: 0;
+
+		&:after {
+			font-size: 18px;
+		}
+	}
+
+	&[data-user-id$="0"], &[data-user-id$="2"], &[data-user-id$="4"], &[data-user-id$="8"] {
+		.navbar-header > a:first-of-type:before {
+			background-image: url("/assets/uploads/files/1503689201803-dischorse.png");
+		}
+
+		.forum-title:after {
+			content: "Untitled Discourse community";
+
+			&:hover {
+				content: "500 OK";
+			}
+		}
+	}
+
+	&[data-user-id$="1"], &[data-user-id$="3"], &[data-user-id$="5"] {
+		.navbar-header > a:first-of-type:before {
+			background-image: url("/assets/uploads/default/7309/c5b85beab7048e9c.png");
+		}
+
+		.forum-title:after {
+			content: "Sherikádol Ungèg";
+
+			&:hover {
+				content: "The Perplexing Complexity of Failure";
+			}
+		}
+	}
+
+	&[data-user-id$="6"], &[data-user-id$="7"], &[data-user-id$="9"] {
+		.navbar-header > a:first-of-type:before {
+			background-image: url("/assets/uploads/files/1460387543903-morbiuswilters.jpg");
+		}
+
+		.forum-title:after {
+			content: "@morbiuswilters should be";
+
+			&:hover {
+				content: "a @moderator again";
+			}
+		}
+	}
+
+	.pagination-text:before {
+		content: "page ";
+	}
+
+
+	a[data-username]:not(:hover),
+	[component="header/username"]:not(:hover),
+	.plugin-mentions-a:not(:hover),
+	[component="topic/header"] > .hidden-xs > a:not(:hover) {
+		font-size: 0.000000001em;
+
+		&:after {
+			content: "boomzilla";
+			font-size: 1000000000em;
+		}
+	}
+
+	.plugin-mentions-a:not(:hover):after {
+		content: "@boomzilla";
+		font-size: 900000000em;
+	}
+
+	.topic [component="post/parent"]:not(:hover) {
+		font-size: 0;
+
+		& > i {
+			font-size: 10px;
+		}
+
+		&:after {
+			font-size: 10px;
+			content: " @boomzilla";
+		}
+	}
+}

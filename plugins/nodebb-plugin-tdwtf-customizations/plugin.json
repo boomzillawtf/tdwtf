@@ -14,14 +14,20 @@
 		{"hook": "action:markdown.updateParserRules", "method": "disableFuzzy"}
 	],
 	"less": [
+		"./categories.less",
 		"./custom.less",
-		"./details-shim.less"
+		"./details-shim.less",
+		"./flexnav.less",
+		"./holiday.less",
+		"./iframely.less"
 	],
 	"scripts": [
-		"./custom.js",
 		"./details-shim.js",
+		"./necro.js",
+		"./popcorn.js",
 		"./post-tools.js",
-		"./steganography.js"
+		"./steganography.js",
+		"./style.js"
 	],
 	"templates": "templates"
 }

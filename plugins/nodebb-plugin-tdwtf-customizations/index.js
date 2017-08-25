@@ -292,6 +292,9 @@ module.exports = {
 		data.tags.push({
 			name: 'google-site-verification',
 			content: 'CHVbCxly52Dog4tN9fsbqoQkNTASojg2LzYSeJzqRgw'
+		}, {
+			name: 'msvalidate.01',
+			content: '8B5F1BB25DCAA2F72ED1C203180B0774'
 		});
 
 		callback(null, data);
@@ -306,9 +309,11 @@ module.exports = {
 	},
 	"header": function(data, callback) {
 		async.parallel({
-			groups: async.apply(Groups.isMemberOfGroups, data.templateValues.user.uid, ['Mafia - Players', 'Mafia - Club Ded', 'Self-Serve Mafia - Players', 'Self-Serve Mafia - Club Ded']),
+			groups: async.apply(Groups.isMemberOfGroups, data.templateValues.user.uid, ['Mafia - Players', 'Mafia - Club Ded', 'Self-Serve Mafia - Players', 'Self-Serve Mafia - Club Ded', 'Impossible Mission - A', 'Impossible Mission - B']),
 			clubDed: async.apply(Categories.getTopicIds, 32, 'cid:32:tids', false, 0, 0),
 			clubDedSS: async.apply(Categories.getTopicIds, 47, 'cid:47:tids', false, 0, 0)
+			//clubDed: async.apply(Categories.getTopicIds, {cid: 32, start: 0, stop: 0}),
+			//clubDedSS: async.apply(Categories.getTopicIds, {cid: 47, start: 0, stop: 0})
 		}, function(err, results) {
 			if (err) {
 				return callback(err, data);
@@ -318,6 +323,8 @@ module.exports = {
 			data.templateValues.user.isMafiaClubDed = results.groups[1] && results.clubDed[0];
 			data.templateValues.user.isMafiaPlayerSS = results.groups[2];
 			data.templateValues.user.isMafiaClubDedSS = results.groups[3] && results.clubDedSS[0];
+			data.templateValues.user.isImpossibleMissionA = results.groups[4];
+			data.templateValues.user.isImpossibleMissionB = results.groups[5];
 			data.templateValues.userJSON = JSON.stringify(data.templateValues.user);
 			callback(null, data);
 		});

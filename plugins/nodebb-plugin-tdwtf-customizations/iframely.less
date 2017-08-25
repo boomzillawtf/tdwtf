@@ -1,0 +1,72 @@
+// lesshint maxCharPerLine: false, importantRule: false, depthLevel: false
+
+.topic .posts .content, .composer .preview, [component="chat/message/body"] {
+	.iframely-link {
+		margin-bottom: 11px;
+	}
+
+	.iframely-link:last-child {
+		margin-bottom: 0;
+	}
+
+	.iframely-link .thumb, .iframely-link .iframely-container img.thumb {
+		max-width: 21px !important;
+		height: auto;
+		float: none !important;
+	}
+
+	.iframely-link .iframely-container {
+		h4 {
+			margin-top: 0;
+		}
+
+		.media .media {
+			display: inline-block;
+			max-width: 200px;
+			margin-top: 0;
+			vertical-align: top;
+		}
+
+		.panel-iframely .iframely-embed .one-line {
+			/* wrap iframely titles instead of cutting off with an elipse */
+			white-space: normal !important;
+		}
+
+		p.description {
+			/* wrap iframely on small screen https://what.thedailywtf.com/post/868774 */
+			display: inline-block;
+			max-width: 350px;
+			width: auto;
+		}
+
+		/* https://what.thedailywtf.com/post/919173 */
+		max-height: 800px;
+		overflow-y: auto;
+
+		img, iframe {
+			max-height: none !important;
+		}
+
+		/* https://what.thedailywtf.com/post/1049125 */
+		img {
+			max-width: calc(~"100% - 4px") !important;
+		}
+	}
+
+}
+
+/*.iframely-container > div > div[style="left: 0px; width: 100%; height: 0px; position: relative; padding-bottom: 100%;"] {
+	left: initial !important;
+	width: initial !important;
+	height: initial !important;
+	position: initial !important;
+	padding-bottom: initial !important;
+
+	& > video[style="top: 0px; left: 0px; width: 100%; height: 100%; position: absolute;"] {
+		top: initial !important;
+		left: initial !important;
+		width: initial !important;
+		height: initial !important;
+		position: initial !important;
+	}
+}*/
