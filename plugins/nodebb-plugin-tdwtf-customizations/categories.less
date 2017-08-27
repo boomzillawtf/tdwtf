@@ -167,7 +167,7 @@ body {
 		background-color: rgba(255, 127, 255, 0.25);
 	}
 
-	.page-topic & {
+	.page-topic &:not([data-nid]) {
 		a[href="https://what.thedailywtf.com/uid/289"]:after, a[href="/user/raceprouk"]:after {
 			content: " \"Maria\"";
 			font-weight: bold;
@@ -235,7 +235,7 @@ body {
 		background-color: rgba(255, 127, 255, 0.25);
 	}
 
-	.page-topic & {
+	.page-topic &:not([data-nid]) {
 		/* goddamnit why did nobody tell me there was going to be a rule 5 */
 		a[href="https://what.thedailywtf.com/uid/1"]:before, a[href="/user/ben_lubar"]:before {
 			content: "Ben \"";
@@ -413,7 +413,7 @@ body {
 	}
 
 	/* players */
-	.page-topic & {
+	.page-topic &:not([data-nid]) {
 		a[href="https://what.thedailywtf.com/uid/650"], a[href="/user/accalia"] {
 			&:before {
 				content: "Solras \"";
