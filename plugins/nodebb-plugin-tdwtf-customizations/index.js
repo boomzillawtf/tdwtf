@@ -8,10 +8,12 @@ var db = module.parent.require('./database');
 var Categories = module.parent.require('./categories');
 var Groups = module.parent.require('./groups');
 var Posts = module.parent.require('./posts');
+var SocketPosts = module.parent.require('./socket.io/posts');
 var SocketPlugins = module.parent.require('./socket.io/plugins');
 var Topics = module.parent.require('./topics');
 var User = module.parent.require('./user');
 var privileges = module.parent.require('./privileges');
+var meta = module.parent.require('./meta');
 var utils = module.parent.require('../public/src/utils');
 
 var realLoggerAdd = winston.Logger.prototype.add;
@@ -34,6 +36,61 @@ uploadsController.upload = function(req, res, filesIterator) {
 	}
 
 	realUpload(req, res, filesIterator);
+};
+
+// Modifications documented inline:
+SocketPosts.getVoters = function (socket, data, callback) {
+	if (!data || !data.pid || !data.cid) {
+		return callback(new Error('[[error:invalid-data]]'));
+	}
+
+	async.waterfall([
+		function (next) {
+			// Removed:
+			//if (parseInt(meta.config.votesArePublic, 10) !== 0) {
+			//	return next(null, true);
+			//}
+			privileges.categories.isAdminOrMod(data.cid, socket.uid, next);
+		},
+		function (isAdminOrMod, next) {
+			// Removed:
+			//if (!isAdminOrMod) {
+			//	return next(new Error('[[error:no-privileges]]'));
+			//}
+
+			async.parallel({
+				upvoteUids: function (next) {
+					db.getSetMembers('pid:' + data.pid + ':upvote', next);
+				},
+				downvoteUids: function (next) {
+					// Added:
+					if (!isAdminOrMod && parseInt(meta.config.votesArePublic, 10) !== 1) {
+						return db.setCount('pid:' + data.pid + ':downvote', function (err, count) {
+							next(err, Array(count).fill(14));
+						});
+					}
+					// End Added
+					db.getSetMembers('pid:' + data.pid + ':downvote', next);
+				},
+			}, next);
+		},
+		function (results, next) {
+			async.parallel({
+				upvoters: function (next) {
+					User.getUsersFields(results.upvoteUids, ['username', 'userslug', 'picture'], next);
+				},
+				upvoteCount: function (next) {
+					next(null, results.upvoteUids.length);
+				},
+				downvoters: function (next) {
+					User.getUsersFields(results.downvoteUids, ['username', 'userslug', 'picture'], next);
+				},
+				downvoteCount: function (next) {
+					next(null, results.downvoteUids.length);
+				},
+			}, next);
+		},
+	], callback);
 };
 
 SocketPlugins.tdwtf = {};
