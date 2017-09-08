@@ -367,10 +367,8 @@ module.exports = {
 	"header": function(data, callback) {
 		async.parallel({
 			groups: async.apply(Groups.isMemberOfGroups, data.templateValues.user.uid, ['Mafia - Players', 'Mafia - Club Ded', 'Self-Serve Mafia - Players', 'Self-Serve Mafia - Club Ded', 'Impossible Mission - A', 'Impossible Mission - B']),
-			clubDed: async.apply(Categories.getTopicIds, 32, 'cid:32:tids', false, 0, 0),
-			clubDedSS: async.apply(Categories.getTopicIds, 47, 'cid:47:tids', false, 0, 0)
-			//clubDed: async.apply(Categories.getTopicIds, {cid: 32, start: 0, stop: 0}),
-			//clubDedSS: async.apply(Categories.getTopicIds, {cid: 47, start: 0, stop: 0})
+			clubDed: async.apply(Categories.getTopicIds, {cid: 32, start: 0, stop: 0}),
+			clubDedSS: async.apply(Categories.getTopicIds, {cid: 47, start: 0, stop: 0})
 		}, function(err, results) {
 			if (err) {
 				return callback(err, data);

@@ -1,4 +1,4 @@
-FROM node:6
+FROM node:8
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
@@ -15,6 +15,9 @@ RUN npm install
 COPY NodeBB /usr/src/app
 
 RUN sed -e "s/var mediumMin = \\([0-9]\\+\\);/var mediumMin = !window.localStorage['unresponsive-settings'] || JSON.parse(window.localStorage['unresponsive-settings']).responsive ? \\1 : 0;/" -i /usr/src/app/node_modules/nodebb-plugin-composer-default/static/lib/composer/resize.js
+
+COPY templates-js-stub /usr/src/app/templates-js-stub
+RUN npm install ./templates-js-stub/
 
 COPY plugins /usr/src/app/plugins
 RUN npm install ./plugins/*/ `cat ./plugins/other.txt`
