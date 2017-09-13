@@ -31,8 +31,10 @@
 .topic .posts .icon .user-icon,
 .topic .posts .icon img,
 .users-container .users-box .user-icon,
-.users-container .users-box img {
-	border-radius: 0 !important;
+.users-container .users-box img,
+.topic .threaded-replies img,
+.topic .threaded-replies .user-icon {
+	border-radius: 0 !important; // lesshint importantRule: false
 }
 
 /* resize the forum logo to fit better */
@@ -62,16 +64,23 @@ kbd, kbd kbd {
 }
 
 /* post content */
-.topic .posts .content, .composer .preview, [component="chat/message/body"] {
+[component="chat/message/body"],
+.topic .posts .content,
+.composer .preview {
+
 	/* Stick a border around images */
 	.img-responsive {
 		padding: 1px;
 		border: 1px solid #d8e5fb;
+		max-height: 600px;
+		object-fit: contain;
+		display: inline;
+		-moz-box-sizing: content-box;
+		box-sizing: content-box;
+
 		@media (min-width: 1000px) {
 			max-width: 600px;
 		}
-		max-height: 600px;
-		display: inline;
 	}
 
 	/* Differentiate strike/del */
@@ -80,15 +89,18 @@ kbd, kbd kbd {
 		border-color: #f1c0c0;
 		color: black;
 	}
+
 	ins {
 		background-color: #dbffdb;
 		border-color: #c1e9c1;
 		color: black;
 	}
+
 	ins > del {
 		background-color: #0cf;
 		text-decoration: overline;
 	}
+
 	del > ins {
 		background-color: #ff6;
 		text-decoration: overline;
@@ -96,9 +108,9 @@ kbd, kbd kbd {
 
 	/* From nodebb-theme-persona */
 	h1:first-child, h2:first-child, h3:first-child, h4:first-child, h5:first-child, h6:first-child {
-		margin-top: 0px;
+		margin-top: 0;
 	}
-	
+
 	h1 {
 		font-size: 22px;
 		margin: 10px 0;
@@ -142,6 +154,7 @@ kbd, kbd kbd {
 		abbr[title]:after {
 			content: " [" attr(title) "]";
 		}
+
 		a[title]:after {
 			content: " [" attr(title) "]";
 		}
@@ -157,62 +170,25 @@ kbd, kbd kbd {
 	a[href] {
 		text-decoration: underline;
 	}
+
 	a.plugin-mentions-a, a[href^="#"], a[href=""] {
 		text-decoration: none;
 	}
 
-	blockquote > blockquote, blockquote > p, .iframely-link {
+	blockquote > blockquote, blockquote > p {
 		margin-bottom: 11px;
 	}
 
-	blockquote > blockquote:last-child, blockquote > p:last-child, .iframely-link:last-child {
+	blockquote > blockquote:last-child, blockquote > p:last-child {
 		margin-bottom: 0;
 	}
 
-	.iframely-link .thumb {
-		max-width: 21px !important;
-		height: auto;
-		float: none !important;
-	}
-
-	.iframely-link .iframely-container {
-		h4 {
-			margin-top: 0;
-		}
-
-		.media .media {
-			display: inline-block;
-			max-width: 200px;
-			margin-top: 0;
-			vertical-align: top;
-		}
-
-		.panel-iframely .iframely-embed .one-line {
-			/* wrap iframely titles instead of cutting off with an elipse */
-			white-space: normal !important;
-		}
-
-		p.description {
-			/* wrap iframely on small screen https://what.thedailywtf.com/post/868774 */
-			display: inline-block;
-			max-width: 350px;
-			width: auto;
-		}
-
-		/* https://what.thedailywtf.com/post/919173 */
-		max-height: 800px;
-		overflow-y: auto;
-
-		img, iframe {
-			max-height: none !important;
-		}
-	}
-
 	.lazyYT-container iframe {
-		max-width: none !important;
+		max-width: none !important; // lesshint importantRule: false
 	}
 
 	.img-responsive.emoji, .img-responsive.plugin-mentions-emoji {
+		width: auto;
 		height: 20px;
 		border: none;
 	}
@@ -235,27 +211,60 @@ a[component="post/reply"], a[component="post/quote"], a[component="post/quote-cl
 	margin-right: 3px;
 }
 
+.raw-content {
+	font-family: monospace;
+	font-size: 10pt;
+	white-space: pre-wrap;
+	margin-bottom: 15px;
+}
+
 a[component="post/upvote"], a[component="post/downvote"] {
-	background-color: #ccc;
-	padding: 10px;
-	padding-right: 8px;
-	margin-right: 2px;
+	.fa {
+		background-color: #ccc;
+		padding: 12px 10px 11px;
+	}
 }
 
 .topic a[component="post/upvote"].upvoted, .topic a[component="post/downvote"].downvoted {
 	color: #ccc;
 }
 
-a[component="post/upvote"].upvoted {
+a[component="post/upvote"].upvoted .fa {
 	background-color: #0b0;
 }
 
-a[component="post/downvote"].downvoted {
+a[component="post/downvote"].downvoted .fa {
 	background-color: #c00;
 }
 
 span[component="post/vote-count"] {
-	padding: 10px 13px;
+	padding: 10px;
+}
+
+.post-footer > .pull-right {
+	margin-bottom: 8px;
+}
+
+[component="post"] > hr {
+	margin-top: 12px;
+}
+
+.topic [component="post/reply-count"] {
+	display: table;
+	padding: 10px;
+	padding-left: 7px;
+	color: inherit;
+	background: rgba(127, 127, 127, 0.25);
+}
+
+.topic [component="post/replies"] {
+	margin-top: 0;
+	padding-top: 20px;
+	background: rgba(127, 127, 127, 0.25);
+
+	@media (max-width: 991px) {
+		margin-left: 0;
+	}
 }
 
 /* hide email addresses for admin views of profiles */
@@ -285,7 +294,7 @@ span[component="post/vote-count"] {
 /* make reply-to visible on cell phone size */
 @media (max-width: 767px) {
 	[component="post/parent"].hidden-xs {
-		display: inline-block !important;
+		display: inline-block !important; // lesshint importantRule: false
 	}
 }
 
@@ -310,42 +319,8 @@ span[component="post/vote-count"] {
 }
 
 .composer {
-	z-index: 1000 !important; /* otherwise it covers the cancel dialog on alternative skins */
-}
-
-/* See if we can change the background colour of categories - PJH */
-html {
-	height: 100%;
-}
-body {
-	min-height: 100%;
-}
-[data-category-id="4"] body { /* staff */
-	box-shadow: 0 0 25vw #283890 inset;
-	background-image: url("/uploads/files/1458603522948-trans_15_turnleft.png");
-	background-size: cover;
-	background-attachment: fixed;
-}
-[data-category-id="17"] body { /* turn left */
-	box-shadow: 0 0 25vw #3ab54a inset;
-	background-image: url("/uploads/files/1458603522948-trans_15_turnleft.png");
-	background-size: cover;
-	background-attachment: fixed;
-}
-[data-category-id="16"] body { /* lounge */
-	box-shadow: 0 0 25vw #f7941d inset;
-	background-image: url("/uploads/files/1458603503953-trans_15_qantas-first-class-lounge-sydney.png");
-	background-size: cover;
-	background-attachment: fixed;
-}
-[data-category-id="33"] body, [data-category-id="34"] body, [data-category-id="35"] body, [data-category-id="38"] body, [data-category-id="40"] body, [data-category-id="41"] body { /* mafia factions */
-	box-shadow: 0 0 25vw #a16946 inset;
-}
-[data-category-id="31"] body { /* mafia current game */
-	box-shadow: 0 0 5vw #ab4642 inset;
-}
-[data-category-id="32"] body { /* mafia club ded */
-	box-shadow: 0 0 5vw #000 inset;
+	/* otherwise it covers the cancel dialog on alternative skins */
+	z-index: 1000 !important; // lesshint importantRule: false
 }
 
 /* fix mobile */
@@ -356,187 +331,9 @@ body {
 	}
 }
 
-/* hide post buttons in active mafia games */
-[data-category-id="31"], [data-category-id="33"], [data-category-id="34"], [data-category-id="35"], [data-category-id="38"], [data-category-id="40"], [data-category-id="41"] {
-	.votes, .topic .moderator-tools a {
-		display: none;
-	}
-
-	&:not([data-mafia-player]) {
-		div.btn-group.action-bar, span.post-tools [component="post/reply"], span.post-tools [component="post/quote"] {
-			display: none;
-		}
-	}
-}
-
-/* mafia GM highlights */
-
-/* Mafia I - Release! Mafia */
-[data-tid="2078"], [data-tid="17813"], [data-tid="17815"], [data-tid="17816"] {
-	& > [data-uid="175"] {
-		background-color: rgba(255, 255, 0, 0.25);
-	}
-}
-
-/* Mafia II - Mafia in Spaaaaaaaaace! */
-[data-tid="18068"], [data-tid="18315"], [data-tid="18316"], [data-tid="18317"], [data-tid="18318"], [data-tid="18319"] {
-	& > [data-uid="39"] {
-		background-color: rgba(255, 255, 0, 0.25);
-	}
-}
-
-/* Mafia III - Bushido Mafia */
-[data-tid="18440"], [data-tid="18593"], [data-tid="18595"], [data-tid="18596"], [data-tid="18597"], [data-tid="18598"] {
-	& > [data-uid="731"] {
-		background-color: rgba(255, 255, 0, 0.25);
-	}
-}
-
-/* Mafia IV - Reverse Mafia */
-[data-tid="18779"], [data-tid="18901"], [data-tid="18902"], [data-tid="18899"] {
-	& > [data-uid="595"], & > [data-uid="650"], & > [data-uid="970"] {
-		background-color: rgba(255, 255, 0, 0.25);
-	}
-}
-
-/* Mafia V - Corporate Mafia */
-[data-tid="19354"], [data-tid="19459"], [data-tid="19460"], [data-tid="19461"], [data-tid="19462"] {
-	& > [data-uid="256"] {
-		background-color: rgba(255, 255, 0, 0.25);
-	}
-}
-
-/* Mafia VI - Spellars Town Council */
-[data-tid="19711"], [data-tid="19712"], [data-tid="19713"], [data-tid="19835"] {
-	& > [data-uid="650"] {
-		background-color: rgba(255, 127, 255, 0.25);
-	}
-
-	.page-topic & {
-		a[href="https://what.thedailywtf.com/uid/289"]:after, a[href="/user/raceprouk"]:after {
-			content: ' "Maria"';
-			font-weight: bold;
-		}
-		a[href="https://what.thedailywtf.com/uid/731"]:after, a[href="/user/yamikuronue"]:after {
-			content: ' "Violet"';
-			font-weight: bold;
-		}
-		a[href="https://what.thedailywtf.com/uid/1727"]:after, a[href="/user/cloak15"]:after {
-			content: ' "Oscar"';
-			font-weight: bold;
-		}
-		.icon > a[href]:after, a[href]:empty:after {
-			content: "";
-		}
-	}
-}
-
-/* Mafia VII - Bushido Mafia II */
-[data-tid="19996"], [data-tid="20083"], [data-tid="20084"], [data-tid="20085"], [data-tid="20086"], [data-tid="20087"] {
-	& > [data-uid="731"], & > [data-uid="1727"] {
-		background-color: rgba(192, 0, 255, 0.25);
-	}
-}
-
-/* Mafia VIII - Nuclear Missile Mafia */
-[data-tid="20366"], [data-tid="20374"], [data-tid="20381"], [data-tid="20375"], [data-tid="20376"], [data-tid="20377"], [data-tid="20378"], [data-tid="20379"], [data-tid="20380"] {
-	& > [data-uid="39"] {
-		background-color: rgba(255, 255, 0, 0.25);
-	}
-}
-
-/* Mafia IX - Flame War Mafia */
-[data-tid="20576"], [data-tid="20577"], [data-tid="20578"], [data-tid="20579"] {
-	& > [data-uid="140879"] {
-		background-color: rgba(255, 157, 0, 0.25);
-	}
-	.post-header > .pull-left > strong > a {
-		text-shadow: 0 0 2px rgb(254,252,201),
-			1px -1px 3px rgb(254,236,133),
-			-2px -2px 4px rgb(255,174,52),
-			2px -4px 5px rgb(236,118,12),
-			-2px -6px 6px rgb(205,70,6),
-			0 -8px 7px rgb(151,55,22),
-			1px -9px 8px rgb(69,27,14);
-	}
-}
-
-/* Mafia X - Normal Mafia Realy! Pinkie Swears! */
-[data-tid="20735"], [data-tid="20736"], [data-tid="20737"], [data-tid="20740"], [data-tid="20754"] {
-	& > [data-uid="650"] {
-		background-color: rgba(255, 127, 255, 0.25);
-	}
-
-	.page-topic & {
-		/* goddamnit why did nobody tell me there was going to be a rule 5 */
-		a[href="https://what.thedailywtf.com/uid/1"]:before, a[href="/user/ben_lubar"]:before {
-			content: 'Ben "';
-			font-weight: bold;
-		}
-		a[href="https://what.thedailywtf.com/uid/1"]:after, a[href="/user/ben_lubar"]:after {
-			content: '" Lubar';
-			font-weight: bold;
-		}
-		a[href="https://what.thedailywtf.com/uid/802"]:after, a[href="/user/createdtodislikethis"]:after {
-			content: ' "Created"';
-			font-weight: bold;
-		}
-
-		/* hardcore roleplay mode */
-		a[href="https://what.thedailywtf.com/uid/802"], a[href="/user/createdtodislikethis"],
-		a[href="https://what.thedailywtf.com/uid/140879"], a[href="/user/fox"],
-		a[href="https://what.thedailywtf.com/uid/731"], a[href="/user/yamikuronue"],
-		a[href="https://what.thedailywtf.com/uid/141372"], a[href="/user/pydsigner"] {
-			text-shadow: 0 0 5px rgba(255, 127, 255, 0.25);
-		}
-	}
-}
-
-/* Mafia XI - don't push the button */
-/*[data-tid=""] {
-	& > [data-uid="175"] {
-		background-color: rgba(255, 255, 0, 0.25);
-	}
-}*/
-
-/* Mafia XII - Phantom Mafia */
-/*[data-tid=""] {
-	& > [data-uid="595"] {
-		background-color: rgba(255, 255, 0, 0.25);
-	}
-}*/
-
-/* Mafia XIII - The Resistance */
-/*[data-tid=""] {
-	& > [data-uid="138677"] {
-		background-color: rgba(255, 255, 0, 0.25);
-	}
-}*/
-
-/* Mafia XIV - Whisper Mafia */
-/*[data-tid=""] {
-	& > [data-uid="256"] {
-		background-color: rgba(255, 255, 0, 0.25);
-	}
-}*/
-
-/* Mafia XV - Limbo Mafia */
-/*[data-tid=""] {
-	& > [data-uid="1345"] {
-		background-color: rgba(255, 255, 0, 0.25);
-	}
-}*/
-
-/* Mafia XVI - Time Travel Mafia */
-/*[data-tid=""] {
-	& > [data-uid="141504"] {
-		background-color: rgba(255, 255, 0, 0.25);
-	}
-}*/
-
 #new-topics-alert {
 	position: absolute;
-	margin-top: -60px;
+	margin-top: -88px;
 }
 
 .persona-usercard .usercard-name {
@@ -551,12 +348,23 @@ div#taskbar.taskbar.navbar-fixed-bottom {
 	left: auto;
 }
 
-.topic .posts>li { transition: box-shadow 30s; box-shadow: 0 0 0 #5bc0de; }
-.topic .posts>li.highlight { transition: box-shadow 0s; box-shadow: 0 0 5em #5bc0de; }
-.posts > li > div > hr { border-top: 1px solid #777; } /* https://what.thedailywtf.com/post/894514 */
+.topic .posts>li {
+	transition: box-shadow 30s;
+	box-shadow: 0 0 0 #5bc0de;
+}
+
+.topic .posts>li.highlight {
+	transition: box-shadow 0s;
+	box-shadow: 0 0 5em #5bc0de;
+}
+
+/* https://what.thedailywtf.com/post/894514 */
+.posts > li > div > hr {
+	border-top: 1px solid #777;
+}
 
 .header [component="navbar/title"] {
-	display: block !important;
+	display: block !important; // lesshint importantRule: false
 	clear: both;
 	max-width: 0;
 	white-space: nowrap;
@@ -565,109 +373,42 @@ div#taskbar.taskbar.navbar-fixed-bottom {
 		font-size: 16px;
 		padding-left: 30px;
 		padding-bottom: 10px;
-		display: block !important;
+		display: block !important; // lesshint importantRule: false
 
-		&:empty {
-			display: none !important;
+		&:empty, &.hidden + a, &:empty + a {
+			display: none !important; // lesshint importantRule: false
+		}
+
+		& + a {
+			position: absolute;
+			line-height: 18px;
+			padding: 3px;
+			border-radius: 12px;
+			width: 24px;
+			height: 24px;
+			text-align: center;
+			margin-top: -32px;
 		}
 	}
-}
-
-@media (max-width: 1199px) {
-	.nav>li>a {
-		padding-left: 5px;
-		padding-right: 5px;
-	}
-	#search-form {
-		padding: 0;
-		margin-right: 0;
-	}
-	#search-form #search-button {
-		padding-left: 4px;
-		padding-right: 4px;
-	}
-	.unread-count:after {
-		left: 10px;
-	}
-}
-
-
-#nav-dropdown {
-	/* top bar */
-	display: flex;
-	flex-direction: row;
-}
-
-#logged-in-menu, #logged-out-menu {
-	/* avatar menu */
-	order: 100;
-	flex-shrink: 0;
-}
-
-#logged-in-menu + ul, #logged-out-menu + ul {
-	/* search box */
-	order: 99;
-	flex-shrink: 1;
-}
-
-#logged-in-menu + ul + ul, #logged-out-menu + ul + ul {
-	/* "forum is down" spinner */
-	order: 98;
-	flex-shrink: 0;
 }
 
 .page-topic .forum-title, .page-category .forum-title {
 	display: none;
 }
 
-.header .pagination-block {
-	/* topic progress bar */
-	order: 96;
-	flex-shrink: 0;
-	display: none !important;
-
-	&.ready {
-		display: block !important;
-
-		@media (max-width: 991px) {
-			display: none !important;
-		}
-	}
-}
-
-#main-nav {
-	/* navigation menu button bar */
-	flex-grow: 1;
-	flex-shrink: 2;
-	display: flex;
-}
-
-.navbar-form {
-	padding-left: 0;
-}
-
-#search-form #search-button.hidden {
-	border: none;
-}
-
-/* details shim for Firefox - https://github.com/tyleruebele/details-shim/blob/master/details-shim.css */
-details, summary {display: block;}
-details.details_shim_closed > * {display: none;}
-details.details_shim_closed > summary {display: block;}
-details.details_shim_open   > summary {display: block;}
-details.details_shim_closed > summary:before {display: inline-block; content: "\25b6"; padding: 0 0.1em; margin-right: 0.4em; font-size: 0.9em;}
-details.details_shim_open   > summary:before {display: inline-block; content: "\25bc"; padding: 0; margin-right: 0.35em;}
-
 /* tags in the composer */
 .tags-container.inline-block {
 	display: block;
 }
+
 .bootstrap-tagsinput {
 	display: flex;
 }
+
 .bootstrap-tagsinput input {
 	flex-grow: 1;
 }
+
 .bootstrap-tagsinput .label {
 	height: 1.5em;
 	margin-top: 0.3em;
@@ -680,7 +421,7 @@ details.details_shim_open   > summary:before {display: inline-block; content: "\
 /* force navbar to never hide on non-mobile view */
 @media (min-width: 992px) {
 	.navbar-fixed-top {
-		top: 0 !important;
+		top: 0 !important; // lesshint importantRule: false
 	}
 }
 
@@ -716,6 +457,7 @@ details.details_shim_open   > summary:before {display: inline-block; content: "\
 	padding-bottom: 360px;
 	max-width: 100%;
 }
+
 /* hide status stuff */
 i[component="user/status"],
 a.user-status /* mobile menu, that's different */,
@@ -745,7 +487,10 @@ blockquote small {
 	margin-bottom: 10px;
 }
 
-/* If people are going to title topics things that are 2 pixels wide in an 18 point font, let 'em. Except for the 2 pixels part. */
+/*
+If people are going to title topics things that are 2 pixels wide
+in an 18 point font, let 'em. Except for the 2 pixels part.
+*/
 a[itemprop="url"][href] {
 	position: relative;
 
@@ -756,30 +501,32 @@ a[itemprop="url"][href] {
 	}
 }
 
-.chat-modal, .chat-modal .modal-dialog {
-	width: initial;
-	height: initial;
-}
-
-.chat-modal .modal-dialog .modal-content {
-	@media (min-width: 768px) {
-		width: 600px;
-	}
-
-	@media (max-width: 991px) {
-		width: 100%;
-		height: 100%;
-	}
-}
-
 /* Force border-box in Firefox 1-28. You're welcome, @Lorne-Kates. */
-* {
+* { // lesshint universalSelector: false
 	-moz-box-sizing: border-box;
 }
 
 /* https://what.thedailywtf.com/post/937723 */
 .skin-lumen .modal-header .close {
 	color: #333;
+}
+
+/* stop RP names from showing up where they shouldn't */
+.page-topic [data-tid] {
+	.icon > a[href], a[href]:empty, a[href].plugin-mentions-emoji-a, .persona-usercard a[href] {
+		&:before, &:after, &:hover:after, &:active:after {
+			content: initial;
+		}
+	}
+
+	/* allow long names to wrap 🦊 */
+	a[href]:before, a[href]:after {
+		white-space: normal;
+	}
+}
+
+[component="post/reply-count"] {
+	white-space: nowrap;
 }
 
 .emoji {
@@ -799,20 +546,93 @@ a[itemprop="url"][href] {
 		&[data-emoji-id="eek"] {
 			height: 30px;
 		}
+
 		&[data-emoji-id="rofl"] {
 			height: 15px;
 		}
+
 		&[data-emoji-id="spittake"] {
 			height: 25px;
 		}
+
 		&[data-emoji-id="hide"] {
 			height: 25px;
 		}
+
 		&[data-emoji-id="popcorn"] {
 			height: 35px;
 		}
+
 		&[data-emoji-id="vomit"] {
 			height: 16px;
 		}
 	}
+}
+
+.necro-post {
+	margin-bottom: 20px;
+	text-align: center;
+	font-size: 1.5em;
+	text-transform: uppercase;
+	color: rgba(127, 127, 127, 0.5);
+}
+
+/* prevent accidental dismiss flag button presses */
+.page-posts-flags #dismissAll, .page-posts-flags button.dismiss {
+	display: none;
+}
+
+/* dark theme fixes */
+body.skin-cyborg, body.skin-darkly, body.skin-slate, body.skin-superhero {
+	html[data-current-month="10"][data-current-day-of-month="31"] & #panel:before {
+		background-image: url("/uploads/default/8503/d2f7d9520f48de69.png");
+	}
+
+	.emoji[data-set-id="tdwtf"][data-emoji-id^="fa_"] {
+		background-color: #dfdfdf;
+		border-radius: 10px;
+	}
+
+	#menu .notification-list li.unread, .header .notification-list li.unread {
+		background-color: #847820;
+		color: #fff;
+	}
+}
+
+/*
+bootstrap is still violating the HTML5 spec as of version 4:
+https://html.spec.whatwg.org/multipage/rendering.html#the-details-and-summary-elements
+*/
+html summary { display: list-item; }
+
+/*
+nodebb-plugin-composer-default 4.3.0+ thinks having a 1-character-wide
+text entry area is good enough
+*/
+.composer .preview-container {
+	max-width: calc(50% ~"-" 30px);
+}
+
+/*
+nodebb-plugin-composer-default 4.3.0+ thinks the preview should have
+a font size about ten times what is in the actual posts
+*/
+.composer.composer .preview, .composer.composer .write {
+	font-size: inherit;
+}
+
+/* RepliesLast */
+.topic .threaded-replies .replies-last {
+	margin-left: 1em;
+}
+
+/* shenanigans */
+div.post-header a[href="/groups/sockdevs"] small,
+div.profile a[href="/groups/sockdevs"] small {
+	background-image: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+	text-shadow: 0 0 3px #000;
+}
+
+[data-property="customCSS"] + .help-block:after {
+	content: " This field can be read by moderators, so don't put any Mafia stuff in here.";
 }

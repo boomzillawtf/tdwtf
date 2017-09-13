@@ -1,0 +1,652 @@
+/* See if we can change the background colour of categories - PJH */
+html {
+	height: 100%;
+}
+
+body {
+	min-height: 100%;
+}
+
+/* staff */
+[data-category-id="4"] body {
+	box-shadow: 0 0 25vw #283890 inset;
+	background-image: url("/uploads/files/1458603522948-trans_15_turnleft.png");
+	background-size: cover;
+	background-attachment: fixed;
+}
+
+/* turn left */
+[data-category-id="17"] body {
+	box-shadow: 0 0 25vw #3ab54a inset;
+	background-image: url("/uploads/files/1458603522948-trans_15_turnleft.png");
+	background-size: cover;
+	background-attachment: fixed;
+}
+
+/* lounge */
+[data-category-id="16"] body {
+	box-shadow: 0 0 25vw #f7941d inset;
+	background-image: url("/uploads/files/1458603503953-trans_15_qantas-first-class-lounge-sydney.png");
+	background-size: cover;
+	background-attachment: fixed;
+}
+
+/* mafia factions */
+[data-category-id="33"] body,
+[data-category-id="34"] body,
+[data-category-id="35"] body,
+[data-category-id="38"] body,
+[data-category-id="40"] body,
+[data-category-id="46"] body {
+	box-shadow: 0 0 25vw #a16946 inset;
+}
+
+/* mafia current game */
+[data-category-id="31"] body,
+[data-category-id="45"] body {
+	box-shadow: 0 0 5vw #ab4642 inset;
+}
+
+/* mafia club ded */
+[data-category-id="32"] body,
+[data-category-id="47"] body {
+	box-shadow: 0 0 5vw #000 inset;
+}
+
+/* external mafia club ded */
+[data-category-id="41"] body {
+	box-shadow: 0 0 5vw #0c2042 inset;
+}
+
+/* hide post buttons in active mafia games */
+[data-category-id="31"],
+[data-category-id="33"],
+[data-category-id="34"],
+[data-category-id="35"],
+[data-category-id="38"],
+[data-category-id="40"] {
+	.votes, .topic .moderator-tools a {
+		display: none !important; // lesshint importantRule: false
+	}
+
+	&:not([data-mafia-player]) {
+		div.btn-group.action-bar,
+		span.post-tools [component="post/reply"],
+		span.post-tools [component="post/quote"] {
+			display: none;
+		}
+	}
+}
+
+[data-category-id="45"], [data-category-id="46"] {
+	.votes, .topic .moderator-tools a {
+		display: none !important; // lesshint importantRule: false
+	}
+
+	&:not([data-mafia-player-ss]) {
+		div.btn-group.action-bar,
+		span.post-tools [component="post/reply"],
+		span.post-tools [component="post/quote"] {
+			display: none;
+		}
+	}
+}
+
+/* mafia GM highlights */
+
+/* self-serve */
+[data-category-id="45"],
+[data-category-id="46"],
+[data-category-id="47"] {
+	[data-tid] > [data-uid="140639"], [data-tid] > [data-uid="141616"] {
+		background-color: rgba(255, 0, 127, 0.25);
+	}
+}
+
+/* Mafia I - Release! Mafia */
+[data-tid="2078"],
+[data-tid="17813"],
+[data-tid="17815"],
+[data-tid="17816"] {
+	& > [data-uid="175"] {
+		background-color: rgba(255, 255, 0, 0.25);
+	}
+}
+
+/* Mafia II - Mafia in Spaaaaaaaaace! */
+[data-tid="18068"],
+[data-tid="18315"],
+[data-tid="18316"],
+[data-tid="18317"],
+[data-tid="18318"],
+[data-tid="18319"] {
+	& > [data-uid="39"] {
+		background-color: rgba(255, 255, 0, 0.25);
+	}
+}
+
+/* Mafia III - Bushido Mafia */
+[data-tid="18440"],
+[data-tid="18593"],
+[data-tid="18595"],
+[data-tid="18596"],
+[data-tid="18597"],
+[data-tid="18598"] {
+	& > [data-uid="731"] {
+		background-color: rgba(255, 255, 0, 0.25);
+	}
+}
+
+/* Mafia IV - Reverse Mafia */
+[data-tid="18779"],
+[data-tid="18901"],
+[data-tid="18902"],
+[data-tid="18899"] {
+	& > [data-uid="595"], & > [data-uid="650"], & > [data-uid="970"] {
+		background-color: rgba(255, 255, 0, 0.25);
+	}
+}
+
+/* Mafia V - Corporate Mafia */
+[data-tid="19354"],
+[data-tid="19459"],
+[data-tid="19460"],
+[data-tid="19461"],
+[data-tid="19462"] {
+	& > [data-uid="256"] {
+		background-color: rgba(255, 255, 0, 0.25);
+	}
+}
+
+/* Mafia VI - Spellars Town Council */
+[data-tid="19711"],
+[data-tid="19712"],
+[data-tid="19713"],
+[data-tid="19835"] {
+	& > [data-uid="650"] {
+		background-color: rgba(255, 127, 255, 0.25);
+	}
+
+	.page-topic &:not([data-nid]) {
+		a[href="https://what.thedailywtf.com/uid/289"]:after, a[href="/user/raceprouk"]:after {
+			content: " \"Maria\"";
+			font-weight: bold;
+		}
+
+		a[href="https://what.thedailywtf.com/uid/731"]:after, a[href="/user/yamikuronue"]:after {
+			content: " \"Violet\"";
+			font-weight: bold;
+		}
+
+		a[href="https://what.thedailywtf.com/uid/1727"]:after, a[href="/user/cloak15"]:after {
+			content: " \"Oscar\"";
+			font-weight: bold;
+		}
+	}
+}
+
+/* Mafia VII - Bushido Mafia II */
+[data-tid="19996"],
+[data-tid="20083"],
+[data-tid="20084"],
+[data-tid="20085"],
+[data-tid="20086"],
+[data-tid="20087"] {
+	& > [data-uid="731"], & > [data-uid="1727"] {
+		background-color: rgba(192, 0, 255, 0.25);
+	}
+}
+
+/* Mafia VIII - Nuclear Missile Mafia */
+[data-tid="20366"],
+[data-tid="20374"],
+[data-tid="20381"],
+[data-tid="20375"],
+[data-tid="20376"],
+[data-tid="20377"],
+[data-tid="20378"],
+[data-tid="20379"],
+[data-tid="20380"] {
+	& > [data-uid="39"] {
+		background-color: rgba(255, 255, 0, 0.25);
+	}
+}
+
+/* Mafia IX - Flame War Mafia */
+[data-tid="20576"], [data-tid="20577"], [data-tid="20578"], [data-tid="20579"] {
+	& > [data-uid="140879"] {
+		background-color: rgba(255, 157, 0, 0.25);
+	}
+
+	.post-header > .pull-left > strong > a {
+		text-shadow: 0 0 2px rgb(254, 252, 201),
+			1px -1px 3px rgb(254, 236, 133),
+			-2px -2px 4px rgb(255, 174, 52),
+			2px -4px 5px rgb(236, 118, 12),
+			-2px -6px 6px rgb(205, 70, 6),
+			0 -8px 7px rgb(151, 55, 22),
+			1px -9px 8px rgb(69, 27, 14);
+	}
+}
+
+/* Mafia X - Normal Mafia Realy! Pinkie Swears! */
+[data-tid="20735"], [data-tid="20736"], [data-tid="20737"], [data-tid="20740"], [data-tid="20754"] {
+	& > [data-uid="650"] {
+		background-color: rgba(255, 127, 255, 0.25);
+	}
+
+	.page-topic &:not([data-nid]) {
+		/* goddamnit why did nobody tell me there was going to be a rule 5 */
+		a[href="https://what.thedailywtf.com/uid/1"]:before, a[href="/user/ben_lubar"]:before {
+			content: "Ben \"";
+			font-weight: bold;
+		}
+
+		a[href="https://what.thedailywtf.com/uid/1"]:after, a[href="/user/ben_lubar"]:after {
+			content: "\" Lubar";
+			font-weight: bold;
+		}
+
+		a[href="https://what.thedailywtf.com/uid/802"]:after, a[href="/user/createdtodislikethis"]:after {
+			content: " \"Created\"";
+			font-weight: bold;
+		}
+
+		a[href="https://what.thedailywtf.com/uid/731"]:after, a[href="/user/yamikuronue"]:after {
+			content: " \"Violet\"";
+			font-weight: bold;
+		}
+
+		a[href="https://what.thedailywtf.com/uid/1727"]:after, a[href="/user/cloak15"]:after {
+			content: " \"Victor\"";
+			font-weight: bold;
+		}
+
+		a[href="https://what.thedailywtf.com/uid/141372"]:after, a[href="/user/pydsigner"]:after {
+			content: " \"Kendric\"";
+			font-weight: bold;
+		}
+
+		a[href="https://what.thedailywtf.com/uid/140879"]:after, a[href="/user/fox"]:after {
+			content: " \"Lotharam\"";
+			font-weight: bold;
+		}
+
+		/* hardcore roleplay mode */
+		a[href="https://what.thedailywtf.com/uid/802"], a[href="/user/createdtodislikethis"],
+		a[href="https://what.thedailywtf.com/uid/140879"], a[href="/user/fox"],
+		a[href="https://what.thedailywtf.com/uid/731"], a[href="/user/yamikuronue"],
+		a[href="https://what.thedailywtf.com/uid/141372"], a[href="/user/pydsigner"] {
+			text-shadow: 0 0 5px rgba(255, 127, 255, 0.25);
+		}
+	}
+}
+
+/* Mafia XI - The Resistance */
+[data-tid="20988"], [data-tid="20989"], [data-tid="20991"], [data-tid="20990"] {
+	& > [data-uid="138677"] {
+		background-color: rgba(162, 135, 87, 0.25);
+	}
+}
+
+/* Mafia XII - Limbo Mafia */
+[data-tid="21153"], [data-tid="21200"], [data-tid="21201"], [data-tid="21202"], [data-tid="21203"] {
+	& > [data-uid="1345"] {
+		background-color: rgba(255, 255, 0, 0.25);
+	}
+}
+
+/* Mafia XIII - Shipwreck Mafia */
+[data-tid="21372"], [data-tid="21332"], [data-tid="21323"], [data-tid="21324"], [data-tid="21325"] {
+	& > [data-uid="256"] {
+		background-color: rgba(255, 255, 0, 0.25);
+	}
+}
+
+/* Mafia XIV - Run Townie Run Mafia */
+[data-tid="21587"], [data-tid="21588"], [data-tid="21589"], [data-tid="21590"] {
+	& > [data-uid="141570"] {
+		background-color: rgba(255, 255, 0, 0.25);
+	}
+}
+
+/* Mafia XV - Secret Kung Fuhrer */
+[data-tid="21778"], [data-tid="21788"], [data-tid="21791"] {
+	& > [data-uid="645"] {
+		background-color: rgba(255, 255, 0, 0.25);
+	}
+}
+
+/* Mafia XVI - Coptastrophe Mafia */
+[data-tid="22023"], [data-tid="22135"], [data-tid="22135"], [data-tid="22137"], [data-tid="22139"] {
+	& > [data-uid="650"] {
+		background-color: rgba(255, 127, 255, 0.25);
+	}
+}
+
+/* Mafia XVII - Bushido Mafia III */
+[data-tid="22304"], [data-tid="22389"], [data-tid="22439"], [data-tid="22452"] {
+	& > [data-uid="731"] {
+		background-color: rgba(192, 0, 255, 0.25);
+	}
+}
+
+/* Mafia XVIII - Forum Mafia */
+[data-tid="22523"],
+[data-tid="22524"],
+[data-tid="22548"],
+[data-tid="22558"],
+[data-tid="22559"],
+[data-tid="22560"],
+[data-tid="22562"] {
+	& > [data-uid="802"], & > [data-uid="141737"] {
+		background-color: rgba(255, 255, 0, 0.25);
+	}
+}
+
+/* Mafia XIX - Secret Hitler Mk. II */
+[data-tid="22884"], [data-tid="22886"], [data-tid="22887"] {
+	& > [data-uid="645"] {
+		background-color: rgba(255, 255, 0, 0.25);
+
+		.table-striped > tbody > tr:nth-of-type(odd) {
+			background-color: rgba(128, 192, 255, 0.25);
+		}
+	}
+}
+
+/* Mafia XX - [theme pending] */
+[data-tid="23308"],
+[data-tid="23321"],
+[data-tid="23322"],
+[data-tid="23323"],
+[data-tid="23324"],
+[data-tid="23327"] {
+	& > [data-uid="1345"], & > [data-uid="141079"] {
+		background-color: rgba(255, 255, 0, 0.25);
+	}
+}
+
+/* Mafia XXI - Wine In Front Of Mafia */
+/*[data-tid=""] {
+	& > [data-uid="140879"] {
+		background-color: rgba(255, 255, 0, 0.25);
+	}
+}*/
+
+/* Mafia XXII - 五行思想マフィア */
+/*[data-tid=""] {
+	& > [data-uid="289"] {
+		background-color: rgba(255, 255, 0, 0.25);
+	}
+}*/
+
+/* Mafia XXIII - Werwolf */
+/*[data-tid=""] {
+	& > [data-uid="343"] {
+		background-color: rgba(255, 255, 0, 0.25);
+	}
+}*/
+
+/* Mafia XXIV - Bushido IV: Bastard Harder */
+/*[data-tid=""] {
+	& > [data-uid="731"] {
+		background-color: rgba(192, 0, 255, 0.25);
+	}
+}*/
+
+/* other games */
+
+/* The Impossible Mission */
+[data-tid="20849"],
+[data-tid="20850"],
+[data-tid="20852"],
+[data-tid="20854"],
+[data-tid="20855"],
+[data-tid="20856"],
+[data-tid="20858"],
+[data-tid="20864"],
+[data-tid="20865"] {
+	/* GMs */
+	& > [data-uid="731"], & > [data-uid="1496"], & > [data-uid="140639"] {
+		background-color: rgba(192, 0, 255, 0.25);
+	}
+
+	/* players */
+	.page-topic &:not([data-nid]) {
+		a[href="https://what.thedailywtf.com/uid/650"], a[href="/user/accalia"] {
+			&:before {
+				content: "Solras \"";
+				font-weight: bold;
+			}
+
+			&:after {
+				content: "\"";
+				font-weight: bold;
+			}
+
+			&:hover:after, &:active:after {
+				content: "\", Daughter of Umdor, Son of Gimrigg, Son of Rangrom who slew the dreaded Balrog of Tydren's Keep [lawful neutral dwarf druid]"; // lesshint maxCharPerLine: false
+			}
+		}
+
+		a[href="https://what.thedailywtf.com/uid/1166"],
+		a[href="/user/gąska"],
+		a[href="https://what.thedailywtf.com/groups/gaska"] {
+			&:before {
+				content: "Alrod \"";
+				font-weight: bold;
+			}
+
+			&:after {
+				content: "\" the Short-Tempered";
+				font-weight: bold;
+			}
+
+			&:hover:after, &:active:after {
+				content: "\" the Short-Tempered [neutral evil dwarf fighter]";
+			}
+		}
+
+		a[href="https://what.thedailywtf.com/uid/23"], a[href="/user/error"] {
+			&:before {
+				content: "Shade \"";
+				font-weight: bold;
+			}
+
+			&:after {
+				content: "\"";
+				font-weight: bold;
+			}
+
+			&:hover:after, &:active:after {
+				content: "\" [chaotic neutral elf rogue]";
+			}
+		}
+
+		a[href="https://what.thedailywtf.com/uid/140732"], a[href="/user/rednaxela"] {
+			&:before {
+				content: "Alanus \"";
+				font-weight: bold;
+			}
+
+			&:after {
+				content: "\" Dove";
+				font-weight: bold;
+			}
+
+			&:hover:after, &:active:after {
+				content: "\" Dove [neutral good halfling fighter]";
+			}
+		}
+
+		a[href="https://what.thedailywtf.com/uid/544"], a[href="/user/xaade"] {
+			&:before {
+				content: "Zabrock \"";
+				font-weight: bold;
+			}
+
+			&:after {
+				content: "\" Lightcrest";
+				font-weight: bold;
+			}
+
+			&:hover:after, &:active:after {
+				content: "\" Lightcrest [lawful good half-orc paladin]";
+			}
+		}
+
+		a[href="https://what.thedailywtf.com/uid/582"], a[href="/user/chaostheeternal"] {
+			&:before {
+				content: "Ariana \"";
+				font-weight: bold;
+			}
+
+			&:after {
+				content: "\" Diramos";
+				font-weight: bold;
+			}
+
+			&:hover:after, &:active:after {
+				content: "\" Diramos [true neutral human cleric]";
+			}
+		}
+
+		a[href="https://what.thedailywtf.com/uid/1345"], a[href="/user/vault_dweller"] {
+			&:before {
+				content: "Tiet \"";
+				font-weight: bold;
+			}
+
+			&:after {
+				content: "\" Kropnatlum";
+				font-weight: bold;
+			}
+
+			&:hover:after, &:active:after {
+				content: "\" Kropnatlum [neutral good gnome sorcerer]";
+			}
+		}
+
+		a[href="https://what.thedailywtf.com/uid/141406"], a[href="/user/masonwheeler"] {
+			&:before {
+				content: "Roland \"";
+				font-weight: bold;
+			}
+
+			&:after {
+				content: "\" Caesamar";
+				font-weight: bold;
+			}
+
+			&:hover:after, &:active:after {
+				content: "\" Caesamar [true neutral catfolk bard]";
+			}
+		}
+
+		a[href="https://what.thedailywtf.com/uid/1727"], a[href="/user/cloak15"] {
+			&:before {
+				content: "Edwin \"";
+				font-weight: bold;
+			}
+
+			&:after {
+				content: "\" Gales";
+				font-weight: bold;
+			}
+
+			&:hover:after, &:active:after {
+				content: "\" Gales [neutral good human cleric]";
+			}
+		}
+
+		a[href="https://what.thedailywtf.com/uid/141401"], a[href="/user/lathun"] {
+			&:before {
+				content: "Marzon \"";
+				font-weight: bold;
+			}
+
+			&:after {
+				content: "\" Yedan";
+				font-weight: bold;
+			}
+
+			&:hover:after, &:active:after {
+				content: "\" Yedan [lawful neutral human swashbuckler]";
+			}
+		}
+
+		a[href="https://what.thedailywtf.com/uid/970"], a[href="/user/izzion"] {
+			&:before {
+				content: "Cyssaliht \"";
+				font-weight: bold;
+			}
+
+			&:after {
+				content: "\"";
+				font-weight: bold;
+			}
+
+			&:hover:after, &:active:after {
+				content: "\" [neutral good half-elf sorcerer]";
+			}
+		}
+
+		a[href="https://what.thedailywtf.com/uid/897"], a[href="/user/tsaukpaetra"] {
+			&:before {
+				content: "Biggen \"";
+				font-weight: bold;
+			}
+
+			&:after {
+				content: "\" Gurble";
+				font-weight: bold;
+			}
+
+			&:hover:after, &:active:after {
+				content: "\" Gurble [chaotic good halfling ranger]";
+			}
+		}
+
+		a[href="https://what.thedailywtf.com/uid/141628"], a[href="/user/hitoshirenu-shourai"] {
+			&:before {
+				content: "Seris \"";
+				font-weight: bold;
+			}
+
+			&:after {
+				content: "\" Clover";
+				font-weight: bold;
+			}
+
+			&:hover:after, &:active:after {
+				content: "\" Clover [true neutral tiefling sorceror]";
+			}
+		}
+	}
+}
+
+/* The Impossible Mission - hide post buttons in game threads for non-players */
+html {
+	&:not([data-impossible-mission-a]) {
+		[data-tid="20850"], [data-tid="20854"], [data-tid="20864"] {
+			div.btn-group.action-bar,
+			& + .post-bar div.btn-group.action-bar,
+			span.post-tools [component="post/reply"],
+			span.post-tools [component="post/quote"] {
+				display: none;
+			}
+		}
+	}
+
+	&:not([data-impossible-mission-b]) {
+		[data-tid="20852"], [data-tid="20855"], [data-tid="20865"] {
+			div.btn-group.action-bar,
+			& + .post-bar div.btn-group.action-bar,
+			span.post-tools [component="post/reply"],
+			span.post-tools [component="post/quote"] {
+				display: none;
+			}
+		}
+	}
+}

@@ -1,23 +1,44 @@
 #!/bin/bash
 
-start_time=$(date -u +%s)
+history_count=20
+threshold=$(( ( $history_count - 1 ) * 5 * $(getconf CLK_TCK) * 90 / 100 ))
 
-until curl -fsm 5 http://127.0.0.1:"$1"/recent.rss > /dev/null; do
-	echo "Waiting for $PPID/$1"
-	sleep 5
+for (( i=0; $i <= $history_count; i++ )); do
+	eval declare -A history$i="([1]=0)"
 done
 
-start_time=$(( $(date -u +%s) - $start_time ))
-
-echo "$PPID/$1 up after $start_time seconds"
-
 while true; do
-	if ! curl -fsm 15 http://127.0.0.1:"$1"/recent.rss > /dev/null; then
-		echo "$PPID/$1 timed out"
-		date -uIns
-		#gdb -p "$PPID" -ex 'thread apply all bt' -ex 'kill' --batch
-		kill -9 "$PPID"
-		exit
-	fi
+	unset history$history_count
+	eval "declare -A history$history_count=([1]=0 $(for pid in $(pidof node); do
+		if [[ "$pid" == "1" ]]; then
+			continue
+		fi
+
+		declare -a stat=($(cat /proc/$pid/stat))
+		echo "[$pid]=${stat[13]}"
+		unset stat
+	done))"
+
+	for pid in "${!history0[@]}"; do
+		pcpu="history$history_count[$pid]"
+		pcpu="${!pcpu}"
+		if [[ -z "$pcpu" ]]; then
+			continue
+		fi
+
+		if (( $pcpu - "${history0[$pid]}" < $threshold )); then
+			continue
+		fi
+
+		echo '{"level":"error","message":"[watchdog.bash] killing '"$pid"'","timestamp":"'"`date -u --iso-8601=ns | sed -e 's/......+00:00/Z/g' -e 's/,/./g'`"'"}'
+		kill -9 "$pid"
+	done
+
+	for (( i=0; $i < $history_count; i++ )); do
+		next=$(( $i + 1 ))
+		unset history$i
+		eval $(declare -p history$next | sed -e "s/history$next=/history$i=/")
+	done
+
 	sleep 5
 done

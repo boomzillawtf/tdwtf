@@ -4,14 +4,30 @@
 	"library": "index.js",
 	"hooks": [
 		{"hook": "static:app.load", "method": "init"},
+		{"hook": "filter:admin.header.build", "method": "adminHeader"},
 		{"hook": "filter:meta.getMetaTags", "method": "meta"},
 		{"hook": "filter:middleware.renderHeader", "method": "header"},
-		{"hook": "filter:post.edit", "method": "postEdit"}
+		{"hook": "filter:notification.push", "method": "notificationPush"},
+		{"hook": "filter:notifications.merge", "method": "addNotificationCategory"},
+		{"hook": "filter:register.check", "method": "registerCheck"},
+		{"hook": "filter:topics.addPostData", "method": "postReplyCount"},
+		{"hook": "action:markdown.updateParserRules", "method": "disableFuzzy"}
 	],
 	"less": [
-		"./custom.less"
+		"./categories.less",
+		"./custom.less",
+		"./details-shim.less",
+		"./flexnav.less",
+		"./holiday.less",
+		"./iframely.less"
 	],
 	"scripts": [
-		"./custom.js"
-	]
+		"./details-shim.js",
+		"./necro.js",
+		"./popcorn.js",
+		"./post-tools.js",
+		"./steganography.js",
+		"./style.js"
+	],
+	"templates": "templates"
 }

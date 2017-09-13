@@ -53,18 +53,24 @@
 	path = plugins/nodebb-plugin-import-tdwtf
 	url = https://github.com/BenLubar/nodebb-plugin-import-discourse.git
 	branch = tdwtf
-[submodule "emoji/emojione"]
-	path = emoji/emojione
-	url = https://github.com/Ranks/emojione.git
 [submodule "emoji/fontawesome"]
 	path = emoji/fontawesome
 	url = https://github.com/encharm/Font-Awesome-SVG-PNG
-[submodule "plugins/nodebb-plugin-image-size"]
-	path = plugins/nodebb-plugin-image-size
-	url = https://github.com/BenLubar/nodebb-plugin-image-size
 [submodule "plugins/nodebb-plugin-youtube-embed"]
 	path = plugins/nodebb-plugin-youtube-embed
 	url = https://github.com/boomzillawtf/nodebb-plugin-youtube-embed.git
-[submodule "plugins/nodebb-plugin-google-search"]
-	path = plugins/nodebb-plugin-google-search
-	url = https://github.com/BenLubar/nodebb-plugin-google-search
+[submodule "plugins/nodebb-plugin-image-size"]
+	path = plugins/nodebb-plugin-image-size
+	url = https://github.com/BenLubar/nodebb-plugin-image-size
+[submodule "plugins/nodebb-plugin-user-css"]
+	path = plugins/nodebb-plugin-user-css
+	url = https://github.com/BenLubar/nodebb-plugin-user-css
+[submodule "plugins/nodebb-plugin-ignore-users"]
+	path = plugins/nodebb-plugin-ignore-users
+	url = https://github.com/exo-do/nodebb-plugin-ignore-users
+[submodule "emoji/emojione-assets"]
+	path = emoji/emojione-assets
+	url = https://github.com/emojione/emojione-assets
+[submodule "plugins/nodebb-plugin-post-revisions"]
+	path = plugins/nodebb-plugin-post-revisions
+	url = ../../BenLubar/nodebb-plugin-post-revisions.git
