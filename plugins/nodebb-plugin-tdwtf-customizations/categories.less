@@ -608,7 +608,56 @@ body {
 			}
 		}
 
-		a[href="https://what.thedailywtf.com/uid/141628"], a[href="/user/hitoshirenu-shourai"] {
+		a[href="https://what.thedailywtf.com/uid/141905"], a[href="/user/perverted_vixen"] {
+			&:before {
+				content: "Kell \"";
+				font-weight: bold;
+			}
+
+			&:after {
+				content: "\" of the Flame";
+				font-weight: bold;
+			}
+
+			&:hover:after, &:active:after {
+				content: "\" of the Flame [neutral good aasimar oracle]";
+			}
+		}
+
+		
+	}
+}
+
+/* The Impossible Mission - special cases */
+
+/* group a + club ded only*/
+
+[data-tid="20856"],
+[data-tid="20850"],
+[data-tid="20854"],
+[data-tid="20864"] {
+	a[href="https://what.thedailywtf.com/uid/141628"], a[href="/user/hitoshirenu-shourai"] {
+			&:before {
+				content: "Sunless Moon \"";
+				font-weight: bold;
+			}
+
+			&:after {
+				content: "\" of Midwinter's Gaze";
+				font-weight: bold;
+			}
+
+			&:hover:after, &:active:after {
+				content: "\" Clover [true neutral human hunter]";
+			}
+		}
+}
+
+/* group b only */
+[data-tid="20852"],
+[data-tid="20855"],
+[data-tid="20865"] {
+	a[href="https://what.thedailywtf.com/uid/141628"], a[href="/user/hitoshirenu-shourai"] {
 			&:before {
 				content: "Seris \"";
 				font-weight: bold;
@@ -623,7 +672,6 @@ body {
 				content: "\" Clover [true neutral tiefling sorceror]";
 			}
 		}
-	}
 }
 
 /* The Impossible Mission - hide post buttons in game threads for non-players */
