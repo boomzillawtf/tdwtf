@@ -15,7 +15,7 @@ function addNecroPostMessage() {
 		if (diff >= necroThreshold) {
 			var ago = $.timeago.settings.strings.suffixAgo;
 			$.timeago.settings.strings.suffixAgo = ' later';
-			$('<aside>').addClass('necro-post').text(diff >= 1000 * 60 * 60 * 24 * 365 * 10 ? 'goddamnit fbmac' : $.timeago.inWords(diff)).append($('<hr>')).prependTo(post);
+			$('<aside>').addClass('necro-post').text(diff >= 1000 * 60 * 60 * 24 * 365 * 10 ? 'goddamnit @wharrgarbl!' : $.timeago.inWords(diff)).append($('<hr>')).prependTo(post);
 			$.timeago.settings.strings.suffixAgo = ago;
 		}
 	});
