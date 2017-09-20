@@ -634,19 +634,21 @@ body {
 [data-tid="20850"],
 [data-tid="20854"],
 [data-tid="20864"] {
-	a[href="https://what.thedailywtf.com/uid/141628"], a[href="/user/hitoshirenu-shourai"] {
-		&:before {
-			content: "Sunless Moon \"";
-			font-weight: bold;
-		}
+	.page-topic &:not([data-nid]) {
+		a[href="https://what.thedailywtf.com/uid/141628"], a[href="/user/hitoshirenu-shourai"] {
+			&:before {
+				content: "Sunless Moon \"";
+				font-weight: bold;
+			}
 
-		&:after {
-			content: "\" of Midwinter's Gaze";
-			font-weight: bold;
-		}
+			&:after {
+				content: "\" of Midwinter's Gaze";
+				font-weight: bold;
+			}
 
-		&:hover:after, &:active:after {
-			content: "\" Clover [true neutral human hunter]";
+			&:hover:after, &:active:after {
+				content: "\" of Midwinter's Gaze [true neutral human hunter]";
+			}
 		}
 	}
 }
@@ -655,19 +657,21 @@ body {
 [data-tid="20852"],
 [data-tid="20855"],
 [data-tid="20865"] {
-	a[href="https://what.thedailywtf.com/uid/141628"], a[href="/user/hitoshirenu-shourai"] {
-		&:before {
-			content: "Seris \"";
-			font-weight: bold;
-		}
+	.page-topic &:not([data-nid]) {
+		a[href="https://what.thedailywtf.com/uid/141628"], a[href="/user/hitoshirenu-shourai"] {
+			&:before {
+				content: "Seris \"";
+				font-weight: bold;
+			}
 
-		&:after {
-			content: "\" Clover";
-			font-weight: bold;
-		}
+			&:after {
+				content: "\" Clover";
+				font-weight: bold;
+			}
 
-		&:hover:after, &:active:after {
-			content: "\" Clover [true neutral tiefling sorceror]";
+			&:hover:after, &:active:after {
+				content: "\" Clover [true neutral tiefling sorceror]";
+			}
 		}
 	}
 }
