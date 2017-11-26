@@ -8,6 +8,9 @@ var db = module.parent.require('./database');
 var Categories = module.parent.require('./categories');
 var Groups = module.parent.require('./groups');
 var Posts = module.parent.require('./posts');
+var postCache = module.parent.require('./posts/cache');
+var plugins = module.parent.require('./plugins');
+var translator = module.parent.require('./translator');
 var SocketPosts = module.parent.require('./socket.io/posts');
 var SocketPlugins = module.parent.require('./socket.io/plugins');
 var Topics = module.parent.require('./topics');
@@ -89,6 +92,65 @@ SocketPosts.getVoters = function (socket, data, callback) {
 					next(null, results.downvoteUids.length);
 				},
 			}, next);
+		},
+	], callback);
+};
+
+// increase this by 1 every time a post rendering related change happens
+const postCacheRevision = 1;
+
+var realCacheDel = postCache.del;
+postCache.del = function (pid) {
+	realCacheDel.apply(postCache, arguments);
+	db.delete('tdwtf-post-cache:' + parseInt(pid, 10));
+};
+
+Posts.parsePost = function (postData, callback) {
+	postData.content = String(postData.content || '');
+
+	if (postData.pid && postCache.has(String(postData.pid))) {
+		postData.content = postCache.get(String(postData.pid));
+		return callback(null, postData);
+	}
+
+	async.waterfall([
+		// TDWTF: added
+		function (next) {
+			db.getObject('tdwtf-post-cache:' + parseInt(postData.pid, 10), next);
+		},
+		function (cached, next) {
+			if (!cached) {
+				return next();
+			}
+
+			if (cached.version !== postCacheRevision) {
+				return next();
+			}
+
+			postCache.set(String(postData.pid), cached.content);
+			postData.content = cached.content;
+			callback(null, postData);
+		},
+		// TDWTF: end added
+		function (next) {
+			plugins.fireHook('filter:parse.post', { postData: postData }, next);
+		},
+		function (data, next) {
+			data.postData.content = translator.escape(data.postData.content);
+
+			// TDWTF: commented
+			if (/*global.env === 'production' &&*/ data.postData.pid) {
+				postCache.set(String(data.postData.pid), data.postData.content);
+				// TDWTF: added
+				return db.setObject('tdwtf-post-cache:' + parseInt(data.postData.pid, 10), {
+					'version': postCacheRevision,
+					'content': data.postData.content
+				}, function (err) {
+					next(err, data.postData);
+				});
+				// TDWTF: end added
+			}
+			next(null, data.postData);
 		},
 	], callback);
 };

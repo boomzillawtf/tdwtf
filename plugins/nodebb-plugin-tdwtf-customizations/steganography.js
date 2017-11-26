@@ -185,7 +185,9 @@ var notificationObserver = new MutationObserver(function() {
 	});
 });
 $(document).ready(function() {
-	notificationObserver.observe(document.querySelector('.header [component="notifications/list"]'), {childList: true, attributes: true, characterData: true, subtree: true});
+	if (app.user.uid) {
+		notificationObserver.observe(document.querySelector('.header [component="notifications/list"]'), {childList: true, attributes: true, characterData: true, subtree: true});
+	}
 });
 
 $(window).on('action:topics.loaded', function() {

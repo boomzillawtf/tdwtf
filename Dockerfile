@@ -9,7 +9,7 @@ ENV NODE_ENV=production \
     daemon=false \
     silent=false
 
-COPY NodeBB/package.json /usr/src/app/
+COPY NodeBB/install/package.json /usr/src/app/package.json
 
 RUN npm install
 COPY NodeBB /usr/src/app
@@ -17,10 +17,10 @@ COPY NodeBB /usr/src/app
 RUN sed -e "s/var mediumMin = \\([0-9]\\+\\);/var mediumMin = !window.localStorage['unresponsive-settings'] || JSON.parse(window.localStorage['unresponsive-settings']).responsive ? \\1 : 0;/" -i /usr/src/app/node_modules/nodebb-plugin-composer-default/static/lib/composer/resize.js
 
 COPY templates-js-stub /usr/src/app/templates-js-stub
-RUN npm install ./templates-js-stub/
+RUN npm install --save ./templates-js-stub/
 
 COPY plugins /usr/src/app/plugins
-RUN npm install ./plugins/*/ `cat ./plugins/other.txt`
+RUN npm install --save ./plugins/*/ `cat ./plugins/other.txt`
 
 COPY emoji/emojione-assets/png/32 /usr/src/app/node_modules/nodebb-plugin-emoji-one/public/static/images
 COPY emoji/emojione-assets/LICENSE.md /usr/src/app/node_modules/nodebb-plugin-emoji-one/public/static/images/
