@@ -1,6 +1,7 @@
 /* jshint node: true */
 
 var async = module.parent.require('async');
+var jsesc = module.parent.require('jsesc');
 var nconf = module.parent.require('nconf');
 var request = module.parent.require('request');
 var winston = module.parent.require('winston');
@@ -97,7 +98,7 @@ SocketPosts.getVoters = function (socket, data, callback) {
 };
 
 // increase this by 1 every time a post rendering related change happens
-const postCacheRevision = 1;
+var postCacheRevision = 1;
 
 var realCacheDel = postCache.del;
 postCache.del = function (pid) {
@@ -442,7 +443,7 @@ module.exports = {
 			data.templateValues.user.isMafiaClubDedSS = results.groups[3] && results.clubDedSS[0];
 			data.templateValues.user.isImpossibleMissionA = results.groups[4];
 			data.templateValues.user.isImpossibleMissionB = results.groups[5];
-			data.templateValues.userJSON = JSON.stringify(data.templateValues.user);
+			data.templateValues.userJSON = jsesc(JSON.stringify(data.templateValues.user), { isScriptContext: true });
 			callback(null, data);
 		});
 	},

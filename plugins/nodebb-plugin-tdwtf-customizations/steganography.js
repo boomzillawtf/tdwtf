@@ -1,5 +1,5 @@
 /* jshint browser: true */
-/* globals $, ajaxify */
+/* globals $, ajaxify, app */
 
 /* jshint -W126 */
 
