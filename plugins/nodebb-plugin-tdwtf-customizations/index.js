@@ -98,18 +98,23 @@ SocketPosts.getVoters = function (socket, data, callback) {
 };
 
 // increase this by 1 every time a post rendering related change happens
-var postCacheRevision = 1;
+var postCacheRevision = 2;
+
+var uncachedPost = {};
 
 var realCacheDel = postCache.del;
 postCache.del = function (pid) {
-	realCacheDel.apply(postCache, arguments);
-	db.delete('tdwtf-post-cache:' + parseInt(pid, 10));
+	uncachedPost[pid] = true;
+	db.delete('tdwtf-post-cache:' + parseInt(pid, 10), function() {
+		realCacheDel.call(postCache, pid);
+		delete uncachedPost[pid];
+	});
 };
 
 Posts.parsePost = function (postData, callback) {
 	postData.content = String(postData.content || '');
 
-	if (postData.pid && postCache.has(String(postData.pid))) {
+	if (postData.pid && !Object.prototype.hasOwnProperty.call(uncachedPost, postData.pid) && postCache.has(String(postData.pid))) {
 		postData.content = postCache.get(String(postData.pid));
 		return callback(null, postData);
 	}
@@ -117,6 +122,9 @@ Posts.parsePost = function (postData, callback) {
 	async.waterfall([
 		// TDWTF: added
 		function (next) {
+			if (Object.prototype.hasOwnProperty.call(uncachedPost, postData.pid)) {
+				return next(null, null);
+			}
 			db.getObject('tdwtf-post-cache:' + parseInt(postData.pid, 10), next);
 		},
 		function (cached, next) {
@@ -142,6 +150,7 @@ Posts.parsePost = function (postData, callback) {
 			// TDWTF: commented
 			if (/*global.env === 'production' &&*/ data.postData.pid) {
 				postCache.set(String(data.postData.pid), data.postData.content);
+				delete uncachedPost[postData.pid];
 				// TDWTF: added
 				return db.setObject('tdwtf-post-cache:' + parseInt(data.postData.pid, 10), {
 					'version': postCacheRevision,
