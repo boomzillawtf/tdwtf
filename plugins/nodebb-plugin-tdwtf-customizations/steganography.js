@@ -65,7 +65,7 @@ var checkedImageSources = {};
 
 var payloads = [
 	{payload: "MafiA!", description: "a private mafia category", protect: [32, 33, 34, 35, 38, 40, 41, 46, 47], except: [32]},
-	{payload: "Lounge", description: "the lounge", protect: [16], except: [4, 16]},
+	{payload: "Lounge", description: "the lounge", protect: [16, 53], except: [4, 16, 53]},
 	{payload: "StafF?", description: "the staff forum", protect: [4], except: [4]}
 ];
 
