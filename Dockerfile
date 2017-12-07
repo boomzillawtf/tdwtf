@@ -20,16 +20,14 @@ COPY templates-js-stub /usr/src/app/templates-js-stub
 RUN npm install --save ./templates-js-stub/
 
 COPY plugins /usr/src/app/plugins
-RUN npm install --save ./plugins/*/ `cat ./plugins/other.txt`
+RUN npm install --save ./plugins/*/
 
-COPY emoji/emojione-assets/png/32 /usr/src/app/node_modules/nodebb-plugin-emoji-one/public/static/images
-COPY emoji/emojione-assets/LICENSE.md /usr/src/app/node_modules/nodebb-plugin-emoji-one/public/static/images/
-RUN node -e 'require("nodebb-plugin-emoji-one/lib/set/update/index").build("/usr/src/app/node_modules/nodebb-plugin-emoji-one/public/static/images")'
+RUN node -e 'require("nodebb-plugin-emoji-one/emoji").defineEmoji({packs:[]},function(err){if(err){console.error(err);process.exit(1)}})'
 
 COPY emoji/tdwtf /usr/src/app/tdwtf-emoji
 COPY emoji/fontawesome/black/png/64 /usr/src/app/tdwtf-emoji/fontawesome
 RUN cd /usr/src/app/tdwtf-emoji/fontawesome && rename 's/^/fa-/' -- *.png && rename 's/-/_/g' -- *.png && mv -- *.png /usr/src/app/tdwtf-emoji/ && cd .. && rmdir fontawesome
-RUN mkdir -p /usr/src/app/node_modules/nodebb-plugin-emoji-static/public/static/images && ln -s /usr/src/app/tdwtf-emoji /usr/src/app/node_modules/nodebb-plugin-emoji-static/public/static/images/tdwtf
+RUN cd /usr/src/app/tdwtf-emoji && node -p 'var dict={};fs.readdirSync(__dirname).forEach(function(e){dict[e]={aliases:[e.replace(/\.[^.]+$/,"")],image:e}});JSON.stringify(dict)' > /usr/src/app/tdwtf-emoji/dictionary.json
 
 RUN echo public/uploads/*/ > .make-uploads-folders
 

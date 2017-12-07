@@ -74,3 +74,6 @@
 [submodule "plugins/nodebb-plugin-post-revisions"]
 	path = plugins/nodebb-plugin-post-revisions
 	url = ../../BenLubar/nodebb-plugin-post-revisions.git
+[submodule "plugins/nodebb-plugin-emoji-one"]
+	path = plugins/nodebb-plugin-emoji-one
+	url = ../../NodeBB-Community/nodebb-plugin-emoji-one.git

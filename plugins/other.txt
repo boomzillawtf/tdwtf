@@ -1,2 +1,0 @@
-nodebb-plugin-emoji-static@1.0.4
-nodebb-plugin-shortcuts@1.1.2

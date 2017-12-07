@@ -11,7 +11,8 @@
 		{"hook": "filter:notifications.merge", "method": "addNotificationCategory"},
 		{"hook": "filter:register.check", "method": "registerCheck"},
 		{"hook": "filter:topics.addPostData", "method": "postReplyCount"},
-		{"hook": "action:markdown.updateParserRules", "method": "disableFuzzy"}
+		{"hook": "action:markdown.updateParserRules", "method": "disableFuzzy"},
+		{"hook": "filter:emoji.packs", "method": "defineEmoji"}
 	],
 	"less": [
 		"./categories.less",

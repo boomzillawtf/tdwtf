@@ -639,5 +639,19 @@ module.exports = {
 			"fuzzyIP": false,
 			"fuzzyEmail": false
 		});
+	},
+	"defineEmoji": function(data, callback) {
+		data.packs.push({
+			name: 'The Daily WTF Custom Emoji',
+			id: 'tdwtf-emoji',
+			attribution: 'Pull requests accepted: https://github.com/boomzillawtf/tdwtf/tree/master/emoji/tdwtf',
+			path: '/usr/src/app/tdwtf-emoji',
+			mode: 'images',
+			images: {
+				directory: '/usr/src/app/tdwtf-emoji'
+			},
+			dictionary: require('/usr/src/app/tdwtf-emoji/dictionary.json')
+		});
+		callback(null, data);
 	}
 };
