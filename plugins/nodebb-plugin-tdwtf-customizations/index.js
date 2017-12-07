@@ -98,7 +98,7 @@ SocketPosts.getVoters = function (socket, data, callback) {
 };
 
 // increase this by 1 every time a post rendering related change happens
-var postCacheRevision = 2;
+var postCacheRevision = 3;
 
 var uncachedPost = {};
 
