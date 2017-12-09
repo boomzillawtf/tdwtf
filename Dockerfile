@@ -20,7 +20,7 @@ COPY templates-js-stub /usr/src/app/templates-js-stub
 RUN npm install --save ./templates-js-stub/
 
 COPY plugins /usr/src/app/plugins
-RUN npm install --save ./plugins/*/
+RUN npm install --save ./plugins/*/ nodebb-plugin-shortcuts@1.1.2
 
 RUN node -e 'require("nodebb-plugin-emoji-one/emoji").defineEmoji({packs:[]},function(err){if(err){console.error(err);process.exit(1)}})'
 
