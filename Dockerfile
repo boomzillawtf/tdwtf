@@ -27,7 +27,7 @@ RUN node -e 'require("nodebb-plugin-emoji-one/emoji").defineEmoji({packs:[]},fun
 COPY emoji/tdwtf /usr/src/app/tdwtf-emoji
 COPY emoji/fontawesome/black/png/64 /usr/src/app/tdwtf-emoji/fontawesome
 RUN cd /usr/src/app/tdwtf-emoji/fontawesome && rename 's/^/fa-/' -- *.png && rename 's/-/_/g' -- *.png && mv -- *.png /usr/src/app/tdwtf-emoji/ && cd .. && rmdir fontawesome
-RUN cd /usr/src/app/tdwtf-emoji && node -p 'var dict={};fs.readdirSync(__dirname).forEach(function(e){dict[e]={aliases:[e.replace(/\.[^.]+$/,"")],image:e}});JSON.stringify(dict)' > /usr/src/app/tdwtf-emoji/dictionary.json
+RUN cd /usr/src/app/tdwtf-emoji && node -p 'var dict={};fs.readdirSync(__dirname).forEach(function(e){dict[e.replace(/\.[^.]+$/,"")]={aliases:[e],image:e}});JSON.stringify(dict)' > /usr/src/app/tdwtf-emoji/dictionary.json
 
 RUN echo public/uploads/*/ > .make-uploads-folders
 
