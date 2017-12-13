@@ -1,22 +1,19 @@
 {
   "devDependencies": {
     "gulp": "^3.9.1",
-    "gulp-jshint": "^2.0.1",
-    "gulp-jsonlint": "^1.1.2",
+    "gulp-jshint": "^2.0.4",
+    "gulp-jsonlint": "^1.2.0",
     "gulp-lesshint": "^4.0.0",
-    "jasmine-core": "^2.4.1",
-    "jasmine-jquery": "^2.1.1",
-    "jshint": "^2.9.2",
-    "karma": "^1.7.0",
-    "karma-firefox-launcher": "^1.0.0",
-    "karma-jasmine": "^1.0.2",
+    "jasmine-core": "^2.8.0",
+    "jshint": "^2.9.5",
+    "karma": "^1.7.1",
+    "karma-firefox-launcher": "^1.1.0",
+    "karma-jasmine": "^1.1.1",
     "karma-jasmine-jquery": "^0.1.1",
     "karma-less-preprocessor": "^0.3.3",
-    "karma-phantomjs-launcher": "^1.0.0",
-    "karma-scss-preprocessor": "^3.0.0",
+    "karma-phantomjs-launcher": "^1.0.4",
     "karma-spec-reporter": "0.0.31",
-    "node-sass": "^4.5.3",
-    "phantomjs-prebuilt": "^2.1.7"
+    "phantomjs-prebuilt": "^2.1.16"
   },
   "scripts": {
     "lint": "node_modules/.bin/gulp lint",

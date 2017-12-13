@@ -10,7 +10,6 @@ module.exports = function( config ) {
 		],
 		exclude: [],
 		preprocessors: {
-			'**/*.scss': [ 'scss' ],
 			'**/*.less': [ 'less' ]
 		},
 		proxies: {},
