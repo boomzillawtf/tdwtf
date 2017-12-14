@@ -68,7 +68,7 @@ $(function() {
 	new MutationObserver(function(records) {
 		records.forEach(function(record) {
 			record.addedNodes.forEach(function(node) {
-				if ([].some.call(node.classList, function(c) {
+				if (node.classList && [].some.call(node.classList, function(c) {
 					return /^emoji-/.test(c);
 				})) {
 					node.classList.add('emoji');
