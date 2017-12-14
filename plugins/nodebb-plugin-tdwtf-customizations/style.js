@@ -11,6 +11,8 @@ $(window).on('action:ajaxify.contentLoaded', function() {
 		}
 	}
 
+	$html.addClass('preventSlideout');
+
 	data('category-id', ajaxify.data && ajaxify.data.cid);
 	data('user-id', app.user && app.user.uid);
 	data('mafia-player', app.user && app.user.isMafiaPlayer);
@@ -60,4 +62,18 @@ $(window).on('action:ajaxify.end', function() {
 	} else {
 		$fa.remove();
 	}
+});
+
+$(function() {
+	new MutationObserver(function(records) {
+		records.forEach(function(record) {
+			record.addedNodes.forEach(function(node) {
+				if ([].some.call(node.classList, function(c) {
+					return /^emoji-/.test(c);
+				})) {
+					node.classList.add('emoji');
+				}
+			});
+		});
+	}).observe(document.body, {childList: true, subtree: true});
 });
