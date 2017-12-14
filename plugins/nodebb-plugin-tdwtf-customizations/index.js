@@ -440,7 +440,8 @@ module.exports = {
 		async.parallel({
 			groups: async.apply(Groups.isMemberOfGroups, data.templateValues.user.uid, ['Mafia - Players', 'Mafia - Club Ded', 'Self-Serve Mafia - Players', 'Self-Serve Mafia - Club Ded', 'Impossible Mission - A', 'Impossible Mission - B']),
 			clubDed: async.apply(Categories.getTopicIds, {cid: 32, start: 0, stop: 0}),
-			clubDedSS: async.apply(Categories.getTopicIds, {cid: 47, start: 0, stop: 0})
+			clubDedSS: async.apply(Categories.getTopicIds, {cid: 47, start: 0, stop: 0}),
+			settings: async.apply(db.getObjectFields, 'user:' + data.templateValues.user.uid + ':settings', ['tdwtfDisableMobileSlide'])
 		}, function(err, results) {
 			if (err) {
 				return callback(err, data);
@@ -452,6 +453,7 @@ module.exports = {
 			data.templateValues.user.isMafiaClubDedSS = results.groups[3] && results.clubDedSS[0];
 			data.templateValues.user.isImpossibleMissionA = results.groups[4];
 			data.templateValues.user.isImpossibleMissionB = results.groups[5];
+			data.templateValues.user.disableMobileSlide = Boolean(results.settings && parseInt(results.settings.tdwtfDisableMobileSlide, 10));
 			data.templateValues.userJSON = jsesc(JSON.stringify(data.templateValues.user), { isScriptContext: true });
 			callback(null, data);
 		});
@@ -652,6 +654,27 @@ module.exports = {
 			},
 			dictionary: require('/usr/src/app/tdwtf-emoji/dictionary.json')
 		});
+		callback(null, data);
+	},
+	"addCustomSettings": function(data, callback) {
+		db.getObjectFields('user:' + data.uid + ':settings', ['tdwtfDisableMobileSlide'], function(err, settings) {
+			if (err) {
+				return callback(err);
+			}
+
+			data.customSettings.push({
+				'title': 'TDWTF',
+				'content': '<div class="checkbox"><label><input type="checkbox" data-property="tdwtfDisableMobileSlide"' + (settings && parseInt(settings.tdwtfDisableMobileSlide, 10) ? ' checked' : '') + '> <strong>Disable side-sliding on mobile.</strong></label></div><p class="help-block">Requires a refresh to take effect.</p>'
+			});
+
+			callback(null, data);
+		});
+	},
+	"saveUserSettings": function(data) {
+		db.setObjectField('user:' + data.uid + ':settings', 'tdwtfDisableMobileSlide', data.settings.tdwtfDisableMobileSlide ? 1 : 0);
+	},
+	"getUserSettings": function(data, callback) {
+		data.settings.tdwtfDisableMobileSlide = parseInt(data.settings.tdwtfDisableMobileSlide || '0', 10);
 		callback(null, data);
 	}
 };

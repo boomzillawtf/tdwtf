@@ -11,7 +11,11 @@ $(window).on('action:ajaxify.contentLoaded', function() {
 		}
 	}
 
-	$html.addClass('preventSlideout');
+	if (app.user && app.user.disableMobileSlide) {
+		$html.addClass('preventSlideout');
+	} else {
+		$html.removeClass('preventSlideout');
+	}
 
 	data('category-id', ajaxify.data && ajaxify.data.cid);
 	data('user-id', app.user && app.user.uid);

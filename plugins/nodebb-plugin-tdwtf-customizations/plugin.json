@@ -12,7 +12,10 @@
 		{"hook": "filter:register.check", "method": "registerCheck"},
 		{"hook": "filter:topics.addPostData", "method": "postReplyCount"},
 		{"hook": "action:markdown.updateParserRules", "method": "disableFuzzy"},
-		{"hook": "filter:emoji.packs", "method": "defineEmoji"}
+		{"hook": "filter:emoji.packs", "method": "defineEmoji"},
+		{"hook": "filter:user.customSettings", "method": "addCustomSettings"},
+		{"hook": "action:user.saveSettings", "method": "saveUserSettings"},
+		{"hook": "filter:user.getSettings", "method": "getUserSettings"}
 	],
 	"less": [
 		"./categories.less",
