@@ -71,7 +71,7 @@ $(window).on('action:ajaxify.end', function() {
 $(function() {
 	new MutationObserver(function(records) {
 		records.forEach(function(record) {
-			record.addedNodes.forEach(function(node) {
+			[].forEach.call(record.addedNodes, function(node) {
 				if (node.classList && [].some.call(node.classList, function(c) {
 					return /^emoji-/.test(c);
 				})) {
