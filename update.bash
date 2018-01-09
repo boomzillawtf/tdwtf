@@ -2,7 +2,6 @@
 
 if [[ "`basename "$0"`" == "update_local.bash" ]]; then
 	# build the local image
-	docker pull node:8
 	docker build -t boomzillawtf/tdwtf .
 else
 	# pull the new image

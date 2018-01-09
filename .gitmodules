@@ -1,6 +1,3 @@
-[submodule "NodeBB"]
-	path = NodeBB
-	url = https://github.com/NodeBB/NodeBB
 [submodule "nodebb-plugin-deny-moderator-access"]
 	path = plugins/nodebb-plugin-deny-moderator-access
 	url = https://github.com/BenLubar/nodebb-plugin-deny-moderator-access

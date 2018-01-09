@@ -1,6 +1,5 @@
-FROM node:8
+FROM nodebb/docker:v1.7.3
 
-RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 COPY watchdog.bash /usr/src/app/
@@ -9,15 +8,7 @@ ENV NODE_ENV=production \
     daemon=false \
     silent=false
 
-COPY NodeBB/install/package.json /usr/src/app/package.json
-
-RUN npm install
-COPY NodeBB /usr/src/app
-
 RUN sed -e "s/var mediumMin = \\([0-9]\\+\\);/var mediumMin = !window.localStorage['unresponsive-settings'] || JSON.parse(window.localStorage['unresponsive-settings']).responsive ? \\1 : 0;/" -i /usr/src/app/node_modules/nodebb-plugin-composer-default/static/lib/composer/resize.js
-
-COPY templates-js-stub /usr/src/app/templates-js-stub
-RUN npm install --save ./templates-js-stub/
 
 COPY plugins /usr/src/app/plugins
 RUN npm install --save ./plugins/*/ nodebb-plugin-shortcuts@1.1.2
@@ -39,9 +30,6 @@ RUN cd node_modules/nodebb-plugin-tdwtf-buttons && curl -sSL https://patch-diff.
 
 COPY youtube-embed-debug.diff /usr/src/app/node_modules/nodebb-plugin-youtube-embed/youtube-embed-debug.diff
 RUN cd node_modules/nodebb-plugin-youtube-embed && cat youtube-embed-debug.diff | patch -p1
-
-# the default port for NodeBB is exposed outside the container
-EXPOSE 4567
 
 VOLUME /usr/src/app/docker
 VOLUME /usr/src/app/public/uploads

@@ -21,7 +21,6 @@
 		"./categories.less",
 		"./custom.less",
 		"./details-shim.less",
-		"./flexnav.less",
 		"./holiday.less",
 		"./iframely.less"
 	],
