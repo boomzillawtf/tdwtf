@@ -20,6 +20,8 @@ var privileges = module.parent.require('./privileges');
 var meta = module.parent.require('./meta');
 var utils = module.parent.require('../public/src/utils');
 
+var importRedirects = require('./import.js');
+
 var realLoggerAdd = winston.Logger.prototype.add;
 winston.Logger.prototype.add = function() {
 	this.filters.push(function(level, msg) {
@@ -415,7 +417,7 @@ module.exports = {
 		params.router.get('/api/admin/plugins/tdwtf', renderAdminPage);
 		params.router.get('/api/tdwtf-ip', renderIPPage);
 
-		callback();
+		importRedirects.load(params, callback);
 	},
 	"meta": function(data, callback) {
 		data.tags.push({

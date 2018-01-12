@@ -46,10 +46,6 @@
 [submodule "nodebb-plugin-upvote-notifications"]
 	path = plugins/nodebb-plugin-upvote-notifications
 	url = https://github.com/boomzillawtf/nodebb-plugin-upvote-notifications
-[submodule "plugins/nodebb-plugin-import-tdwtf"]
-	path = plugins/nodebb-plugin-import-tdwtf
-	url = https://github.com/BenLubar/nodebb-plugin-import-discourse.git
-	branch = tdwtf
 [submodule "emoji/fontawesome"]
 	path = emoji/fontawesome
 	url = https://github.com/encharm/Font-Awesome-SVG-PNG
