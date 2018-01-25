@@ -1,3 +1,5 @@
+/* jshint node: true */
+
 (function(Plugin) {
 	var db = require.main.require('./src/database'),
 	    Posts = require.main.require('./src/posts'),
@@ -190,7 +192,7 @@
 					}
 
 					redirect(req, res, '/user/' + slug);
-				})
+				});
 			});
 		});
 	};
@@ -212,7 +214,7 @@
 					}
 
 					redirect(req, res, '/category/' + slug);
-				})
+				});
 			});
 		});
 	};
@@ -277,7 +279,7 @@
 					}
 
 					redirect(req, res, url);
-				})
+				});
 			});
 		});
 	};
