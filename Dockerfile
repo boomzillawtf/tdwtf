@@ -10,6 +10,10 @@ ENV NODE_ENV=production \
 
 RUN sed -e "s/var mediumMin = \\([0-9]\\+\\);/var mediumMin = !window.localStorage['unresponsive-settings'] || JSON.parse(window.localStorage['unresponsive-settings']).responsive ? \\1 : 0;/" -i /usr/src/app/node_modules/nodebb-plugin-composer-default/static/lib/composer/resize.js
 
+RUN ln -sf /usr/src/app/install/package.json /usr/src/app/package.json
+RUN curl -sSL https://patch-diff.githubusercontent.com/raw/NodeBB/NodeBB/pull/6267.diff | patch -p1
+RUN npm install
+
 COPY plugins /usr/src/app/plugins
 RUN npm install --save ./plugins/*/ nodebb-plugin-shortcuts@1.1.2
 
@@ -27,7 +31,6 @@ RUN echo public/uploads/*/ > .make-uploads-folders
 RUN cd node_modules/nodebb-plugin-imagemagick && curl -sSL https://patch-diff.githubusercontent.com/raw/NodeBB/nodebb-plugin-imagemagick/pull/6.diff | patch -p1
 RUN curl -sSL https://patch-diff.githubusercontent.com/raw/NodeBB/NodeBB/pull/5185.diff | patch -p1
 RUN cd node_modules/nodebb-plugin-tdwtf-buttons && curl -sSL https://patch-diff.githubusercontent.com/raw/NedFodder/nodebb-plugin-tdwtf-buttons/pull/2.diff | patch -p1
-RUN curl -sSL https://patch-diff.githubusercontent.com/raw/NodeBB/NodeBB/pull/6266.diff | patch -p1
 
 COPY youtube-embed-debug.diff /usr/src/app/node_modules/nodebb-plugin-youtube-embed/youtube-embed-debug.diff
 RUN cd node_modules/nodebb-plugin-youtube-embed && cat youtube-embed-debug.diff | patch -p1
