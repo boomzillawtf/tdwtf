@@ -2,6 +2,9 @@ FROM nodebb/docker:v1.7.4
 
 WORKDIR /usr/src/app
 
+# Remove this when we update NodeBB next
+RUN curl -sSL https://github.com/NodeBB/NodeBB/commit/5302e79b564f057105be467f885e0018b0605c58.diff | patch -p1
+
 COPY watchdog.bash /usr/src/app/
 
 ENV NODE_ENV=production \
