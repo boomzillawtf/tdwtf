@@ -14,7 +14,7 @@ ENV NODE_ENV=production \
 RUN sed -e "s/var mediumMin = \\([0-9]\\+\\);/var mediumMin = !window.localStorage['unresponsive-settings'] || JSON.parse(window.localStorage['unresponsive-settings']).responsive ? \\1 : 0;/" -i /usr/src/app/node_modules/nodebb-plugin-composer-default/static/lib/composer/resize.js
 
 COPY plugins /usr/src/app/plugins
-RUN npm install --save ./plugins/*/ nodebb-plugin-shortcuts@1.1.2
+RUN npm install --save ./plugins/*/ nodebb-plugin-shortcuts@1.1.2 https://github.com/NodeBB/nodebb-plugin-emoji\#0bb38743168fd99bd630a4e22f2e83b89bfd15c8
 
 RUN node -e 'require("nodebb-plugin-emoji-one/emoji").defineEmoji({packs:[]},function(err){if(err){console.error(err);process.exit(1)}})'
 

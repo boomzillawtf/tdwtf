@@ -67,17 +67,3 @@ $(window).on('action:ajaxify.end', function() {
 		$fa.remove();
 	}
 });
-
-$(function() {
-	new MutationObserver(function(records) {
-		records.forEach(function(record) {
-			[].forEach.call(record.addedNodes, function(node) {
-				if (node.classList && [].some.call(node.classList, function(c) {
-					return /^emoji-/.test(c);
-				})) {
-					node.classList.add('emoji');
-				}
-			});
-		});
-	}).observe(document.body, {childList: true, subtree: true});
-});
