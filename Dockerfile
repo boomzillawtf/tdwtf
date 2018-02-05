@@ -32,6 +32,7 @@ RUN curl -sSL https://patch-diff.githubusercontent.com/raw/NodeBB/NodeBB/pull/51
 RUN cd node_modules/nodebb-plugin-tdwtf-buttons && curl -sSL https://patch-diff.githubusercontent.com/raw/NedFodder/nodebb-plugin-tdwtf-buttons/pull/2.diff | patch -p1
 RUN curl -sSL https://patch-diff.githubusercontent.com/raw/NodeBB/NodeBB/pull/6266.diff | patch -p1
 RUN cd node_modules/nodebb-plugin-mentions && curl -sSL https://patch-diff.githubusercontent.com/raw/julianlam/nodebb-plugin-mentions/pull/96.diff | patch -p1
+RUN curl -sSL https://patch-diff.githubusercontent.com/raw/NodeBB/NodeBB/pull/6304.diff | patch -p1
 
 COPY youtube-embed-debug.diff /usr/src/app/node_modules/nodebb-plugin-youtube-embed/youtube-embed-debug.diff
 RUN cd node_modules/nodebb-plugin-youtube-embed && cat youtube-embed-debug.diff | patch -p1
