@@ -2,9 +2,6 @@ FROM nodebb/docker:v1.7.4
 
 WORKDIR /usr/src/app
 
-# Remove this when we update NodeBB next
-RUN curl -sSL https://github.com/NodeBB/NodeBB/commit/5302e79b564f057105be467f885e0018b0605c58.diff | patch -p1
-
 COPY watchdog.bash /usr/src/app/
 
 ENV NODE_ENV=production \
@@ -14,7 +11,7 @@ ENV NODE_ENV=production \
 RUN sed -e "s/var mediumMin = \\([0-9]\\+\\);/var mediumMin = !window.localStorage['unresponsive-settings'] || JSON.parse(window.localStorage['unresponsive-settings']).responsive ? \\1 : 0;/" -i /usr/src/app/node_modules/nodebb-plugin-composer-default/static/lib/composer/resize.js
 
 COPY plugins /usr/src/app/plugins
-RUN npm install --save ./plugins/*/ nodebb-plugin-shortcuts@1.1.2 https://github.com/NodeBB/nodebb-plugin-emoji\#0bb38743168fd99bd630a4e22f2e83b89bfd15c8
+RUN npm install --save ./plugins/*/ nodebb-plugin-shortcuts@1.1.2 nodebb-plugin-emoji@2.1.0
 
 RUN node -e 'require("nodebb-plugin-emoji-one/emoji").defineEmoji({packs:[]},function(err){if(err){console.error(err);process.exit(1)}})'
 
@@ -32,7 +29,11 @@ RUN curl -sSL https://patch-diff.githubusercontent.com/raw/NodeBB/NodeBB/pull/51
 RUN cd node_modules/nodebb-plugin-tdwtf-buttons && curl -sSL https://patch-diff.githubusercontent.com/raw/NedFodder/nodebb-plugin-tdwtf-buttons/pull/2.diff | patch -p1
 RUN curl -sSL https://patch-diff.githubusercontent.com/raw/NodeBB/NodeBB/pull/6266.diff | patch -p1
 RUN cd node_modules/nodebb-plugin-mentions && curl -sSL https://patch-diff.githubusercontent.com/raw/julianlam/nodebb-plugin-mentions/pull/96.diff | patch -p1
-RUN curl -sSL https://patch-diff.githubusercontent.com/raw/NodeBB/NodeBB/pull/6304.diff | patch -p1
+RUN curl -sSL https://patch-diff.githubusercontent.com/raw/NodeBB/NodeBB/pull/6315.diff | patch -p1
+
+# Remove this when we update NodeBB next
+RUN curl -sSL https://github.com/NodeBB/NodeBB/commit/5302e79b564f057105be467f885e0018b0605c58.diff | patch -p1
+RUN curl -sSL https://github.com/NodeBB/NodeBB/commit/8c9bae8ba388f94750130819106d240e90715be7.diff | patch -p1
 
 COPY youtube-embed-debug.diff /usr/src/app/node_modules/nodebb-plugin-youtube-embed/youtube-embed-debug.diff
 RUN cd node_modules/nodebb-plugin-youtube-embed && cat youtube-embed-debug.diff | patch -p1
