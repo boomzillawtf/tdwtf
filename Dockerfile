@@ -24,7 +24,6 @@ RUN echo public/uploads/*/ > .make-uploads-folders
 
 # PULL REQUESTS
 # delete these steps as the pull requests get merged into the upstream repo
-RUN cd node_modules/nodebb-plugin-imagemagick && curl -sSL https://patch-diff.githubusercontent.com/raw/NodeBB/nodebb-plugin-imagemagick/pull/6.diff | patch -p1
 RUN curl -sSL https://patch-diff.githubusercontent.com/raw/NodeBB/NodeBB/pull/5185.diff | patch -p1
 RUN cd node_modules/nodebb-plugin-tdwtf-buttons && curl -sSL https://patch-diff.githubusercontent.com/raw/NedFodder/nodebb-plugin-tdwtf-buttons/pull/2.diff | patch -p1
 RUN curl -sSL https://patch-diff.githubusercontent.com/raw/NodeBB/NodeBB/pull/6266.diff | patch -p1
