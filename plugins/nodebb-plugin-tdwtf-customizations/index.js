@@ -655,7 +655,7 @@ module.exports = {
 				directory: '/usr/src/app/tdwtf-emoji'
 			},
 			dictionary: require('/usr/src/app/tdwtf-emoji/dictionary.json')
-		});
+		}, require('/usr/src/app/tdwtf-emoji/fontawesome.json'));
 		callback(null, data);
 	},
 	"addCustomSettings": function(data, callback) {

@@ -46,9 +46,6 @@
 [submodule "nodebb-plugin-upvote-notifications"]
 	path = plugins/nodebb-plugin-upvote-notifications
 	url = https://github.com/boomzillawtf/nodebb-plugin-upvote-notifications
-[submodule "emoji/fontawesome"]
-	path = emoji/fontawesome
-	url = https://github.com/encharm/Font-Awesome-SVG-PNG
 [submodule "plugins/nodebb-plugin-youtube-embed"]
 	path = plugins/nodebb-plugin-youtube-embed
 	url = https://github.com/boomzillawtf/nodebb-plugin-youtube-embed.git
