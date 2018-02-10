@@ -15,7 +15,7 @@ RUN curl -sSL https://github.com/NodeBB/NodeBB/commit/5302e79b564f057105be467f88
 RUN curl -sSL https://github.com/NodeBB/NodeBB/commit/8c9bae8ba388f94750130819106d240e90715be7.diff | patch -p1
 RUN curl -sSL https://patch-diff.githubusercontent.com/raw/NodeBB/NodeBB/pull/6266.diff | patch -p1
 RUN curl -sSL https://patch-diff.githubusercontent.com/raw/NodeBB/NodeBB/pull/6315.diff | patch -p1
-RUN cd node_modules/nodebb-plugin-composer-default && curl -sSL https://github.com/NodeBB/nodebb-plugin-composer-default/commit/9fbcb8b4fdf2a391f10abb0b70a1a9ff70c53fb2.diff | patch -p1
+RUN cd node_modules/nodebb-plugin-composer-default && sed -i static/lib/composer/autocomplete.js -e 's/\r//' && curl -sSL https://github.com/NodeBB/nodebb-plugin-composer-default/commit/9fbcb8b4fdf2a391f10abb0b70a1a9ff70c53fb2.diff | patch -p1
 RUN node -e 'require("./src/cli/package-install").updatePackageFile()' && npm install --production
 
 COPY plugins /usr/src/app/plugins
