@@ -19,7 +19,7 @@ RUN cd node_modules/nodebb-plugin-composer-default && sed -i static/lib/composer
 RUN node -e 'require("./src/cli/package-install").updatePackageFile()' && npm install --production
 
 COPY plugins /usr/src/app/plugins
-RUN npm install --save ./plugins/*/ nodebb-plugin-shortcuts@1.1.2 nodebb-plugin-emoji@2.1.2
+RUN npm install --save ./plugins/*/ nodebb-plugin-shortcuts@1.1.2 nodebb-plugin-emoji@2.1.3
 
 RUN node -e 'require("nodebb-plugin-emoji-one/emoji").defineEmoji({packs:[]},function(err){if(err){console.error(err);process.exit(1)}})'
 
