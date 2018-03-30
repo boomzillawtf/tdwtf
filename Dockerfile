@@ -1,4 +1,4 @@
-FROM nodebb/docker:v1.7.4
+FROM nodebb/docker:v1.8.1
 
 WORKDIR /usr/src/app
 
@@ -8,18 +8,14 @@ ENV NODE_ENV=production \
     daemon=false \
     silent=false
 
+RUN apt-get update \
+ && apt-get install -y webp \
+ && rm -rf /var/lib/apt/lists/*
+
 RUN sed -e "s/var mediumMin = \\([0-9]\\+\\);/var mediumMin = !window.localStorage['unresponsive-settings'] || JSON.parse(window.localStorage['unresponsive-settings']).responsive ? \\1 : 0;/" -i /usr/src/app/node_modules/nodebb-plugin-composer-default/static/lib/composer/resize.js
 
-# Remove this when we update NodeBB next
-RUN curl -sSL https://github.com/NodeBB/NodeBB/commit/5302e79b564f057105be467f885e0018b0605c58.diff | patch -p1
-RUN curl -sSL https://github.com/NodeBB/NodeBB/commit/8c9bae8ba388f94750130819106d240e90715be7.diff | patch -p1
-RUN curl -sSL https://patch-diff.githubusercontent.com/raw/NodeBB/NodeBB/pull/6266.diff | patch -p1
-RUN curl -sSL https://patch-diff.githubusercontent.com/raw/NodeBB/NodeBB/pull/6315.diff | patch -p1
-RUN cd node_modules/nodebb-plugin-composer-default && sed -i static/lib/composer/autocomplete.js -e 's/\r//' && curl -sSL https://github.com/NodeBB/nodebb-plugin-composer-default/commit/9fbcb8b4fdf2a391f10abb0b70a1a9ff70c53fb2.diff | patch -p1
-RUN node -e 'require("./src/cli/package-install").updatePackageFile()' && npm install --production
-
 COPY plugins /usr/src/app/plugins
-RUN npm install --save ./plugins/*/ nodebb-plugin-shortcuts@1.1.2 nodebb-plugin-emoji@2.1.3
+RUN npm install --save ./plugins/*/ nodebb-plugin-shortcuts@1.1.2 nodebb-plugin-emoji@2.2.0
 
 RUN node -e 'require("nodebb-plugin-emoji-one/emoji").defineEmoji({packs:[]},function(err){if(err){console.error(err);process.exit(1)}})'
 
@@ -33,7 +29,6 @@ RUN echo public/uploads/*/ > .make-uploads-folders
 # delete these steps as the pull requests get merged into the upstream repo
 RUN curl -sSL https://patch-diff.githubusercontent.com/raw/NodeBB/NodeBB/pull/5185.diff | patch -p1
 RUN cd node_modules/nodebb-plugin-tdwtf-buttons && curl -sSL https://patch-diff.githubusercontent.com/raw/NedFodder/nodebb-plugin-tdwtf-buttons/pull/2.diff | patch -p1
-RUN cd node_modules/nodebb-plugin-mentions && curl -sSL https://patch-diff.githubusercontent.com/raw/julianlam/nodebb-plugin-mentions/pull/96.diff | patch -p1
 
 VOLUME /usr/src/app/docker
 VOLUME /usr/src/app/public/uploads
