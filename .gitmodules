@@ -67,3 +67,6 @@
 [submodule "plugins/nodebb-plugin-emoji-one"]
 	path = plugins/nodebb-plugin-emoji-one
 	url = ../../NodeBB-Community/nodebb-plugin-emoji-one.git
+[submodule "plugins/nodebb-plugin-desktop-notifications"]
+	path = plugins/nodebb-plugin-desktop-notifications
+	url = ../../psychobunny/nodebb-plugin-desktop-notifications.git
