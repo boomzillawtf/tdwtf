@@ -126,15 +126,29 @@ html[data-current-month="4"][data-current-day-of-month="1"]:not([data-user-id="6
 	}
 
 
-	a[data-username]:not(:hover),
-	[component="header/username"]:not(:hover),
-	.plugin-mentions-a:not(:hover),
-	[component="topic/header"] > .hidden-xs:not(.tag-list) > a:not(:hover) {
-		font-size: 0.000000001em;
+	a[data-username],
+	[component="header/username"],
+	.plugin-mentions-a,
+	[component="topic/header"] > .hidden-xs:not(.tag-list) > a {
+		&:not(:hover) {
+			font-size: 0.000000001em;
 
-		&:after {
-			content: "boomzilla";
-			font-size: 1000000000em;
+			&:after {
+				content: "boomzilla";
+				font-size: 1000000000em;
+			}
+		}
+
+		&:hover {
+			position: relative;
+
+			&:before {
+				content: "boomzilla";
+				color: transparent;
+				position: absolute;
+				height: 100%;
+				top: 0;
+			}
 		}
 	}
 
