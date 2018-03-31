@@ -17,10 +17,10 @@ html[data-current-month="10"][data-current-day-of-month="31"] #panel:before {
 	pointer-events: none;
 }
 
-/*@font-face {
+@font-face {
 	font-family: sponge;
 	src: url("/assets/uploads/files/1503689288950-sponge.ttf");
-}*/
+}
 
 @keyframes voteflip {
 	0% {
@@ -40,7 +40,7 @@ html[data-current-month="4"][data-current-day-of-month="1"]:not([data-user-id="6
 		animation: voteflip 10s step-start;
 		display: inline-block;
 	}
-	/*.necro-post {
+	.necro-post {
 		display: block;
 		font-family: sponge;
 		font-size: 72px;
@@ -48,7 +48,7 @@ html[data-current-month="4"][data-current-day-of-month="1"]:not([data-user-id="6
 		color: #fff;
 		text-align: center;
 		padding-top: 20px;
-	}*/
+	}
 
 	.forum-logo {
 		display: none;
@@ -78,10 +78,12 @@ html[data-current-month="4"][data-current-day-of-month="1"]:not([data-user-id="6
 			background-image: url("/assets/uploads/files/1503689201803-dischorse.png");
 		}
 
-		.forum-title:after {
-			content: "Untitled Discourse community";
+		.forum-title {
+			&:after {
+				content: "Untitled Discourse community";
+			}
 
-			&:hover {
+			&:hover:after {
 				content: "500 OK";
 			}
 		}
@@ -92,10 +94,12 @@ html[data-current-month="4"][data-current-day-of-month="1"]:not([data-user-id="6
 			background-image: url("/assets/uploads/default/7309/c5b85beab7048e9c.png");
 		}
 
-		.forum-title:after {
-			content: "Sherikádol Ungèg";
+		.forum-title {
+			&:after {
+				content: "Sherikádol Ungèg";
+			}
 
-			&:hover {
+			&:hover:after {
 				content: "The Perplexing Complexity of Failure";
 			}
 		}
@@ -106,10 +110,12 @@ html[data-current-month="4"][data-current-day-of-month="1"]:not([data-user-id="6
 			background-image: url("/assets/uploads/files/1460387543903-morbiuswilters.jpg");
 		}
 
-		.forum-title:after {
-			content: "@morbiuswilters should be";
+		.forum-title {
+			&:after {
+				content: "@morbiuswilters should be";
+			}
 
-			&:hover {
+			&:hover:after {
 				content: "a @moderator again";
 			}
 		}
@@ -123,7 +129,7 @@ html[data-current-month="4"][data-current-day-of-month="1"]:not([data-user-id="6
 	a[data-username]:not(:hover),
 	[component="header/username"]:not(:hover),
 	.plugin-mentions-a:not(:hover),
-	[component="topic/header"] > .hidden-xs > a:not(:hover) {
+	[component="topic/header"] > .hidden-xs:not(.tag-list) > a:not(:hover) {
 		font-size: 0.000000001em;
 
 		&:after {
