@@ -131,11 +131,15 @@ html[data-current-month="4"][data-current-day-of-month="1"]:not([data-user-id="6
 	.plugin-mentions-a,
 	[component="topic/header"] > .hidden-xs:not(.tag-list) > a {
 		&:not(:hover) {
-			font-size: 0.000000001em;
+			visibility: hidden;
+			word-spacing: -999px;
+			letter-spacing: -999px;
 
 			&:after {
+				visibility: visible;
+				word-spacing: normal;
+				letter-spacing: normal;
 				content: "boomzilla";
-				font-size: 1000000000em;
 			}
 		}
 
@@ -152,9 +156,10 @@ html[data-current-month="4"][data-current-day-of-month="1"]:not([data-user-id="6
 		}
 	}
 
-	.plugin-mentions-a:not(:hover):after {
-		content: "@boomzilla";
-		font-size: 900000000em;
+	.plugin-mentions-a {
+		&:not(:hover):after, &:hover:before {
+			content: "@boomzilla";
+		}
 	}
 
 	.topic [component="post/parent"]:not(:hover) {
