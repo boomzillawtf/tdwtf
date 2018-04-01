@@ -32,7 +32,7 @@ html[data-current-month="10"][data-current-day-of-month="31"] #panel:before {
 	}
 }
 
-html[data-current-month="4"][data-current-day-of-month="1"]:not([data-user-id="650"]) {
+html[data-current-month="4"][data-current-day-of-month="1"]:not([data-user-id="13"]):not([data-user-id="650"]) {
 	/*.categories>li, .category>ul>li, .topic .posts>li {
 		transform: rotate(-1deg);
 	}*/
@@ -131,6 +131,7 @@ html[data-current-month="4"][data-current-day-of-month="1"]:not([data-user-id="6
 	.plugin-mentions-a,
 	[component="topic/header"] > .hidden-xs:not(.tag-list) > a {
 		&:not(:hover) {
+			display: inline-block;
 			visibility: hidden;
 			word-spacing: -999px;
 			letter-spacing: -999px;
