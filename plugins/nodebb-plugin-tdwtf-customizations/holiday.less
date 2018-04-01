@@ -36,7 +36,7 @@ html[data-current-month="4"][data-current-day-of-month="1"]:not([data-user-id="1
 	/*.categories>li, .category>ul>li, .topic .posts>li {
 		transform: rotate(-1deg);
 	}*/
-	.votes {
+	[component="post"]:not(.deleted) .votes {
 		animation: voteflip 20s step-start infinite;
 		display: inline-block;
 	}
@@ -163,16 +163,30 @@ html[data-current-month="4"][data-current-day-of-month="1"]:not([data-user-id="1
 		}
 	}
 
-	.topic [component="post/parent"]:not(:hover) {
-		font-size: 0;
+	.topic [component="post/parent"] {
+		&:not(:hover) {
+			font-size: 0;
 
-		& > i {
-			font-size: 10px;
+			& > i {
+				font-size: 8px;
+			}
+
+			&:after {
+				font-size: 8px;
+				content: " @boomzilla";
+			}
 		}
 
-		&:after {
-			font-size: 10px;
-			content: " @boomzilla";
+		&:hover {
+			position: relative;
+
+			&:before {
+				content: "boomzilla";
+				color: transparent;
+				position: absolute;
+				height: 100%;
+				top: 0;
+			}
 		}
 	}
 }
