@@ -67,9 +67,17 @@ html[data-current-month="4"][data-current-day-of-month="1"]:not([data-user-id="1
 
 	&[data-user-id] .forum-title {
 		font-size: 0;
+		position: relative;
 
-		&:after {
+		&:before, &:after {
 			font-size: 18px;
+		}
+
+		&:before {
+			color: transparent;
+			position: absolute;
+			height: 100%;
+			top: 0;
 		}
 	}
 
@@ -79,7 +87,7 @@ html[data-current-month="4"][data-current-day-of-month="1"]:not([data-user-id="1
 		}
 
 		.forum-title {
-			&:after {
+			&:before, &:after {
 				content: "Untitled Discourse community";
 			}
 
@@ -95,7 +103,7 @@ html[data-current-month="4"][data-current-day-of-month="1"]:not([data-user-id="1
 		}
 
 		.forum-title {
-			&:after {
+			&:before, &:after {
 				content: "Sherikádol Ungèg";
 			}
 
@@ -111,7 +119,7 @@ html[data-current-month="4"][data-current-day-of-month="1"]:not([data-user-id="1
 		}
 
 		.forum-title {
-			&:after {
+			&:before, &:after {
 				content: "@morbiuswilters should be";
 			}
 
@@ -181,11 +189,13 @@ html[data-current-month="4"][data-current-day-of-month="1"]:not([data-user-id="1
 			position: relative;
 
 			&:before {
-				content: "boomzilla";
+				content: " @boomzilla";
 				color: transparent;
 				position: absolute;
 				height: 100%;
 				top: 0;
+				padding-left: 1em;
+				padding-right: 1em;
 			}
 		}
 	}
