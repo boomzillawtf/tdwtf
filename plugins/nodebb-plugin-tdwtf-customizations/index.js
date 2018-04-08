@@ -19,6 +19,7 @@ var User = module.parent.require('./user');
 var privileges = module.parent.require('./privileges');
 var meta = module.parent.require('./meta');
 var utils = module.parent.require('../public/src/utils');
+var crypto = require('crypto');
 
 var importRedirects = require('./import.js');
 
@@ -31,18 +32,6 @@ winston.Logger.prototype.add = function() {
 	winston.Logger.prototype.add = realLoggerAdd;
 };
 winston.add();
-
-var uploadsController = module.parent.require('./controllers/uploads');
-var realUpload = uploadsController.upload;
-uploadsController.upload = function(req, res, filesIterator) {
-	// Ensure a category is set. We use General Discussion because it
-	// allows all users to upload files.
-	if (parseInt(req.body.cid, 10) === 0) {
-		req.body.cid = 8;
-	}
-
-	realUpload(req, res, filesIterator);
-};
 
 // Modifications documented inline:
 SocketPosts.getVoters = function (socket, data, callback) {
@@ -411,11 +400,86 @@ function renderIPPage(req, res) {
 	res.json({client_ip: req.ip, upstream_ip: upstreamIP, upstream_port: nconf.get('port')});
 }
 
+function encryptFrontPageData(data) {
+	data = Buffer.from(data, 'utf8');
+
+	var verify = crypto.createHmac('sha256', Buffer.from(nconf.get('tdwtf_front_v'), 'base64'));
+	verify.update(data);
+	var encrypted = [verify.digest()];
+
+	var iv = crypto.randomBytes(16);
+	encrypted.push(iv);
+
+	var cipher = crypto.createCipheriv('aes256', Buffer.from(nconf.get('tdwtf_front_d'), 'base64'), iv);
+	encrypted.push(cipher.update(data));
+	encrypted.push(cipher.final());
+
+	return Buffer.concat(encrypted).toString('base64');
+}
+
+function decryptFrontPageData(data) {
+	data = Buffer.from(data, 'base64');
+
+	var decipher = crypto.createDecipheriv('aes256', Buffer.from(nconf.get('tdwtf_front_e'), 'base64'), data.slice(32, 48));
+	var decrypted = decipher.update(data.slice(48));
+	decrypted = Buffer.concat([decrypted, decipher.final()]);
+
+	var verify = crypto.createHmac('sha256', Buffer.from(nconf.get('tdwtf_front_s'), 'base64'));
+	verify.update(decrypted);
+	var hash = verify.digest();
+
+	if (!crypto.timingSafeEqual(data.slice(0, 32), hash)) {
+		throw new Error('invalid data');
+	}
+
+	return decrypted.toString('utf8');
+}
+
+function renderFrontPageAuth(req, res) {
+	var target = 'https://thedailywtf.com/login/nodebb';
+	var state;
+
+	try {
+		if (req.query.target) {
+			target = decryptFrontPageData(req.query.target);
+			console.log('target: ' + target);
+		}
+
+		if (!req.query.state) {
+			res.redirect(302, target);
+			return;
+		}
+
+		state = decryptFrontPageData(req.query.state);
+	} catch (ex) {
+		winston.warn('[tdwtf-front-page-auth] ' + ex.toString());
+		res.status(400).json('bad-request');
+		return;
+	}
+
+	User.getUserFields(req.uid, ['username', 'userslug'], function(err, u) {
+		if (err) {
+			return res.status(500).json(err.message);
+		}
+
+		User.isAdminOrGlobalMod(req.uid, function(err, isMod) {
+			if (err) {
+				return res.status(500).json(err.message);
+			}
+
+			target += target.indexOf('?') === -1 ? '?' : '&';
+			target += 'token=' + encodeURIComponent(encryptFrontPageData(JSON.stringify({n: u.username, s: u.userslug, m: isMod, t: state})));
+			res.redirect(302, target);
+		});
+	});
+}
+
 module.exports = {
 	"init": function(params, callback) {
 		params.router.get('/admin/plugins/tdwtf', params.middleware.admin.buildHeader, renderAdminPage);
 		params.router.get('/api/admin/plugins/tdwtf', renderAdminPage);
 		params.router.get('/api/tdwtf-ip', renderIPPage);
+		params.router.get('/api/tdwtf-front-page-auth', params.middleware.ensureLoggedIn, renderFrontPageAuth);
 
 		importRedirects.load(params, callback);
 	},

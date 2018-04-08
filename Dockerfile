@@ -2,6 +2,9 @@ FROM nodebb/docker:v1.8.2
 
 WORKDIR /usr/src/app
 
+# v1.8.2 backports. remove when we upgrade to the next version.
+RUN npm install nodebb-plugin-composer-default@6.0.20
+
 COPY watchdog.bash /usr/src/app/
 
 ENV NODE_ENV=production \

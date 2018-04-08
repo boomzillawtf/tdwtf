@@ -37,6 +37,7 @@
 		params.router.get('/api/p/:pid', Plugin.postRedirect);
 		params.router.get('/user_avatar/:host/:user/:size/:name', Plugin.avatarRedirect);
 		params.router.get('/api/user_avatar/:host/:user/:size/:name', Plugin.avatarRedirect);
+		params.router.get('/api/tdwtf-disco-user-redirect/:id', Plugin.userRedirect);
 		params.router.get('/c/:parent/:child?', Plugin.categoryRedirect);
 		params.router.get('/api/c/:parent/:child?', Plugin.categoryRedirect);
 
@@ -168,6 +169,26 @@
 			})) {
 				next();
 			}
+		});
+	};
+
+	Plugin.userRedirect = function(req, res, next) {
+		if (isNaN(req.params.id)) {
+			return next();
+		}
+
+		db.sortedSetScore('_imported:_users', req.params.id, function(err, id) {
+			if (err || !id) {
+				return next();
+			}
+
+			User.getUserField(id, 'userslug', function(err, slug) {
+				if (err || !slug) {
+					return next();
+				}
+
+				redirect(req, res, '/user/' + slug);
+			});
 		});
 	};
 
