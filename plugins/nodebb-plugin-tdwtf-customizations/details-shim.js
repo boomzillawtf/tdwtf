@@ -31,7 +31,7 @@ window.addEventListener('DOMContentLoaded', function () {
 					var open = d.hasAttribute('open') || d.getAttribute('data-open') === 'open';
 
 					var details = document.createElement('div');
-					details.classList.add('details');
+					details.classList.add('tdwtf-details-shim');
 					if (open) {
 						details.classList.add('open');
 					}

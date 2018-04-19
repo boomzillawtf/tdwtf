@@ -1,16 +1,16 @@
 /* Styles for details/summary shim */
 
-.details, summary {
+.tdwtf-details-shim, summary {
     display: list-item;
     font-weight: inherit;
 }
 
-.details > summary {
+.tdwtf-details-shim > summary {
     display: inline-block;
     font-weight: inherit;
 }
 
-.details > summary:before {
+.tdwtf-details-shim > summary:before {
     content: "►";
     display: block;
     margin-top: 1pt;
@@ -19,12 +19,12 @@
     float: left;
 }
 
-.details.open > summary:before {
+.tdwtf-details-shim.open > summary:before {
     content: "▼";
     margin-left: -2px;
     margin-right: 2px;
 }
 
-.details:not(.open) > :not(summary) {
+.tdwtf-details-shim:not(.open) > :not(summary) {
     display: none;
 }
