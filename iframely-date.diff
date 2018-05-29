@@ -1,5 +1,5 @@
 diff --git a/library.js b/library.js
-index 3313930..06f8067 100644
+index 3313930..0110434 100644
 --- a/library.js
 +++ b/library.js
 @@ -173,7 +173,8 @@ iframely.replace = function(raw, options, callback) {
@@ -8,7 +8,7 @@ index 3313930..06f8067 100644
  								icon: icon,
 -								url: url
 +								url: url,
-+								date: validator.escape(embed.meta.date)
++								date: validator.escape(embed.meta.date || '')
  							}, function (err, parsed) {
  
  								if (err) {
@@ -16,7 +16,7 @@ index 3313930..06f8067 100644
  						favicon: wrapImage(icon),
  						embed: embed,
  						url: url,
-+						date: validator.escape(embed.meta.date),
++						date: validator.escape(embed.meta.date || ''),
  						metaString: metaInfo.length ? metaInfo.join('&nbsp;&nbsp;/&nbsp;&nbsp;') : false,
  						embedHtml: embedHtml,
  						embedIsImg: /^<img[^>]+>$/.test(embedHtml),
