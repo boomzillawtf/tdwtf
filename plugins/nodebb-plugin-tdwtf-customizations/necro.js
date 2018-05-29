@@ -9,12 +9,12 @@ function addNecroPostMessage() {
 		}
 		if (post.is('[data-index="0"]') && !post.find('.content>:not([class*="iframely"])').length) {
 			var dataDate = new Date(post.find('[data-date]').attr('data-date'));
-			var diff = post.attr('data-timestamp') - dataDate;
-			if (diff >= necroThreshold) {
-				var ago = $.timeago.settings.strings.suffixAgo;
+			var dataDiff = post.attr('data-timestamp') - dataDate;
+			if (dataDiff >= necroThreshold) {
+				var dataAgo = $.timeago.settings.strings.suffixAgo;
 				$.timeago.settings.strings.suffixAgo = ' later';
-				$('<aside>').addClass('necro-post').text($.timeago.inWords(diff)).append($('<hr>')).prependTo(post);
-				$.timeago.settings.strings.suffixAgo = ago;
+				$('<aside>').addClass('necro-post').text($.timeago.inWords(dataDiff)).append($('<hr>')).prependTo(post);
+				$.timeago.settings.strings.suffixAgo = dataAgo;
 			}
 			return;
 		}
