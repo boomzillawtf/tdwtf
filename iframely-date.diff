@@ -1,0 +1,47 @@
+diff --git a/library.js b/library.js
+index 3313930..06f8067 100644
+--- a/library.js
++++ b/library.js
+@@ -173,7 +173,8 @@ iframely.replace = function(raw, options, callback) {
+ 								title: embed.meta.title || url,
+ 								embed: embed,
+ 								icon: icon,
+-								url: url
++								url: url,
++								date: validator.escape(embed.meta.date)
+ 							}, function (err, parsed) {
+ 
+ 								if (err) {
+@@ -234,6 +235,7 @@ iframely.replace = function(raw, options, callback) {
+ 						favicon: wrapImage(icon),
+ 						embed: embed,
+ 						url: url,
++						date: validator.escape(embed.meta.date),
+ 						metaString: metaInfo.length ? metaInfo.join('&nbsp;&nbsp;/&nbsp;&nbsp;') : false,
+ 						embedHtml: embedHtml,
+ 						embedIsImg: /^<img[^>]+>$/.test(embedHtml),
+diff --git a/static/templates/partials/iframely-link-title.tpl b/static/templates/partials/iframely-link-title.tpl
+index ee16400..95b9d74 100644
+--- a/static/templates/partials/iframely-link-title.tpl
++++ b/static/templates/partials/iframely-link-title.tpl
+@@ -1,6 +1,6 @@
+ <div class="iframely-link">
+     <div>
+-        <a href="{url}" target="_blank" rel="nofollow noreferrer noopener">
++        <a href="{url}" target="_blank" rel="nofollow noreferrer noopener" data-date="{date}">
+ 
+             <!-- IF icon -->
+             <img src="{icon}" class="thumb pull-left not-responsive" />
+diff --git a/static/templates/partials/iframely-widget-card.tpl b/static/templates/partials/iframely-widget-card.tpl
+index b135b72..a065a32 100644
+--- a/static/templates/partials/iframely-widget-card.tpl
++++ b/static/templates/partials/iframely-widget-card.tpl
+@@ -10,7 +10,7 @@
+ 
+             <!-- IF title -->
+             <h4 class="media-heading">
+-                <a href="{url}" target="_blank" rel="nofollow noreferrer noopener" class="one-line">
++                <a href="{url}" target="_blank" rel="nofollow noreferrer noopener" class="one-line" data-date="{date}">
+                     <!-- IF favicon -->
+                     <img src="{favicon}" class="thumb pull-left not-responsive" />
+                     <!-- ENDIF favicon -->

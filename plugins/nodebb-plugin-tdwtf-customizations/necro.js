@@ -7,6 +7,17 @@ function addNecroPostMessage() {
 		if (post.is(':has(.necro-post)')) {
 			return;
 		}
+		if (post.is('[data-index="0"]') && !post.find('.content>:not([class*="iframely"])').length) {
+			var dataDate = new Date(post.find('[data-date]').attr('data-date'));
+			var diff = post.attr('data-timestamp') - dataDate;
+			if (diff >= necroThreshold) {
+				var ago = $.timeago.settings.strings.suffixAgo;
+				$.timeago.settings.strings.suffixAgo = ' later';
+				$('<aside>').addClass('necro-post').text($.timeago.inWords(diff)).append($('<hr>')).prependTo(post);
+				$.timeago.settings.strings.suffixAgo = ago;
+			}
+			return;
+		}
 		var prev = post.prev('[component="post"]');
 		if (!prev.length) {
 			return;

@@ -31,6 +31,9 @@ RUN curl -sSL https://github.com/BenLubar/NodeBB/commit/195a1c503a25b967be67d912
 RUN cd node_modules/nodebb-plugin-tdwtf-buttons && curl -sSL https://patch-diff.githubusercontent.com/raw/NedFodder/nodebb-plugin-tdwtf-buttons/pull/2.diff | patch -p1
 RUN rm -rf node_modules/mubsub && cp -R node_modules/mubsub-nbb node_modules/mubsub
 
+ADD iframely-date.diff /usr/src/app/node_modules/nodebb-plugin-iframely/
+RUN cd node_modules/nodebb-plugin-iframely && patch -p1 < iframely-date.diff
+
 VOLUME /usr/src/app/docker
 VOLUME /usr/src/app/public/uploads
 
