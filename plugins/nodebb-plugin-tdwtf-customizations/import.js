@@ -187,7 +187,7 @@
 					return next();
 				}
 
-				redirect(req, res, '/user/' + slug);
+				res.redirect(301, '/user/' + slug);
 			});
 		});
 	};
