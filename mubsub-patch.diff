@@ -10,3 +10,15 @@ index f16bd852a..4154544b4 100644
 +	var mubsub = require('mubsub-nbb');
 +	return mongoAdapter({ client: mubsub(getConnectionString()) });
  };
+diff --git a/src/database/mongo/pubsub.js b/src/database/mongo/pubsub.js
+index 83ff67629..47116c24a 100644
+--- a/src/database/mongo/pubsub.js
++++ b/src/database/mongo/pubsub.js
+@@ -1,6 +1,6 @@
+ 'use strict';
+ 
+-var mubsub = require('mubsub');
++var mubsub = require('mubsub-nbb');
+ 
+ var db = require('../mongo');
+ var client = mubsub(db.client);
