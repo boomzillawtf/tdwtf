@@ -1,5 +1,5 @@
 diff --git a/src/database/mongo.js b/src/database/mongo.js
-index f16bd852a..94f9dfbdf 100644
+index f16bd852a..4ac26df5d 100644
 --- a/src/database/mongo.js
 +++ b/src/database/mongo.js
 @@ -272,5 +272,6 @@ mongoModule.close = function (callback) {
@@ -8,7 +8,7 @@ index f16bd852a..94f9dfbdf 100644
  	var mongoAdapter = require('socket.io-adapter-mongo');
 -	return mongoAdapter(getConnectionString());
 +	var mubsub = require('mubsub-nbb');
-+	return mongoAdapter({ client: mubsub(mongoModule.client) });
++	return mongoAdapter(null, { client: mubsub(mongoModule.client) });
  };
 diff --git a/src/database/mongo/pubsub.js b/src/database/mongo/pubsub.js
 index 83ff67629..47116c24a 100644
