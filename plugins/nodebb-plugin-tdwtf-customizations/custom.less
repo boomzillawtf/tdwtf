@@ -1,3 +1,5 @@
+html:not([data-disable-tdwtf-css]) {
+
 /* Get rid of <del>women</del><ins>Jeff Atwood</ins>-friendly shapes */
 #menu .chat-list li a .user-icon,
 #menu .chat-list li a img,
@@ -584,10 +586,6 @@ a[itemprop="url"][href] {
 
 /* dark theme fixes */
 body.skin-cyborg, body.skin-darkly, body.skin-slate, body.skin-superhero {
-	html[data-current-month="10"][data-current-day-of-month="31"] & #panel:before {
-		background-image: url("/uploads/default/8503/d2f7d9520f48de69.png");
-	}
-
 	.emoji[data-set-id="tdwtf"][data-emoji-id^="fa_"] {
 		background-color: #dfdfdf;
 		border-radius: 10px;
@@ -598,12 +596,20 @@ body.skin-cyborg, body.skin-darkly, body.skin-slate, body.skin-superhero {
 		color: #fff;
 	}
 }
+&[data-current-month="10"][data-current-day-of-month="31"] {
+	body.skin-cyborg, body.skin-darkly, body.skin-slate, body.skin-superhero {
+		#panel:before {
+			background-image: url("/uploads/default/8503/d2f7d9520f48de69.png");
+		}
+	}
+}
+
 
 /*
 bootstrap is still violating the HTML5 spec as of version 4:
 https://html.spec.whatwg.org/multipage/rendering.html#the-details-and-summary-elements
 */
-html summary { display: list-item; }
+summary { display: list-item; }
 
 /*
 nodebb-plugin-composer-default 4.3.0+ thinks having a 1-character-wide
@@ -649,4 +655,6 @@ div.profile a[href="/groups/sockdevs"] small {
 
 #main-nav {
 	margin-right: -400px;
+}
+
 }

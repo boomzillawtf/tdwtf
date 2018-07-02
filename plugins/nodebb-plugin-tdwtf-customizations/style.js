@@ -43,6 +43,8 @@ $(window).on('action:ajaxify.contentLoaded', function() {
 	data('current-day-of-week', now.getDay());
 	data('current-day-of-month', now.getDate());
 
+	data('disable-tdwtf-css', false); // ?override_disable-tdwtf-css=anything
+
 	if ($('#new_topic').length && $('#new-topics-alert').length) {
 		$('#new-topics-alert').css('margin-left', $('#new_topic').outerWidth() + 10 + 'px');
 	}
