@@ -36,6 +36,8 @@ RUN cd node_modules/nodebb-plugin-iframely && patch -p1 < iframely-date.diff
 ADD mongo-patches.diff /usr/src/app/
 RUN patch -p1 < mongo-patches.diff
 
+RUN curl -sSL https://patch-diff.githubusercontent.com/raw/NodeBB/NodeBB/pull/5861.diff | patch -p1 && cp -f install/package.json package.json && npm install
+
 VOLUME /usr/src/app/docker
 VOLUME /usr/src/app/public/uploads
 
