@@ -12,6 +12,9 @@ RUN apt-get update \
  && apt-get install -y webp \
  && rm -rf /var/lib/apt/lists/*
 
+# Install PostgreSQL stuff before any other npm commands are run.
+RUN curl -sSL https://patch-diff.githubusercontent.com/raw/NodeBB/NodeBB/pull/5861.diff | patch -p1 && cp -f install/package.json package.json && npm install
+
 RUN sed -e "s/var mediumMin = \\([0-9]\\+\\);/var mediumMin = !window.localStorage['unresponsive-settings'] || JSON.parse(window.localStorage['unresponsive-settings']).responsive ? \\1 : 0;/" -i /usr/src/app/node_modules/nodebb-plugin-composer-default/static/lib/composer/resize.js
 
 COPY plugins /usr/src/app/plugins
@@ -35,8 +38,6 @@ RUN cd node_modules/nodebb-plugin-iframely && patch -p1 < iframely-date.diff
 
 ADD mongo-patches.diff /usr/src/app/
 RUN patch -p1 < mongo-patches.diff
-
-RUN curl -sSL https://patch-diff.githubusercontent.com/raw/NodeBB/NodeBB/pull/5861.diff | patch -p1 && cp -f install/package.json package.json && npm install
 
 VOLUME /usr/src/app/docker
 VOLUME /usr/src/app/public/uploads
