@@ -1,4 +1,4 @@
-FROM nodebb/docker:v1.10.0
+FROM nodebb/docker:v1.10.1
 
 WORKDIR /usr/src/app
 
@@ -32,6 +32,7 @@ RUN echo public/uploads/*/ > .make-uploads-folders
 # delete these steps as the pull requests get merged into the upstream repo
 RUN curl -sSL https://github.com/BenLubar/NodeBB/commit/5e75a45b28c1db142b3e76727a8aad58ed7d33d4.diff | patch -p1
 RUN cd node_modules/nodebb-plugin-tdwtf-buttons && curl -sSL https://patch-diff.githubusercontent.com/raw/NedFodder/nodebb-plugin-tdwtf-buttons/pull/2.diff | patch -p1
+RUN curl -sSL https://patch-diff.githubusercontent.com/raw/NodeBB/NodeBB/pull/6640.diff | patch -p1
 
 ADD iframely-date.diff /usr/src/app/node_modules/nodebb-plugin-iframely/
 RUN cd node_modules/nodebb-plugin-iframely && patch -p1 < iframely-date.diff
