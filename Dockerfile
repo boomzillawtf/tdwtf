@@ -6,7 +6,8 @@ COPY watchdog.bash /usr/src/app/
 
 ENV NODE_ENV=production \
     daemon=false \
-    silent=false
+    silent=false \
+    DEBUG=socket.io-adapter-postgres
 
 RUN apt-get update \
  && apt-get install -y webp \
