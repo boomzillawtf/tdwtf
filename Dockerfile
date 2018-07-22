@@ -6,20 +6,26 @@ COPY watchdog.bash /usr/src/app/
 
 ENV NODE_ENV=production \
     daemon=false \
-    silent=false \
-    DEBUG=socket.io-adapter-postgres
+    silent=false
 
 RUN apt-get update \
  && apt-get install -y webp \
  && rm -rf /var/lib/apt/lists/*
 
+# Include changes made to NodeBB since the last release (mostly dependency updates and translations.)
+RUN git fetch origin 448542d4efe047ad65824ffa587a47e13cb95d99 \
+ && git checkout FETCH_HEAD
+
 # Install PostgreSQL stuff before any other npm commands are run.
-RUN curl -sSL https://patch-diff.githubusercontent.com/raw/NodeBB/NodeBB/pull/5861.diff | patch -p1 && cp -f install/package.json package.json && npm install
+RUN curl -sSL https://patch-diff.githubusercontent.com/raw/NodeBB/NodeBB/pull/5861.diff | patch -p1 \
+ && curl -sSL https://patch-diff.githubusercontent.com/raw/NodeBB/NodeBB/pull/6659.diff | patch -p1 \
+ && cp -f install/package.json package.json \
+ && npm install
 
 RUN sed -e "s/var mediumMin = \\([0-9]\\+\\);/var mediumMin = !window.localStorage['unresponsive-settings'] || JSON.parse(window.localStorage['unresponsive-settings']).responsive ? \\1 : 0;/" -i /usr/src/app/node_modules/nodebb-plugin-composer-default/static/lib/composer/resize.js
 
 COPY plugins /usr/src/app/plugins
-RUN npm install --save ./plugins/*/ nodebb-plugin-shortcuts@1.1.2 nodebb-plugin-emoji@2.2.3
+RUN npm install --save ./plugins/*/ nodebb-plugin-shortcuts@1.1.2
 
 RUN node -e 'require("nodebb-plugin-emoji-one/emoji").defineEmoji({packs:[]},function(err){if(err){console.error(err);process.exit(1)}})'
 
@@ -33,7 +39,6 @@ RUN echo public/uploads/*/ > .make-uploads-folders
 # delete these steps as the pull requests get merged into the upstream repo
 RUN curl -sSL https://github.com/BenLubar/NodeBB/commit/5e75a45b28c1db142b3e76727a8aad58ed7d33d4.diff | patch -p1
 RUN cd node_modules/nodebb-plugin-tdwtf-buttons && curl -sSL https://patch-diff.githubusercontent.com/raw/NedFodder/nodebb-plugin-tdwtf-buttons/pull/2.diff | patch -p1
-RUN curl -sSL https://patch-diff.githubusercontent.com/raw/NodeBB/NodeBB/pull/6640.diff | patch -p1
 
 ADD iframely-date.diff /usr/src/app/node_modules/nodebb-plugin-iframely/
 RUN cd node_modules/nodebb-plugin-iframely && patch -p1 < iframely-date.diff
