@@ -13,7 +13,7 @@ RUN apt-get update \
  && rm -rf /var/lib/apt/lists/*
 
 # Include changes made to NodeBB since the last release (mostly dependency updates and translations.)
-RUN git fetch origin 448542d4efe047ad65824ffa587a47e13cb95d99 \
+RUN git fetch https://github.com/NodeBB/NodeBB.git 448542d4efe047ad65824ffa587a47e13cb95d99 \
  && git checkout FETCH_HEAD
 
 # Install PostgreSQL stuff before any other npm commands are run.
