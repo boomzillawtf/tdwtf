@@ -15,7 +15,8 @@
 		{"hook": "filter:emoji.packs", "method": "defineEmoji"},
 		{"hook": "filter:user.customSettings", "method": "addCustomSettings"},
 		{"hook": "action:user.saveSettings", "method": "saveUserSettings"},
-		{"hook": "filter:user.getSettings", "method": "getUserSettings"}
+		{"hook": "filter:user.getSettings", "method": "getUserSettings"},
+		{"hook": "action:middleware.pageView", "method": "storeRealIP"}
 	],
 	"less": [
 		"./categories.less",

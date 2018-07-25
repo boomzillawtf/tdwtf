@@ -258,10 +258,29 @@ function prepareAdminPage(uid, next) {
 
 		data.recent = recentRestarts;
 
-		db.getSortedSetRevRangeByScore('ip:recent', 0, -1, now, now - 60 * 60 * 1000, function(err, recentIPs) {
+		db.client.query({
+			name: 'query_wtdwtf_real_ip',
+			text: `
+SELECT r."ip"::TEXT "ip"
+  FROM "legacy_object_live" o
+ INNER JOIN "legacy_zset" z
+         ON o."_key" = z."_key"
+        AND o."type" = z."type"
+ INNER JOIN "wtdwtf_real_ip" r
+         ON DECODE(z."value", 'hex') = r."hash"
+ WHERE o."_key" = 'ip:recent'
+   AND z."score" >= $1::NUMERIC
+ ORDER BY z."score" DESC
+`,
+			values: [now - 60 * 60 * 1000]
+		}, function(err, data) {
 			if (err) {
 				return next(err);
 			}
+
+			var recentIPs = data.rows.map(function (r) {
+				return r.ip;
+			});
 
 			async.eachLimit(recentIPs, 10, function(ip, next) {
 				var upstreams = findUpstreams(ip);
@@ -481,7 +500,17 @@ module.exports = {
 		params.router.get('/api/tdwtf-ip', renderIPPage);
 		params.router.get('/api/tdwtf-front-page-auth', params.middleware.ensureLoggedIn, renderFrontPageAuth);
 
-		importRedirects.load(params, callback);
+		db.client.query(`
+CREATE TABLE IF NOT EXISTS "wtdwtf_real_ip" (
+	"ip" INET NOT NULL UNIQUE,
+	"hash" BYTEA NOT NULL PRIMARY KEY CHECK(OCTET_LENGTH("hash") = 20)
+);`, function(err) {
+			if (err) {
+				return callback(err);
+			}
+
+			importRedirects.load(params, callback);
+		});
 	},
 	"meta": function(data, callback) {
 		data.tags.push({
@@ -742,5 +771,13 @@ module.exports = {
 	"getUserSettings": function(data, callback) {
 		data.settings.tdwtfDisableMobileSlide = parseInt(data.settings.tdwtfDisableMobileSlide || '0', 10);
 		callback(null, data);
+	},
+	"storeRealIP": function(data) {
+		var reallyDumbObfuscationMethod = crypto.createHash('sha1').update(data.req.ip + nconf.get('secret')).digest();
+		db.client.query({
+			name: 'insert_wtdwtf_real_ip',
+			text: 'INSERT INTO "wtdwtf_real_ip" ("ip", "hash") VALUES ($1::TEXT::INET, $2::BYTEA) ON CONFLICT DO NOTHING',
+			values: [data.req.ip, reallyDumbObfuscationMethod]
+		}, function() {});
 	}
 };
