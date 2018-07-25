@@ -41,7 +41,7 @@ SELECT "s" INTO secret FROM "secret";
 LOOP
 
 	addr := inet '0.0.0.0' + inc;
-	hash := DIGEST(CONVERT_TO(addr::TEXT || secret, 'SQL_ASCII'), 'sha1');
+	hash := DIGEST(CONVERT_TO(HOST(addr) || secret, 'SQL_ASCII'), 'sha1');
 
 	IF EXISTS(SELECT 1 FROM "recent_ips" WHERE "zhash" = hash) THEN
 		INSERT INTO "wtdwtf_real_ip" ("ip", "hash") VALUES (addr, hash) ON CONFLICT DO NOTHING;

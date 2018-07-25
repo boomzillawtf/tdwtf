@@ -261,7 +261,7 @@ function prepareAdminPage(uid, next) {
 		db.client.query({
 			name: 'query_wtdwtf_real_ip',
 			text: `
-SELECT r."ip"::TEXT "ip"
+SELECT HOST(r."ip") "ip"
   FROM "legacy_object_live" o
  INNER JOIN "legacy_zset" z
          ON o."_key" = z."_key"
