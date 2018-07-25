@@ -273,12 +273,12 @@ SELECT r."ip"::TEXT "ip"
  ORDER BY z."score" DESC
 `,
 			values: [now - 60 * 60 * 1000]
-		}, function(err, data) {
+		}, function(err, res) {
 			if (err) {
 				return next(err);
 			}
 
-			var recentIPs = data.rows.map(function (r) {
+			var recentIPs = res.rows.map(function (r) {
 				return r.ip;
 			});
 
