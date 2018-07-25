@@ -14,11 +14,11 @@ RUN apt-get update \
 
 # Include changes made to NodeBB since the last release (mostly dependency updates and translations.)
 RUN git fetch https://github.com/NodeBB/NodeBB.git master \
- && git checkout 448542d4efe047ad65824ffa587a47e13cb95d99
+ && git checkout c1e98eefa7fe93431ac312ecc0d90314db2c49b1
 
 # Install PostgreSQL stuff before any other npm commands are run.
 RUN curl -sSL https://patch-diff.githubusercontent.com/raw/NodeBB/NodeBB/pull/5861.diff | patch -p1 \
- && curl -sSL https://patch-diff.githubusercontent.com/raw/NodeBB/NodeBB/pull/6659.diff | patch -p1 \
+ && curl -sSL https://patch-diff.githubusercontent.com/raw/NodeBB/NodeBB/pull/6669.diff | patch -p1 \
  && cp -f install/package.json package.json \
  && npm install
 
