@@ -67,3 +67,6 @@
 [submodule "plugins/nodebb-plugin-desktop-notifications"]
 	path = plugins/nodebb-plugin-desktop-notifications
 	url = ../../psychobunny/nodebb-plugin-desktop-notifications.git
+[submodule "plugins/nodebb-plugin-pwned-passwords"]
+	path = plugins/nodebb-plugin-pwned-passwords
+	url = ../../BenLubar/nodebb-plugin-pwned-passwords.git
