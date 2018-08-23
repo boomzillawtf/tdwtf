@@ -10,8 +10,8 @@ if [ ! -z "${installed_docker}" ]; then
 	if [ "${older_version}" != "${required_docker}" ]; then
 		# We can't safely use https://get.docker.com, manual intervention required
 		echo "Your version of docker (${installed_docker}) is out of date,
-(${required_docker} needed.) You  may want to update  your system or visit 
-https://docs.docker.com/engine/installation/#on-linux if your repository doesn't 
+(${required_docker} needed.) You  may want to update  your system or visit
+https://docs.docker.com/engine/installation/#on-linux if your repository doesn't
 support a more recent version or you could try running
 
 	curl -sSL https://get.docker.com/ | sh
@@ -32,7 +32,7 @@ if [ -d /etc/nginx/ ]; then
 	sudo cp nodebb-upstream.conf /etc/nginx/
 else
 	nginx_warning="The host webserver does not appear to be the expected nginx (no
-/etc/nginx directory.). You need to create a virtual host definition /include/ file matching 
+/etc/nginx directory.). You need to create a virtual host definition /include/ file matching
 nodebb-upstream.conf for a webserver running on the host."
 fi
 
@@ -43,24 +43,20 @@ docker pull boomzillawtf/tdwtf
 # create a Docker network
 docker network create --subnet 172.21.1.0/24 wtdwtf
 
-# create the MongoDB container.
-docker run -d --name wtdwtf-mongo --net wtdwtf --restart unless-stopped mongo --replSet rs
+# create the PostgreSQL container
+docker run -d --name wtdwtf-nodebb-postgres --net wtdwtf --restart unless-stopped postgres
 
-# wait for MongoDB to be online and create the replSet.
-while ! docker exec wtdwtf-mongo mongo --eval 'db.version()' > /dev/null 2>&1; do
-	sleep 1
-done
+# give PostgreSQL time to start up
+until nc -z "`docker inspect -f '{{ .NetworkSettings.Networks.wtdwtf.IPAddress }}' wtdwtf-nodebb-postgres`" 5432; do echo "Waiting for PostgreSQL"; sleep 1; done
 
-docker exec wtdwtf-mongo mongo --eval 'rs.initiate()'
-
-# give MongoDB time to start up
-until nc -z "`docker inspect -f '{{ .NetworkSettings.Networks.wtdwtf.IPAddress }}' wtdwtf-mongo`" 27017; do echo "Waiting for MongoDB"; sleep 1; done
+# create the database
+docker exec -u postgres wtdwtf-nodebb-postgres psql --eval='CREATE DATABASE nodebb;'
 
 # start the NodeBB container
 docker run -d --name wtdwtf-nodebb --net wtdwtf --ip 172.21.1.254 --restart unless-stopped -v /usr/share/nginx/wtdwtf-nodebb.config:/usr/src/app/docker -v /usr/share/nginx/wtdwtf-nodebb.uploads:/usr/src/app/public/uploads boomzillawtf/tdwtf
 
 # run the setup script
-docker exec wtdwtf-nodebb node app --setup='{"url":"http://nodebb.local","secret":"not-secret wtdwtf test","database":"mongo","mongo:host":"wtdwtf-mongo","mongo:port":27017,"mongo:username":"","mongo:password":"","mongo:database":"0","admin:username":"PaulaBean","admin:email":"paula@example.com","admin:password":"brillant","admin:password:confirm":"brillant"}'
+docker exec wtdwtf-nodebb node app --setup='{"url":"http://nodebb.local","secret":"not-secret wtdwtf test","database":"postgres","postgres:host":"wtdwtf-nodebb-postgres","postgres:port":5432,"postgres:username":"postgres","postgres:password":"","postgres:database":"nodebb","admin:username":"PaulaBean","admin:email":"paula@example.com","admin:password":"brillant","admin:password:confirm":"brillant"}'
 
 # copy the complete config
 docker cp config.json wtdwtf-nodebb:/usr/src/app/docker/config.json

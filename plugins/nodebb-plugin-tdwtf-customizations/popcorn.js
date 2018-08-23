@@ -1,5 +1,6 @@
-/* jshint browser: true */
-/* globals $, ajaxify, app, socket */
+/*eslint-env browser, jquery*/
+/*globals ajaxify app socket*/
+
 function addPopcornButton(tid) {
 	$('[component="topic"]').off('click', '[component="post/quote-club-ded"]').on('click', '[component="post/quote-club-ded"]', function() {
 		var p = $(this).parents('[component="post"]');

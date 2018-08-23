@@ -1,16 +1,12 @@
 {
 	"url": "http://nodebb.local",
 	"secret": "not-secret wtdwtf test",
-	"database": "mongo",
+	"database": "postgres",
 	"port": [4567, 4568],
-	"mongo": {
-		"host": "wtdwtf-mongo",
-		"port": 27017,
-		"database": "0"
-	},
-	"redis": {
-		"host": "wtdwtf-redis",
-		"port": 6379,
-		"database": 0
+	"postgres": {
+		"host": "wtdwtf-nodebb-postgres",
+		"port": 5432,
+		"username": "postgres",
+		"database": "nodebb"
 	}
 }

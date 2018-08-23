@@ -1,14 +1,14 @@
-/* jshint node: true */
+/*eslint-env node*/
 
 (function(Plugin) {
-	var db = require.main.require('./src/database'),
-	    Posts = require.main.require('./src/posts'),
-	    Topics = require.main.require('./src/topics'),
-	    User = require.main.require('./src/user'),
-	    Categories = require.main.require('./src/categories'),
-	    Messaging = require.main.require('./src/messaging'),
-	    nconf = require.main.require('nconf'),
-	    utils = require.main.require('./public/src/utils.js');
+	var db = require.main.require('./src/database');
+	var Posts = require.main.require('./src/posts');
+	var Topics = require.main.require('./src/topics');
+	var User = require.main.require('./src/user');
+	var Categories = require.main.require('./src/categories');
+	var Messaging = require.main.require('./src/messaging');
+	var nconf = require.main.require('nconf');
+	var utils = require.main.require('./public/src/utils.js');
 
 	// change: also take the request as a parameter
 	function redirect(req, res, url) {

@@ -1,20 +1,19 @@
-// lesshint depthLevel: false
 /* holidays! */
 
 html[data-current-month="10"][data-current-day-of-month="31"] #panel:before {
-	display: block;
-	content: " ";
 	background-image: url("/assets/uploads/default/8337/260c79c86c26d749.png");
-	background-size: contain;
-	background-repeat: no-repeat;
 	background-position: top right;
-	opacity: 0.1;
-	position: fixed;
-	top: 50px;
-	right: 0;
-	width: 50vw;
+	background-repeat: no-repeat;
+	background-size: contain;
+	content: " ";
+	display: block;
 	height: 60vh;
+	opacity: 0.1;
 	pointer-events: none;
+	position: fixed;
+	right: 0px;
+	top: 50px;
+	width: 50vw;
 }
 
 @font-face {
@@ -33,21 +32,19 @@ html[data-current-month="10"][data-current-day-of-month="31"] #panel:before {
 }
 
 html[data-current-month="4"][data-current-day-of-month="1"]:not([data-user-id="13"]):not([data-user-id="650"]) {
-	/*.categories>li, .category>ul>li, .topic .posts>li {
-		transform: rotate(-1deg);
-	}*/
 	[component="post"]:not(.deleted) .votes {
 		animation: voteflip 20s step-start infinite;
 		display: inline-block;
 	}
+
 	.necro-post {
+		background-image: url("/assets/uploads/files/1503689246464-sponge.png");
+		color: #ffffff;
 		display: block;
 		font-family: sponge;
 		font-size: 72px;
-		background-image: url("/assets/uploads/files/1503689246464-sponge.png");
-		color: #fff;
-		text-align: center;
 		padding-top: 20px;
+		text-align: center;
 	}
 
 	&[data-user-id] .forum-logo {
@@ -55,43 +52,48 @@ html[data-current-month="4"][data-current-day-of-month="1"]:not([data-user-id="1
 	}
 
 	&[data-user-id] .navbar-header > a:first-of-type:before {
-		content: "";
-		width: 30px;
-		height: 30px;
-		display: inline-block;
 		background-size: cover;
+		content: "";
+		display: inline-block;
+		float: left;
+		height: 30px;
 		margin: 10px;
 		vertical-align: middle;
-		float: left;
+		width: 30px;
 	}
 
 	&[data-user-id] .forum-title {
-		font-size: 0;
+		font-size: 0px;
 		position: relative;
 
-		&:before, &:after {
+		&:before,
+		&:after {
 			font-size: 18px;
 		}
 
 		&:before {
 			color: transparent;
-			text-shadow: none;
-			position: absolute;
 			height: 100%;
-			top: 0;
+			padding-right: 15px;
+			position: absolute;
+			text-shadow: none;
+			top: 0px;
 			white-space: nowrap;
 			z-index: 1000;
-			padding-right: 15px;
 		}
 	}
 
-	&[data-user-id$="0"], &[data-user-id$="2"], &[data-user-id$="4"], &[data-user-id$="8"] {
+	&[data-user-id$="0"],
+	&[data-user-id$="2"],
+	&[data-user-id$="4"],
+	&[data-user-id$="8"] {
 		.navbar-header > a:first-of-type:before {
 			background-image: url("/assets/uploads/files/1503689201803-dischorse.png");
 		}
 
 		.forum-title {
-			&:before, &:after {
+			&:before,
+			&:after {
 				content: "Untitled Discourse community";
 			}
 
@@ -101,13 +103,16 @@ html[data-current-month="4"][data-current-day-of-month="1"]:not([data-user-id="1
 		}
 	}
 
-	&[data-user-id$="1"], &[data-user-id$="3"], &[data-user-id$="5"] {
+	&[data-user-id$="1"],
+	&[data-user-id$="3"],
+	&[data-user-id$="5"] {
 		.navbar-header > a:first-of-type:before {
 			background-image: url("/assets/uploads/default/7309/c5b85beab7048e9c.png");
 		}
 
 		.forum-title {
-			&:before, &:after {
+			&:before,
+			&:after {
 				content: "Sherikádol Ungèg";
 			}
 
@@ -117,13 +122,16 @@ html[data-current-month="4"][data-current-day-of-month="1"]:not([data-user-id="1
 		}
 	}
 
-	&[data-user-id$="6"], &[data-user-id$="7"], &[data-user-id$="9"] {
+	&[data-user-id$="6"],
+	&[data-user-id$="7"],
+	&[data-user-id$="9"] {
 		.navbar-header > a:first-of-type:before {
 			background-image: url("/assets/uploads/files/1460387543903-morbiuswilters.jpg");
 		}
 
 		.forum-title {
-			&:before, &:after {
+			&:before,
+			&:after {
 				content: "@morbiuswilters should be";
 			}
 
@@ -144,15 +152,15 @@ html[data-current-month="4"][data-current-day-of-month="1"]:not([data-user-id="1
 	[component="topic/header"] > .hidden-xs:not(.tag-list) > a {
 		&:not(:hover) {
 			display: inline-block;
+			letter-spacing: -999px;
 			visibility: hidden;
 			word-spacing: -999px;
-			letter-spacing: -999px;
 
 			&:after {
+				content: "boomzilla";
+				letter-spacing: normal;
 				visibility: visible;
 				word-spacing: normal;
-				letter-spacing: normal;
-				content: "boomzilla";
 			}
 		}
 
@@ -160,33 +168,34 @@ html[data-current-month="4"][data-current-day-of-month="1"]:not([data-user-id="1
 			position: relative;
 
 			&:before {
-				content: "boomzilla";
 				color: transparent;
-				text-shadow: none;
-				position: absolute;
+				content: "boomzilla";
 				height: 100%;
-				top: 0;
+				position: absolute;
+				text-shadow: none;
+				top: 0px;
 			}
 		}
 	}
 
 	.plugin-mentions-a {
-		&:not(:hover):after, &:hover:before {
+		&:not(:hover):after,
+		&:hover:before {
 			content: "@boomzilla";
 		}
 	}
 
 	.topic [component="post/parent"] {
 		&:not(:hover) {
-			font-size: 0;
+			font-size: 0px;
 
 			& > i {
 				font-size: 8px;
 			}
 
 			&:after {
-				font-size: 8px;
 				content: " @boomzilla";
+				font-size: 8px;
 			}
 		}
 
@@ -194,14 +203,14 @@ html[data-current-month="4"][data-current-day-of-month="1"]:not([data-user-id="1
 			position: relative;
 
 			&:before {
-				content: " @boomzilla";
 				color: transparent;
-				text-shadow: none;
-				position: absolute;
+				content: " @boomzilla";
 				height: 100%;
-				top: 0;
 				padding-left: 1em;
 				padding-right: 1em;
+				position: absolute;
+				text-shadow: none;
+				top: 0px;
 			}
 		}
 	}

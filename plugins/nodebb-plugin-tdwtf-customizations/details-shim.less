@@ -1,6 +1,7 @@
 /* Styles for details/summary shim */
 
-.tdwtf-details-shim, summary {
+.tdwtf-details-shim,
+summary {
     display: list-item;
     font-weight: inherit;
 }
@@ -13,10 +14,10 @@
 .tdwtf-details-shim > summary:before {
     content: "►";
     display: block;
-    margin-top: 1pt;
-    font-size: 80%;
-    width: 1.3em;
     float: left;
+    font-size: 80%;
+    margin-top: 1pt;
+    width: 1.3em;
 }
 
 .tdwtf-details-shim.open > summary:before {

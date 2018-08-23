@@ -1,5 +1,6 @@
-/* jshint browser: true */
-/* globals $, ajaxify, app */
+/*eslint-env browser, jquery*/
+/*global app ajaxify*/
+
 var initialSearch = location.search || '?';
 
 $(window).on('action:ajaxify.contentLoaded', function() {

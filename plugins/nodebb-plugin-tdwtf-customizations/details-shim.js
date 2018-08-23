@@ -1,4 +1,4 @@
-/* jshint browser: true, -W071, -W083 */
+/*eslint-env browser*/
 
 // https://what.thedailywtf.com/post/1335607
 

@@ -1,0 +1,9 @@
+{
+	"idSelector": false,
+	"importantRule": false,
+	"maxCharPerLine": false,
+	"qualifyingElement": false,
+	"stringQuotes": {
+		"style": "double"
+	}
+}

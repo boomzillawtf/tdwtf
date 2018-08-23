@@ -1,5 +1,5 @@
-/* jshint browser: true */
-/* globals $, ajaxify, socket */
+/*eslint-env browser, jquery*/
+/*globals ajaxify socket*/
 
 // https://what.thedailywtf.com/post/1044675
 
@@ -25,10 +25,10 @@ function processPosts() {
 
 				// this mutation observer will watch the post for deletion / edits
 				var o = new MutationObserver(function () {
-					var li = post.parentElement, raw = li.querySelector(".raw-content");
-					if (li.classList.contains("deleted")) {
+					var li = post.parentElement, raw = li.querySelector('.raw-content');
+					if (li.classList.contains('deleted')) {
 						o.disconnect();
-					} else if (!raw || raw.classList.contains("hidden")) {
+					} else if (!raw || raw.classList.contains('hidden')) {
 						if (li.contains(raw)) {
 							li.removeChild(raw);
 						}
@@ -54,22 +54,22 @@ function processPosts() {
 	// otherwise, it'll call addRaw to do the heavy lifting
 	function showRaw(event) {
 		var e = event.target;
-		while (e.getAttribute("component") !== "post") {
+		while (e.getAttribute('component') !== 'post') {
 			e = e.parentElement;
 		}
-		var post = e.querySelector(".content:not(.raw-content)");
-		var raw = e.querySelector(".content.raw-content");
-		var pid = e.getAttribute("data-pid");
+		var post = e.querySelector('.content:not(.raw-content)');
+		var raw = e.querySelector('.content.raw-content');
+		var pid = e.getAttribute('data-pid');
 
 		if (raw) {
 			if (!raw.classList.contains('loading')) {
-				if (post.classList.contains("hidden")) {
-					raw.classList.add("hidden");
-					post.classList.remove("hidden");
+				if (post.classList.contains('hidden')) {
+					raw.classList.add('hidden');
+					post.classList.remove('hidden');
 					$(event.target).text('Show raw');
 				} else {
-					post.classList.add("hidden");
-					raw.classList.remove("hidden");
+					post.classList.add('hidden');
+					raw.classList.remove('hidden');
 					$(event.target).text('Hide raw');
 				}
 			}
@@ -77,9 +77,9 @@ function processPosts() {
 			addRaw(pid, post, true);
 			$(event.target).text('Hide raw');
 		}
-		
+
 		// this scrolls the page only if necessary to keep the "view raw" button within the viewport
-		var t = document.getElementById("header-menu").getBoundingClientRect().bottom;
+		var t = document.getElementById('header-menu').getBoundingClientRect().bottom;
 		var b = window.innerHeight;
 		var r = event.target.getBoundingClientRect();
 		if (r.top < t) {
@@ -88,7 +88,7 @@ function processPosts() {
 			window.scrollBy(0, r.bottom - b);
 		}
 	}
-	
+
 	// this relies on the addRaw function from above, and it quotes the entire post, regardless of any selected text
 	// by default, the new topic will be titled "Re: (original title)" and in the same category as the original
 	function replyAsTopic(event) {
@@ -97,13 +97,13 @@ function processPosts() {
 
 		// start a new topic composer, with the same category as the quoted post's topic selected by default
 		window.app.newTopic(window.ajaxify.data.cid);
-		
+
 		// this watches the post so it'll fire when addRaw has finished
 		var o = new MutationObserver(function () {
 			var raw = e.querySelector('.raw-content');
 			if (raw) {
 				o.disconnect();
-				
+
 				// I can't add a quote to the composer until after it's finished loading
 				// as far as I know, there's no event or callback when the composer finishes loading
 				// a mutation observer would need to watch the whole page, so I'm just going to use an interval
@@ -112,10 +112,10 @@ function processPosts() {
 						var t = document.querySelector('.composer input.title');
 						if (t) {
 							clearInterval(i);
-							
+
 							// set the title of the new topic
-							t.value = "Re: " + window.ajaxify.data.titleRaw;
-							
+							t.value = 'Re: ' + window.ajaxify.data.titleRaw;
+
 							// grab the raw post out of the element that addRaw created
 							var r = e.querySelector('.raw-content'), h = r.classList.contains('hidden');
 							r.classList.remove('hidden');
@@ -144,7 +144,7 @@ function processPosts() {
 			}
 		});
 		o.observe(e, {childList: true, subtree: true});
-		
+
 		// if the raw element doesn't exist, call addRaw to add it; otherwise, just force the observer to fire
 		if (!e.querySelector('.raw-content')) {
 			addRaw(pid, e.querySelector('.content'));
@@ -152,7 +152,7 @@ function processPosts() {
 			e.appendChild(e.lastChild);
 		}
 	}
-	
+
 	$('.post-footer .dropdown.open').each(function() {
 		var e = $(this);
 		// if there's a "Bookmark" option, this adds it right before that; otherwise, at the very top
@@ -161,7 +161,7 @@ function processPosts() {
 			favOption = e.find('.dropdown-menu > li:first-of-type');
 		}
 		// add the "view raw" button
-		if (!e.is(":has(.view-raw)")) {
+		if (!e.is(':has(.view-raw)')) {
 			$('<li>').attr('role', 'presentation').append($('<a>').text('View raw').attr({
 				role: 'menuitem',
 				href: '#',
@@ -170,7 +170,7 @@ function processPosts() {
 		}
 
 		// add the "reply as topic" item and a separator to the hamburger menu
-		if (!e.is(":has(.reply-as-topic)")) {
+		if (!e.is(':has(.reply-as-topic)')) {
 			$('<li>').attr('role', 'presentation').append($('<a>').text('Reply as topic').attr({
 				role: 'menuitem',
 				href: '#',

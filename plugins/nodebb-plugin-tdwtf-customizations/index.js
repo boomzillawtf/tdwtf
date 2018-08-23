@@ -1,4 +1,4 @@
-/* jshint node: true */
+/*eslint-env node*/
 
 var async = module.parent.require('async');
 var jsesc = module.parent.require('jsesc');
@@ -163,7 +163,7 @@ SocketPlugins.tdwtf.getPopcornBookmark = function(socket, data, callback) {
 	function done(err, isMember) {
 		if (err || !isMember) {
 			// hide real error
-			return callback(new Error("[[invalid-data]]"));
+			return callback(new Error('[[invalid-data]]'));
 		}
 
 		Topics.getUserBookmark(tid, socket.uid, callback);
@@ -461,7 +461,6 @@ function renderFrontPageAuth(req, res) {
 	try {
 		if (req.query.target) {
 			target = decryptFrontPageData(req.query.target);
-			console.log('target: ' + target);
 		}
 
 		if (!req.query.state) {
@@ -494,7 +493,7 @@ function renderFrontPageAuth(req, res) {
 }
 
 module.exports = {
-	"init": function(params, callback) {
+	'init': function(params, callback) {
 		params.router.get('/admin/plugins/tdwtf', params.middleware.admin.buildHeader, renderAdminPage);
 		params.router.get('/api/admin/plugins/tdwtf', renderAdminPage);
 		params.router.get('/api/tdwtf-ip', renderIPPage);
@@ -512,7 +511,7 @@ CREATE TABLE IF NOT EXISTS "wtdwtf_real_ip" (
 			importRedirects.load(params, callback);
 		});
 	},
-	"meta": function(data, callback) {
+	'meta': function(data, callback) {
 		data.tags.push({
 			name: 'google-site-verification',
 			content: 'CHVbCxly52Dog4tN9fsbqoQkNTASojg2LzYSeJzqRgw'
@@ -523,7 +522,7 @@ CREATE TABLE IF NOT EXISTS "wtdwtf_real_ip" (
 
 		callback(null, data);
 	},
-	"adminHeader": function(header, callback) {
+	'adminHeader': function(header, callback) {
 		header.plugins.push({
 			route: '/plugins/tdwtf',
 			name: 'TDWTF'
@@ -531,7 +530,7 @@ CREATE TABLE IF NOT EXISTS "wtdwtf_real_ip" (
 
 		callback(null, header);
 	},
-	"header": function(data, callback) {
+	'header': function(data, callback) {
 		async.parallel({
 			groups: async.apply(Groups.isMemberOfGroups, data.templateValues.user.uid, ['Mafia - Players', 'Mafia - Club Ded', 'Self-Serve Mafia - Players', 'Self-Serve Mafia - Club Ded', 'Impossible Mission - A', 'Impossible Mission - B']),
 			clubDed: async.apply(Categories.getTopicIds, {cid: 32, start: 0, stop: 0}),
@@ -553,7 +552,7 @@ CREATE TABLE IF NOT EXISTS "wtdwtf_real_ip" (
 			callback(null, data);
 		});
 	},
-	"notificationPush": function(data, callback) {
+	'notificationPush': function(data, callback) {
 		if (!data.notification.tid) {
 			return callback(null, data);
 		}
@@ -568,7 +567,7 @@ CREATE TABLE IF NOT EXISTS "wtdwtf_real_ip" (
 			callback(null, data);
 		});
 	},
-	"addNotificationCategory": function(data, callback) {
+	'addNotificationCategory': function(data, callback) {
 		var pids = [];
 		var tids = [];
 		data.notifications.forEach(function(n) {
@@ -610,7 +609,7 @@ CREATE TABLE IF NOT EXISTS "wtdwtf_real_ip" (
 			callback(null, data);
 		});
 	},
-	"postReplyCount": function(data, callback) {
+	'postReplyCount': function(data, callback) {
 		var pids = data.posts.map(function(post) {
 			post.replies = {
 				count: 0,
@@ -695,7 +694,7 @@ CREATE TABLE IF NOT EXISTS "wtdwtf_real_ip" (
 			}
 		], callback);
 	},
-	"registerCheck": function(data, callback) {
+	'registerCheck': function(data, callback) {
 		if (data.queue) {
 			return callback(null, data);
 		}
@@ -730,14 +729,14 @@ CREATE TABLE IF NOT EXISTS "wtdwtf_real_ip" (
 			callback(null, data);
 		});
 	},
-	"disableFuzzy": function(parser) {
+	'disableFuzzy': function(parser) {
 		parser.linkify.set({
-			"fuzzyLink": false,
-			"fuzzyIP": false,
-			"fuzzyEmail": false
+			'fuzzyLink': false,
+			'fuzzyIP': false,
+			'fuzzyEmail': false
 		});
 	},
-	"defineEmoji": function(data, callback) {
+	'defineEmoji': function(data, callback) {
 		data.packs.push({
 			name: 'The Daily WTF Custom Emoji',
 			id: 'tdwtf-emoji',
@@ -751,7 +750,7 @@ CREATE TABLE IF NOT EXISTS "wtdwtf_real_ip" (
 		}, require('/usr/src/app/tdwtf-emoji/fontawesome.json'));
 		callback(null, data);
 	},
-	"addCustomSettings": function(data, callback) {
+	'addCustomSettings': function(data, callback) {
 		db.getObjectFields('user:' + data.uid + ':settings', ['tdwtfDisableMobileSlide'], function(err, settings) {
 			if (err) {
 				return callback(err);
@@ -765,14 +764,14 @@ CREATE TABLE IF NOT EXISTS "wtdwtf_real_ip" (
 			callback(null, data);
 		});
 	},
-	"saveUserSettings": function(data) {
+	'saveUserSettings': function(data) {
 		db.setObjectField('user:' + data.uid + ':settings', 'tdwtfDisableMobileSlide', data.settings.tdwtfDisableMobileSlide ? 1 : 0);
 	},
-	"getUserSettings": function(data, callback) {
+	'getUserSettings': function(data, callback) {
 		data.settings.tdwtfDisableMobileSlide = parseInt(data.settings.tdwtfDisableMobileSlide || '0', 10);
 		callback(null, data);
 	},
-	"storeRealIP": function(data) {
+	'storeRealIP': function(data) {
 		var reallyDumbObfuscationMethod = crypto.createHash('sha1').update(data.req.ip + nconf.get('secret')).digest();
 		db.client.query({
 			name: 'insert_wtdwtf_real_ip',

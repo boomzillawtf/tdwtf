@@ -1,5 +1,5 @@
-/* jshint browser: true */
-/* globals $ */
+/*eslint-env browser, jquery*/
+
 function addNecroPostMessage() {
 	var necroThreshold = 7 * 24 * 60 * 60 * 1000;
 	$('[component="post"]').each(function() {

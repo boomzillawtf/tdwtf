@@ -1,660 +1,697 @@
 html:not([data-disable-tdwtf-css]) {
+	/* Get rid of <del>women</del><ins>Jeff Atwood</ins>-friendly shapes */
+	#menu .chat-list li a .user-icon,
+	#menu .chat-list li a img,
+	#menu .notification-list li .user-icon,
+	#menu .notification-list li img,
+	.account .cover .avatar-wrapper,
+	.avatar.avatar-rounded,
+	.categories>li .card .user-icon,
+	.categories>li .card img,
+	.categories>li .content .user-icon,
+	.categories>li .content img,
+	.category>ul>li .card .user-icon,
+	.category>ul>li .card img,
+	.category>ul>li .content .user-icon,
+	.category>ul>li .content img,
+	.chat-modal .chat-content li.chat-message .chat-user-image,
+	.chats-list li .user-img,
+	.expanded-chat .chat-content li.chat-message .chat-user-image,
+	.header #user_dropdown .user-icon,
+	.header #user_dropdown img,
+	.header .chat-list li a .user-icon,
+	.header .chat-list li a img,
+	.header .notification-list li .user-icon,
+	.header .notification-list li img,
+	.posts-list .posts-list-item .user-img,
+	.search .user-img,
+	.taskbar .navbar-nav li.taskbar-chat a,
+	.taskbar .navbar-nav li.taskbar-chat a:active,
+	.taskbar .navbar-nav li.taskbar-chat a:focus,
+	.taskbar .navbar-nav li.taskbar-chat a:hover,
+	.topic .posts .icon .user-icon,
+	.topic .posts .icon img,
+	.users-container .users-box .user-icon,
+	.users-container .users-box img,
+	.topic .threaded-replies img,
+	.topic .threaded-replies .user-icon {
+		border-radius: 0px !important;
+	}
 
-/* Get rid of <del>women</del><ins>Jeff Atwood</ins>-friendly shapes */
-#menu .chat-list li a .user-icon,
-#menu .chat-list li a img,
-#menu .notification-list li .user-icon,
-#menu .notification-list li img,
-.account .cover .avatar-wrapper,
-.avatar.avatar-rounded,
-.categories>li .card .user-icon,
-.categories>li .card img,
-.categories>li .content .user-icon,
-.categories>li .content img,
-.category>ul>li .card .user-icon,
-.category>ul>li .card img,
-.category>ul>li .content .user-icon,
-.category>ul>li .content img,
-.chat-modal .chat-content li.chat-message .chat-user-image,
-.chats-list li .user-img,
-.expanded-chat .chat-content li.chat-message .chat-user-image,
-.header #user_dropdown .user-icon,
-.header #user_dropdown img,
-.header .chat-list li a .user-icon,
-.header .chat-list li a img,
-.header .notification-list li .user-icon,
-.header .notification-list li img,
-.posts-list .posts-list-item .user-img,
-.search .user-img,
-.taskbar .navbar-nav li.taskbar-chat a,
-.taskbar .navbar-nav li.taskbar-chat a:active,
-.taskbar .navbar-nav li.taskbar-chat a:focus,
-.taskbar .navbar-nav li.taskbar-chat a:hover,
-.topic .posts .icon .user-icon,
-.topic .posts .icon img,
-.users-container .users-box .user-icon,
-.users-container .users-box img,
-.topic .threaded-replies img,
-.topic .threaded-replies .user-icon {
-	border-radius: 0 !important; // lesshint importantRule: false
-}
+	/* resize the forum logo to fit better */
+	.header .forum-logo {
+		height: 30px;
+		margin: 10px;
+		width: 30px;
+	}
 
-/* resize the forum logo to fit better */
-.header .forum-logo {
-	margin: 10px;
-	height: 30px;
-	width: 30px;
-}
+	/* this is applied by default on some browser widths but not others */
+	.navbar>.container .navbar-brand,
+	.navbar>.container-fluid .navbar-brand {
+		margin-left: -15px;
+	}
 
-/* this is applied by default on some browser widths but not others */
-.navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
-	margin-left: -15px;
-}
+	/* <kbd> */
+	kbd,
+	kbd kbd {
+		background-color: #ffffff;
+		border: 1px solid #e9e9e9;
+		border-radius: 3px;
+		box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.8);
+		color: #222222;
+		display: inline-block;
+		font-size: 0.857em;
+		line-height: 1.4;
+		margin: 0px 0.1em;
+		padding: 0.1em 0.6em;
+	}
 
-/* <kbd> */
-kbd, kbd kbd {
-	background-color: #fff;
-	border: 1px solid #e9e9e9;
-	border-radius: 3px;
-	box-shadow: 0 1px 0 rgba(0, 0, 0, 0.8);
-	color: #222;
-	display: inline-block;
-	font-size: 0.857em;
-	line-height: 1.4;
-	margin: 0 0.1em;
-	padding: 0.1em 0.6em;
-}
+	/* post content */
+	[component="chat/message/body"],
+	.topic .posts .content,
+	.composer .preview {
 
-/* post content */
-[component="chat/message/body"],
-.topic .posts .content,
-.composer .preview {
+		/* Stick a border around images */
+		.img-responsive {
+			-moz-box-sizing: content-box;
+			border: 1px solid #d8e5fb;
+			box-sizing: content-box;
+			display: inline;
+			max-height: 600px;
+			object-fit: contain;
+			padding: 1px;
 
-	/* Stick a border around images */
-	.img-responsive {
-		padding: 1px;
-		border: 1px solid #d8e5fb;
-		max-height: 600px;
-		object-fit: contain;
-		display: inline;
-		-moz-box-sizing: content-box;
-		box-sizing: content-box;
+			@media (min-width: 1000px) {
+				max-width: 600px;
+			}
+		}
 
-		@media (min-width: 1000px) {
-			max-width: 600px;
+		/* Differentiate strike/del */
+		del {
+			background-color: #ffdddd;
+			border-color: #f1c0c0;
+			color: black;
+		}
+
+		ins {
+			background-color: #dbffdb;
+			border-color: #c1e9c1;
+			color: black;
+		}
+
+		ins > del {
+			background-color: #00ccff;
+			text-decoration: overline;
+		}
+
+		del > ins {
+			background-color: #ffff66;
+			text-decoration: overline;
+		}
+
+		/* From nodebb-theme-persona */
+		h1:first-child,
+		h2:first-child,
+		h3:first-child,
+		h4:first-child,
+		h5:first-child,
+		h6:first-child {
+			margin-top: 0px;
+		}
+
+		h1 {
+			font-size: 22px;
+			margin: 10px 0px;
+		}
+
+		h2 {
+			font-size: 20px;
+		}
+
+		h3 {
+			font-size: 16px;
+			font-weight: 900;
+			text-transform: uppercase;
+		}
+
+		h4 {
+			font-size: 17px;
+		}
+
+		h5 {
+			font-weight: 800;
+			text-transform: uppercase;
+		}
+
+		h4,
+		h5,
+		h6 {
+			margin-top: 15px;
+		}
+
+		pre {
+			max-height: 350px;
+
+			code {
+				min-width: 100%;
+				white-space: pre;
+				word-wrap: normal;
+			}
+		}
+
+		/* Show abbr and a title contents on mobile */
+		@media screen and (max-width: 991px) {
+			abbr[title]:after {
+				content: " [" attr(title) "]";
+			}
+
+			a[title]:after {
+				content: " [" attr(title) "]";
+			}
+		}
+
+		/* Stop big+big...+big abuse http://what.thedailywtf.com/t/abusing-big-tags/5566 */
+		big big big big big big {
+			font-size: 1em;
+		}
+
+		/* And small-small */
+		small small small small small small {
+			font-size: 1em;
+		}
+
+		/* underline links in posts */
+		a[href] {
+			text-decoration: underline;
+		}
+
+		a.plugin-mentions-a,
+		a[href^="#"],
+		a[href=""] {
+			text-decoration: none;
+		}
+
+		blockquote > blockquote,
+		blockquote > p {
+			margin-bottom: 11px;
+		}
+
+		blockquote > blockquote:last-child,
+		blockquote > p:last-child {
+			margin-bottom: 0px;
+		}
+
+		.lazyYT-container iframe {
+			max-width: none !important;
+		}
+
+		.img-responsive.emoji,
+		.img-responsive.plugin-mentions-emoji {
+			border: 0px;
+			height: 20px;
+			width: auto;
+		}
+
+		table {
+			border-collapse: separate;
+			border-spacing: 2px;
 		}
 	}
 
-	/* Differentiate strike/del */
-	del {
-		background-color: #fdd;
-		border-color: #f1c0c0;
-		color: black;
+	.slideout-open #panel {
+		height: 100%;
 	}
 
-	ins {
-		background-color: #dbffdb;
-		border-color: #c1e9c1;
-		color: black;
+	/* make it blue */
+	a[component="post/reply"],
+	a[component="post/quote"],
+	a[component="post/quote-club-ded"] {
+		background-color: #337ab7;
+		color: white;
+		margin-right: 3px;
+		padding: 10px;
 	}
 
-	ins > del {
-		background-color: #0cf;
-		text-decoration: overline;
+	.raw-content {
+		font-family: monospace;
+		font-size: 10pt;
+		margin-bottom: 15px;
+		white-space: pre-wrap;
 	}
 
-	del > ins {
-		background-color: #ff6;
-		text-decoration: overline;
-	}
-
-	/* From nodebb-theme-persona */
-	h1:first-child, h2:first-child, h3:first-child, h4:first-child, h5:first-child, h6:first-child {
-		margin-top: 0;
-	}
-
-	h1 {
-		font-size: 22px;
-		margin: 10px 0;
-	}
-
-	h2 {
-		font-size: 20px;
-	}
-
-	h3 {
-		text-transform: uppercase;
-		font-size: 16px;
-		font-weight: 900;
-	}
-
-	h4 {
-		font-size: 17px;
-	}
-
-	h5 {
-		font-weight: 800;
-		text-transform: uppercase;
-	}
-
-	h4, h5, h6 {
-		margin-top: 15px;
-	}
-
-	pre {
-		max-height: 350px;
-
-		code {
-			white-space: pre;
-			word-wrap: normal;
-			min-width: 100%;
+	a[component="post/upvote"],
+	a[component="post/downvote"] {
+		.fa {
+			background-color: #cccccc;
+			padding: 12px 10px 11px;
 		}
 	}
 
-	/* Show abbr and a title contents on mobile */
-	@media screen and (max-width: 991px) {
-		abbr[title]:after {
-			content: " [" attr(title) "]";
-		}
-
-		a[title]:after {
-			content: " [" attr(title) "]";
-		}
+	.topic a[component="post/upvote"].upvoted,
+	.topic a[component="post/downvote"].downvoted {
+		color: #cccccc;
 	}
 
-	/* Stop big+big...+big abuse http://what.thedailywtf.com/t/abusing-big-tags/5566 */
-	big big big big big big { font-size: 1em; }
-
-	/* And small-small */
-	small small small small small small { font-size: 1em; }
-
-	/* underline links in posts */
-	a[href] {
-		text-decoration: underline;
+	a[component="post/upvote"].upvoted .fa {
+		background-color: #00bb00;
 	}
 
-	a.plugin-mentions-a, a[href^="#"], a[href=""] {
-		text-decoration: none;
+	a[component="post/downvote"].downvoted .fa {
+		background-color: #cc0000;
 	}
 
-	blockquote > blockquote, blockquote > p {
-		margin-bottom: 11px;
+	span[component="post/vote-count"] {
+		padding: 10px;
 	}
 
-	blockquote > blockquote:last-child, blockquote > p:last-child {
-		margin-bottom: 0;
+	.post-footer > .pull-right {
+		margin-bottom: 8px;
 	}
 
-	.lazyYT-container iframe {
-		max-width: none !important; // lesshint importantRule: false
+	[component="post"] > hr {
+		margin-top: 12px;
 	}
 
-	.img-responsive.emoji, .img-responsive.plugin-mentions-emoji {
-		width: auto;
-		height: 20px;
-		border: none;
+	.topic [component="post/reply-count"] {
+		background: rgba(127, 127, 127, 0.25);
+		color: inherit;
+		display: table;
+		padding: 10px;
+		padding-left: 7px;
 	}
 
-	table {
-		border-collapse: separate;
-		border-spacing: 2px;
-	}
-}
+	.topic [component="post/replies"] {
+		background: rgba(127, 127, 127, 0.25);
+		margin-top: 0px;
+		padding-top: 20px;
 
-.slideout-open #panel {
-	height: 100%;
-}
-
-/* make it blue */
-a[component="post/reply"], a[component="post/quote"], a[component="post/quote-club-ded"] {
-	background-color: #337ab7;
-	color: white;
-	padding: 10px;
-	margin-right: 3px;
-}
-
-.raw-content {
-	font-family: monospace;
-	font-size: 10pt;
-	white-space: pre-wrap;
-	margin-bottom: 15px;
-}
-
-a[component="post/upvote"], a[component="post/downvote"] {
-	.fa {
-		background-color: #ccc;
-		padding: 12px 10px 11px;
-	}
-}
-
-.topic a[component="post/upvote"].upvoted, .topic a[component="post/downvote"].downvoted {
-	color: #ccc;
-}
-
-a[component="post/upvote"].upvoted .fa {
-	background-color: #0b0;
-}
-
-a[component="post/downvote"].downvoted .fa {
-	background-color: #c00;
-}
-
-span[component="post/vote-count"] {
-	padding: 10px;
-}
-
-.post-footer > .pull-right {
-	margin-bottom: 8px;
-}
-
-[component="post"] > hr {
-	margin-top: 12px;
-}
-
-.topic [component="post/reply-count"] {
-	display: table;
-	padding: 10px;
-	padding-left: 7px;
-	color: inherit;
-	background: rgba(127, 127, 127, 0.25);
-}
-
-.topic [component="post/replies"] {
-	margin-top: 0;
-	padding-top: 20px;
-	background: rgba(127, 127, 127, 0.25);
-
-	@media (max-width: 991px) {
-		margin-left: 0;
-	}
-}
-
-/* hide email addresses for admin views of profiles */
-.profile-meta strong {
-	position: relative;
-}
-
-.profile-meta strong i.fa.fa-eye-slash::after {
-	background-color: #000;
-	content: "";
-	position: absolute;
-	right: 0;
-	top: 0;
-	bottom: 0;
-	left: 10px;
-}
-
-.profile-meta strong:hover i.fa.fa-eye-slash::after {
-	display: none;
-}
-
-/* hide the global notice on profile pages where it goes behind the cover image */
-.page-user [widget-area="header"] {
-	display: none;
-}
-
-/* make reply-to visible on cell phone size */
-@media (max-width: 767px) {
-	[component="post/parent"].hidden-xs {
-		display: inline-block !important; // lesshint importantRule: false
-	}
-}
-
-#main-nav span.menu-item-label {
-	display: none;
-}
-
-.menu-selection-list span.menu-item-label {
-	display: inline;
-}
-
-.topic .post-signature {
-	max-height: 100px;
-	overflow-y: hidden;
-	padding-right: 1em;
-	max-width: 800px;
-	word-wrap: break-word;
-
-	@media (max-width: 991px) {
-		max-width: 100%;
-	}
-}
-
-.composer {
-	/* otherwise it covers the cancel dialog on alternative skins */
-	z-index: 1000 !important; // lesshint importantRule: false
-}
-
-/* fix mobile */
-@media (max-width: 1199px) {
-	main#panel {
-		background: inherit;
-		box-shadow: inherit;
-	}
-}
-
-#new-topics-alert {
-	position: absolute;
-	margin-top: -88px;
-}
-
-.persona-usercard .usercard-name {
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	width: 270px;
-	display: inline-block;
-	overflow: hidden;
-}
-
-div#taskbar.taskbar.navbar-fixed-bottom {
-	left: auto;
-}
-
-.topic .posts>li {
-	transition: box-shadow 5s;
-	box-shadow: 0 0 0 #5bc0de;
-}
-
-.topic .posts>li.highlight {
-	transition: box-shadow 0s;
-	box-shadow: 0 0 5em #5bc0de;
-}
-
-/* https://what.thedailywtf.com/post/894514 */
-.posts > li > div > hr {
-	border-top: 1px solid #777;
-}
-
-.header [component="navbar/title"] {
-	display: block !important; // lesshint importantRule: false
-	clear: both;
-	max-width: 0;
-	white-space: nowrap;
-
-	span {
-		font-size: 16px;
-		padding-left: 30px;
-		padding-bottom: 10px;
-		display: block !important; // lesshint importantRule: false
-
-		&:empty, &.hidden + a, &:empty + a {
-			display: none !important; // lesshint importantRule: false
-		}
-
-		& + a {
-			position: absolute;
-			line-height: 18px;
-			padding: 3px;
-			border-radius: 12px;
-			width: 24px;
-			height: 24px;
-			text-align: center;
-			margin-top: -32px;
+		@media (max-width: 991px) {
+			margin-left: 0px;
 		}
 	}
-}
 
-.page-topic .forum-title, .page-category .forum-title {
-	display: none;
-}
-
-/* tags in the composer */
-.tags-container.inline-block {
-	display: block;
-}
-
-.bootstrap-tagsinput {
-	display: flex;
-}
-
-.bootstrap-tagsinput input {
-	flex-grow: 1;
-}
-
-.bootstrap-tagsinput .label {
-	height: 1.5em;
-	margin-top: 0.3em;
-}
-
-.lazyYT-container {
-	background-color: transparent;
-}
-
-/* force navbar to never hide on non-mobile view */
-@media (min-width: 992px) {
-	.navbar-fixed-top {
-		top: 0 !important; // lesshint importantRule: false
+	/* hide email addresses for admin views of profiles */
+	.profile-meta strong {
+		position: relative;
 	}
-}
 
-.nprogress-busy .form-actions:after {
-	content: "";
-	display: inline-block;
-	width: 18px;
-	height: 18px;
-	vertical-align: middle;
-	box-sizing: border-box;
-	border: solid 2px transparent;
-	border-top-color: #29d;
-	border-left-color: #29d;
-	border-radius: 50%;
-	animation: nprogress-spinner 400ms linear infinite;
-	margin-left: 10px;
-}
-
-.composer .imagedrop {
-	box-shadow: 0 0 5em #5bc0de inset;
-}
-
-.composer .formatting-bar .formatting-group {
-	/* hide image link button and duplicate upload button */
-	li[data-format="picture-o"], li[data-format="picture"] {
-		display: none;
-	}
-}
-
-/* attempt to cut down on the jellypotato */
-.js-lazyYT {
-	width: 640px;
-	padding-bottom: 360px;
-	max-width: 100%;
-}
-
-/* hide status stuff */
-i[component="user/status"],
-a.user-status /* mobile menu, that's different */,
-.dropdown-menu li a.user-status,
-.dropdown-menu li:first-child + li.divider,
-.chat-list .status {
-	display: none;
-}
-
-/* fix composer height */
-.composer .write-preview-container {
-	min-height: 0;
-}
-
-blockquote small {
-	display: inline;
-	color: inherit;
-	font-size: 85%;
-
-	&:before {
+	.profile-meta strong i.fa.fa-eye-slash::after {
+		background-color: #000000;
+		bottom: 0px;
 		content: "";
-	}
-}
-
-/* https://what.thedailywtf.com/post/899058 */
-.js-lazyYT {
-	margin-bottom: 10px;
-}
-
-/*
-If people are going to title topics things that are 2 pixels wide
-in an 18 point font, let 'em. Except for the 2 pixels part.
-*/
-a[itemprop="url"][href] {
-	position: relative;
-
-	&:after {
+		left: 10px;
 		position: absolute;
-		content: "\a0\a0\a0\a0\a0\a0\a0\a0";
-		left: 0;
-	}
-}
-
-/* Force border-box in Firefox 1-28. You're welcome, @Lorne-Kates. */
-* { // lesshint universalSelector: false
-	-moz-box-sizing: border-box;
-}
-
-/* https://what.thedailywtf.com/post/937723 */
-.skin-lumen .modal-header .close {
-	color: #333;
-}
-
-/* stop RP names from showing up where they shouldn't */
-.page-topic [data-tid] {
-	.icon > a[href], a[href]:empty, a[href].plugin-mentions-emoji-a, .persona-usercard a[href] {
-		&:before, &:after, &:hover:after, &:active:after {
-			content: initial;
-		}
+		right: 0px;
+		top: 0px;
 	}
 
-	/* allow long names to wrap 🦊 */
-	a[href]:before, a[href]:after {
-		white-space: normal;
-	}
-}
-
-[component="post/reply-count"] {
-	white-space: nowrap;
-}
-
-.emoji {
-	display: inline-block;
-
-	&[data-set-id="emoji-one"] {
-		height: 20px;
-		width: 20px;
-		margin: -1px 0;
-	}
-
-	&[data-set-id="tdwtf"] {
-		vertical-align: middle;
-		height: 20px;
-		width: auto;
-
-		&[data-emoji-id="eek"] {
-			height: 30px;
-		}
-
-		&[data-emoji-id="rofl"] {
-			height: 15px;
-		}
-
-		&[data-emoji-id="spittake"] {
-			height: 25px;
-		}
-
-		&[data-emoji-id="hide"] {
-			height: 25px;
-		}
-
-		&[data-emoji-id="popcorn"] {
-			height: 35px;
-		}
-
-		&[data-emoji-id="vomit"] {
-			height: 16px;
-		}
-	}
-}
-
-.necro-post {
-	margin-bottom: 20px;
-	text-align: center;
-	font-size: 1.5em;
-	text-transform: uppercase;
-	color: rgba(127, 127, 127, 0.5);
-}
-
-/* prevent accidental dismiss flag button presses */
-.page-posts-flags #dismissAll, .page-posts-flags button.dismiss {
-	display: none;
-}
-
-/* dark theme fixes */
-body.skin-cyborg, body.skin-darkly, body.skin-slate, body.skin-superhero {
-	.emoji[data-set-id="tdwtf"][data-emoji-id^="fa_"] {
-		background-color: #dfdfdf;
-		border-radius: 10px;
-	}
-
-	#menu .notification-list li.unread, .header .notification-list li.unread {
-		background-color: #847820;
-		color: #fff;
-	}
-}
-&[data-current-month="10"][data-current-day-of-month="31"] {
-	body.skin-cyborg, body.skin-darkly, body.skin-slate, body.skin-superhero {
-		#panel:before {
-			background-image: url("/uploads/default/8503/d2f7d9520f48de69.png");
-		}
-	}
-}
-
-
-/*
-bootstrap is still violating the HTML5 spec as of version 4:
-https://html.spec.whatwg.org/multipage/rendering.html#the-details-and-summary-elements
-*/
-summary { display: list-item; }
-
-/*
-nodebb-plugin-composer-default 4.3.0+ thinks having a 1-character-wide
-text entry area is good enough
-*/
-.composer .preview-container {
-	max-width: calc(50% ~"-" 30px);
-}
-
-/*
-nodebb-plugin-composer-default 4.3.0+ thinks the preview should have
-a font size about ten times what is in the actual posts
-*/
-.composer.composer .preview, .composer.composer .write {
-	font-size: inherit;
-}
-
-/* RepliesLast */
-.topic .threaded-replies .replies-last {
-	margin-left: 1em;
-}
-
-/* shenanigans */
-div.post-header a[href="/groups/sockdevs"] small,
-div.profile a[href="/groups/sockdevs"] small {
-	background-image: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
-	text-shadow: 0 0 3px #000;
-}
-
-[data-property="customCSS"] + .help-block:after {
-	content: " This field can be read by moderators, so don't put any Mafia stuff in here.";
-}
-
-@media (min-width: 768px) and (max-width: 1199px) {
-	.header .forum-title {
+	.profile-meta strong:hover i.fa.fa-eye-slash::after {
 		display: none;
 	}
-}
 
-.composing #header-menu {
-	z-index: 1000;
-}
+	/* hide the global notice on profile pages where it goes behind the cover image */
+	.page-user [widget-area="header"] {
+		display: none;
+	}
 
-#main-nav {
-	margin-right: -400px;
-}
+	/* make reply-to visible on cell phone size */
+	@media (max-width: 767px) {
+		[component="post/parent"].hidden-xs {
+			display: inline-block !important;
+		}
+	}
 
+	#main-nav span.menu-item-label {
+		display: none;
+	}
+
+	.menu-selection-list span.menu-item-label {
+		display: inline;
+	}
+
+	.topic .post-signature {
+		max-height: 100px;
+		max-width: 800px;
+		overflow-y: hidden;
+		padding-right: 1em;
+		word-wrap: break-word;
+
+		@media (max-width: 991px) {
+			max-width: 100%;
+		}
+	}
+
+	.composer {
+		/* otherwise it covers the cancel dialog on alternative skins */
+		z-index: 1000 !important;
+	}
+
+	/* fix mobile */
+	@media (max-width: 1199px) {
+		main#panel {
+			background: inherit;
+			box-shadow: inherit;
+		}
+	}
+
+	#new-topics-alert {
+		margin-top: -88px;
+		position: absolute;
+	}
+
+	.persona-usercard .usercard-name {
+		display: inline-block;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		width: 270px;
+	}
+
+	div#taskbar.taskbar.navbar-fixed-bottom {
+		left: auto;
+	}
+
+	.topic .posts>li {
+		box-shadow: 0px 0px 0px #5bc0de;
+		transition: box-shadow 5s;
+	}
+
+	.topic .posts>li.highlight {
+		box-shadow: 0px 0px 5em #5bc0de;
+		transition: box-shadow 0s;
+	}
+
+	/* https://what.thedailywtf.com/post/894514 */
+	.posts > li > div > hr {
+		border-top: 1px solid #777777;
+	}
+
+	.header [component="navbar/title"] {
+		clear: both;
+		display: block !important;
+		max-width: 0px;
+		white-space: nowrap;
+
+		span {
+			display: block !important;
+			font-size: 16px;
+			padding-bottom: 10px;
+			padding-left: 30px;
+
+			&:empty,
+			&.hidden + a,
+			&:empty + a {
+				display: none !important;
+			}
+
+			& + a {
+				border-radius: 12px;
+				height: 24px;
+				line-height: 18px;
+				margin-top: -32px;
+				padding: 3px;
+				position: absolute;
+				text-align: center;
+				width: 24px;
+			}
+		}
+	}
+
+	.page-topic .forum-title,
+	.page-category .forum-title {
+		display: none;
+	}
+
+	/* tags in the composer */
+	.tags-container.inline-block {
+		display: block;
+	}
+
+	.bootstrap-tagsinput {
+		display: flex;
+	}
+
+	.bootstrap-tagsinput input {
+		flex-grow: 1;
+	}
+
+	.bootstrap-tagsinput .label {
+		height: 1.5em;
+		margin-top: 0.3em;
+	}
+
+	.lazyYT-container {
+		background-color: transparent;
+	}
+
+	/* force navbar to never hide on non-mobile view */
+	@media (min-width: 992px) {
+		.navbar-fixed-top {
+			top: 0px !important;
+		}
+	}
+
+	.nprogress-busy .form-actions:after {
+		animation: nprogress-spinner 400ms linear infinite;
+		border: solid 2px transparent;
+		border-left-color: #2299dd;
+		border-radius: 50%;
+		border-top-color: #2299dd;
+		box-sizing: border-box;
+		content: "";
+		display: inline-block;
+		height: 18px;
+		margin-left: 10px;
+		vertical-align: middle;
+		width: 18px;
+	}
+
+	.composer .imagedrop {
+		box-shadow: 0px 0px 5em #5bc0de inset;
+	}
+
+	.composer .formatting-bar .formatting-group {
+		/* hide image link button and duplicate upload button */
+		li[data-format="picture-o"],
+		li[data-format="picture"] {
+			display: none;
+		}
+	}
+
+	/* attempt to cut down on the jellypotato */
+	.js-lazyYT {
+		max-width: 100%;
+		padding-bottom: 360px;
+		width: 640px;
+	}
+
+	/* hide status stuff */
+	i[component="user/status"],
+	a.user-status,
+	.dropdown-menu li a.user-status,
+	.dropdown-menu li:first-child + li.divider,
+	.chat-list .status {
+		display: none;
+	}
+
+	/* fix composer height */
+	.composer .write-preview-container {
+		min-height: 0px;
+	}
+
+	blockquote small {
+		color: inherit;
+		display: inline;
+		font-size: 85%;
+
+		&:before {
+			content: "";
+		}
+	}
+
+	/* https://what.thedailywtf.com/post/899058 */
+	.js-lazyYT {
+		margin-bottom: 10px;
+	}
+
+	/*
+	If people are going to title topics things that are 2 pixels wide
+	in an 18 point font, let 'em. Except for the 2 pixels part.
+	*/
+	a[itemprop="url"][href] {
+		position: relative;
+
+		&:after {
+			content: "\a0\a0\a0\a0\a0\a0\a0\a0";
+			left: 0px;
+			position: absolute;
+		}
+	}
+
+	/* https://what.thedailywtf.com/post/937723 */
+	.skin-lumen .modal-header .close {
+		color: #333333;
+	}
+
+	/* stop RP names from showing up where they shouldn't */
+	.page-topic [data-tid] {
+		.icon > a[href],
+		a[href]:empty,
+		a[href].plugin-mentions-emoji-a,
+		.persona-usercard a[href] {
+			&:before,
+			&:after,
+			&:hover:after,
+			&:active:after {
+				content: initial;
+			}
+		}
+
+		/* allow long names to wrap 🦊 */
+		a[href]:before,
+		a[href]:after {
+			white-space: normal;
+		}
+	}
+
+	[component="post/reply-count"] {
+		white-space: nowrap;
+	}
+
+	.emoji {
+		display: inline-block;
+
+		&[data-set-id="emoji-one"] {
+			height: 20px;
+			margin: -1px 0px;
+			width: 20px;
+		}
+
+		&[data-set-id="tdwtf"] {
+			height: 20px;
+			vertical-align: middle;
+			width: auto;
+
+			&[data-emoji-id="eek"] {
+				height: 30px;
+			}
+
+			&[data-emoji-id="rofl"] {
+				height: 15px;
+			}
+
+			&[data-emoji-id="spittake"] {
+				height: 25px;
+			}
+
+			&[data-emoji-id="hide"] {
+				height: 25px;
+			}
+
+			&[data-emoji-id="popcorn"] {
+				height: 35px;
+			}
+
+			&[data-emoji-id="vomit"] {
+				height: 16px;
+			}
+		}
+	}
+
+	.necro-post {
+		color: rgba(127, 127, 127, 0.5);
+		font-size: 1.5em;
+		margin-bottom: 20px;
+		text-align: center;
+		text-transform: uppercase;
+	}
+
+	/* prevent accidental dismiss flag button presses */
+	.page-posts-flags #dismissAll,
+	.page-posts-flags button.dismiss {
+		display: none;
+	}
+
+	/* dark theme fixes */
+	body.skin-cyborg,
+	body.skin-darkly,
+	body.skin-slate,
+	body.skin-superhero {
+		.emoji[data-set-id="tdwtf"][data-emoji-id^="fa_"] {
+			background-color: #dfdfdf;
+			border-radius: 10px;
+		}
+
+		#menu .notification-list li.unread,
+		.header .notification-list li.unread {
+			background-color: #847820;
+			color: #ffffff;
+		}
+	}
+
+	&[data-current-month="10"][data-current-day-of-month="31"] {
+		body.skin-cyborg,
+		body.skin-darkly,
+		body.skin-slate,
+		body.skin-superhero {
+			#panel:before {
+				background-image: url("/uploads/default/8503/d2f7d9520f48de69.png");
+			}
+		}
+	}
+
+	/*
+	bootstrap is still violating the HTML5 spec as of version 4:
+	https://html.spec.whatwg.org/multipage/rendering.html#the-details-and-summary-elements
+	*/
+	summary {
+		display: list-item;
+	}
+
+	/*
+	nodebb-plugin-composer-default 4.3.0+ thinks having a 1-character-wide
+	text entry area is good enough
+	*/
+	.composer .preview-container {
+		max-width: calc(50% ~"-" 30px);
+	}
+
+	/*
+	nodebb-plugin-composer-default 4.3.0+ thinks the preview should have
+	a font size about ten times what is in the actual posts
+	*/
+	.composer.composer .preview,
+	.composer.composer .write {
+		font-size: inherit;
+	}
+
+	/* RepliesLast */
+	.topic .threaded-replies .replies-last {
+		margin-left: 1em;
+	}
+
+	/* shenanigans */
+	div.post-header a[href="/groups/sockdevs"] small,
+	div.profile a[href="/groups/sockdevs"] small {
+		background-image: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+		text-shadow: 0px 0px 3px #000000;
+	}
+
+	[data-property="customCSS"] + .help-block:after {
+		content: " This field can be read by moderators, so don't put any Mafia stuff in here.";
+	}
+
+	@media (min-width: 768px) and (max-width: 1199px) {
+		.header .forum-title {
+			display: none;
+		}
+	}
+
+	.composing #header-menu {
+		z-index: 1000;
+	}
+
+	#main-nav {
+		margin-right: -400px;
+	}
 }
