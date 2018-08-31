@@ -1,19 +1,30 @@
 /* holidays! */
 
-html[data-current-month="10"][data-current-day-of-month="31"] #panel:before {
-	background-image: url("/assets/uploads/default/8337/260c79c86c26d749.png");
-	background-position: top right;
-	background-repeat: no-repeat;
-	background-size: contain;
-	content: " ";
-	display: block;
-	height: 60vh;
-	opacity: 0.1;
-	pointer-events: none;
-	position: fixed;
-	right: 0px;
-	top: 50px;
-	width: 50vw;
+html[data-current-month="10"][data-current-day-of-month="31"] {
+	#panel:before {
+		background-image: url("/assets/uploads/default/8337/260c79c86c26d749.png");
+		background-position: top right;
+		background-repeat: no-repeat;
+		background-size: contain;
+		content: " ";
+		display: block;
+		height: 60vh;
+		opacity: 0.1;
+		pointer-events: none;
+		position: fixed;
+		right: 0px;
+		top: 50px;
+		width: 50vw;
+	}
+
+	body.skin-cyborg,
+	body.skin-darkly,
+	body.skin-slate,
+	body.skin-superhero {
+		#panel:before {
+			background-image: url("/uploads/default/8503/d2f7d9520f48de69.png");
+		}
+	}
 }
 
 @font-face {
