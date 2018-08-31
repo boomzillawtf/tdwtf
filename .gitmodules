@@ -1,63 +1,63 @@
 [submodule "nodebb-plugin-deny-moderator-access"]
 	path = plugins/nodebb-plugin-deny-moderator-access
-	url = https://github.com/BenLubar/nodebb-plugin-deny-moderator-access
+	url = ../../BenLubar/nodebb-plugin-deny-moderator-access.git
 [submodule "nodebb-plugin-emailer-amazon"]
 	path = plugins/nodebb-plugin-emailer-amazon
-	url = https://github.com/barisusakli/nodebb-plugin-emailer-amazon
+	url = ../../barisusakli/nodebb-plugin-emailer-amazon.git
 [submodule "nodebb-plugin-google-analytics"]
 	path = plugins/nodebb-plugin-google-analytics
-	url = https://github.com/julianlam/nodebb-plugin-google-analytics
+	url = ../../julianlam/nodebb-plugin-google-analytics.git
 [submodule "nodebb-plugin-gravatar"]
 	path = plugins/nodebb-plugin-gravatar
-	url = https://github.com/julianlam/nodebb-plugin-gravatar
+	url = ../../julianlam/nodebb-plugin-gravatar.git
 [submodule "nodebb-plugin-htmlcleaner"]
 	path = plugins/nodebb-plugin-htmlcleaner
-	url = https://github.com/BenLubar/nodebb-plugin-htmlcleaner
+	url = ../../BenLubar/nodebb-plugin-htmlcleaner.git
 [submodule "nodebb-plugin-iframely"]
 	path = plugins/nodebb-plugin-iframely
-	url = https://github.com/NodeBB/nodebb-plugin-iframely
+	url = ../../NodeBB/nodebb-plugin-iframely.git
 [submodule "nodebb-plugin-imagemagick"]
 	path = plugins/nodebb-plugin-imagemagick
-	url = https://github.com/NodeBB/nodebb-plugin-imagemagick
+	url = ../../NodeBB/nodebb-plugin-imagemagick.git
 [submodule "nodebb-plugin-mentions-emoji"]
 	path = plugins/nodebb-plugin-mentions-emoji
-	url = https://github.com/BenLubar/nodebb-plugin-mentions-emoji
+	url = ../../BenLubar/nodebb-plugin-mentions-emoji.git
 [submodule "nodebb-plugin-ns-login"]
 	path = plugins/nodebb-plugin-ns-login
-	url = https://github.com/NicolasSiver/nodebb-plugin-ns-login
+	url = ../../NicolasSiver/nodebb-plugin-ns-login.git
 [submodule "nodebb-plugin-sso-facebook"]
 	path = plugins/nodebb-plugin-sso-facebook
-	url = https://github.com/julianlam/nodebb-plugin-sso-facebook
+	url = ../../julianlam/nodebb-plugin-sso-facebook.git
 [submodule "nodebb-plugin-sso-github"]
 	path = plugins/nodebb-plugin-sso-github
-	url = https://github.com/julianlam/nodebb-plugin-sso-github
+	url = ../../julianlam/nodebb-plugin-sso-github.git
 [submodule "nodebb-plugin-sso-google"]
 	path = plugins/nodebb-plugin-sso-google
-	url = https://github.com/julianlam/nodebb-plugin-sso-google
+	url = ../../julianlam/nodebb-plugin-sso-google.git
 [submodule "nodebb-plugin-sso-twitter"]
 	path = plugins/nodebb-plugin-sso-twitter
-	url = https://github.com/julianlam/nodebb-plugin-sso-twitter
+	url = ../../julianlam/nodebb-plugin-sso-twitter.git
 [submodule "nodebb-plugin-tdwtf-buttons"]
 	path = plugins/nodebb-plugin-tdwtf-buttons
-	url = https://github.com/NedFodder/nodebb-plugin-tdwtf-buttons
+	url = ../../NedFodder/nodebb-plugin-tdwtf-buttons.git
 [submodule "nodebb-plugin-unresponsive"]
 	path = plugins/nodebb-plugin-unresponsive
-	url = https://github.com/boomzillawtf/nodebb-plugin-unresponsive
+	url = ../../boomzillawtf/nodebb-plugin-unresponsive.git
 [submodule "plugins/nodebb-plugin-youtube-embed"]
 	path = plugins/nodebb-plugin-youtube-embed
-	url = https://github.com/boomzillawtf/nodebb-plugin-youtube-embed.git
+	url = ../../boomzillawtf/nodebb-plugin-youtube-embed.git
 [submodule "plugins/nodebb-plugin-image-size"]
 	path = plugins/nodebb-plugin-image-size
-	url = https://github.com/BenLubar/nodebb-plugin-image-size
+	url = ../../BenLubar/nodebb-plugin-image-size.git
 [submodule "plugins/nodebb-plugin-user-css"]
 	path = plugins/nodebb-plugin-user-css
-	url = https://github.com/BenLubar/nodebb-plugin-user-css
+	url = ../../BenLubar/nodebb-plugin-user-css.git
 [submodule "plugins/nodebb-plugin-ignore-users"]
 	path = plugins/nodebb-plugin-ignore-users
-	url = https://github.com/exo-do/nodebb-plugin-ignore-users
+	url = ../../exo-do/nodebb-plugin-ignore-users.git
 [submodule "emoji/emojione-assets"]
 	path = emoji/emojione-assets
-	url = https://github.com/emojione/emojione-assets
+	url = ../../emojione/emojione-assets.git
 [submodule "plugins/nodebb-plugin-post-revisions"]
 	path = plugins/nodebb-plugin-post-revisions
 	url = ../../BenLubar/nodebb-plugin-post-revisions.git
