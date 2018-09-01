@@ -59,4 +59,5 @@ RUN ln -s /usr/src/app/docker/config.json /usr/src/app/config.json
 # make sure the uploads subdirectories exist and run any database migrations.
 CMD cat .make-uploads-folders | xargs mkdir -p \
  && ./nodebb upgrade --schema --build \
+ && rm -f pidfile \
  && exec node --perf_basic_prof ./nodebb start
