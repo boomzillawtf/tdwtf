@@ -32,22 +32,7 @@ html[data-current-month="10"][data-current-day-of-month="31"] {
 	src: url("/assets/uploads/files/1503689288950-sponge.ttf");
 }
 
-@keyframes voteflip {
-	0% {
-		transform: rotate(0deg);
-	}
-
-	50% {
-		transform: rotate(180deg);
-	}
-}
-
 html[data-current-month="4"][data-current-day-of-month="1"]:not([data-user-id="13"]):not([data-user-id="650"]) {
-	[component="post"]:not(.deleted) .votes {
-		animation: voteflip 20s step-start infinite;
-		display: inline-block;
-	}
-
 	.necro-post {
 		background-image: url("/assets/uploads/files/1503689246464-sponge.png");
 		color: #ffffff;
@@ -56,6 +41,10 @@ html[data-current-month="4"][data-current-day-of-month="1"]:not([data-user-id="1
 		font-size: 72px;
 		padding-top: 20px;
 		text-align: center;
+	}
+
+	.2ac3a3adc5551647133578b5d9c21ea4 {
+		animation: fa-spin 2s infinite linear;
 	}
 
 	&[data-user-id] .forum-logo {

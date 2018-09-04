@@ -10,9 +10,6 @@
 [submodule "nodebb-plugin-gravatar"]
 	path = plugins/nodebb-plugin-gravatar
 	url = ../../julianlam/nodebb-plugin-gravatar.git
-[submodule "nodebb-plugin-htmlcleaner"]
-	path = plugins/nodebb-plugin-htmlcleaner
-	url = ../../BenLubar/nodebb-plugin-htmlcleaner.git
 [submodule "nodebb-plugin-iframely"]
 	path = plugins/nodebb-plugin-iframely
 	url = ../../NodeBB/nodebb-plugin-iframely.git
