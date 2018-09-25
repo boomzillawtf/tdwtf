@@ -20,7 +20,7 @@ RUN apt-get update \
 
 # Include changes made to NodeBB since the last release (most importantly, PostgreSQL and single-host cluster support.)
 RUN git fetch https://github.com/NodeBB/NodeBB.git master \
- && git checkout 12940b577b1e66dc94182b3adecc86f366133d2a
+ && git checkout 95501e8fee74008ea0cb9ed06da440365bc41830
 
 # Reset the package.json file before we install any plugins.
 RUN cp -f install/package.json package.json \
@@ -44,7 +44,7 @@ RUN echo public/uploads/*/ > .make-uploads-folders
 
 # PULL REQUESTS
 # delete these steps as the pull requests get merged into the upstream repo
-RUN curl -sSL https://github.com/BenLubar/NodeBB/commit/5e75a45b28c1db142b3e76727a8aad58ed7d33d4.diff | patch -p1
+RUN curl -sSL https://github.com/BenLubar/NodeBB/commit/a2892b0bce24f9d0dad53943dbc887b0d52236bf.diff | patch -p1
 RUN cd node_modules/nodebb-plugin-tdwtf-buttons && curl -sSL https://patch-diff.githubusercontent.com/raw/NedFodder/nodebb-plugin-tdwtf-buttons/pull/2.diff | patch -p1
 
 ADD iframely-date.diff /usr/src/app/node_modules/nodebb-plugin-iframely/
@@ -60,4 +60,4 @@ RUN ln -s /usr/src/app/docker/config.json /usr/src/app/config.json
 CMD cat .make-uploads-folders | xargs mkdir -p \
  && ./nodebb upgrade --schema --build \
  && rm -f pidfile \
- && exec node --perf_basic_prof ./nodebb start
+ && exec node ./nodebb start
