@@ -20,7 +20,7 @@ RUN apt-get update \
 
 # Include changes made to NodeBB since the last release (most importantly, PostgreSQL and single-host cluster support.)
 RUN git fetch https://github.com/NodeBB/NodeBB.git master \
- && git checkout 95501e8fee74008ea0cb9ed06da440365bc41830
+ && git checkout 820847461c11418ec5c9ffc2837cc3032e5846eb
 
 # Reset the package.json file before we install any plugins.
 RUN cp -f install/package.json package.json \
@@ -60,4 +60,5 @@ RUN ln -s /usr/src/app/docker/config.json /usr/src/app/config.json
 CMD cat .make-uploads-folders | xargs mkdir -p \
  && ./nodebb upgrade --schema --build \
  && rm -f pidfile \
+ && bash -c './watchdog.bash &' \
  && exec node ./nodebb start

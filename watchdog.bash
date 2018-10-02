@@ -10,7 +10,7 @@ done
 while true; do
 	unset history$history_count
 	eval "declare -A history$history_count=([1]=0 $(for pid in $(pidof node); do
-		if [[ "$pid" == "1" ]]; then
+		if [[ "$pid" == "$(cat pidfile)" ]]; then
 			continue
 		fi
 
