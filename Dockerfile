@@ -1,4 +1,4 @@
-FROM nodebb/docker:v1.10.1
+FROM nodebb/docker:v1.10.2
 
 WORKDIR /usr/src/app
 
@@ -17,14 +17,6 @@ ENV NODE_ENV=production \
 RUN apt-get update \
  && apt-get install -y webp \
  && rm -rf /var/lib/apt/lists/*
-
-# Include changes made to NodeBB since the last release (most importantly, PostgreSQL and single-host cluster support.)
-RUN git fetch https://github.com/NodeBB/NodeBB.git master \
- && git checkout 820847461c11418ec5c9ffc2837cc3032e5846eb
-
-# Reset the package.json file before we install any plugins.
-RUN cp -f install/package.json package.json \
- && npm install
 
 # Disable daemon in the code, but keep daemon enabled in the config so PID works.
 RUN sed -e "s/require('daemon')/if (false) &/" -i /usr/src/app/loader.js
