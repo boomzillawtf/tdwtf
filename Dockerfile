@@ -1,4 +1,4 @@
-FROM nodebb/docker:v1.10.2
+FROM nodebb/docker:v1.11.0
 
 WORKDIR /usr/src/app
 
@@ -24,7 +24,7 @@ RUN sed -e "s/require('daemon')/if (false) &/" -i /usr/src/app/loader.js
 RUN sed -e "s/var mediumMin = \\([0-9]\\+\\);/var mediumMin = !window.localStorage['unresponsive-settings'] || JSON.parse(window.localStorage['unresponsive-settings']).responsive ? \\1 : 0;/" -i /usr/src/app/node_modules/nodebb-plugin-composer-default/static/lib/composer/resize.js
 
 COPY plugins /usr/src/app/plugins
-RUN npm install --save ./plugins/*/ nodebb-plugin-shortcuts@1.1.2 nodebb-plugin-htmlcleaner@0.2.2
+RUN npm install --save ./plugins/*/ nodebb-plugin-shortcuts@1.1.2 nodebb-plugin-htmlcleaner@0.2.4
 
 RUN node -e 'require("nodebb-plugin-emoji-one/emoji").defineEmoji({packs:[]},function(err){if(err){console.error(err);process.exit(1)}})'
 
@@ -38,6 +38,8 @@ RUN echo public/uploads/*/ > .make-uploads-folders
 # delete these steps as the pull requests get merged into the upstream repo
 RUN curl -sSL https://github.com/BenLubar/NodeBB/commit/a2892b0bce24f9d0dad53943dbc887b0d52236bf.diff | patch -p1
 RUN cd node_modules/nodebb-plugin-tdwtf-buttons && curl -sSL https://patch-diff.githubusercontent.com/raw/NedFodder/nodebb-plugin-tdwtf-buttons/pull/2.diff | patch -p1
+RUN cd node_modules/nodebb-plugin-gravatar && curl -sSL https://patch-diff.githubusercontent.com/raw/julianlam/nodebb-plugin-gravatar/pull/16.diff | patch -p1
+RUN curl -sSL https://patch-diff.githubusercontent.com/raw/NodeBB/NodeBB/pull/7110.diff | patch -p1
 
 ADD iframely-date.diff /usr/src/app/node_modules/nodebb-plugin-iframely/
 RUN cd node_modules/nodebb-plugin-iframely && patch -p1 < iframely-date.diff

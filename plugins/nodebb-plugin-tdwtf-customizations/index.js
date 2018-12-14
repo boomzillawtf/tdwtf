@@ -1,37 +1,27 @@
 /*eslint-env node*/
 
-var async = module.parent.require('async');
-var jsesc = module.parent.require('jsesc');
-var nconf = module.parent.require('nconf');
-var request = module.parent.require('request');
-var winston = module.parent.require('winston');
-var db = module.parent.require('./database');
-var Categories = module.parent.require('./categories');
-var Groups = module.parent.require('./groups');
-var Posts = module.parent.require('./posts');
-var postCache = module.parent.require('./posts/cache');
-var plugins = module.parent.require('./plugins');
-var translator = module.parent.require('./translator');
-var SocketPosts = module.parent.require('./socket.io/posts');
-var SocketPlugins = module.parent.require('./socket.io/plugins');
-var Topics = module.parent.require('./topics');
-var User = module.parent.require('./user');
-var privileges = module.parent.require('./privileges');
-var meta = module.parent.require('./meta');
-var utils = module.parent.require('../public/src/utils');
+var async = require.main.require('async');
+var jsesc = require.main.require('jsesc');
+var nconf = require.main.require('nconf');
+var request = require.main.require('request');
+var winston = require.main.require('winston');
+var db = require.main.require('./src/database');
+var Categories = require.main.require('./src/categories');
+var Groups = require.main.require('./src/groups');
+var Posts = require.main.require('./src/posts');
+var postCache = require.main.require('./src/posts/cache');
+var plugins = require.main.require('./src/plugins');
+var translator = require.main.require('./src/translator');
+var SocketPosts = require.main.require('./src/socket.io/posts');
+var SocketPlugins = require.main.require('./src/socket.io/plugins');
+var Topics = require.main.require('./src/topics');
+var User = require.main.require('./src/user');
+var privileges = require.main.require('./src/privileges');
+var meta = require.main.require('./src/meta');
+var utils = require.main.require('./public/src/utils');
 var crypto = require('crypto');
 
 var importRedirects = require('./import.js');
-
-var realLoggerAdd = winston.Logger.prototype.add;
-winston.Logger.prototype.add = function() {
-	this.filters.push(function(level, msg) {
-		// add port/pid to log output
-		return '[' + nconf.get('port') + '/' + global.process.pid + '] ' + msg;
-	});
-	winston.Logger.prototype.add = realLoggerAdd;
-};
-winston.add();
 
 // Modifications documented inline:
 SocketPosts.getVoters = function (socket, data, callback) {
@@ -212,7 +202,7 @@ var upstreamIP = require('os').networkInterfaces().eth0.find(function(addr) {
 
 db.sortedSetAdd('tdwtf-upstreams:started', Date.now(), upstreamIP + ':' + nconf.get('port'));
 
-var upstreamPorts = module.parent.require('../config.json').port;
+var upstreamPorts = require.main.require('./config.json').port;
 
 var upstreamIPs = upstreamPorts.map(function(port) {
 	return upstreamIP.replace(/\.254$/, '.253') + ':' + port;
