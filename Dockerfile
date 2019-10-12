@@ -36,7 +36,6 @@ RUN echo public/uploads/*/ > .make-uploads-folders
 
 # PULL REQUESTS
 # delete these steps as the pull requests get merged into the upstream repo
-RUN curl -sSL https://github.com/NodeBB/NodeBB/commit/e906bea4700b0f85ddb7c68a1cc9e0bf26551fcc.diff | patch -p1
 RUN curl -sSL https://github.com/BenLubar/NodeBB/commit/a2892b0bce24f9d0dad53943dbc887b0d52236bf.diff | patch -p1
 RUN cd node_modules/nodebb-plugin-tdwtf-buttons && curl -sSL https://patch-diff.githubusercontent.com/raw/NedFodder/nodebb-plugin-tdwtf-buttons/pull/2.diff | patch -p1
 
