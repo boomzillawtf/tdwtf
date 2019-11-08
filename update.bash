@@ -20,7 +20,7 @@ if [[ "`docker inspect -f '{{ .NetworkSettings.Networks.wtdwtf.IPAddress }}' wtd
 fi
 
 # start the new NodeBB container
-docker run -d --name wtdwtf-nodebb --net wtdwtf --ip $ip --restart unless-stopped --volumes-from wtdwtf-nodebb-temp $TDWTF_NODEBB_DOCKER_RUN_ARGS boomzillawtf/tdwtf
+docker run -d --name wtdwtf-nodebb --net wtdwtf --ip $ip --restart unless-stopped --init --volumes-from wtdwtf-nodebb-temp $TDWTF_NODEBB_DOCKER_RUN_ARGS boomzillawtf/tdwtf
 
 # output logs
 docker logs -f wtdwtf-nodebb &

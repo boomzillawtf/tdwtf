@@ -53,7 +53,7 @@ until nc -z "`docker inspect -f '{{ .NetworkSettings.Networks.wtdwtf.IPAddress }
 docker exec -u postgres wtdwtf-nodebb-postgres psql --eval='CREATE DATABASE nodebb;'
 
 # start the NodeBB container
-docker run -d --name wtdwtf-nodebb --net wtdwtf --ip 172.21.1.254 --restart unless-stopped -v /usr/share/nginx/wtdwtf-nodebb.config:/usr/src/app/docker -v /usr/share/nginx/wtdwtf-nodebb.uploads:/usr/src/app/public/uploads boomzillawtf/tdwtf
+docker run -d --name wtdwtf-nodebb --net wtdwtf --ip 172.21.1.254 --restart unless-stopped --init -v /usr/share/nginx/wtdwtf-nodebb.config:/usr/src/app/docker -v /usr/share/nginx/wtdwtf-nodebb.uploads:/usr/src/app/public/uploads boomzillawtf/tdwtf
 
 # run the setup script
 docker exec wtdwtf-nodebb node app --setup='{"url":"http://nodebb.local","secret":"not-secret wtdwtf test","database":"postgres","postgres:host":"wtdwtf-nodebb-postgres","postgres:port":5432,"postgres:username":"postgres","postgres:password":"","postgres:database":"nodebb","admin:username":"PaulaBean","admin:email":"paula@example.com","admin:password":"brillant","admin:password:confirm":"brillant"}'

@@ -2,12 +2,6 @@ FROM nodebb/docker:v1.12.2
 
 WORKDIR /usr/src/app
 
-RUN wget -O /tini https://github.com/krallin/tini/releases/download/v0.18.0/tini \
- && echo '12d20136605531b09a2c2dac02ccee85e1b874eb322ef6baf7561cd93f93c855 /tini' | sha256sum -c \
- && chmod +x /tini
-
-ENTRYPOINT ["/tini", "--"]
-
 COPY watchdog.bash /usr/src/app/
 
 ENV NODE_ENV=production \
