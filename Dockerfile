@@ -30,8 +30,13 @@ RUN echo public/uploads/*/ > .make-uploads-folders
 
 # PULL REQUESTS
 # delete these steps as the pull requests get merged into the upstream repo
+
+# allow self-flagging
 RUN curl -sSL https://github.com/BenLubar/NodeBB/commit/a2892b0bce24f9d0dad53943dbc887b0d52236bf.diff | patch -p1
+# take wrapDelta into account when updating textarea selection ranges
 RUN cd node_modules/nodebb-plugin-tdwtf-buttons && curl -sSL https://patch-diff.githubusercontent.com/raw/NedFodder/nodebb-plugin-tdwtf-buttons/pull/2.diff | patch -p1
+# fix postgres using an absolutely horrific query plan for post replies
+RUN curl -sSL https://patch-diff.githubusercontent.com/raw/NodeBB/NodeBB/pull/8030.diff | patch -p1
 
 ADD iframely-date.diff /usr/src/app/node_modules/nodebb-plugin-iframely/
 RUN cd node_modules/nodebb-plugin-iframely && patch -p1 < iframely-date.diff
