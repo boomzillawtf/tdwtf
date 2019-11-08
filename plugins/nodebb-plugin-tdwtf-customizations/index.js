@@ -24,58 +24,41 @@ var crypto = require('crypto');
 var importRedirects = require('./import.js');
 
 // Modifications documented inline:
-SocketPosts.getVoters = function (socket, data, callback) {
+
+SocketPosts.getVoters = async function (socket, data) {
 	if (!data || !data.pid || !data.cid) {
-		return callback(new Error('[[error:invalid-data]]'));
+		throw new Error('[[error:invalid-data]]');
 	}
+	const showDownvotes = !meta.config['downvote:disabled'];
+	// TDWTF: split into variable
+	const isAdminOrMod = await privileges.categories.isAdminOrMod(data.cid, socket.uid);
+	const canSeeVotes = meta.config.votesArePublic || isAdminOrMod;
+	if (!canSeeVotes) {
+		throw new Error('[[error:no-privileges]]');
+	}
+	const [upvoteUids, downvoteUids] = await Promise.all([
+		db.getSetMembers('pid:' + data.pid + ':upvote'),
+		showDownvotes ? db.getSetMembers('pid:' + data.pid + ':downvote') : [],
+	]);
 
-	async.waterfall([
-		function (next) {
-			// Removed:
-			//if (parseInt(meta.config.votesArePublic, 10) !== 0) {
-			//	return next(null, true);
-			//}
-			privileges.categories.isAdminOrMod(data.cid, socket.uid, next);
-		},
-		function (isAdminOrMod, next) {
-			// Removed:
-			//if (!isAdminOrMod) {
-			//	return next(new Error('[[error:no-privileges]]'));
-			//}
+	// TDWTF: Added:
+	if (!isAdminOrMod) {
+		downvoteUids = Array(downvoteUids.length).fill(14);
+	}
+	// End Added
 
-			async.parallel({
-				upvoteUids: function (next) {
-					db.getSetMembers('pid:' + data.pid + ':upvote', next);
-				},
-				downvoteUids: function (next) {
-					// Added:
-					if (!isAdminOrMod && parseInt(meta.config.votesArePublic, 10) !== 1) {
-						return db.setCount('pid:' + data.pid + ':downvote', function (err, count) {
-							next(err, Array(count).fill(14));
-						});
-					}
-					// End Added
-					db.getSetMembers('pid:' + data.pid + ':downvote', next);
-				},
-			}, next);
-		},
-		function (results, next) {
-			async.parallel({
-				upvoters: function (next) {
-					User.getUsersFields(results.upvoteUids, ['username', 'userslug', 'picture'], next);
-				},
-				upvoteCount: function (next) {
-					next(null, results.upvoteUids.length);
-				},
-				downvoters: function (next) {
-					User.getUsersFields(results.downvoteUids, ['username', 'userslug', 'picture'], next);
-				},
-				downvoteCount: function (next) {
-					next(null, results.downvoteUids.length);
-				},
-			}, next);
-		},
-	], callback);
+	const [upvoters, downvoters] = await Promise.all([
+		user.getUsersFields(upvoteUids, ['username', 'userslug', 'picture']),
+		user.getUsersFields(downvoteUids, ['username', 'userslug', 'picture']),
+	]);
+
+	return {
+		upvoteCount: upvoters.length,
+		downvoteCount: downvoters.length,
+		showDownvotes: showDownvotes,
+		upvoters: upvoters,
+		downvoters: downvoters,
+	};
 };
 
 // increase this by 1 every time a post rendering related change happens
@@ -92,59 +75,44 @@ postCache.del = function (pid) {
 	});
 };
 
-Posts.parsePost = function (postData, callback) {
-	postData.content = String(postData.content || '');
-
-	if (postData.pid && !Object.prototype.hasOwnProperty.call(uncachedPost, postData.pid) && postCache.has(String(postData.pid))) {
-		postData.content = postCache.get(String(postData.pid));
-		return callback(null, postData);
+Posts.parsePost = async function (postData) {
+	if (!postData) {
+		return postData;
 	}
-
-	async.waterfall([
-		// TDWTF: added
-		function (next) {
-			if (Object.prototype.hasOwnProperty.call(uncachedPost, postData.pid)) {
-				return next(null, null);
-			}
-			db.getObject('tdwtf-post-cache:' + parseInt(postData.pid, 10), next);
-		},
-		function (cached, next) {
-			if (!cached) {
-				return next();
-			}
-
-			if (cached.version !== postCacheRevision) {
-				return next();
-			}
-
-			postCache.set(String(postData.pid), cached.content);
+	postData.content = String(postData.content || '');
+	const cache = require.main.require('./src/posts/cache');
+	const pid = String(postData.pid);
+	const cachedContent = cache.get(pid);
+	if (postData.pid && cachedContent !== undefined) {
+		postData.content = cachedContent;
+		cache.hits += 1;
+		return postData;
+	}
+	if (!Object.prototype.hasOwnProperty.call(uncachedPost, pid)) {
+		var cached = await db.getObject('tdwtf-post-cache:' + pid);
+		if (cached && cached.version == postCacheRevision) {
+			cache.set(pid, cached.content);
 			postData.content = cached.content;
-			callback(null, postData);
-		},
+			return postData;
+		}
+	}
+	cache.misses += 1;
+	const data = await plugins.fireHook('filter:parse.post', { postData: postData });
+	data.postData.content = translator.escape(data.postData.content);
+	// TDWTF: commented
+	if (/*global.env === 'production' &&*/ data.postData.pid) {
+		cache.set(pid, data.postData.content);
+		// TDWTF: added
+		delete uncachedPost[pid];
+		await db.setObject('tdwtf-post-cache:' + pid, {
+			'version': postCacheRevision,
+			'content': data.postData.content
+		});
 		// TDWTF: end added
-		function (next) {
-			plugins.fireHook('filter:parse.post', { postData: postData }, next);
-		},
-		function (data, next) {
-			data.postData.content = translator.escape(data.postData.content);
-
-			// TDWTF: commented
-			if (/*global.env === 'production' &&*/ data.postData.pid) {
-				postCache.set(String(data.postData.pid), data.postData.content);
-				delete uncachedPost[postData.pid];
-				// TDWTF: added
-				return db.setObject('tdwtf-post-cache:' + parseInt(data.postData.pid, 10), {
-					'version': postCacheRevision,
-					'content': data.postData.content
-				}, function (err) {
-					next(err, data.postData);
-				});
-				// TDWTF: end added
-			}
-			next(null, data.postData);
-		},
-	], callback);
+	}
+	return data.postData;
 };
+
 
 SocketPlugins.tdwtf = {};
 SocketPlugins.tdwtf.getPopcornBookmark = function(socket, data, callback) {
