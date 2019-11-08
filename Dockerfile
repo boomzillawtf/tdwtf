@@ -32,7 +32,7 @@ RUN echo public/uploads/*/ > .make-uploads-folders
 # delete these steps as the pull requests get merged into the upstream repo
 
 # allow self-flagging
-RUN curl -sSL https://github.com/BenLubar/NodeBB/commit/a2892b0bce24f9d0dad53943dbc887b0d52236bf.diff | patch -p1
+RUN curl -sSL https://github.com/BenLubar/NodeBB/commit/3cd74e02b541336414969dba843eea67a20a5f8f.diff | patch -p1
 # take wrapDelta into account when updating textarea selection ranges
 RUN cd node_modules/nodebb-plugin-tdwtf-buttons && curl -sSL https://patch-diff.githubusercontent.com/raw/NedFodder/nodebb-plugin-tdwtf-buttons/pull/2.diff | patch -p1
 # fix postgres using an absolutely horrific query plan for post replies
