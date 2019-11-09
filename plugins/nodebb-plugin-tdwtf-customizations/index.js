@@ -36,7 +36,7 @@ SocketPosts.getVoters = async function (socket, data) {
 	if (!canSeeVotes) {
 		throw new Error('[[error:no-privileges]]');
 	}
-	const [upvoteUids, downvoteUids] = await Promise.all([
+	var [upvoteUids, downvoteUids] = await Promise.all([
 		db.getSetMembers('pid:' + data.pid + ':upvote'),
 		showDownvotes ? db.getSetMembers('pid:' + data.pid + ':downvote') : [],
 	]);
