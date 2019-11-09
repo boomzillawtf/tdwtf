@@ -48,8 +48,8 @@ SocketPosts.getVoters = async function (socket, data) {
 	// End Added
 
 	const [upvoters, downvoters] = await Promise.all([
-		user.getUsersFields(upvoteUids, ['username', 'userslug', 'picture']),
-		user.getUsersFields(downvoteUids, ['username', 'userslug', 'picture']),
+		User.getUsersFields(upvoteUids, ['username', 'userslug', 'picture']),
+		User.getUsersFields(downvoteUids, ['username', 'userslug', 'picture']),
 	]);
 
 	return {
@@ -115,16 +115,16 @@ Posts.parsePost = async function (postData) {
 
 
 SocketPlugins.tdwtf = {};
-SocketPlugins.tdwtf.getPopcornBookmark = function(socket, data, callback) {
+SocketPlugins.tdwtf.getPopcornBookmark = function(socket, data) {
 	var tid = parseInt(data, 10);
 
 	function done(err, isMember) {
 		if (err || !isMember) {
 			// hide real error
-			return callback(new Error('[[invalid-data]]'));
+			return Promise.reject(new Error('[[invalid-data]]'));
 		}
 
-		Topics.getUserBookmark(tid, socket.uid, callback);
+		return Topics.getUserBookmark(tid, socket.uid);
 	}
 
 	// Discussion of NodeBB Updates is always allowed for popcorning.
