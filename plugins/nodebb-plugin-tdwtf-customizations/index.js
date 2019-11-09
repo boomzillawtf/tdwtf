@@ -75,6 +75,11 @@ postCache.del = function (pid) {
 	});
 };
 
+// Drop built-in sanitization in favor of nodebb-plugin-htmlcleaner.
+Posts.sanitize = function (content) {
+	return content;
+};
+
 Posts.parsePost = async function (postData) {
 	if (!postData) {
 		return postData;
