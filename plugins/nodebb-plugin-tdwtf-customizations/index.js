@@ -43,7 +43,11 @@ SocketPosts.getVoters = async function (socket, data) {
 
 	// TDWTF: Added:
 	if (!isAdminOrMod) {
-		downvoteUids = Array(downvoteUids.length).fill(14);
+		for (i = 0; i < downvoteUids.length; ++i) {
+			if (!Groups.isMember(downvoteUids[i], 'Public Downvoters', done)) {
+				downvoteUids[i] = 14;
+			}
+		}
 	}
 	// End Added
 
