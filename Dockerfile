@@ -1,4 +1,4 @@
-FROM nodebb/docker:v1.13.3
+FROM nodebb/docker:v1.14.0
 
 WORKDIR /usr/src/app
 
