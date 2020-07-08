@@ -20,10 +20,10 @@ index 3313930..0110434 100644
  						metaString: metaInfo.length ? metaInfo.join('&nbsp;&nbsp;/&nbsp;&nbsp;') : false,
  						embedHtml: embedHtml,
  						embedIsImg: /^<img[^>]+>$/.test(embedHtml),
-diff --git a/public/templates/partials/iframely-link-title.tpl b/public/templates/partials/iframely-link-title.tpl
+diff --git a/static/templates/partials/iframely-link-title.tpl b/static/templates/partials/iframely-link-title.tpl
 index ee16400..95b9d74 100644
---- a/public/templates/partials/iframely-link-title.tpl
-+++ b/public/templates/partials/iframely-link-title.tpl
+--- a/static/templates/partials/iframely-link-title.tpl
++++ b/static/templates/partials/iframely-link-title.tpl
 @@ -1,6 +1,6 @@
  <div class="iframely-link">
      <div>
@@ -32,10 +32,10 @@ index ee16400..95b9d74 100644
  
              <!-- IF icon -->
              <img src="{icon}" class="thumb pull-left not-responsive" />
-diff --git a/public/templates/partials/iframely-widget-card.tpl b/public/templates/partials/iframely-widget-card.tpl
+diff --git a/static/templates/partials/iframely-widget-card.tpl b/static/templates/partials/iframely-widget-card.tpl
 index b135b72..a065a32 100644
---- a/public/templates/partials/iframely-widget-card.tpl
-+++ b/public/templates/partials/iframely-widget-card.tpl
+--- a/static/templates/partials/iframely-widget-card.tpl
++++ b/static/templates/partials/iframely-widget-card.tpl
 @@ -10,7 +10,7 @@
  
              <!-- IF title -->
