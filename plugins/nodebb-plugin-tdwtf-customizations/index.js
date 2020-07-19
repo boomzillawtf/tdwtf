@@ -43,7 +43,15 @@ SocketPosts.getVoters = async function (socket, data) {
 
 	// TDWTF: Added:
 	if (!isAdminOrMod) {
-		downvoteUids = Array(downvoteUids.length).fill(14);
+		function coerceErrorToBool(err, value) {
+			if (err) { return false; }
+			else { return !!value; }
+		}
+		downvoteUids = await Promise.all(downvoteUids.map(async voterUid => {
+			const isPublicDownvoter = await Groups.isMember(voterUid, 'Public Downvoters', coerceErrorToBool);
+			if (!isPublicDownvoter) { return 14; }
+			else { return voterUid; }
+		}));
 	}
 	// End Added
 
