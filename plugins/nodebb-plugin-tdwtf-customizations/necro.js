@@ -1,33 +1,46 @@
 /*eslint-env browser, jquery*/
 
 function addNecroPostMessage() {
-	var necroThreshold = 7 * 24 * 60 * 60 * 1000;
+	var necroThreshold = 7 * 24 * 60 * 60 * 1000; // a week
+	var gdThreshold = 1000 * 60 * 60 * 24 * 365 * 10; // 10 years
+	var gdText = 'goddamnit fbmac';
+
+	function addNecro(poost, dateDiff) {
+		// change suffix to "later", otherwise it would look wrong
+		// also, English is the only language
+		var dataAgo = $.timeago.settings.strings.suffixAgo;
+		$.timeago.settings.strings.suffixAgo = ' later';
+		var agoText = dateDiff >= gdThreshold ? gdText : $.timeago.inWords(dateDiff);
+		$.timeago.settings.strings.suffixAgo = dataAgo;
+
+		$('<aside>').addClass('necro-post').text(agoText).append($('<hr>')).prependTo(poost);
+	}
+
+	function isArticle(poost) {
+		return poost.is('[data-index="0"]') && !poost.find('.content>:not([class*="iframely"])').length;
+	}
+
 	$('[component="post"]').each(function() {
 		var post = $(this);
 		if (post.is(':has(.necro-post)')) {
 			return;
 		}
-		if (post.is('[data-index="0"]') && !post.find('.content>:not([class*="iframely"])').length) {
-			var dataDate = new Date(post.find('[data-date]').attr('data-date'));
-			var dataDiff = post.attr('data-timestamp') - dataDate;
-			if (dataDiff >= necroThreshold) {
-				var dataAgo = $.timeago.settings.strings.suffixAgo;
-				$.timeago.settings.strings.suffixAgo = ' later';
-				$('<aside>').addClass('necro-post').text($.timeago.inWords(dataDiff)).append($('<hr>')).prependTo(post);
-				$.timeago.settings.strings.suffixAgo = dataAgo;
-			}
-			return;
-		}
+
+		var postDate = post.attr('data-timestamp');
+		var prevDate = postDate; // if it doesn't get overridden, eventually nothing happens
+
 		var prev = post.prev('[component="post"]');
-		if (!prev.length) {
-			return;
+
+		if (isArticle(post)) {
+			prevDate = new Date(post.find('[data-date]').attr('data-date'));
+		} else if (prev.length) {
+			prevDate = prev.attr('data-timestamp');
 		}
-		var diff = post.attr('data-timestamp') - prev.attr('data-timestamp');
+
+		var diff = postDate - prevDate;
+
 		if (diff >= necroThreshold) {
-			var ago = $.timeago.settings.strings.suffixAgo;
-			$.timeago.settings.strings.suffixAgo = ' later';
-			$('<aside>').addClass('necro-post').text(diff >= 1000 * 60 * 60 * 24 * 365 * 10 ? 'goddamnit fbmac' : $.timeago.inWords(diff)).append($('<hr>')).prependTo(post);
-			$.timeago.settings.strings.suffixAgo = ago;
+			addNecro(post, diff);
 		}
 	});
 }
