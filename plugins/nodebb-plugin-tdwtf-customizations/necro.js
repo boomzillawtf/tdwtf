@@ -2,7 +2,7 @@
 
 function addNecroPostMessage() {
 	var necroThreshold = 7 * 24 * 60 * 60 * 1000; // a week
-	var gdThreshold = 1000 * 60 * 60 * 24 * 365 * 10; // 10 years
+	var gdThreshold = 1000 * 60 * 60 * 24 * 365 * 10; // almost 10 years
 	var gdText = 'goddamnit fbmac';
 
 	function addNecro(poost, dateDiff) {
