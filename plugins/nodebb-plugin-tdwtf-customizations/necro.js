@@ -1,19 +1,46 @@
 /*eslint-env browser, jquery*/
 
 function addNecroPostMessage() {
-	var necroThreshold = 7 * 24 * 60 * 60 * 1000; // a week
+	var necroThreshold = ajaxify.data.necroThreshold * 24 * 60 * 60 * 1000; // a week or however long
 	var gdThreshold = 1000 * 60 * 60 * 24 * 365 * 10; // almost 10 years
-	var gdText = 'goddamnit fbmac';
+	var gdText = 'goddamnit fbmac'; // TODO: define a localized string for this
+	var laterKey = "topic:timeago_later";
+	var earlierKey = "topic:timeago_earlier";
+	var necroPostUrl = 'partials/topic/necro-post';
+
+
+	function getTimeInWords(n){
+		var ts = $.timeago.settings;
+
+		if (!ts.origStrings) {
+			ts.origStrings = ts.strings;
+
+			// make a copy to blank out
+			ts.blankStrings = { ...ts.strings };
+
+			ts.blankStrings.prefixAgo = '';
+			ts.blankStrings.suffixAgo = '';
+			ts.blankStrings.prefixFromNow = '';
+			ts.blankStrings.suffixFromNow = '';
+		}
+
+		ts.strings = ts.blankStrings;
+		var o = $.timeago.inWords(n);
+		ts.strings = ts.origStrings;
+		return o;
+	}
 
 	function addNecro(poost, dateDiff) {
-		// change suffix to "later", otherwise it would look wrong
-		// also, English is the only language
-		var dataAgo = $.timeago.settings.strings.suffixAgo;
-		$.timeago.settings.strings.suffixAgo = ' later';
-		var agoText = dateDiff >= gdThreshold ? gdText : $.timeago.inWords(dateDiff);
-		$.timeago.settings.strings.suffixAgo = dataAgo;
+		var words = getTimeInWords(dateDiff);
 
-		$('<aside>').addClass('necro-post').text(agoText).append($('<hr>')).prependTo(poost);
+		var finalKey = dateDiff > 0? laterKey: earlierKey;
+
+		// not using template literals for compatibility with :belt_onion: browsers
+		var finalText = dateDiff >= gdThreshold? gdText: '[[' + finalKey + ', ' + words + ']]';
+
+		app.parseAndTranslate(necroPostUrl, { text: finalText}, function(html) {
+			html.insertBefore(poost);
+		});
 	}
 
 	function isArticle(poost) {
@@ -39,7 +66,7 @@ function addNecroPostMessage() {
 
 		var diff = postDate - prevDate;
 
-		if (diff >= necroThreshold) {
+		if (Math.abs(diff) >= necroThreshold) {
 			addNecro(post, diff);
 		}
 	});
