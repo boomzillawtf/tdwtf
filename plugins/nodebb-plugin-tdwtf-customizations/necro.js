@@ -8,6 +8,15 @@ function addNecroPostMessage() {
 	var earlierKey = "topic:timeago_earlier";
 	var necroPostUrl = 'partials/topic/necro-post';
 
+	function cloneObject(o) {
+		// @#$@#! IE doesn't support spread syntax
+		var copy = {};
+		for (var k in o) {
+			copy[k] = o[k];
+		}
+
+		return copy;
+	}
 
 	function getTimeInWords(n){
 		var ts = $.timeago.settings;
@@ -16,7 +25,7 @@ function addNecroPostMessage() {
 			ts.origStrings = ts.strings;
 
 			// make a copy to blank out
-			ts.blankStrings = { ...ts.strings };
+			ts.blankStrings = cloneObject(ts.strings);
 
 			ts.blankStrings.prefixAgo = '';
 			ts.blankStrings.suffixAgo = '';
