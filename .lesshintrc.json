@@ -3,6 +3,7 @@
 	"importantRule": false,
 	"maxCharPerLine": false,
 	"qualifyingElement": false,
+	"spaceAroundComma": false,
 	"stringQuotes": {
 		"style": "double"
 	}
