@@ -1,7 +1,7 @@
 <h3>Recently restarted instances</h3>
 <ul>
 <!-- BEGIN recent -->
-<li>@value</li>
+<li>{@value}</li>
 <!-- END recent -->
 </ul>
 
