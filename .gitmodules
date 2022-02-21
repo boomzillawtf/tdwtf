@@ -1,6 +1,6 @@
 [submodule "nodebb-plugin-deny-moderator-access"]
 	path = plugins/nodebb-plugin-deny-moderator-access
-	url = ../../BenLubar/nodebb-plugin-deny-moderator-access.git
+	url = ../../boomzillawtf/nodebb-plugin-deny-moderator-access.git
 [submodule "nodebb-plugin-emailer-amazon"]
 	path = plugins/nodebb-plugin-emailer-amazon
 	url = ../../barisusakli/nodebb-plugin-emailer-amazon.git
@@ -18,7 +18,7 @@
 	url = ../../NodeBB/nodebb-plugin-imagemagick.git
 [submodule "nodebb-plugin-mentions-emoji"]
 	path = plugins/nodebb-plugin-mentions-emoji
-	url = ../../BenLubar/nodebb-plugin-mentions-emoji.git
+	url = ../../boomzillawtf/nodebb-plugin-mentions-emoji.git
 [submodule "nodebb-plugin-ns-login"]
 	path = plugins/nodebb-plugin-ns-login
 	url = ../../NicolasSiver/nodebb-plugin-ns-login.git
@@ -36,7 +36,7 @@
 	url = ../../julianlam/nodebb-plugin-sso-twitter.git
 [submodule "nodebb-plugin-tdwtf-buttons"]
 	path = plugins/nodebb-plugin-tdwtf-buttons
-	url = ../../NedFodder/nodebb-plugin-tdwtf-buttons.git
+	url = ../../boomzillawtf/nodebb-plugin-tdwtf-buttons.git
 [submodule "nodebb-plugin-unresponsive"]
 	path = plugins/nodebb-plugin-unresponsive
 	url = ../../boomzillawtf/nodebb-plugin-unresponsive.git
@@ -45,10 +45,10 @@
 	url = ../../boomzillawtf/nodebb-plugin-youtube-embed.git
 [submodule "plugins/nodebb-plugin-image-size"]
 	path = plugins/nodebb-plugin-image-size
-	url = ../../BenLubar/nodebb-plugin-image-size.git
+	url = ../../boomzillawtf/nodebb-plugin-image-size.git
 [submodule "plugins/nodebb-plugin-user-css"]
 	path = plugins/nodebb-plugin-user-css
-	url = ../../BenLubar/nodebb-plugin-user-css.git
+	url = ../../boomzillawtf/nodebb-plugin-user-css.git
 [submodule "plugins/nodebb-plugin-ignore-users"]
 	path = plugins/nodebb-plugin-ignore-users
 	url = ../../exo-do/nodebb-plugin-ignore-users.git
@@ -57,7 +57,7 @@
 	url = ../../emojione/emojione-assets.git
 [submodule "plugins/nodebb-plugin-post-revisions"]
 	path = plugins/nodebb-plugin-post-revisions
-	url = ../../BenLubar/nodebb-plugin-post-revisions.git
+	url = ../../boomzillawtf/nodebb-plugin-post-revisions.git
 [submodule "plugins/nodebb-plugin-emoji-one"]
 	path = plugins/nodebb-plugin-emoji-one
 	url = ../../NodeBB-Community/nodebb-plugin-emoji-one.git
@@ -66,4 +66,4 @@
 	url = ../../psychobunny/nodebb-plugin-desktop-notifications.git
 [submodule "plugins/nodebb-plugin-pwned-passwords"]
 	path = plugins/nodebb-plugin-pwned-passwords
-	url = ../../BenLubar/nodebb-plugin-pwned-passwords.git
+	url = ../../boomzillawtf/nodebb-plugin-pwned-passwords.git
