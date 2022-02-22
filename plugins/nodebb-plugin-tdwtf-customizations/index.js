@@ -44,7 +44,7 @@ SocketPosts.getVoters = async function (socket, data) {
 	// TDWTF: Added:
 	winston.info(`downvoteUid: ${JSON.stringify(downvoteUid)}`)
 	if (!isAdminOrMod && downvoteUid > 0) {
-		downvoteUids = Array(downvoteUids.length).fill(downvoteUid ?? 14);
+		downvoteUids = Array(downvoteUids.length).fill(downvoteUid || 14);
 	}
 	// End Added
 
@@ -466,7 +466,7 @@ module.exports = {
 			if( err ){
 				return callback(err);
 			}
-			downvoteUid = uid.downvoteUid ?? 14;
+			if( uid.downvoteUid ) downvoteUid = uid.downvoteUid || 14;
 		})
 		db.client.query(`
 CREATE TABLE IF NOT EXISTS "wtdwtf_real_ip" (
