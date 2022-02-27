@@ -8,6 +8,7 @@ var winston = require.main.require('winston');
 var db = require.main.require('./src/database');
 var Categories = require.main.require('./src/categories');
 var Groups = require.main.require('./src/groups');
+var Posts = require.main.require('./src/posts');
 var plugins = require.main.require('./src/plugins');
 var translator = require.main.require('./src/translator');
 var SocketPosts = require.main.require('./src/socket.io/posts');
