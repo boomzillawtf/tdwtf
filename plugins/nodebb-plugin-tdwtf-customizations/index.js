@@ -9,7 +9,6 @@ var db = require.main.require('./src/database');
 var Categories = require.main.require('./src/categories');
 var Groups = require.main.require('./src/groups');
 var Posts = require.main.require('./src/posts');
-var postCache = require.main.require('./src/posts/cache');
 var plugins = require.main.require('./src/plugins');
 var translator = require.main.require('./src/translator');
 var SocketPosts = require.main.require('./src/socket.io/posts');
@@ -20,11 +19,11 @@ var privileges = require.main.require('./src/privileges');
 var meta = require.main.require('./src/meta');
 var utils = require.main.require('./public/src/utils');
 var crypto = require('crypto');
-
+var winston = require('winston');
 var importRedirects = require('./import.js');
 
 // Modifications documented inline:
-
+var downvoteUid = 14;
 SocketPosts.getVoters = async function (socket, data) {
 	if (!data || !data.pid || !data.cid) {
 		throw new Error('[[error:invalid-data]]');
@@ -42,8 +41,9 @@ SocketPosts.getVoters = async function (socket, data) {
 	]);
 
 	// TDWTF: Added:
-	if (!isAdminOrMod) {
-		downvoteUids = Array(downvoteUids.length).fill(14);
+	winston.info(`downvoteUid: ${JSON.stringify(downvoteUid)}`)
+	if (!isAdminOrMod && downvoteUid > 0) {
+		downvoteUids = Array(downvoteUids.length).fill(downvoteUid || 14);
 	}
 	// End Added
 
@@ -61,61 +61,9 @@ SocketPosts.getVoters = async function (socket, data) {
 	};
 };
 
-// increase this by 1 every time a post rendering related change happens
-var postCacheRevision = 4;
-
-var uncachedPost = {};
-
-var realCacheDel = postCache.del;
-postCache.del = function (pid) {
-	uncachedPost[pid] = true;
-	db.delete('tdwtf-post-cache:' + parseInt(pid, 10), function() {
-		realCacheDel.call(postCache, pid);
-		delete uncachedPost[pid];
-	});
-};
-
 // Drop built-in sanitization in favor of nodebb-plugin-htmlcleaner.
 Posts.sanitize = function (content) {
 	return content;
-};
-
-Posts.parsePost = async function (postData) {
-	if (!postData) {
-		return postData;
-	}
-	postData.content = String(postData.content || '');
-	const cache = require.main.require('./src/posts/cache');
-	const pid = String(postData.pid);
-	const cachedContent = cache.get(pid);
-	if (postData.pid && cachedContent !== undefined) {
-		postData.content = cachedContent;
-		cache.hits += 1;
-		return postData;
-	}
-	if (!Object.prototype.hasOwnProperty.call(uncachedPost, pid)) {
-		var cached = await db.getObject('tdwtf-post-cache:' + pid);
-		if (cached && cached.version == postCacheRevision) {
-			cache.set(pid, cached.content);
-			postData.content = cached.content;
-			return postData;
-		}
-	}
-	cache.misses += 1;
-	const data = await plugins.fireHook('filter:parse.post', { postData: postData });
-	data.postData.content = translator.escape(data.postData.content);
-	// TDWTF: commented
-	if (/*global.env === 'production' &&*/ data.postData.pid) {
-		cache.set(pid, data.postData.content);
-		// TDWTF: added
-		delete uncachedPost[pid];
-		await db.setObject('tdwtf-post-cache:' + pid, {
-			'version': postCacheRevision,
-			'content': data.postData.content
-		});
-		// TDWTF: end added
-	}
-	return data.postData;
 };
 
 
@@ -206,7 +154,7 @@ function findUpstreams(clientIP) {
 function prepareAdminPage(uid, next) {
 	var now = Date.now();
 
-	var data = {title: 'The Daily WTF', entries: []};
+	var data = {title: 'The Daily WTF', entries: [], downvoteUid: downvoteUid };
 
 	db.getSortedSetRevRangeWithScores('tdwtf-upstreams:started', 0, upstreamPorts.length - 1, function(err, upstreamsStarted) {
 		if (err) {
@@ -461,7 +409,12 @@ module.exports = {
 		params.router.get('/api/admin/plugins/tdwtf', renderAdminPage);
 		params.router.get('/api/tdwtf-ip', renderIPPage);
 		params.router.get('/api/tdwtf-front-page-auth', params.middleware.ensureLoggedIn, renderFrontPageAuth);
-
+		db.getObjectFields('settings:tdwtf', ['downvoteUid'], function(err, uid){
+			if( err ){
+				return callback(err);
+			}
+			if( uid.downvoteUid ) downvoteUid = uid.downvoteUid || 14;
+		})
 		db.client.query(`
 CREATE TABLE IF NOT EXISTS "wtdwtf_real_ip" (
 	"ip" INET NOT NULL UNIQUE,

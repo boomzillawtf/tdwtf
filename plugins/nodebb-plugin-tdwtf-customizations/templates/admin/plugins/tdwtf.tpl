@@ -1,7 +1,7 @@
 <h3>Recently restarted instances</h3>
 <ul>
 <!-- BEGIN recent -->
-<li>@value</li>
+<li>{@value}</li>
 <!-- END recent -->
 </ul>
 
@@ -24,3 +24,35 @@
 </li>
 <!-- END entries -->
 </ul>
+<hr>
+<form class="form tdwtf-settings">
+    <div class="form-group">
+        <label for="downvoteUid">
+            Downvote UID:
+        </label>
+        <input type="number" id="downvoteUid" name="downvoteUid" class="form-control" placeholder="14" value="{downvoteUid}"/>
+    </div>
+    <button class="btn btn-primary" id="save">Save Settings</button>
+
+</form>
+<script type="text/javascript">
+	require(['settings'], function(Settings) {
+		Settings.load('tdwtf', $('.tdwtf-settings'));
+		$('#save').on('click', function() {
+			var data = {
+			    downvoteUid: $('#downvoteUid').val()
+		    };
+			Settings.save('tdwtf', $('.tdwtf-settings'), function() {
+				app.alert({
+					type: 'success',
+					alert_id: 'tdwtf-saved',
+					title: 'Reload Required',
+					message: 'Please reload your NodeBB to complete configuration of the TDWTF Customization Plugin',
+					clickfn: function() {
+						socket.emit('admin.reload');
+					}
+				})
+			});
+		});
+	});
+</script>
