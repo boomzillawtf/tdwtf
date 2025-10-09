@@ -1,33 +1,82 @@
 /*eslint-env browser, jquery*/
 
 function addNecroPostMessage() {
-	var necroThreshold = 7 * 24 * 60 * 60 * 1000;
+	var necroThreshold = ajaxify.data.necroThreshold * 24 * 60 * 60 * 1000; // a week or however long
+	var gdThreshold = 1000 * 60 * 60 * 24 * 365 * 10; // almost 10 years
+	var gdText = 'goddamnit fbmac'; // TODO: define a localized string for this
+	var laterKey = "topic:timeago_later";
+	var earlierKey = "topic:timeago_earlier";
+	var necroPostUrl = 'partials/topic/necro-post';
+
+	function cloneObject(o) {
+		// @#$@#! IE doesn't support spread syntax
+		var copy = {};
+		for (var k in o) {
+			copy[k] = o[k];
+		}
+
+		return copy;
+	}
+
+	function getTimeInWords(n){
+		var ts = $.timeago.settings;
+
+		if (!ts.origStrings) {
+			ts.origStrings = ts.strings;
+
+			// make a copy to blank out
+			ts.blankStrings = cloneObject(ts.strings);
+
+			ts.blankStrings.prefixAgo = '';
+			ts.blankStrings.suffixAgo = '';
+			ts.blankStrings.prefixFromNow = '';
+			ts.blankStrings.suffixFromNow = '';
+		}
+
+		ts.strings = ts.blankStrings;
+		var o = $.timeago.inWords(n);
+		ts.strings = ts.origStrings;
+		return o;
+	}
+
+	function addNecro(poost, dateDiff) {
+		var words = getTimeInWords(dateDiff);
+
+		var finalKey = dateDiff > 0? laterKey: earlierKey;
+
+		// not using template literals for compatibility with :belt_onion: browsers
+		var finalText = dateDiff >= gdThreshold? gdText: '[[' + finalKey + ', ' + words + ']]';
+
+		app.parseAndTranslate(necroPostUrl, { text: finalText}, function(html) {
+			html.insertBefore(poost);
+		});
+	}
+
+	function isArticle(poost) {
+		return poost.is('[data-index="0"]') && !poost.find('.content>:not([class*="iframely"])').length;
+	}
+
 	$('[component="post"]').each(function() {
 		var post = $(this);
 		if (post.is(':has(.necro-post)')) {
 			return;
 		}
-		if (post.is('[data-index="0"]') && !post.find('.content>:not([class*="iframely"])').length) {
-			var dataDate = new Date(post.find('[data-date]').attr('data-date'));
-			var dataDiff = post.attr('data-timestamp') - dataDate;
-			if (dataDiff >= necroThreshold) {
-				var dataAgo = $.timeago.settings.strings.suffixAgo;
-				$.timeago.settings.strings.suffixAgo = ' later';
-				$('<aside>').addClass('necro-post').text($.timeago.inWords(dataDiff)).append($('<hr>')).prependTo(post);
-				$.timeago.settings.strings.suffixAgo = dataAgo;
-			}
-			return;
-		}
+
+		var postDate = post.attr('data-timestamp');
+		var prevDate = postDate; // if it doesn't get overridden, eventually nothing happens
+
 		var prev = post.prev('[component="post"]');
-		if (!prev.length) {
-			return;
+
+		if (isArticle(post)) {
+			prevDate = new Date(post.find('[data-date]').attr('data-date'));
+		} else if (prev.length) {
+			prevDate = prev.attr('data-timestamp');
 		}
-		var diff = post.attr('data-timestamp') - prev.attr('data-timestamp');
-		if (diff >= necroThreshold) {
-			var ago = $.timeago.settings.strings.suffixAgo;
-			$.timeago.settings.strings.suffixAgo = ' later';
-			$('<aside>').addClass('necro-post').text(diff >= 1000 * 60 * 60 * 24 * 365 * 10 ? 'goddamnit fbmac' : $.timeago.inWords(diff)).append($('<hr>')).prependTo(post);
-			$.timeago.settings.strings.suffixAgo = ago;
+
+		var diff = postDate - prevDate;
+
+		if (Math.abs(diff) >= necroThreshold) {
+			addNecro(post, diff);
 		}
 	});
 }
