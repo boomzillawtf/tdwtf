@@ -4,6 +4,10 @@ WORKDIR /usr/src/app
 
 COPY watchdog.bash /usr/src/app/
 
+RUN sed -i s/deb.debian.org/archive.debian.org/g /etc/apt/sources.list
+RUN sed -i "s,deb http://security.debian.org/debian-security stretch/updates main,# deb http://security.debian.org/debian-security stretch/updates main,g" /etc/apt/sources.list
+RUN sed -i "s,deb http://archive.debian.org/debian stretch-updates main,# deb http://archive.debian.org/debian stretch-updates main,g" /etc/apt/sources.list
+
 ENV NODE_ENV=production \
     daemon=true \
     silent=false
@@ -34,10 +38,10 @@ RUN echo public/uploads/*/ > .make-uploads-folders
 # allow self-flagging
 RUN curl -sSL https://github.com/BenLubar/NodeBB/commit/3cd74e02b541336414969dba843eea67a20a5f8f.diff | patch -p1
 # take wrapDelta into account when updating textarea selection ranges
-RUN cd node_modules/nodebb-plugin-tdwtf-buttons && curl -sSL https://patch-diff.githubusercontent.com/raw/NedFodder/nodebb-plugin-tdwtf-buttons/pull/2.diff | patch -p1
+RUN cd node_modules/nodebb-plugin-tdwtf-buttons && curl -sSL https://patch-diff.githubusercontent.com/raw/NedFodder/nodebb-plugin-tdwtf-buttons/pull/2.diff | patch -p1 -t
 
 ADD iframely-date.diff /usr/src/app/node_modules/nodebb-plugin-iframely/
-RUN cd node_modules/nodebb-plugin-iframely && patch -p1 < iframely-date.diff
+RUN cd node_modules/nodebb-plugin-iframely && patch -p1 -t < iframely-date.diff
 
 VOLUME /usr/src/app/docker
 VOLUME /usr/src/app/public/uploads
