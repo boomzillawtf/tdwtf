@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	width="100%" height="100%" viewBox="0 0 64 64" x="0" y="0">
+	<title>SVG animation</title>
+	<style>
+		svg { background-color: transparent; }
+		
+		circle, ellipse, path { stroke: red; fill: white; }
+
+		*[id] { animation: 2100ms /*ease-in-out*/ cubic-bezier(0.2,0.75, 0.2,1.0) infinite; } 
+		
+		#mouth-exit        { animation-name: mouth-exit;        cx:  0px; cy:  0px;          stroke-width: 0px; fill: red;  }
+		#sides-exit        { animation-name: sides-exit;        cx: 32px; cy: 32px; r: 26px;                                } 
+		#bigeye-to-sides   { animation-name: bigeye-to-sides;                                                               } 
+		#smallpupil-appear { animation-name: smallpupil-appear;                              stroke-width: 0px; fill: red;  }
+		#smalleye          { animation-name: smalleye;                                                          fill: none; }
+		#bigeye-appear     { animation-name: bigeye-appear;                                                                 }
+		#bigpupil-appear   { animation-name: bigpupil-appear;                                stroke-width: 0px; fill: red;  }
+		#pupil-to-mouth    { animation-name: pupil-to-mouth;                                 stroke-width: 0px; fill: red;  }
+		#brow-leave        { animation-name: brow-leave;                                     stroke-width: 0px; fill: red;  }
+		#brow-to-brow      { animation-name: brow-to-brow;                                   stroke-width: 0px; fill: red;  }
+		#brow-appear       { animation-name: brow-appear;                                    stroke-width: 0px; fill: red;  }
+
+		@keyframes sides-exit {
+			0%   { stroke-width: 4px; }
+			100% { stroke-width: 0px; }
+		}
+		@keyframes mouth-exit {
+			0%   { rx: 3.6px; ry: 2.8px; transform: translate(42px, 49px) rotate(-33deg); }
+			100% { rx:   0px; ry:   0px; transform: translate(44px, 53px) rotate(-33deg); }
+		}
+		@keyframes bigeye-to-sides {
+			0%   { cx: 28px; cy: 28px; r: 11px; stroke-width: 2px; }
+			100% { cx: 32px; cy: 32px; r: 26px; stroke-width: 4px; }
+		}
+		@keyframes smallpupil-appear {
+			0%   { cx: 38px; cy: 28px; r:   0px; }
+			100% { cx: 44px; cy: 33px; r: 2.5px; }
+		}
+		@keyframes bigeye-appear {
+			0%   { cx: 21px; cy: 28px; r:  0px; stroke-width: 0px; }
+			100% { cx: 28px; cy: 28px; r: 11px; stroke-width: 2px; }
+		}
+		@keyframes smalleye {
+			0%   { d: path('M 44,33  H 44.01  Q 44.01,33.01, 44.01,33.01  Q 44,33.01, 44,33  Z'); stroke-width: 2px; }
+			100% { d: path('M 38,28  H 55     Q 55   ,40   , 47   ,40     Q 38,40   , 38,28  Z'); stroke-width: 2px; }
+		}
+		@keyframes bigpupil-appear {
+			0%   { cx: 21px; cy: 28px; rx:   0px; ry:   0px; }
+			100% { cx: 32px; cy: 32px; rx: 2.5px; ry: 2.5px; }
+		}
+		@keyframes pupil-to-mouth {
+			0%   { rx: 2.5px; ry: 2.5px; transform: translate(32px, 32px);                }
+			100% { rx: 3.6px; ry: 2.8px; transform: translate(42px, 49px) rotate(-33deg); }
+		}
+		@keyframes brow-leave {
+			0%   { d: path('M 41,23  C 44.2,23.1, 46.4,24.1, 50,20  M 50,20  C 48.2,26.0, 42.3,24.7, 41,23  Z'); }
+			100% { d: path('M 57,25  C 57.004,25.004, 57.006,25.006, 57.01,25.01  M 57.01,25.01  C 57.006,25.006, 57.004,25.006, 57,25  Z'); }
+		}
+		@keyframes brow-to-brow {
+			0%   { d: path('M 24,12  C 28.9,10.1, 34.5,11.1, 40,20  M 40,20  C 33.3,14.5, 32.2,12.4, 24,12  Z'); }
+			100% { d: path('M 41,23  C 44.2,23.1, 46.4,24.1, 50,20  M 50,20  C 48.2,26.0, 42.3,24.7, 41,23  Z'); }
+		}
+		@keyframes brow-appear {
+			0%   { d: path('M 30,15  C 30.004,15.004, 30.006,15.006, 30.01,15.01  M 30.01,15.01  C 30.006,15.006, 30.004,15.004, 30,15  Z'); }
+			100% { d: path('M 24,12  C 28.9,10.1, 34.5,11.1, 40,20  M 40,20  C 33.3,14.5, 32.2,12.4, 24,12  Z'); }
+		}
+		
+	</style>
+	<!--rect x="-32" y="-32" width="64" height="64" fill="gold"></rect-->
+	<circle  id="sides-exit"></circle>
+	<ellipse id="mouth-exit"></ellipse>
+	<circle  id="bigeye-to-sides"></circle>
+	<circle  id="smallpupil-appear"></circle>
+	<path    id="smalleye"></path>
+	<circle  id="bigeye-appear"></circle>
+	<ellipse id="bigpupil-appear"></ellipse>
+	<ellipse id="pupil-to-mouth"></ellipse>
+	<path    id="brow-leave"></path>
+	<path    id="brow-to-brow"></path>
+	<path    id="brow-appear"></path>
+	
+	<!--path id="blah" d="M-10,8 L10,7" stroke="green" stroke-width="1">
+		<animate attributeName="d" dur="1s" repeatCount="indefinite" calcMode="spline"
+		         keyTimes="0.0; 0.5; 1.0"
+		         values="M-10,8 L10,7; M-10,7 L10,8; M-10,8 L10,7"
+		></animate>
+	</path-->
+</svg>
